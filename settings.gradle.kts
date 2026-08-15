@@ -27,5 +27,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Cloudy"
+rootProject.name = "skynight"
 include(":app")
