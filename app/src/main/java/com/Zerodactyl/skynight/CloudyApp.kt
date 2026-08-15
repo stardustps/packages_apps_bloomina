@@ -1,4 +1,4 @@
-package dev.ncatt.ota
+package com.Zerodactyl.skynight
 
 import android.app.Application
 import com.topjohnwu.superuser.Shell

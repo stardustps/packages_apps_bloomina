@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ui
+package com.Zerodactyl.skynight.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dev.ncatt.ota.R
-import dev.ncatt.ota.data.Download
-import dev.ncatt.ota.data.DownloadState
-import dev.ncatt.ota.data.UpdateManifest
-import dev.ncatt.ota.data.UpdateRepository
-import dev.ncatt.ota.databinding.FragmentCheckUpdateBinding
-import dev.ncatt.ota.ota.DeviceInfo
-import dev.ncatt.ota.ota.IFlashCallback
-import dev.ncatt.ota.ota.InstallResult
-import dev.ncatt.ota.ota.OtaInstaller
-import dev.ncatt.ota.ota.RootIpc
-import dev.ncatt.ota.ota.VersionCheck
+import com.Zerodactyl.skynight.R
+import com.Zerodactyl.skynight.data.Download
+import com.Zerodactyl.skynight.data.DownloadState
+import com.Zerodactyl.skynight.data.UpdateManifest
+import com.Zerodactyl.skynight.data.UpdateRepository
+import com.Zerodactyl.skynight.databinding.FragmentCheckUpdateBinding
+import com.Zerodactyl.skynight.ota.DeviceInfo
+import com.Zerodactyl.skynight.ota.IFlashCallback
+import com.Zerodactyl.skynight.ota.InstallResult
+import com.Zerodactyl.skynight.ota.OtaInstaller
+import com.Zerodactyl.skynight.ota.RootIpc
+import com.Zerodactyl.skynight.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.ncatt.ota"
+    namespace = "com.Zerodactyl.skynight"
     compileSdk = 36          // SESL8 requires compileSdk >= 34
 
     defaultConfig {
-        applicationId = "dev.ncatt.ota"
+        applicationId = "com.Zerodactyl.skynight"
         minSdk = 26
         targetSdk = 34
         versionCode = 80604

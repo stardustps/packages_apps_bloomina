@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ui
+package com.Zerodactyl.skynight.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dev.ncatt.ota.R
-import dev.ncatt.ota.data.UpdateRepository
-import dev.ncatt.ota.databinding.FragmentMaintainerBinding
-import dev.ncatt.ota.ota.DeviceInfo
+import com.Zerodactyl.skynight.R
+import com.Zerodactyl.skynight.data.UpdateRepository
+import com.Zerodactyl.skynight.databinding.FragmentMaintainerBinding
+import com.Zerodactyl.skynight.ota.DeviceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

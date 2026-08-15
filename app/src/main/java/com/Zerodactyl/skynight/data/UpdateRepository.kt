@@ -1,4 +1,4 @@
-package dev.ncatt.ota.data
+package com.Zerodactyl.skynight.data
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException

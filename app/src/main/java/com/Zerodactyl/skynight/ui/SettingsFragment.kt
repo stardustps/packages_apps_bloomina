@@ -1,10 +1,10 @@
-package dev.ncatt.ota.ui
+package com.Zerodactyl.skynight.ui
 
 import android.os.Bundle
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import dev.ncatt.ota.R
+import com.Zerodactyl.skynight.R
 
 /**
  * Cloudy internal settings, using the SESL preference fork so the rows match OneUI.

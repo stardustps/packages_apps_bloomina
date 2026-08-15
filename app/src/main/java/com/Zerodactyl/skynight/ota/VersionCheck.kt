@@ -1,6 +1,6 @@
-package dev.ncatt.ota.ota
+package com.Zerodactyl.skynight.ota
 
-import dev.ncatt.ota.data.Release
+import com.Zerodactyl.skynight.data.Release
 
 /**
  * Decides whether a remote [Release] is newer than what's installed, using the ROM's own

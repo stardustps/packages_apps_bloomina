@@ -1,10 +1,10 @@
-package dev.ncatt.ota.ui
+package com.Zerodactyl.skynight.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import dev.ncatt.ota.R
-import dev.ncatt.ota.databinding.ActivityMainBinding
+import com.Zerodactyl.skynight.R
+import com.Zerodactyl.skynight.databinding.ActivityMainBinding
 
 /**
  * OneUI 8 shell:

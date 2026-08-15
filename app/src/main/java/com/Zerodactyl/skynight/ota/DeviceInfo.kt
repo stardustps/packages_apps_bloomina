@@ -1,4 +1,4 @@
-package dev.ncatt.ota.ota
+package com.Zerodactyl.skynight.ota
 
 import android.os.Build
 import java.io.File
