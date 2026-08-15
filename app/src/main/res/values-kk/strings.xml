@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">LumiROM жаңартуын тексеріңіз</string>
+    <string name="tab_check_update">Жаңарту</string>
+    <string name="tab_maintainer">Жетекші</string>
+    <string name="tab_settings">Параметрлер</string>
+    <string name="sep_status">Күй</string>
+    <string name="sep_available">Қолжетімді құрастыру</string>
+    <string name="sep_changelog">Өзгеріс журналы</string>
+    <string name="sep_device">Бұл құрылғы</string>
+    <string name="sep_details">Мәліметтер</string>
+    <string name="sep_contact">Байланыс</string>
+    <string name="f_version">Нұсқа</string>
+    <string name="f_build_date">Құрылған күні</string>
+    <string name="f_size">Жүктеп алу өлшемі</string>
+    <string name="f_android">Android нұсқасы</string>
+    <string name="f_patch">Қауіпсіздік патч</string>
+    <string name="f_fingerprint">Саусақ ізін құрастыру</string>
+    <string name="f_installed">Орнатылған нұсқа</string>
+    <string name="f_model">Құрылғы үлгісі</string>
+    <string name="f_kernel">Ядро нұсқасы</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Құрылғы</string>
+    <string name="status_checking">Жаңартулар тексерілуде…</string>
+    <string name="status_checking_sub">LumiROM жаңарту серверімен байланысу</string>
+    <string name="status_up_to_date">Сіздің бағдарламалық құралыңыз жаңартылған</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s — бұл құрылғыға арналған ең соңғы құрастыру</string>
+    <string name="status_update_available">Жаңарту қолжетімді</string>
+    <string name="status_update_available_sub">LumiROM %1$s жүктеп алуға дайын</string>
+    <string name="status_failed">Жаңартуларды_APOS___тексеру мүмкін болмады</string>
+    <string name="status_downloading">Жаңарту жүктеп алынуда</string>
+    <string name="status_downloading_sub">%1$d%% · аспан түнін ашық ұстаңыз</string>
+    <string name="status_installing">Орнатуға дайындалуда</string>
+    <string name="btn_check">Жаңартуларды тексеріңіз</string>
+    <string name="btn_download">Жүктеп алыңыз және орнатыңыз</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Садақа беру</string>
+    <string name="unknown_maintainer">Белгісіз күтуші</string>
+    <string name="flash_warning">Құрылғыны желіден ажыратпаңыз немесе өшірмеңіз.</string>
+</resources>

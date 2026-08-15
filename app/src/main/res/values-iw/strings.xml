@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">בדוק את העדכון של LumiROM</string>
+    <string name="tab_check_update">עדכון</string>
+    <string name="tab_maintainer">משמר</string>
+    <string name="tab_settings">הגדרות</string>
+    <string name="sep_status">סטטוס</string>
+    <string name="sep_available">מבנה זמין</string>
+    <string name="sep_changelog">יומן שינויים</string>
+    <string name="sep_device">המכשיר הזה</string>
+    <string name="sep_details">פרטים</string>
+    <string name="sep_contact">צור קשר</string>
+    <string name="f_version">גרסה</string>
+    <string name="f_build_date">תאריך בנייה</string>
+    <string name="f_size">גודל הורדה</string>
+    <string name="f_android">גרסת אנדרואיד</string>
+    <string name="f_patch">תיקון אבטחה</string>
+    <string name="f_fingerprint">בניית טביעת אצבע</string>
+    <string name="f_installed">גרסה מותקנת</string>
+    <string name="f_model">דגם מכשיר</string>
+    <string name="f_kernel">גרסת ליבה</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">מכשיר</string>
+    <string name="status_checking">מחפש עדכונים...</string>
+    <string name="status_checking_sub">יצירת קשר עם שרת העדכונים של LumiROM</string>
+    <string name="status_up_to_date">התוכנה שלך מעודכנת</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s הוא ה-build העדכני ביותר עבור מכשיר זה</string>
+    <string name="status_update_available">עדכון זמין</string>
+    <string name="status_update_available_sub">LumiROM %1$s מוכן להורדה</string>
+    <string name="status_failed">לא יכולתי\\' לחפש עדכונים</string>
+    <string name="status_downloading">מוריד עדכון</string>
+    <string name="status_downloading_sub">%1$d%% · שמור על לילה פתוח</string>
+    <string name="status_installing">מתכונן להתקנה</string>
+    <string name="btn_check">בדוק אם יש עדכונים</string>
+    <string name="btn_download">הורד והתקן</string>
+    <string name="btn_telegram">טלגרם</string>
+    <string name="btn_donate">לתרום</string>
+    <string name="unknown_maintainer">מתחזק לא ידוע</string>
+    <string name="flash_warning">אין לנתק או לכבות את המכשיר.</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Controleer de update van LumiROM</string>
+    <string name="tab_check_update">Bijwerken</string>
+    <string name="tab_maintainer">Onderhouder</string>
+    <string name="tab_settings">Instellingen</string>
+    <string name="sep_status">Status</string>
+    <string name="sep_available">Beschikbare constructie</string>
+    <string name="sep_changelog">Wijzigingslog</string>
+    <string name="sep_device">Dit apparaat</string>
+    <string name="sep_details">Details</string>
+    <string name="sep_contact">Contacteer</string>
+    <string name="f_version">Versie</string>
+    <string name="f_build_date">Datum van bouw</string>
+    <string name="f_size">Grootte downloaden</string>
+    <string name="f_android">Android-versie</string>
+    <string name="f_patch">Beveiligingspatch</string>
+    <string name="f_fingerprint">Bouw een vingerafdruk</string>
+    <string name="f_installed">Geïnstalleerde versie</string>
+    <string name="f_model">Apparaatmodel</string>
+    <string name="f_kernel">Kernel-versie</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Apparaat</string>
+    <string name="status_checking">Controleren op updates…</string>
+    <string name="status_checking_sub">Contact opnemen met de LumiROM-updateserver</string>
+    <string name="status_up_to_date">Uw software is up-to-date</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s is de nieuwste build voor dit apparaat</string>
+    <string name="status_update_available">Update beschikbaar</string>
+    <string name="status_update_available_sub">LumiROM %1$s is klaar om te downloaden</string>
+    <string name="status_failed">Kon\\'niet controleren op updates</string>
+    <string name="status_downloading">Update downloaden</string>
+    <string name="status_downloading_sub">%1$d%% · houd Skynight open</string>
+    <string name="status_installing">Voorbereiden om te installeren</string>
+    <string name="btn_check">Controleer op updates</string>
+    <string name="btn_download">Downloaden en installeren</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Doneer</string>
+    <string name="unknown_maintainer">Onbekende onderhouder</string>
+    <string name="flash_warning">Koppel het apparaat niet los en schakel het niet uit.</string>
+</resources>

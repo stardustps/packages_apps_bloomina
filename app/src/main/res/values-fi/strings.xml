@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Tarkista LumiROM-päivitys</string>
+    <string name="tab_check_update">Päivitä</string>
+    <string name="tab_maintainer">Ylläpitäjä</string>
+    <string name="tab_settings">Asetukset</string>
+    <string name="sep_status">Tila</string>
+    <string name="sep_available">Saatavilla oleva rakenne</string>
+    <string name="sep_changelog">Muutosloki</string>
+    <string name="sep_device">Tämä laite</string>
+    <string name="sep_details">Yksityiskohdat</string>
+    <string name="sep_contact">Ota yhteyttä</string>
+    <string name="f_version">Versio</string>
+    <string name="f_build_date">Rakennuspäivämäärä</string>
+    <string name="f_size">Latauksen koko</string>
+    <string name="f_android">Android-versio</string>
+    <string name="f_patch">Suojauskorjaus</string>
+    <string name="f_fingerprint">Luo sormenjälki</string>
+    <string name="f_installed">Asennettu versio</string>
+    <string name="f_model">Laitteen malli</string>
+    <string name="f_kernel">Ytimen versio</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Laite</string>
+    <string name="status_checking">Tarkistetaan päivityksiä…</string>
+    <string name="status_checking_sub">Yhteyden ottaminen LumiROM-päivityspalvelimeen</string>
+    <string name="status_up_to_date">Ohjelmistosi on ajan tasalla</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s on tämän laitteen uusin versio</string>
+    <string name="status_update_available">Päivitys saatavilla</string>
+    <string name="status_update_available_sub">LumiROM %1$s on valmis ladattavaksi</string>
+    <string name="status_failed">Ei voitu\\' tarkistaa päivityksiä</string>
+    <string name="status_downloading">Ladataan päivitystä</string>
+    <string name="status_downloading_sub">%1$d%% · pidä taivasyö auki</string>
+    <string name="status_installing">Valmistellaan asennusta</string>
+    <string name="btn_check">Tarkista päivitykset</string>
+    <string name="btn_download">Lataa ja asenna</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Lahjoita</string>
+    <string name="unknown_maintainer">Tuntematon ylläpitäjä</string>
+    <string name="flash_warning">Älä irrota tai sammuta laitetta.</string>
+</resources>

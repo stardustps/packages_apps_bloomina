@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Patikrinkite LumiROM atnaujinimą</string>
+    <string name="tab_check_update">Atnaujinti</string>
+    <string name="tab_maintainer">Prižiūrėtojas</string>
+    <string name="tab_settings">Nustatymai</string>
+    <string name="sep_status">Būsena</string>
+    <string name="sep_available">Turima konstrukcija</string>
+    <string name="sep_changelog">Pakeitimų žurnalas</string>
+    <string name="sep_device">Šis prietaisas</string>
+    <string name="sep_details">Detalės</string>
+    <string name="sep_contact">Susisiekite</string>
+    <string name="f_version">Versija</string>
+    <string name="f_build_date">Sukūrimo data</string>
+    <string name="f_size">Atsisiuntimo dydis</string>
+    <string name="f_android">Android versija</string>
+    <string name="f_patch">Apsaugos pleistras</string>
+    <string name="f_fingerprint">Sukurkite pirštų atspaudus</string>
+    <string name="f_installed">Įdiegta versija</string>
+    <string name="f_model">Prietaiso modelis</string>
+    <string name="f_kernel">Branduolio versija</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Įrenginys</string>
+    <string name="status_checking">Tikrinama, ar yra naujinių…</string>
+    <string name="status_checking_sub">Susisiekimas su LumiROM naujinimo serveriu</string>
+    <string name="status_up_to_date">Jūsų programinė įranga yra atnaujinta</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s yra naujausia šio įrenginio versija</string>
+    <string name="status_update_available">Galimas atnaujinimas</string>
+    <string name="status_update_available_sub">LumiROM %1$s paruoštas atsisiųsti</string>
+    <string name="status_failed">Nepavyko\\' patikrinti, ar nėra naujinimų</string>
+    <string name="status_downloading">Atsisiunčiamas naujinimas</string>
+    <string name="status_downloading_sub">%1$d%% · Laikykite dangų atvirą</string>
+    <string name="status_installing">Ruošiamasi montuoti</string>
+    <string name="btn_check">Patikrinkite, ar nėra atnaujinimų</string>
+    <string name="btn_download">Atsisiųskite ir įdiekite</string>
+    <string name="btn_telegram">Telegrama</string>
+    <string name="btn_donate">Paaukoti</string>
+    <string name="unknown_maintainer">Nežinomas prižiūrėtojas</string>
+    <string name="flash_warning">Neatjunkite ir neišjunkite įrenginio maitinimo.</string>
+</resources>

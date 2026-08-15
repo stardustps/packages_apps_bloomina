@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Suriin ang update ng LumiROM</string>
+    <string name="tab_check_update">Update</string>
+    <string name="tab_maintainer">Tagapangasiwa</string>
+    <string name="tab_settings">Mga setting</string>
+    <string name="sep_status">Katayuan</string>
+    <string name="sep_available">Magagamit na build</string>
+    <string name="sep_changelog">Changelog</string>
+    <string name="sep_device">Ang device na ito</string>
+    <string name="sep_details">Mga Detalye</string>
+    <string name="sep_contact">Makipag-ugnayan</string>
+    <string name="f_version">Bersyon</string>
+    <string name="f_build_date">Petsa ng pagtatayo</string>
+    <string name="f_size">Laki ng download</string>
+    <string name="f_android">bersyon ng Android</string>
+    <string name="f_patch">Security patch</string>
+    <string name="f_fingerprint">Bumuo ng fingerprint</string>
+    <string name="f_installed">Naka-install na bersyon</string>
+    <string name="f_model">Modelo ng device</string>
+    <string name="f_kernel">Bersyon ng kernel</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Device</string>
+    <string name="status_checking">Tinitingnan ang mga update…</string>
+    <string name="status_checking_sub">Pakikipag-ugnayan sa server ng pag-update ng LumiROM</string>
+    <string name="status_up_to_date">Ang iyong software ay napapanahon</string>
+    <string name="status_up_to_date_sub">Ang LumiROM %1$s ay ang pinakabagong build para sa device na ito</string>
+    <string name="status_update_available">Available ang update</string>
+    <string name="status_update_available_sub">Handa nang i-download ang LumiROM %1$s</string>
+    <string name="status_failed">Hindi\\'t suriin para sa mga update</string>
+    <string name="status_downloading">Nagda-download ng update</string>
+    <string name="status_downloading_sub">%1$d%% · panatilihing bukas ang kalangitan</string>
+    <string name="status_installing">Naghahanda sa pag-install</string>
+    <string name="btn_check">Tingnan ang mga update</string>
+    <string name="btn_download">I-download at i-install</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Mag-donate</string>
+    <string name="unknown_maintainer">Hindi kilalang maintainer</string>
+    <string name="flash_warning">Huwag i-unplug o i-off ang device.</string>
+</resources>

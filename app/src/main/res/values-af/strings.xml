@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Gaan opdatering van LumiROM na</string>
+    <string name="tab_check_update">Dateer op</string>
+    <string name="tab_maintainer">Onderhouer</string>
+    <string name="tab_settings">Instellings</string>
+    <string name="sep_status">Status</string>
+    <string name="sep_available">Beskikbare bou</string>
+    <string name="sep_changelog">Veranderlogboek</string>
+    <string name="sep_device">Hierdie toestel</string>
+    <string name="sep_details">Besonderhede</string>
+    <string name="sep_contact">Kontak</string>
+    <string name="f_version">Weergawe</string>
+    <string name="f_build_date">Bou datum</string>
+    <string name="f_size">Aflaai grootte</string>
+    <string name="f_android">Android weergawe</string>
+    <string name="f_patch">Sekuriteitspleister</string>
+    <string name="f_fingerprint">Bou vingerafdruk</string>
+    <string name="f_installed">Geïnstalleerde weergawe</string>
+    <string name="f_model">Toestelmodel</string>
+    <string name="f_kernel">Kern weergawe</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Toestel</string>
+    <string name="status_checking">Kyk tans vir opdaterings …</string>
+    <string name="status_checking_sub">Kontak die LumiROM-opdateringbediener</string>
+    <string name="status_up_to_date">Jou sagteware is op datum</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s is die nuutste bou vir hierdie toestel</string>
+    <string name="status_update_available">Opdatering beskikbaar</string>
+    <string name="status_update_available_sub">LumiROM %1$s is gereed om af te laai</string>
+    <string name="status_failed">Kon nie __APOS___ kyk vir opdaterings nie</string>
+    <string name="status_downloading">Laai tans opdatering af</string>
+    <string name="status_downloading_sub">%1$d%% · hou skynnag oop</string>
+    <string name="status_installing">Berei voor om te installeer</string>
+    <string name="btn_check">Check for updates</string>
+    <string name="btn_download">Laai af en installeer</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Skenk</string>
+    <string name="unknown_maintainer">Onbekende onderhouer</string>
+    <string name="flash_warning">Moenie die toestel ontkoppel of afskakel nie.</string>
+</resources>

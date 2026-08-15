@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">LumiROM 업데이트 확인</string>
+    <string name="tab_check_update">업데이트</string>
+    <string name="tab_maintainer">유지관리자</string>
+    <string name="tab_settings">설정</string>
+    <string name="sep_status">상태</string>
+    <string name="sep_available">사용 가능한 빌드</string>
+    <string name="sep_changelog">변경 내역</string>
+    <string name="sep_device">이 장치</string>
+    <string name="sep_details">세부정보</string>
+    <string name="sep_contact">연락처</string>
+    <string name="f_version">버전</string>
+    <string name="f_build_date">빌드 날짜</string>
+    <string name="f_size">다운로드 크기</string>
+    <string name="f_android">안드로이드 버전</string>
+    <string name="f_patch">보안 패치</string>
+    <string name="f_fingerprint">지문 생성</string>
+    <string name="f_installed">설치된 버전</string>
+    <string name="f_model">장치 모델</string>
+    <string name="f_kernel">커널 버전</string>
+    <string name="f_rom">롬</string>
+    <string name="f_device">장치</string>
+    <string name="status_checking">업데이트 확인 중…</string>
+    <string name="status_checking_sub">LumiROM 업데이트 서버에 접속하기</string>
+    <string name="status_up_to_date">소프트웨어가 최신 상태입니다.</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s은(는) 이 장치의 최신 빌드입니다.</string>
+    <string name="status_update_available">업데이트 가능</string>
+    <string name="status_update_available_sub">LumiROM %1$s을(를) 다운로드할 준비가 되었습니다</string>
+    <string name="status_failed">업데이트를 확인할 수 없습니다\\'</string>
+    <string name="status_downloading">업데이트 다운로드 중</string>
+    <string name="status_downloading_sub">_%1$d%% · 스카이나이트를 열어두세요</string>
+    <string name="status_installing">설치 준비 중</string>
+    <string name="btn_check">업데이트 확인</string>
+    <string name="btn_download">다운로드 및 설치</string>
+    <string name="btn_telegram">텔레그램</string>
+    <string name="btn_donate">기부</string>
+    <string name="unknown_maintainer">알 수 없는 관리자</string>
+    <string name="flash_warning">장치의 플러그를 뽑거나 전원을 끄지 마십시오.</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">የ LumiROM ዝማኔን ያረጋግጡ</string>
+    <string name="tab_check_update">አዘምን</string>
+    <string name="tab_maintainer">ተንከባካቢ</string>
+    <string name="tab_settings">ቅንብሮች</string>
+    <string name="sep_status">ሁኔታ</string>
+    <string name="sep_available">ግንባታ ይገኛል።</string>
+    <string name="sep_changelog">Changelog</string>
+    <string name="sep_device">ይህ መሳሪያ</string>
+    <string name="sep_details">ዝርዝሮች</string>
+    <string name="sep_contact">ተገናኝ</string>
+    <string name="f_version">ሥሪት</string>
+    <string name="f_build_date">የግንባታ ቀን</string>
+    <string name="f_size">የማውረድ መጠን</string>
+    <string name="f_android">አንድሮይድ ስሪት</string>
+    <string name="f_patch">የደህንነት መጠገኛ</string>
+    <string name="f_fingerprint">የጣት አሻራ ይገንቡ</string>
+    <string name="f_installed">Installed version</string>
+    <string name="f_model">የመሳሪያ ሞዴል</string>
+    <string name="f_kernel">የከርነል ስሪት</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">መሳሪያ</string>
+    <string name="status_checking">ዝማኔዎችን በመፈተሽ ላይ…</string>
+    <string name="status_checking_sub">የ LumiROM ማሻሻያ አገልጋይን በማነጋገር ላይ</string>
+    <string name="status_up_to_date">የእርስዎ ሶፍትዌር ወቅታዊ ነው።</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s_ የዚህ መሣሪያ የቅርብ ጊዜ ግንባታ ነው።</string>
+    <string name="status_update_available">ማዘመን አለ።</string>
+    <string name="status_update_available_sub">LumiROM %1$s ለመውረድ ዝግጁ ነው።</string>
+    <string name="status_failed">\\'ዝማኔዎችን መፈለግ አልተቻለም</string>
+    <string name="status_downloading">ዝመናን በማውረድ ላይ</string>
+    <string name="status_downloading_sub">%1$d%%_ · የሰማይ ሌሊት ክፍት ይሁኑ</string>
+    <string name="status_installing">ለመጫን በመዘጋጀት ላይ</string>
+    <string name="btn_check">ዝማኔዎችን ይመልከቱ</string>
+    <string name="btn_download">አውርድና ጫን</string>
+    <string name="btn_telegram">ቴሌግራም</string>
+    <string name="btn_donate">ለገሱ</string>
+    <string name="unknown_maintainer">ያልታወቀ ጠባቂ</string>
+    <string name="flash_warning">መሳሪያውን ይንቀሉት ወይም አያጥፉት።</string>
+</resources>

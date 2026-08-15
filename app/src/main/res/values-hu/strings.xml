@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Ellenőrizze a LumiROM frissítését</string>
+    <string name="tab_check_update">Frissítés</string>
+    <string name="tab_maintainer">Karbantartó</string>
+    <string name="tab_settings">Beállítások elemre</string>
+    <string name="sep_status">Állapot</string>
+    <string name="sep_available">Rendelkezésre álló kivitel</string>
+    <string name="sep_changelog">Változásnapló</string>
+    <string name="sep_device">Ez a készülék</string>
+    <string name="sep_details">Részletek</string>
+    <string name="sep_contact">Kapcsolatfelvétel</string>
+    <string name="f_version">Verzió</string>
+    <string name="f_build_date">Építési dátum</string>
+    <string name="f_size">Letöltési méret</string>
+    <string name="f_android">Android verzió</string>
+    <string name="f_patch">Biztonsági javítás</string>
+    <string name="f_fingerprint">Építsen ujjlenyomatot</string>
+    <string name="f_installed">Telepített verzió</string>
+    <string name="f_model">Készülék modell</string>
+    <string name="f_kernel">Kernel verzió</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Eszköz</string>
+    <string name="status_checking">Frissítések keresése…</string>
+    <string name="status_checking_sub">Kapcsolatfelvétel a LumiROM frissítési szerverrel</string>
+    <string name="status_up_to_date">Az Ön szoftvere naprakész</string>
+    <string name="status_up_to_date_sub">A LumiROM %1$s a legújabb verzió ehhez az eszközhöz</string>
+    <string name="status_update_available">Frissítés elérhető</string>
+    <string name="status_update_available_sub">A LumiROM %1$s készen áll a letöltésre</string>
+    <string name="status_failed">Nem lehetett\\'frissítéseket keresni</string>
+    <string name="status_downloading">Frissítés letöltése</string>
+    <string name="status_downloading_sub">%1$d%% · tartsa nyitva az égboltot</string>
+    <string name="status_installing">Felkészülés a telepítésre</string>
+    <string name="btn_check">Ellenőrizze a frissítéseket</string>
+    <string name="btn_download">Töltse le és telepítse</string>
+    <string name="btn_telegram">Távirat</string>
+    <string name="btn_donate">Adományozni</string>
+    <string name="unknown_maintainer">Ismeretlen karbantartó</string>
+    <string name="flash_warning">Ne húzza ki vagy kapcsolja ki a készüléket.</string>
+</resources>

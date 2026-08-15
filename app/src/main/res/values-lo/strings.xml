@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">ກວດເບິ່ງການປັບປຸງຂອງ LumiROM</string>
+    <string name="tab_check_update">ອັບເດດ</string>
+    <string name="tab_maintainer">ຜູ້ຮັກສາ</string>
+    <string name="tab_settings">ການຕັ້ງຄ່າ</string>
+    <string name="sep_status">ສະຖານະ</string>
+    <string name="sep_available">ການກໍ່ສ້າງທີ່ມີຢູ່</string>
+    <string name="sep_changelog">ບັນທຶກການປ່ຽນແປງ</string>
+    <string name="sep_device">ອຸປະກອນນີ້</string>
+    <string name="sep_details">ລາຍລະອຽດ</string>
+    <string name="sep_contact">ຕິດຕໍ່</string>
+    <string name="f_version">ຮຸ່ນ</string>
+    <string name="f_build_date">ວັນທີສ້າງ</string>
+    <string name="f_size">ຂະໜາດການດາວໂຫຼດ</string>
+    <string name="f_android">ລຸ້ນ Android</string>
+    <string name="f_patch">ແຜ່ນປ້ອງກັນຄວາມປອດໄພ</string>
+    <string name="f_fingerprint">ສ້າງລາຍນິ້ວມື</string>
+    <string name="f_installed">ລຸ້ນທີ່ຕິດຕັ້ງແລ້ວ</string>
+    <string name="f_model">ຮູບແບບອຸປະກອນ</string>
+    <string name="f_kernel">ລຸ້ນ Kernel</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">ອຸປະກອນ</string>
+    <string name="status_checking">ກຳລັງກວດສອບການອັບເດດ...</string>
+    <string name="status_checking_sub">ຕິດຕໍ່ເຊີບເວີການອັບເດດ LumiROM</string>
+    <string name="status_up_to_date">ຊອບແວຂອງທ່ານອັບເດດແລ້ວ</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s ເປັນຕົວສ້າງຫຼ້າສຸດສຳລັບອຸປະກອນນີ້</string>
+    <string name="status_update_available">ມີອັບເດດແລ້ວ</string>
+    <string name="status_update_available_sub">LumiROM %1$s ພ້ອມໃຫ້ດາວໂຫຼດແລ້ວ</string>
+    <string name="status_failed">ບໍ່ສາມາດ \\' ກວດເບິ່ງການອັບເດດໄດ້</string>
+    <string name="status_downloading">ກຳລັງດາວໂຫລດອັບເດດ</string>
+    <string name="status_downloading_sub">%1$d%% · ເຮັດໃຫ້ກາງຄືນເປີດຢູ່ສະເໝີ</string>
+    <string name="status_installing">ກຳລັງກະກຽມການຕິດຕັ້ງ</string>
+    <string name="btn_check">ກວດສອບການອັບເດດ</string>
+    <string name="btn_download">ດາວໂຫລດແລະຕິດຕັ້ງ</string>
+    <string name="btn_telegram">ໂທລະເລກ</string>
+    <string name="btn_donate">ບໍລິຈາກ</string>
+    <string name="unknown_maintainer">ຜູ້ຮັກສາທີ່ບໍ່ຮູ້ຈັກ</string>
+    <string name="flash_warning">ຢ່າຖອດປລັກ ຫຼືປິດອຸປະກອນ.</string>
+</resources>

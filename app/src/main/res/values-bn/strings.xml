@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">LumiROM-এর আপডেট চেক করুন</string>
+    <string name="tab_check_update">আপডেট</string>
+    <string name="tab_maintainer">রক্ষণাবেক্ষণকারী</string>
+    <string name="tab_settings">সেটিংস</string>
+    <string name="sep_status">স্ট্যাটাস</string>
+    <string name="sep_available">উপলব্ধ বিল্ড</string>
+    <string name="sep_changelog">চেঞ্জলগ</string>
+    <string name="sep_device">এই ডিভাইস</string>
+    <string name="sep_details">বিস্তারিত</string>
+    <string name="sep_contact">যোগাযোগ</string>
+    <string name="f_version">সংস্করণ</string>
+    <string name="f_build_date">বিল্ড তারিখ</string>
+    <string name="f_size">ডাউনলোড সাইজ</string>
+    <string name="f_android">অ্যান্ড্রয়েড সংস্করণ</string>
+    <string name="f_patch">নিরাপত্তা প্যাচ</string>
+    <string name="f_fingerprint">ফিঙ্গারপ্রিন্ট তৈরি করুন</string>
+    <string name="f_installed">ইনস্টল করা সংস্করণ</string>
+    <string name="f_model">ডিভাইস মডেল</string>
+    <string name="f_kernel">কার্নেল সংস্করণ</string>
+    <string name="f_rom">রম</string>
+    <string name="f_device">ডিভাইস</string>
+    <string name="status_checking">আপডেটের জন্য পরীক্ষা করা হচ্ছে...</string>
+    <string name="status_checking_sub">LumiROM আপডেট সার্ভারের সাথে যোগাযোগ করা হচ্ছে</string>
+    <string name="status_up_to_date">আপনার সফ্টওয়্যার আপ টু ডেট</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s এই ডিভাইসের জন্য সর্বশেষ বিল্ড</string>
+    <string name="status_update_available">আপডেট উপলব্ধ</string>
+    <string name="status_update_available_sub">LumiROM %1$s ডাউনলোডের জন্য প্রস্তুত</string>
+    <string name="status_failed">আপডেটের জন্য\\' চেক করা যায়নি</string>
+    <string name="status_downloading">আপডেট ডাউনলোড হচ্ছে</string>
+    <string name="status_downloading_sub">%1$d%% · আকাশের রাত খোলা রাখুন</string>
+    <string name="status_installing">ইনস্টল করার প্রস্তুতি নিচ্ছেন</string>
+    <string name="btn_check">আপডেটের জন্য চেক করুন</string>
+    <string name="btn_download">ডাউনলোড করে ইন্সটল করুন</string>
+    <string name="btn_telegram">টেলিগ্রাম</string>
+    <string name="btn_donate">দান করুন</string>
+    <string name="unknown_maintainer">অজানা রক্ষণাবেক্ষণকারী</string>
+    <string name="flash_warning">ডিভাইসটি আনপ্লাগ বা পাওয়ার অফ করবেন না।</string>
+</resources>

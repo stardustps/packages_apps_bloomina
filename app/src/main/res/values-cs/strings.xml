@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Zkontrolujte aktualizaci LumiROM</string>
+    <string name="tab_check_update">Aktualizovat</string>
+    <string name="tab_maintainer">Udržovatel</string>
+    <string name="tab_settings">Nastavení</string>
+    <string name="sep_status">Stav</string>
+    <string name="sep_available">Dostupné sestavení</string>
+    <string name="sep_changelog">Seznam změn</string>
+    <string name="sep_device">Toto zařízení</string>
+    <string name="sep_details">Podrobnosti</string>
+    <string name="sep_contact">Kontakt</string>
+    <string name="f_version">Verze</string>
+    <string name="f_build_date">Datum sestavení</string>
+    <string name="f_size">Velikost ke stažení</string>
+    <string name="f_android">Verze pro Android</string>
+    <string name="f_patch">Bezpečnostní záplata</string>
+    <string name="f_fingerprint">Vytvořte otisk prstu</string>
+    <string name="f_installed">Nainstalovaná verze</string>
+    <string name="f_model">Model zařízení</string>
+    <string name="f_kernel">Verze jádra</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Zařízení</string>
+    <string name="status_checking">Kontrola aktualizací…</string>
+    <string name="status_checking_sub">Kontaktování aktualizačního serveru LumiROM</string>
+    <string name="status_up_to_date">Váš software je aktuální</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s je nejnovější sestavení pro toto zařízení</string>
+    <string name="status_update_available">Aktualizace k dispozici</string>
+    <string name="status_update_available_sub">LumiROM %1$s je připraven ke stažení</string>
+    <string name="status_failed">Nelze\\'t vyhledat aktualizace</string>
+    <string name="status_downloading">Stahování aktualizace</string>
+    <string name="status_downloading_sub">%1$d%% · udržovat skynight otevřenou</string>
+    <string name="status_installing">Příprava k instalaci</string>
+    <string name="btn_check">Zkontrolujte aktualizace</string>
+    <string name="btn_download">Stáhněte a nainstalujte</string>
+    <string name="btn_telegram">telegram</string>
+    <string name="btn_donate">Darovat</string>
+    <string name="unknown_maintainer">Neznámý správce</string>
+    <string name="flash_warning">Neodpojujte ani nevypínejte zařízení.</string>
+</resources>

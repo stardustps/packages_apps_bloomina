@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">LumiROM-ൻ്റെ അപ്ഡേറ്റ് പരിശോധിക്കുക</string>
+    <string name="tab_check_update">അപ്ഡേറ്റ്</string>
+    <string name="tab_maintainer">പരിപാലിക്കുന്നയാൾ</string>
+    <string name="tab_settings">ക്രമീകരണങ്ങൾ</string>
+    <string name="sep_status">നില</string>
+    <string name="sep_available">ലഭ്യമായ നിർമ്മാണം</string>
+    <string name="sep_changelog">ചേഞ്ച്ലോഗ്</string>
+    <string name="sep_device">ഈ ഉപകരണം</string>
+    <string name="sep_details">വിശദാംശങ്ങൾ</string>
+    <string name="sep_contact">ബന്ധപ്പെടുക</string>
+    <string name="f_version">പതിപ്പ്</string>
+    <string name="f_build_date">നിർമ്മാണ തീയതി</string>
+    <string name="f_size">ഡൗൺലോഡ് വലുപ്പം</string>
+    <string name="f_android">ആൻഡ്രോയിഡ് പതിപ്പ്</string>
+    <string name="f_patch">സുരക്ഷാ പാച്ച്</string>
+    <string name="f_fingerprint">വിരലടയാളം നിർമ്മിക്കുക</string>
+    <string name="f_installed">ഇൻസ്റ്റാൾ ചെയ്ത പതിപ്പ്</string>
+    <string name="f_model">ഉപകരണ മോഡൽ</string>
+    <string name="f_kernel">കേർണൽ പതിപ്പ്</string>
+    <string name="f_rom">റോം</string>
+    <string name="f_device">ഉപകരണം</string>
+    <string name="status_checking">അപ്‌ഡേറ്റുകൾക്കായി പരിശോധിക്കുന്നു...</string>
+    <string name="status_checking_sub">LumiROM അപ്‌ഡേറ്റ് സെർവറുമായി ബന്ധപ്പെടുന്നു</string>
+    <string name="status_up_to_date">നിങ്ങളുടെ സോഫ്‌റ്റ്‌വെയർ കാലികമാണ്</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s ആണ് ഈ ഉപകരണത്തിൻ്റെ ഏറ്റവും പുതിയ ബിൽഡ്</string>
+    <string name="status_update_available">അപ്ഡേറ്റ് ലഭ്യമാണ്</string>
+    <string name="status_update_available_sub">LumiROM %1$s ഡൗൺലോഡ് ചെയ്യാൻ തയ്യാറാണ്</string>
+    <string name="status_failed">അപ്ഡേറ്റുകൾക്കായി\\' പരിശോധിക്കാനായില്ല</string>
+    <string name="status_downloading">അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്യുന്നു</string>
+    <string name="status_downloading_sub">%1$d%% · സ്കൈനൈറ്റ് തുറന്നിടുക</string>
+    <string name="status_installing">ഇൻസ്റ്റാൾ ചെയ്യാൻ തയ്യാറെടുക്കുന്നു</string>
+    <string name="btn_check">അപ്ഡേറ്റുകൾക്കായി പരിശോധിക്കുക</string>
+    <string name="btn_download">ഡൗൺലോഡ് ചെയ്ത് ഇൻസ്റ്റാൾ ചെയ്യുക</string>
+    <string name="btn_telegram">ടെലിഗ്രാം</string>
+    <string name="btn_donate">ദാനം ചെയ്യുക</string>
+    <string name="unknown_maintainer">അജ്ഞാത പരിപാലകൻ</string>
+    <string name="flash_warning">ഉപകരണം അൺപ്ലഗ് ചെയ്യുകയോ പവർ ഓഫ് ചെയ്യുകയോ ചെയ്യരുത്.</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">LumiROM yangilanishini tekshiring</string>
+    <string name="tab_check_update">Yangilash</string>
+    <string name="tab_maintainer">Ta\'minotchi</string>
+    <string name="tab_settings">Sozlamalar</string>
+    <string name="sep_status">Status</string>
+    <string name="sep_available">Mavjud qurilish</string>
+    <string name="sep_changelog">O\'zgarishlar jurnali</string>
+    <string name="sep_device">Ushbu qurilma</string>
+    <string name="sep_details">Tafsilotlar</string>
+    <string name="sep_contact">Aloqa</string>
+    <string name="f_version">Versiya</string>
+    <string name="f_build_date">Qurilish sanasi</string>
+    <string name="f_size">Yuklab olish hajmi</string>
+    <string name="f_android">Android versiyasi</string>
+    <string name="f_patch">Xavfsizlik patch</string>
+    <string name="f_fingerprint">Barmoq izini yaratish</string>
+    <string name="f_installed">O\'rnatilgan versiya</string>
+    <string name="f_model">Qurilma modeli</string>
+    <string name="f_kernel">Yadro versiyasi</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">Qurilma</string>
+    <string name="status_checking">Yangilanishlar tekshirilmoqda…</string>
+    <string name="status_checking_sub">LumiROM yangilash serveri bilan bog\'lanish</string>
+    <string name="status_up_to_date">Sizning dasturiy ta\'minotingiz yangilangan</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s - bu qurilma uchun eng so\'nggi qurilma</string>
+    <string name="status_update_available">Yangilanish mavjud</string>
+    <string name="status_update_available_sub">LumiROM %1$s yuklab olishga tayyor</string>
+    <string name="status_failed">Yangilanishlarni APOS___ tekshirib bo\'lmadi</string>
+    <string name="status_downloading">Yangilanish yuklab olinmoqda</string>
+    <string name="status_downloading_sub">%1$d%% · osmon tunini ochiq tuting</string>
+    <string name="status_installing">O\'rnatishga tayyorlanmoqda</string>
+    <string name="btn_check">Yangilanishlarni tekshiring</string>
+    <string name="btn_download">Yuklab oling va o\'rnating</string>
+    <string name="btn_telegram">Telegram</string>
+    <string name="btn_donate">Xayriya qiling</string>
+    <string name="unknown_maintainer">Noma\'lum ta\'minotchi</string>
+    <string name="flash_warning">Qurilmani elektr tarmog\'idan uzmang yoki o\'chirmang.</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">Проверите ажурирање ЛумиРОМ-а</string>
+    <string name="tab_check_update">Ажурирај</string>
+    <string name="tab_maintainer">Маинтаинер</string>
+    <string name="tab_settings">Подешавања</string>
+    <string name="sep_status">Статус</string>
+    <string name="sep_available">Доступна израда</string>
+    <string name="sep_changelog">Цхангелог</string>
+    <string name="sep_device">Овај уређај</string>
+    <string name="sep_details">Детаљи</string>
+    <string name="sep_contact">Контакт</string>
+    <string name="f_version">Версион</string>
+    <string name="f_build_date">Датум изградње</string>
+    <string name="f_size">Величина преузимања</string>
+    <string name="f_android">Андроид верзија</string>
+    <string name="f_patch">Сигурносна закрпа</string>
+    <string name="f_fingerprint">Направите отисак прста</string>
+    <string name="f_installed">Инсталирана верзија</string>
+    <string name="f_model">Модел уређаја</string>
+    <string name="f_kernel">Верзија кернела</string>
+    <string name="f_rom">РОМ</string>
+    <string name="f_device">Уређај</string>
+    <string name="status_checking">Проверавам ажурирања…</string>
+    <string name="status_checking_sub">Контактирајте ЛумиРОМ сервер за ажурирање</string>
+    <string name="status_up_to_date">Ваш софтвер је ажуриран</string>
+    <string name="status_up_to_date_sub">ЛумиРОМ ___СТР___ је најновија верзија за овај уређај</string>
+    <string name="status_update_available">Доступно је ажурирање</string>
+    <string name="status_update_available_sub">ЛумиРОМ ___СТР___ је спреман за преузимање</string>
+    <string name="status_failed">Није могуће___АПОС___провера ажурирања</string>
+    <string name="status_downloading">Преузимање ажурирања</string>
+    <string name="status_downloading_sub">___ИНТ___ · нека небо остане отворено</string>
+    <string name="status_installing">Припрема за инсталацију</string>
+    <string name="btn_check">Проверите ажурирања</string>
+    <string name="btn_download">Преузмите и инсталирајте</string>
+    <string name="btn_telegram">Телеграм</string>
+    <string name="btn_donate">Донирајте</string>
+    <string name="unknown_maintainer">Непознати одржавалац</string>
+    <string name="flash_warning">Не искључујте и не искључујте уређај.</string>
+</resources>

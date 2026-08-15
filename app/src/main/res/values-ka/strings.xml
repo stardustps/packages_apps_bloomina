@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
+    <string name="settings_entry_summary">შეამოწმეთ LumiROM-ის განახლება</string>
+    <string name="tab_check_update">განახლება</string>
+    <string name="tab_maintainer">შემნახველი</string>
+    <string name="tab_settings">პარამეტრები</string>
+    <string name="sep_status">სტატუსი</string>
+    <string name="sep_available">ხელმისაწვდომი აშენება</string>
+    <string name="sep_changelog">ცვლილებების ჟურნალი</string>
+    <string name="sep_device">ეს მოწყობილობა</string>
+    <string name="sep_details">დეტალები</string>
+    <string name="sep_contact">კონტაქტი</string>
+    <string name="f_version">ვერსია</string>
+    <string name="f_build_date">აშენების თარიღი</string>
+    <string name="f_size">ჩამოტვირთვის ზომა</string>
+    <string name="f_android">ანდროიდის ვერსია</string>
+    <string name="f_patch">უსაფრთხოების პაჩი</string>
+    <string name="f_fingerprint">თითის ანაბეჭდის აშენება</string>
+    <string name="f_installed">დაინსტალირებული ვერსია</string>
+    <string name="f_model">მოწყობილობის მოდელი</string>
+    <string name="f_kernel">ბირთვის ვერსია</string>
+    <string name="f_rom">ROM</string>
+    <string name="f_device">მოწყობილობა</string>
+    <string name="status_checking">მიმდინარეობს განახლებების შემოწმება…</string>
+    <string name="status_checking_sub">დაუკავშირდით LumiROM განახლების სერვერს</string>
+    <string name="status_up_to_date">თქვენი პროგრამული უზრუნველყოფა განახლებულია</string>
+    <string name="status_up_to_date_sub">LumiROM %1$s არის ამ მოწყობილობის უახლესი ვერსია</string>
+    <string name="status_update_available">განახლება ხელმისაწვდომია</string>
+    <string name="status_update_available_sub">LumiROM %1$s მზად არის ჩამოსატვირთად</string>
+    <string name="status_failed">განახლებების შემოწმება\\' ვერ მოხერხდა</string>
+    <string name="status_downloading">მიმდინარეობს განახლების ჩამოტვირთვა</string>
+    <string name="status_downloading_sub">%1$d%% · შეინახეთ skynight ღია</string>
+    <string name="status_installing">ინსტალაციისთვის მზადება</string>
+    <string name="btn_check">შეამოწმეთ განახლებები</string>
+    <string name="btn_download">ჩამოტვირთეთ და დააინსტალირეთ</string>
+    <string name="btn_telegram">ტელეგრამა</string>
+    <string name="btn_donate">შემოწირულობა</string>
+    <string name="unknown_maintainer">უცნობი შემსრულებელი</string>
+    <string name="flash_warning">არ გამორთოთ და არ გამორთოთ მოწყობილობა.</string>
+</resources>
