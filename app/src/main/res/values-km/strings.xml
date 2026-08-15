@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">ពិនិត្យមើលបច្ចុប្បន្នភាពនៃ LumiROM</string>
+    <string name="settings_entry_summary">ពិនិត្យមើលបច្ចុប្បន្នភាពនៃ skynight</string>
     <string name="tab_check_update">ធ្វើបច្ចុប្បន្នភាព</string>
     <string name="tab_maintainer">អ្នកថែទាំ</string>
     <string name="tab_settings">ការកំណត់</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">រ៉ូម</string>
     <string name="f_device">ឧបករណ៍</string>
     <string name="status_checking">កំពុងពិនិត្យមើលបច្ចុប្បន្នភាព...</string>
-    <string name="status_checking_sub">ទាក់ទងម៉ាស៊ីនមេធ្វើបច្ចុប្បន្នភាព LumiROM</string>
+    <string name="status_checking_sub">ទាក់ទងម៉ាស៊ីនមេធ្វើបច្ចុប្បន្នភាព skynight</string>
     <string name="status_up_to_date">កម្មវិធីរបស់អ្នកទាន់សម័យ</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s គឺជាការបង្កើតចុងក្រោយបំផុតសម្រាប់ឧបករណ៍នេះ។</string>
+    <string name="status_up_to_date_sub">skynight %1$s គឺជាការបង្កើតចុងក្រោយបំផុតសម្រាប់ឧបករណ៍នេះ។</string>
     <string name="status_update_available">ការអាប់ដេតមាន</string>
-    <string name="status_update_available_sub">LumiROM %1$s រួចរាល់ក្នុងការទាញយក</string>
+    <string name="status_update_available_sub">skynight %1$s រួចរាល់ក្នុងការទាញយក</string>
     <string name="status_failed">មិនអាច \\' ពិនិត្យរកមើលបច្ចុប្បន្នភាព</string>
     <string name="status_downloading">កំពុងទាញយកបច្ចុប្បន្នភាព</string>
     <string name="status_downloading_sub">%1$d%% · រក្សាមេឃពេលយប់បើក</string>

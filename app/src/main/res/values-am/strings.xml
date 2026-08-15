@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">የ LumiROM ዝማኔን ያረጋግጡ</string>
+    <string name="settings_entry_summary">የ skynight ዝማኔን ያረጋግጡ</string>
     <string name="tab_check_update">አዘምን</string>
     <string name="tab_maintainer">ተንከባካቢ</string>
     <string name="tab_settings">ቅንብሮች</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">መሳሪያ</string>
     <string name="status_checking">ዝማኔዎችን በመፈተሽ ላይ…</string>
-    <string name="status_checking_sub">የ LumiROM ማሻሻያ አገልጋይን በማነጋገር ላይ</string>
+    <string name="status_checking_sub">የ skynight ማሻሻያ አገልጋይን በማነጋገር ላይ</string>
     <string name="status_up_to_date">የእርስዎ ሶፍትዌር ወቅታዊ ነው።</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s_ የዚህ መሣሪያ የቅርብ ጊዜ ግንባታ ነው።</string>
+    <string name="status_up_to_date_sub">skynight %1$s_ የዚህ መሣሪያ የቅርብ ጊዜ ግንባታ ነው።</string>
     <string name="status_update_available">ማዘመን አለ።</string>
-    <string name="status_update_available_sub">LumiROM %1$s ለመውረድ ዝግጁ ነው።</string>
+    <string name="status_update_available_sub">skynight %1$s ለመውረድ ዝግጁ ነው።</string>
     <string name="status_failed">\\'ዝማኔዎችን መፈለግ አልተቻለም</string>
     <string name="status_downloading">ዝመናን በማውረድ ላይ</string>
     <string name="status_downloading_sub">%1$d%%_ · የሰማይ ሌሊት ክፍት ይሁኑ</string>

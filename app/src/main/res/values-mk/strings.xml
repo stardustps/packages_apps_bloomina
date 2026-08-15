@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Проверете го ажурирањето на LumiROM</string>
+    <string name="settings_entry_summary">Проверете го ажурирањето на skynight</string>
     <string name="tab_check_update">Ажурирање</string>
     <string name="tab_maintainer">Одржувач</string>
     <string name="tab_settings">Поставки</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Уред</string>
     <string name="status_checking">Се проверува за ажурирања…</string>
-    <string name="status_checking_sub">Контактирање со серверот за ажурирање на LumiROM</string>
+    <string name="status_checking_sub">Контактирање со серверот за ажурирање на skynight</string>
     <string name="status_up_to_date">Вашиот софтвер е ажуриран</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s е најновата верзија за овој уред</string>
+    <string name="status_up_to_date_sub">skynight %1$s е најновата верзија за овој уред</string>
     <string name="status_update_available">Достапно е ажурирање</string>
-    <string name="status_update_available_sub">LumiROM %1$s е подготвен за преземање</string>
+    <string name="status_update_available_sub">skynight %1$s е подготвен за преземање</string>
     <string name="status_failed">Не можеше\\' да провери дали има ажурирања</string>
     <string name="status_downloading">Се презема ажурирање</string>
     <string name="status_downloading_sub">%1$d%% · држете го skynight отворен</string>

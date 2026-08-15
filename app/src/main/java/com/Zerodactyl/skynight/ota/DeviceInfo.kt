@@ -22,7 +22,7 @@ object DeviceInfo {
     /**
      * The ROM's own version stamp: `ro.skynight.rom.ver` (e.g. "8.6.4").
      * Most reliable signal for what's installed - better than fingerprint diffing.
-     * Empty when unset (e.g. skynight running on a non-LumiROM build).
+     * Empty when unset (e.g. skynight running on a non-skynight build).
      */
     val romVersion: String get() = getProp(PROP_ROM_VER).orEmpty()
 

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Kontrollera uppdateringen av LumiROM</string>
+    <string name="settings_entry_summary">Kontrollera uppdateringen av skynight</string>
     <string name="tab_check_update">Uppdatering</string>
     <string name="tab_maintainer">Underhållare</string>
     <string name="tab_settings">Inställningar</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Enhet</string>
     <string name="status_checking">Söker efter uppdateringar...</string>
-    <string name="status_checking_sub">Kontakta LumiROM-uppdateringsservern</string>
+    <string name="status_checking_sub">Kontakta skynight-uppdateringsservern</string>
     <string name="status_up_to_date">Din programvara är uppdaterad</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s är den senaste versionen för den här enheten</string>
+    <string name="status_up_to_date_sub">skynight %1$s är den senaste versionen för den här enheten</string>
     <string name="status_update_available">Uppdatering tillgänglig</string>
-    <string name="status_update_available_sub">LumiROM %1$s är redo att laddas ner</string>
+    <string name="status_update_available_sub">skynight %1$s är redo att laddas ner</string>
     <string name="status_failed">Kunde inte\\' söka efter uppdateringar</string>
     <string name="status_downloading">Laddar ner uppdatering</string>
     <string name="status_downloading_sub">%1$d%% · håll ljuskvällen öppen</string>

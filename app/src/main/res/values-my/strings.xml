@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">LumiROM ၏အပ်ဒိတ်ကိုစစ်ဆေးပါ။</string>
+    <string name="settings_entry_summary">skynight ၏အပ်ဒိတ်ကိုစစ်ဆေးပါ။</string>
     <string name="tab_check_update">မွမ်းမံ</string>
     <string name="tab_maintainer">ထိန်းသိမ်းသူ</string>
     <string name="tab_settings">ဆက်တင်များ</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">ကိရိယာ</string>
     <string name="status_checking">အပ်ဒိတ်များအတွက် စစ်ဆေးနေသည်...</string>
-    <string name="status_checking_sub">LumiROM အပ်ဒိတ်ဆာဗာကို ဆက်သွယ်ခြင်း။</string>
+    <string name="status_checking_sub">skynight အပ်ဒိတ်ဆာဗာကို ဆက်သွယ်ခြင်း။</string>
     <string name="status_up_to_date">သင့်ဆော့ဖ်ဝဲသည် နောက်ဆုံးပေါ်ဖြစ်သည်။</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s သည် ဤစက်ပစ္စည်းအတွက် နောက်ဆုံးပေါ်တည်ဆောက်မှုဖြစ်သည်။</string>
+    <string name="status_up_to_date_sub">skynight %1$s သည် ဤစက်ပစ္စည်းအတွက် နောက်ဆုံးပေါ်တည်ဆောက်မှုဖြစ်သည်။</string>
     <string name="status_update_available">အပ်ဒိတ်ရနိုင်သည်။</string>
-    <string name="status_update_available_sub">LumiROM %1$s ကို ဒေါင်းလုဒ်လုပ်ရန် အသင့်ဖြစ်ပါပြီ။</string>
+    <string name="status_update_available_sub">skynight %1$s ကို ဒေါင်းလုဒ်လုပ်ရန် အသင့်ဖြစ်ပါပြီ။</string>
     <string name="status_failed">အပ်ဒိတ်များအတွက် \\' မစစ်ဆေးနိုင်ပါ။</string>
     <string name="status_downloading">အပ်ဒိတ်ကို ဒေါင်းလုဒ်လုပ်နေသည်။</string>
     <string name="status_downloading_sub">%1$d%% · ကောင်းကင်ယံကို ဖွင့်ထားပါ။</string>

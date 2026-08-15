@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Tarkista LumiROM-päivitys</string>
+    <string name="settings_entry_summary">Tarkista skynight-päivitys</string>
     <string name="tab_check_update">Päivitä</string>
     <string name="tab_maintainer">Ylläpitäjä</string>
     <string name="tab_settings">Asetukset</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Laite</string>
     <string name="status_checking">Tarkistetaan päivityksiä…</string>
-    <string name="status_checking_sub">Yhteyden ottaminen LumiROM-päivityspalvelimeen</string>
+    <string name="status_checking_sub">Yhteyden ottaminen skynight-päivityspalvelimeen</string>
     <string name="status_up_to_date">Ohjelmistosi on ajan tasalla</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s on tämän laitteen uusin versio</string>
+    <string name="status_up_to_date_sub">skynight %1$s on tämän laitteen uusin versio</string>
     <string name="status_update_available">Päivitys saatavilla</string>
-    <string name="status_update_available_sub">LumiROM %1$s on valmis ladattavaksi</string>
+    <string name="status_update_available_sub">skynight %1$s on valmis ladattavaksi</string>
     <string name="status_failed">Ei voitu\\' tarkistaa päivityksiä</string>
     <string name="status_downloading">Ladataan päivitystä</string>
     <string name="status_downloading_sub">%1$d%% · pidä taivasyö auki</string>

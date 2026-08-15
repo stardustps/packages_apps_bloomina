@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">LumiROM का अद्यतन जाँचें</string>
+    <string name="settings_entry_summary">skynight का अद्यतन जाँचें</string>
     <string name="tab_check_update">अद्यतन करें</string>
     <string name="tab_maintainer">रख-रखाव करनेवाला</string>
     <string name="tab_settings">सेटिंग्स</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">रोम</string>
     <string name="f_device">युक्ति</string>
     <string name="status_checking">अपडेट की जांच की जा रही है...</string>
-    <string name="status_checking_sub">LumiROM अद्यतन सर्वर से संपर्क किया जा रहा है</string>
+    <string name="status_checking_sub">skynight अद्यतन सर्वर से संपर्क किया जा रहा है</string>
     <string name="status_up_to_date">आपका सॉफ़्टवेयर अद्यतित है</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s इस डिवाइस के लिए नवीनतम निर्माण है</string>
+    <string name="status_up_to_date_sub">skynight %1$s इस डिवाइस के लिए नवीनतम निर्माण है</string>
     <string name="status_update_available">अपडेट उपलब्ध है</string>
-    <string name="status_update_available_sub">LumiROM %1$s डाउनलोड करने के लिए तैयार है</string>
+    <string name="status_update_available_sub">skynight %1$s डाउनलोड करने के लिए तैयार है</string>
     <string name="status_failed">अद्यतनों की जाँच नहीं कर सका\\'</string>
     <string name="status_downloading">अपडेट डाउनलोड हो रहा है</string>
     <string name="status_downloading_sub">__INT____ · स्काईनाइट को खुला रखें</string>

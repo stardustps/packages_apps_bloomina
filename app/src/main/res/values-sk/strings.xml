@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Skontrolujte aktualizáciu LumiROM</string>
+    <string name="settings_entry_summary">Skontrolujte aktualizáciu skynight</string>
     <string name="tab_check_update">Aktualizovať</string>
     <string name="tab_maintainer">Udržiavač</string>
     <string name="tab_settings">Nastavenia</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Zariadenie</string>
     <string name="status_checking">Kontrolujú sa aktualizácie…</string>
-    <string name="status_checking_sub">Kontaktovanie aktualizačného servera LumiROM</string>
+    <string name="status_checking_sub">Kontaktovanie aktualizačného servera skynight</string>
     <string name="status_up_to_date">Váš softvér je aktuálny</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s je najnovšia zostava pre toto zariadenie</string>
+    <string name="status_up_to_date_sub">skynight %1$s je najnovšia zostava pre toto zariadenie</string>
     <string name="status_update_available">K dispozícii je aktualizácia</string>
-    <string name="status_update_available_sub">LumiROM %1$s je pripravený na stiahnutie</string>
+    <string name="status_update_available_sub">skynight %1$s je pripravený na stiahnutie</string>
     <string name="status_failed">Nepodarilo sa\\'skontrolovať aktualizácie</string>
     <string name="status_downloading">Sťahuje sa aktualizácia</string>
     <string name="status_downloading_sub">%1$d%% · majte otvorený večer</string>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Buscar actualización de LumiROM</string>
+    <string name="settings_entry_summary">Buscar actualización de skynight</string>
     <string name="tab_check_update">Actualización</string>
     <string name="tab_maintainer">Mantenedor</string>
     <string name="tab_settings">Ajustes</string>
@@ -23,11 +23,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Dispositivo</string>
     <string name="status_checking">Buscando actualizaciones…</string>
-    <string name="status_checking_sub">Contactando el servidor de LumiROM</string>
+    <string name="status_checking_sub">Contactando el servidor de skynight</string>
     <string name="status_up_to_date">Su software está actualizado</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s es la última compilación para este dispositivo</string>
+    <string name="status_up_to_date_sub">skynight %1$s es la última compilación para este dispositivo</string>
     <string name="status_update_available">Actualización disponible</string>
-    <string name="status_update_available_sub">LumiROM %1$s está listo para descargar</string>
+    <string name="status_update_available_sub">skynight %1$s está listo para descargar</string>
     <string name="status_failed">No se pudo buscar actualizaciones</string>
     <string name="status_downloading">Descargando actualización</string>
     <string name="status_downloading_sub">%1$d%% · mantenga skynight abierto</string>

@@ -34,13 +34,13 @@ object VersionCheck {
             return Result(cmp > 0, installedVersion, "${DeviceInfo.PROP_ROM_VER} $installedVersion")
         }
 
-        // 3) fingerprint fallback (non-LumiROM base, prop unset)
+        // 3) fingerprint fallback (non-skynight base, prop unset)
         val differs = release.fingerprint.isNotBlank() &&
                 release.fingerprint != DeviceInfo.fingerprint
         return Result(differs, "unknown (${DeviceInfo.PROP_ROM_VER} unset)", "fingerprint fallback")
     }
 
-    /** Pulls the first x[.y[.z]] token out of a label like "LumiROM 8.6.4 Beta". */
+    /** Pulls the first x[.y[.z]] token out of a label like "skynight 8.6.4 Beta". */
     private fun extractSemver(s: String): List<Int> =
         Regex("(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?").find(s)
             ?.let { m -> m.groupValues.drop(1).map { it.toIntOrNull() ?: 0 } }

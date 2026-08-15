@@ -7,7 +7,7 @@
             android:key="json_url"
             android:title="Custom JSON URL"
             android:dialogTitle="Update manifest URL"
-            android:summary="Remote manifest skynight checks for new LumiROM builds" />
+            android:summary="Remote manifest skynight checks for new skynight builds" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Maintenance">

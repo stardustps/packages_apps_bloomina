@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Angalia sasisho la LumiROM</string>
+    <string name="settings_entry_summary">Angalia sasisho la skynight</string>
     <string name="tab_check_update">Sasisha</string>
     <string name="tab_maintainer">Mtunzaji</string>
     <string name="tab_settings">Mipangilio</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Kifaa</string>
     <string name="status_checking">Inatafuta masasisho...</string>
-    <string name="status_checking_sub">Kuwasiliana na seva ya sasisho ya LumiROM</string>
+    <string name="status_checking_sub">Kuwasiliana na seva ya sasisho ya skynight</string>
     <string name="status_up_to_date">Programu yako imesasishwa</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s ndio muundo mpya zaidi wa kifaa hiki</string>
+    <string name="status_up_to_date_sub">skynight %1$s ndio muundo mpya zaidi wa kifaa hiki</string>
     <string name="status_update_available">Sasisho linapatikana</string>
-    <string name="status_update_available_sub">LumiROM %1$s iko tayari kupakuliwa</string>
+    <string name="status_update_available_sub">skynight %1$s iko tayari kupakuliwa</string>
     <string name="status_failed">Haikuweza\\' kuangalia masasisho</string>
     <string name="status_downloading">Inapakua sasisho</string>
     <string name="status_downloading_sub">%1$d%% · weka anga wazi</string>

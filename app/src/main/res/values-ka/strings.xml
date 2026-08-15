@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">შეამოწმეთ LumiROM-ის განახლება</string>
+    <string name="settings_entry_summary">შეამოწმეთ skynight-ის განახლება</string>
     <string name="tab_check_update">განახლება</string>
     <string name="tab_maintainer">შემნახველი</string>
     <string name="tab_settings">პარამეტრები</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">მოწყობილობა</string>
     <string name="status_checking">მიმდინარეობს განახლებების შემოწმება…</string>
-    <string name="status_checking_sub">დაუკავშირდით LumiROM განახლების სერვერს</string>
+    <string name="status_checking_sub">დაუკავშირდით skynight განახლების სერვერს</string>
     <string name="status_up_to_date">თქვენი პროგრამული უზრუნველყოფა განახლებულია</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s არის ამ მოწყობილობის უახლესი ვერსია</string>
+    <string name="status_up_to_date_sub">skynight %1$s არის ამ მოწყობილობის უახლესი ვერსია</string>
     <string name="status_update_available">განახლება ხელმისაწვდომია</string>
-    <string name="status_update_available_sub">LumiROM %1$s მზად არის ჩამოსატვირთად</string>
+    <string name="status_update_available_sub">skynight %1$s მზად არის ჩამოსატვირთად</string>
     <string name="status_failed">განახლებების შემოწმება\\' ვერ მოხერხდა</string>
     <string name="status_downloading">მიმდინარეობს განახლების ჩამოტვირთვა</string>
     <string name="status_downloading_sub">%1$d%% · შეინახეთ skynight ღია</string>

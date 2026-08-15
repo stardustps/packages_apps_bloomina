@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Ellenőrizze a LumiROM frissítését</string>
+    <string name="settings_entry_summary">Ellenőrizze a skynight frissítését</string>
     <string name="tab_check_update">Frissítés</string>
     <string name="tab_maintainer">Karbantartó</string>
     <string name="tab_settings">Beállítások elemre</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Eszköz</string>
     <string name="status_checking">Frissítések keresése…</string>
-    <string name="status_checking_sub">Kapcsolatfelvétel a LumiROM frissítési szerverrel</string>
+    <string name="status_checking_sub">Kapcsolatfelvétel a skynight frissítési szerverrel</string>
     <string name="status_up_to_date">Az Ön szoftvere naprakész</string>
-    <string name="status_up_to_date_sub">A LumiROM %1$s a legújabb verzió ehhez az eszközhöz</string>
+    <string name="status_up_to_date_sub">A skynight %1$s a legújabb verzió ehhez az eszközhöz</string>
     <string name="status_update_available">Frissítés elérhető</string>
-    <string name="status_update_available_sub">A LumiROM %1$s készen áll a letöltésre</string>
+    <string name="status_update_available_sub">A skynight %1$s készen áll a letöltésre</string>
     <string name="status_failed">Nem lehetett\\'frissítéseket keresni</string>
     <string name="status_downloading">Frissítés letöltése</string>
     <string name="status_downloading_sub">%1$d%% · tartsa nyitva az égboltot</string>

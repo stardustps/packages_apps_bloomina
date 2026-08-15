@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Hlola isibuyekezo se-LumiROM</string>
+    <string name="settings_entry_summary">Hlola isibuyekezo se-skynight</string>
     <string name="tab_check_update">Buyekeza</string>
     <string name="tab_maintainer">Umnakekeli</string>
     <string name="tab_settings">Izilungiselelo</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">I-ROM</string>
     <string name="f_device">Idivayisi</string>
     <string name="status_checking">Ihlolela izibuyekezo...</string>
-    <string name="status_checking_sub">Ithinta iseva yokubuyekeza ye-LumiROM</string>
+    <string name="status_checking_sub">Ithinta iseva yokubuyekeza ye-skynight</string>
     <string name="status_up_to_date">Isofthiwe yakho isesikhathini samanje</string>
-    <string name="status_up_to_date_sub">I-LumiROM __%1$s iyisakhiwo sakamuva sale divayisi</string>
+    <string name="status_up_to_date_sub">I-skynight __%1$s iyisakhiwo sakamuva sale divayisi</string>
     <string name="status_update_available">Isibuyekezo siyatholakala</string>
-    <string name="status_update_available_sub">I-LumiROM __%1$s isilungele ukudawuniloda</string>
+    <string name="status_update_available_sub">I-skynight __%1$s isilungele ukudawuniloda</string>
     <string name="status_failed">Ayikwazanga_APOS____ukuhlola izibuyekezo</string>
     <string name="status_downloading">Ilanda isibuyekezo</string>
     <string name="status_downloading_sub">%1$d%% · gcina i-skynight ivuliwe</string>

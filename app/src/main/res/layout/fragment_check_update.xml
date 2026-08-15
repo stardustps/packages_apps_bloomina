@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="LumiROM 8.6.4" />
+                tools:text="skynight 8.6.4" />
 
             <ProgressBar
                 android:id="@+id/downloadBar"

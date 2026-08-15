@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Pārbaudiet LumiROM atjauninājumu</string>
+    <string name="settings_entry_summary">Pārbaudiet skynight atjauninājumu</string>
     <string name="tab_check_update">Atjaunināt</string>
     <string name="tab_maintainer">Uzturētājs</string>
     <string name="tab_settings">Iestatījumi</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Ierīce</string>
     <string name="status_checking">Notiek atjauninājumu pārbaude…</string>
-    <string name="status_checking_sub">Sazināšanās ar LumiROM atjaunināšanas serveri</string>
+    <string name="status_checking_sub">Sazināšanās ar skynight atjaunināšanas serveri</string>
     <string name="status_up_to_date">Jūsu programmatūra ir atjaunināta</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s ir šīs ierīces jaunākā versija</string>
+    <string name="status_up_to_date_sub">skynight %1$s ir šīs ierīces jaunākā versija</string>
     <string name="status_update_available">Pieejams atjauninājums</string>
-    <string name="status_update_available_sub">LumiROM %1$s ir gatavs lejupielādei</string>
+    <string name="status_update_available_sub">skynight %1$s ir gatavs lejupielādei</string>
     <string name="status_failed">Nevarēja\\'pārbaudīt atjauninājumus</string>
     <string name="status_downloading">Notiek atjauninājuma lejupielāde</string>
     <string name="status_downloading_sub">%1$d%% · turiet debesu nakti atvērtu</string>

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Provjerite ažuriranje LumiROM-a</string>
+    <string name="settings_entry_summary">Provjerite ažuriranje skynight-a</string>
     <string name="tab_check_update">Ažuriranje</string>
     <string name="tab_maintainer">Održavatelj</string>
     <string name="tab_settings">postavke</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Uređaj</string>
     <string name="status_checking">Provjera ažuriranja...</string>
-    <string name="status_checking_sub">Kontaktiranje LumiROM servera za ažuriranje</string>
+    <string name="status_checking_sub">Kontaktiranje skynight servera za ažuriranje</string>
     <string name="status_up_to_date">Vaš softver je ažuran</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s najnovija je verzija za ovaj uređaj</string>
+    <string name="status_up_to_date_sub">skynight %1$s najnovija je verzija za ovaj uređaj</string>
     <string name="status_update_available">Ažuriranje dostupno</string>
-    <string name="status_update_available_sub">LumiROM %1$s je spreman za preuzimanje</string>
+    <string name="status_update_available_sub">skynight %1$s je spreman za preuzimanje</string>
     <string name="status_failed">Nije moguće\\'provjeriti ažuriranja</string>
     <string name="status_downloading">Preuzimanje ažuriranja</string>
     <string name="status_downloading_sub">%1$d%% · Držite Skynight otvorenim</string>

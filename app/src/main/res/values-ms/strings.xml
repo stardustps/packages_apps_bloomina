@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Semak kemas kini LumiROM</string>
+    <string name="settings_entry_summary">Semak kemas kini skynight</string>
     <string name="tab_check_update">Kemas kini</string>
     <string name="tab_maintainer">Penyelenggara</string>
     <string name="tab_settings">tetapan</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Peranti</string>
     <string name="status_checking">Menyemak kemas kini…</string>
-    <string name="status_checking_sub">Menghubungi pelayan kemas kini LumiROM</string>
+    <string name="status_checking_sub">Menghubungi pelayan kemas kini skynight</string>
     <string name="status_up_to_date">Perisian anda adalah terkini</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s ialah binaan terbaharu untuk peranti ini</string>
+    <string name="status_up_to_date_sub">skynight %1$s ialah binaan terbaharu untuk peranti ini</string>
     <string name="status_update_available">Kemas kini tersedia</string>
-    <string name="status_update_available_sub">LumiROM %1$s sedia untuk dimuat turun</string>
+    <string name="status_update_available_sub">skynight %1$s sedia untuk dimuat turun</string>
     <string name="status_failed">Tidak dapat\\'t menyemak kemas kini</string>
     <string name="status_downloading">Memuat turun kemas kini</string>
     <string name="status_downloading_sub">%1$d%% · pastikan langit malam terbuka</string>

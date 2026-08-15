@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Verificați actualizarea LumiROM</string>
+    <string name="settings_entry_summary">Verificați actualizarea skynight</string>
     <string name="tab_check_update">Actualizare</string>
     <string name="tab_maintainer">întreținător</string>
     <string name="tab_settings">Setări</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Dispozitiv</string>
     <string name="status_checking">Se verifică actualizările...</string>
-    <string name="status_checking_sub">Contactarea serverului de actualizare LumiROM</string>
+    <string name="status_checking_sub">Contactarea serverului de actualizare skynight</string>
     <string name="status_up_to_date">Software-ul dvs. este actualizat</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s este cea mai recentă versiune pentru acest dispozitiv</string>
+    <string name="status_up_to_date_sub">skynight %1$s este cea mai recentă versiune pentru acest dispozitiv</string>
     <string name="status_update_available">Actualizare disponibilă</string>
-    <string name="status_update_available_sub">LumiROM %1$s este gata de descărcat</string>
+    <string name="status_update_available_sub">skynight %1$s este gata de descărcat</string>
     <string name="status_failed">Nu s-au putut\\'verifica actualizările</string>
     <string name="status_downloading">Se descarcă actualizarea</string>
     <string name="status_downloading_sub">%1$d%% · păstrați skynight deschis</string>

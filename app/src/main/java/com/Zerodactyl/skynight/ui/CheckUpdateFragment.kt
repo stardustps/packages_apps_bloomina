@@ -240,7 +240,7 @@ class CheckUpdateFragment : Fragment() {
 
     /** Scary, unambiguous confirmation before any direct-to-partition write on an A-only device. */
     private fun confirmRawFlash(pkg: File, dl: Download) {
-        val target = "system"   // for LumiROM full images; a boot/recovery image would pass its own name
+        val target = "system"   // for skynight full images; a boot/recovery image would pass its own name
         AlertDialog.Builder(requireContext())
             .setTitle("Flash directly to /$target?")
             .setMessage(

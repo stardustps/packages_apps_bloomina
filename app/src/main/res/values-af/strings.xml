@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">skynight</string>
     <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Gaan opdatering van LumiROM na</string>
+    <string name="settings_entry_summary">Gaan opdatering van skynight na</string>
     <string name="tab_check_update">Dateer op</string>
     <string name="tab_maintainer">Onderhouer</string>
     <string name="tab_settings">Instellings</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Toestel</string>
     <string name="status_checking">Kyk tans vir opdaterings …</string>
-    <string name="status_checking_sub">Kontak die LumiROM-opdateringbediener</string>
+    <string name="status_checking_sub">Kontak die skynight-opdateringbediener</string>
     <string name="status_up_to_date">Jou sagteware is op datum</string>
-    <string name="status_up_to_date_sub">LumiROM %1$s is die nuutste bou vir hierdie toestel</string>
+    <string name="status_up_to_date_sub">skynight %1$s is die nuutste bou vir hierdie toestel</string>
     <string name="status_update_available">Opdatering beskikbaar</string>
-    <string name="status_update_available_sub">LumiROM %1$s is gereed om af te laai</string>
+    <string name="status_update_available_sub">skynight %1$s is gereed om af te laai</string>
     <string name="status_failed">Kon nie __APOS___ kyk vir opdaterings nie</string>
     <string name="status_downloading">Laai tans opdatering af</string>
     <string name="status_downloading_sub">%1$d%% · hou skynnag oop</string>
