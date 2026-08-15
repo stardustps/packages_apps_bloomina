@@ -31,7 +31,7 @@ class MaintainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val url = requireContext().getSharedPreferences("cloudy", 0)
+        val url = requireContext().getSharedPreferences("skynight", 0)
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
@@ -56,7 +56,7 @@ class MaintainerFragment : Fragment() {
                 .onSuccess { m ->
                     val v = _b ?: return@onSuccess
                     val mt = m.maintainer
-                    // ro.cloudy.maintainer (baked into the ROM) is authoritative; the JSON
+                    // ro.skynight.maintainer (baked into the ROM) is authoritative; the JSON
                     // value is only a fallback for devices that don't set the prop.
                     v.name.text = local.first.ifBlank { mt.name }
                     v.handle.text = mt.handle

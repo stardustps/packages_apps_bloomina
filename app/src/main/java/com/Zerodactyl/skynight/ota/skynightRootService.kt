@@ -9,7 +9,7 @@ import java.io.File
  * libsu RootService — hosts a persistent worker in a separate ROOT process.
  * Everything in [Ipc] runs as uid 0, so the app never has to spawn `su -c` per action.
  */
-class CloudyRootService : LibsuRootService() {
+class skynightRootService : LibsuRootService() {
 
     override fun onBind(intent: Intent): IBinder = Ipc()
 
@@ -21,14 +21,14 @@ class CloudyRootService : LibsuRootService() {
         }.getOrDefault("")
 
         override fun moduleReady(): Boolean =
-            File("/data/adb/modules/cloudy_ota/cloudy_ready").exists() ||
-            File("/data/adb/modules/cloudy_ota/module.prop").exists()
+            File("/data/adb/modules/skynight_ota/skynight_ready").exists() ||
+            File("/data/adb/modules/skynight_ota/module.prop").exists()
 
         override fun stageRecovery(pkgPath: String, filename: String): String {
             return try {
-                val staged = "/data/media/0/cloudy/$filename"
+                val staged = "/data/media/0/skynight/$filename"
                 sh(
-                    "mkdir -p /data/media/0/cloudy",
+                    "mkdir -p /data/media/0/skynight",
                     "cp '$pkgPath' '$staged'",
                     "chmod 0644 '$staged'",
                     "mkdir -p /cache/recovery",

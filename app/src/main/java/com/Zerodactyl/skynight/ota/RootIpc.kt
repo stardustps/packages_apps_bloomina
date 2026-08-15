@@ -10,7 +10,7 @@ import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 /**
- * Binds [CloudyRootService] once and keeps the connection alive for the
+ * Binds [skynightRootService] once and keeps the connection alive for the
  * session. Call [connect] before flashing; [disconnect] when the screen is done.
  */
 class RootIpc(private val context: Context) {
@@ -33,13 +33,13 @@ class RootIpc(private val context: Context) {
             override fun onServiceDisconnected(name: ComponentName?) { worker = null }
         }
         connection = conn
-        val intent = Intent(context, CloudyRootService::class.java)
+        val intent = Intent(context, skynightRootService::class.java)
         LibsuRootService.bind(intent, conn)
         cont.invokeOnCancellation { disconnect() }
     }
 
     fun disconnect() {
-        connection?.let { LibsuRootService.stop(Intent(context, CloudyRootService::class.java)) }
+        connection?.let { LibsuRootService.stop(Intent(context, skynightRootService::class.java)) }
         connection = null
         worker = null
     }

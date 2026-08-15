@@ -7,13 +7,13 @@
             android:key="json_url"
             android:title="Custom JSON URL"
             android:dialogTitle="Update manifest URL"
-            android:summary="Remote manifest Cloudy checks for new LumiROM builds" />
+            android:summary="Remote manifest skynight checks for new LumiROM builds" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Maintenance">
         <Preference
             android:key="reset"
             android:title="Reset configurations"
-            android:summary="Clear all saved Cloudy flags and restore defaults" />
+            android:summary="Clear all saved skynight flags and restore defaults" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/heroTitle"
-                style="@style/Cloudy.Text.Hero"
+                style="@style/skynight.Text.Hero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/heroSubtitle"
-                style="@style/Cloudy.Text.HeroSupport"
+                style="@style/skynight.Text.HeroSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -160,7 +160,7 @@
 
             <TextView
                 android:id="@+id/changelog"
-                style="@style/Cloudy.Text.Body"
+                style="@style/skynight.Text.Body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/oui_card_padding_h"

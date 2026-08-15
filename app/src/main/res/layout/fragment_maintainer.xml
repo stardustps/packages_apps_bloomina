@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/name"
-                style="@style/Cloudy.Text.Hero"
+                style="@style/skynight.Text.Hero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/handle"
-                style="@style/Cloudy.Text.HeroSupport"
+                style="@style/skynight.Text.HeroSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

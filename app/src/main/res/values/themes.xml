@@ -3,7 +3,7 @@
     <!--
         OneUITheme and the OneUI.* button styles come from oneui-design; not redefined.
 
-        Font: Cloudy now BUNDLES One UI Sans (res/font/oneui_sans.xml) instead of relying on
+        Font: skynight now BUNDLES One UI Sans (res/font/oneui_sans.xml) instead of relying on
         the "sec" system alias. "sec" only resolves to a real One UI face on Samsung firmware;
         everywhere else it silently fell back to the platform sans, which is why the app looked
         like stock AOSP on any non-Samsung build. The bundled family renders identically on
@@ -14,18 +14,18 @@
         internally. OneUiFont installs a LayoutInflater factory in MainActivity that applies
         the bundled typeface to every inflated TextView, which is what actually covers them.
     -->
-    <style name="Theme.Cloudy" parent="OneUITheme">
+    <style name="Theme.skynight" parent="OneUITheme">
         <item name="android:fontFamily">@font/oneui_sans</item>
         <item name="fontFamily">@font/oneui_sans</item>
-        <item name="android:textViewStyle">@style/Cloudy.TextView</item>
-        <item name="android:buttonStyle">@style/Cloudy.Button</item>
+        <item name="android:textViewStyle">@style/skynight.TextView</item>
+        <item name="android:buttonStyle">@style/skynight.Button</item>
     </style>
 
-    <style name="Cloudy.TextView" parent="android:Widget.Material.TextView">
+    <style name="skynight.TextView" parent="android:Widget.Material.TextView">
         <item name="android:fontFamily">@font/oneui_sans</item>
     </style>
 
-    <style name="Cloudy.Button" parent="android:Widget.Material.Button">
+    <style name="skynight.Button" parent="android:Widget.Material.Button">
         <item name="android:fontFamily">@font/oneui_sans</item>
     </style>
 
@@ -33,7 +33,7 @@
          8.5 leans on a tall, tightly-tracked headline over a quiet secondary line.
          Weight 500 (medium) is the One UI title weight; 700 is reserved for the hero. -->
 
-    <style name="Cloudy.Text.Hero" parent="Cloudy.TextView">
+    <style name="skynight.Text.Hero" parent="skynight.TextView">
         <item name="android:textSize">24sp</item>
         <item name="android:textFontWeight">700</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
@@ -41,7 +41,7 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="Cloudy.Text.HeroSupport" parent="Cloudy.TextView">
+    <style name="skynight.Text.HeroSupport" parent="skynight.TextView">
         <item name="android:textSize">14sp</item>
         <item name="android:textFontWeight">400</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
@@ -49,13 +49,13 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="Cloudy.Text.Title" parent="Cloudy.TextView">
+    <style name="skynight.Text.Title" parent="skynight.TextView">
         <item name="android:textSize">17sp</item>
         <item name="android:textFontWeight">500</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="Cloudy.Text.Body" parent="Cloudy.TextView">
+    <style name="skynight.Text.Body" parent="skynight.TextView">
         <item name="android:textSize">15sp</item>
         <item name="android:textFontWeight">400</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>

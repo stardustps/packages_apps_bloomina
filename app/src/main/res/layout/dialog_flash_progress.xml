@@ -13,13 +13,13 @@
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
     <TextView android:id="@+id/flashLabel"
-        style="@style/Cloudy.Text.Title"
+        style="@style/skynight.Text.Title"
         android:layout_marginTop="16dp"
         android:text="@string/status_installing"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
     <TextView
-        style="@style/Cloudy.Text.Body"
+        style="@style/skynight.Text.Body"
         android:layout_marginTop="6dp"
         android:textSize="13sp"
         android:text="@string/flash_warning"

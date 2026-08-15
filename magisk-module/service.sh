@@ -1,11 +1,11 @@
 #!/system/bin/sh
 # Runs late (after boot). Fixes ownership/permissions once the data partition is fully up,
-# so Cloudy can read/write its staging area regardless of the multi-user path.
+# so skynight can read/write its staging area regardless of the multi-user path.
 MODDIR=${0%/*}
 
 # libsu spawns our commands as root at flash time; this just keeps the staging dir sane.
-if [ -d /data/media/0/cloudy ]; then
-  chmod 0771 /data/media/0/cloudy 2>/dev/null
+if [ -d /data/media/0/skynight ]; then
+  chmod 0771 /data/media/0/skynight 2>/dev/null
 fi
 
 # Re-assert the live SELinux rules in case a policy reload dropped them (KernelSU/Magisk safe).

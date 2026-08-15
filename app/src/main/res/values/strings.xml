@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Cloudy</string>
-    <string name="settings_entry_title">Cloudy</string>
+    <string name="app_name">skynight</string>
+    <string name="settings_entry_title">skynight</string>
     <string name="settings_entry_summary">Check update of LumiROM</string>
 
     <string name="tab_check_update">Update</string>
@@ -35,7 +35,7 @@
     <string name="status_update_available_sub">LumiROM %1$s is ready to download</string>
     <string name="status_failed">Couldn\'t check for updates</string>
     <string name="status_downloading">Downloading update</string>
-    <string name="status_downloading_sub">%1$d%% · keep Cloudy open</string>
+    <string name="status_downloading_sub">%1$d%% · keep skynight open</string>
     <string name="status_installing">Preparing to install</string>
 
     <string name="btn_check">Check for updates</string>

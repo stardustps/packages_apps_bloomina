@@ -1,8 +1,8 @@
-# Allow the Cloudy app domain to do the specific things the flasher needs, and nothing more.
+# Allow the skynight app domain to do the specific things the flasher needs, and nothing more.
 # Magisk/KernelSU load this at boot (magiskpolicy --live equivalent).
 #
 # NOTE: on most builds a third-party app runs in the generic untrusted_app domain, so these
-# rules are intentionally scoped to the operations Cloudy performs, not a blanket allow.
+# rules are intentionally scoped to the operations skynight performs, not a blanket allow.
 
 # Write the recovery command file so recovery applies the OTA on next boot.
 allow untrusted_app cache_file dir  { search write add_name }

@@ -1,14 +1,14 @@
 #!/system/bin/sh
 # Install-time checks. Refuse to install on the wrong device or an A/B layout, since the
 # staging logic assumes A-only recovery semantics.
-ui_print "- Cloudy OTA Helper"
+ui_print "- skynight OTA Helper"
 DEVICE=$(getprop ro.product.vendor.device)
 SLOT=$(getprop ro.boot.slot_suffix)
 
 ui_print "  device: $DEVICE"
 if [ -n "$SLOT" ]; then
   ui_print "! This build reports an A/B slot ($SLOT)."
-  ui_print "! Cloudy's A-only staging is not appropriate here. Aborting."
+  ui_print "! skynight's A-only staging is not appropriate here. Aborting."
   abort
 fi
 

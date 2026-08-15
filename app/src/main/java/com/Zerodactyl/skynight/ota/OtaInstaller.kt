@@ -18,13 +18,13 @@ sealed interface InstallResult {
  * update-applying mode with its own fail-safes) rather than dd-ing a live system.
  *
  * Three tiers, tried in order of safety:
- *   1. Privileged system-app path (RecoverySystem) — only if Cloudy is in priv-app.
- *   2. Root path via the Cloudy module — writes /cache/recovery/command and reboots.
+ *   1. Privileged system-app path (RecoverySystem) — only if skynight is in priv-app.
+ *   2. Root path via the skynight module — writes /cache/recovery/command and reboots.
  *   3. Raw block write — DANGEROUS, gated behind an explicit user confirmation flag.
  */
 class OtaInstaller(private val context: Context) {
 
-    /** Tier 1: works only when Cloudy holds the system RECOVERY permission (priv-app in ROM). */
+    /** Tier 1: works only when skynight holds the system RECOVERY permission (priv-app in ROM). */
     fun tryPrivilegedInstall(pkg: File): InstallResult = try {
         RecoverySystem.verifyPackage(pkg, null, null)
         RecoverySystem.installPackage(context, pkg)   // triggers reboot to recovery
@@ -36,20 +36,20 @@ class OtaInstaller(private val context: Context) {
     }
 
     /**
-     * Tier 2: root staging. Relies on the Cloudy module having relaxed SELinux so we
+     * Tier 2: root staging. Relies on the skynight module having relaxed SELinux so we
      * can write the recovery command file. This is exactly what OEM/AOSP recovery reads
      * on the next boot to apply an OTA and then wipe the command.
      */
     fun rootStageRecovery(pkg: File): InstallResult {
         if (!RootManager.hasRoot()) return InstallResult.NeedsRoot("No root shell")
-        if (!RootManager.cloudyModulePresent())
-            return InstallResult.NeedsRoot("Cloudy module not installed")
+        if (!RootManager.skynightModulePresent())
+            return InstallResult.NeedsRoot("skynight module not installed")
 
         // Recovery expects the package on a partition it can read early. /data/media/0 (== internal
         // /sdcard) is standard for sideload-style OTAs on A-only Samsung.
-        val staged = "/data/media/0/cloudy/${pkg.name}"
+        val staged = "/data/media/0/skynight/${pkg.name}"
         val commands = """
-            mkdir -p /data/media/0/cloudy
+            mkdir -p /data/media/0/skynight
             cp '${pkg.absolutePath}' '$staged'
             chmod 0644 '$staged'
             mkdir -p /cache/recovery
@@ -78,8 +78,8 @@ class OtaInstaller(private val context: Context) {
      */
     fun rawBlockFlash(pkg: File, target: String, confirmedRawFlash: Boolean): InstallResult {
         if (!confirmedRawFlash) return InstallResult.Failed("Raw flash not confirmed")
-        if (!RootManager.hasRoot() || !RootManager.cloudyModulePresent())
-            return InstallResult.NeedsRoot("Root + Cloudy module required for raw flash")
+        if (!RootManager.hasRoot() || !RootManager.skynightModulePresent())
+            return InstallResult.NeedsRoot("Root + skynight module required for raw flash")
 
         val safe = target.filter { it.isLetterOrDigit() || it == '_' }
         val cmd = """

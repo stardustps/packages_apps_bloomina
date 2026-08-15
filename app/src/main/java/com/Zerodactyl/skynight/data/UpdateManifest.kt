@@ -24,7 +24,7 @@ data class Maintainer(
 
 data class Release(
     @SerializedName("version") val version: String,
-    @SerializedName("version_code") val versionCode: Long? = null, // preferred: compare vs ro.cloudy.rom.ver.code
+    @SerializedName("version_code") val versionCode: Long? = null, // preferred: compare vs ro.skynight.rom.ver.code
     @SerializedName("build_date") val buildDate: String,          // Tab1: Build Date
     @SerializedName("android_version") val androidVersion: String, // Tab1: Android Version
     @SerializedName("security_patch") val securityPatch: String,   // Tab1: Security Patch Level

@@ -5,10 +5,10 @@ package com.Zerodactyl.skynight.ota;
 import com.Zerodactyl.skynight.ota.IFlashCallback;
 
 interface IRootIpc {
-    // Read any system property from the root context (e.g. ro.cloudy.version).
+    // Read any system property from the root context (e.g. ro.skynight.version).
     String getProp(String key);
 
-    // True if the Cloudy module dropped its readiness marker.
+    // True if the skynight module dropped its readiness marker.
     boolean moduleReady();
 
     // Stage a recovery-flashable package and write /cache/recovery/command.

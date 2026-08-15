@@ -37,7 +37,7 @@ class CheckUpdateFragment : Fragment() {
      *  cleared the Settings field used to leave an empty string here, which OkHttp rejects. */
     private val jsonUrl: String
         get() = requireContext()
-            .getSharedPreferences("cloudy", 0)
+            .getSharedPreferences("skynight", 0)
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
@@ -227,7 +227,7 @@ class CheckUpdateFragment : Fragment() {
                 is InstallResult.StagedRebootingToRecovery ->
                     setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
                 is InstallResult.NeedsRoot -> {
-                    setHero(R.drawable.ic_status_error, "Root required", "Root + Cloudy module required (${result.why})")
+                    setHero(R.drawable.ic_status_error, "Root required", "Root + skynight module required (${result.why})")
                     v.btnDownload.isEnabled = true
                 }
                 is InstallResult.Failed -> {
@@ -274,7 +274,7 @@ class CheckUpdateFragment : Fragment() {
                 setHero(
                     R.drawable.ic_status_error,
                     getString(R.string.status_failed),
-                    "Root worker unavailable — is the Cloudy module installed?"
+                    "Root worker unavailable — is the skynight module installed?"
                 )
                 return@launch
             }
@@ -326,7 +326,7 @@ class CheckUpdateFragment : Fragment() {
          * Default manifest location. The device codename is auto-detected from
          * `ro.product.vendor.device` (falling back to Build.DEVICE), e.g. .../16.2/a32.json
          */
-        private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/cloudy-app/refs/heads/main/updater"
+        private const val OTA_BASE = "https://raw.githubusercontent.com/Luminous418/skynight-app/refs/heads/main/updater"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
     }
 }
