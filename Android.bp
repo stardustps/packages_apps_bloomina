@@ -6,14 +6,14 @@ android_app {
     name: "bloomina",
 
     srcs: [
-        "app/src/main/java/**/*.java",
-        "app/src/main/java/**/*.kt",
-        "app/src/main/aidl/**/*.aidl",
+        "src/**/*.java",
+        "src/**/*.kt",
+        "src/**/*.aidl",
     ],
 
-    resource_dirs: ["app/src/main/res"],
+    resource_dirs: ["res"],
 
-    manifest: "app/src/main/AndroidManifest.xml",
+    manifest: "AndroidManifest.xml",
 
     certificate: "platform",
     privileged: true,
@@ -39,7 +39,7 @@ android_app {
 
     optimize: {
         enabled: true,
-        proguard_flags_files: ["app/proguard-rules.pro"],
+        proguard_flags_files: ["proguard-rules.pro"],
     },
 
     required: [
