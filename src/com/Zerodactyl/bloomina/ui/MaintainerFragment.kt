@@ -41,23 +41,23 @@ class MaintainerFragment : Fragment() {
                 Triple(DeviceInfo.maintainer, DeviceInfo.model, DeviceInfo.romVersion)
             }
             _b?.let { v ->
-                v.name.text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
-                v.device.text = local.second
-                v.rom.text = local.third.ifBlank { "-" }
+                requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
+                requireView().findViewById<android.widget.TextView>(R.id.device).text = local.second
+                requireView().findViewById<android.widget.TextView>(R.id.rom).text = local.third.ifBlank { "-" }
             }
 
             repo.fetchManifest(url)
                 .onSuccess { m ->
                     val v = _b ?: return@onSuccess
                     val mt = m.maintainer
-                    v.name.text = local.first.ifBlank { mt.name }
-                    v.handle.text = mt.handle
-                    v.device.text = "${mt.device} (${mt.codename})"
-                    v.rom.text = m.romName
+                    requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { mt.name }
+                    requireView().findViewById<android.widget.TextView>(R.id.handle).text = mt.handle
+                    requireView().findViewById<android.widget.TextView>(R.id.device).text = "${mt.device} (${mt.codename})"
+                    requireView().findViewById<android.widget.TextView>(R.id.rom).text = m.romName
                     bindLinks(mt)
                 }
                 .onFailure { t ->
-                    _b?.handle?.text = UpdateRepository.describe(t)
+                    view?.findViewById<android.widget.TextView>(R.id.handle)?.text = UpdateRepository.describe(t)
                 }
         }
     }
@@ -79,8 +79,8 @@ class MaintainerFragment : Fragment() {
             }
         }
         
-        setupLink(v.btnTelegram, null, m.telegram)
-        setupLink(v.btnDonate, null, m.donateUrl)
+        setupLink(requireView().findViewById<android.view.View>(R.id.btnTelegram), null, m.telegram)
+        setupLink(requireView().findViewById<android.view.View>(R.id.btnDonate), null, m.donateUrl)
         setupLink(requireView().findViewById(R.id.btnGithub), requireView().findViewById(R.id.divGithub), m.githubUrl)
         setupLink(requireView().findViewById(R.id.btnXda), requireView().findViewById(R.id.divXda), m.xdaUrl)
     }
