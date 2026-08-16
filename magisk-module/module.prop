@@ -1,6 +1,0 @@
-id=skynight_ota
-name=skynight OTA Helper
-version=v1.2.0
-versionCode=120
-author=skynight / aerocat
-description=Grants com.Zerodactyl.skynight the SELinux + permission context to stage recovery OTAs and reboot to recovery on A-only Galaxy A32. Works with Magisk and KernelSU.
