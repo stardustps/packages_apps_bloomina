@@ -75,53 +75,34 @@ PRODUCT_PROPERTY_OVERRIDES += \
 - `ro.bloomina.rom.ver.code`: a numeric integer used by the app to natively compare if the online update is newer than the installed update (usually a datecode).
 ---
 
-## reverting to the default lineageos updater
+## removing the stock lineageos updater
 
-bloomina is a drop-in replacement for the stock lineageos updater (the `Updater` app, `org.lineageos.updater`, built from `packages/apps/Updater`). if you would rather ship your rom with the built-in updater instead, simply undo the integration steps above.
+bloomina and the stock lineageos updater (the `Updater` app, `org.lineageos.updater`, built from `packages/apps/Updater`) both register `android.settings.SYSTEM_UPDATE_SETTINGS`, so only one can own the system update entry. to use bloomina (or to strip the stock updater entirely), delete `Updater` from the build.
 
-### 1. remove bloomina from your device makefile
-in your `device.mk` / `lineage_codename.mk`, delete the bloomina entry:
-
-```makefile
-# remove this line
-PRODUCT_PACKAGES += \
-    bloomina
-```
-
-if you had removed the stock updater to make room for bloomina (common in some trees), add it back:
+### 1. drop it from PRODUCT_PACKAGES
+lineageos adds `Updater` from a common makefile (`vendor/lineage/config/common.mk` / `lineage.mk`), not your device makefile — so you can't simply "not add" it. exclude it from your device tree instead:
 
 ```makefile
-# restore the stock lineageos updater
-PRODUCT_PACKAGES += \
+# remove the stock lineageos updater (supported on modern trees)
+PRODUCT_PACKAGES_DELENDED += \
     Updater
 ```
 
-### 2. drop the bloomina sepolicy
-in `BoardConfig.mk`, remove the bloomina sepolicy directory. the stock updater brings its own selinux rules from the tree, so this is no longer needed:
+if your tree is older and does not support `PRODUCT_PACKAGES_DELENDED`, filter it out directly:
 
 ```makefile
-# remove this line
-BOARD_SEPOLICY_DIRS += packages/apps/bloomina/sepolicy
+PRODUCT_PACKAGES := $(filter-out Updater,$(PRODUCT_PACKAGES))
 ```
 
-### 3. (optional) clean up the bloomina properties
-the `ro.bloomina.*` overrides are only read by bloomina, so leaving them is harmless — but you can delete them from your `device.mk` for tidiness:
+*(some lineageos-based roms rename the module — e.g. `ArrowUpdater`, `crDroidUpdater`, `DerpUpdater`. grep your `vendor/*/config/*.mk` and `packages/apps` for the updater module name and substitute it above.)*
 
-```makefile
-# remove these
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bloomina.rom=lineage \
-    ro.bloomina.maintainer="your name here" \
-    ro.bloomina.rom.ver=$(lineage_version) \
-    ro.bloomina.rom.ver.code=$(date +%Y%m%d)
-```
+### 2. (optional) remove its sepolicy / privapp
+the stock updater carries its own selinux rules and `privapp-permissions`. leftover entries are ignored once the package is gone, but for a clean tree you can drop its `BOARD_SEPOLICY_DIRS` entry and privapp xml if your device makefile referenced them explicitly. this is not required.
 
-the `privapp-permissions-bloomina.xml` and `bloomina.te` shipped by this repo become unused once bloomina is gone. they target a package that no longer exists and are ignored, so you can leave the checkout in place or delete `packages/apps/bloomina` entirely.
-
-### 4. rebuild and reflash
+### 3. rebuild and reflash
 ```bash
 source build/envsetup.sh
 breakfast codename
 mka bacon
 ```
-after flashing, **settings → about phone → system update** (and any samsung settings injection) will open the stock lineageos `Updater` again. no extra permissions or intent-filter changes are required — the default updater already registers `android.settings.SYSTEM_UPDATE_SETTINGS`, which it reclaims once bloomina is removed.
+after flashing, the stock `Updater` is no longer installed. the **settings → about phone → system update** entry will now be claimed by bloomina (if you added it per the steps above). if you removed the updater without installing bloomina, that menu item simply won't resolve to any app.
