@@ -15,6 +15,9 @@ android_app {
 
     manifest: "AndroidManifest.xml",
 
+    version_name: "2.0-draminica",
+    version: 2,
+
     certificate: "platform",
     privileged: true,
     platform_apis: true,
