@@ -5,6 +5,11 @@ import com.google.android.material.color.DynamicColors
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.Zerodactyl.bloomina.R
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import com.Zerodactyl.bloomina.ota.DeviceInfo
 
 /**
  * Standard Material Design shell:
@@ -21,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
+        checkUpdateCompleted()
         
         setContentView(R.layout.activity_main)
 
@@ -34,6 +40,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) show(updateFragment, R.string.tab_check_update)
+    }
+
+    private fun checkUpdateCompleted() {
+        val prefs = getSharedPreferences("bloomina", 0)
+        val pending = prefs.getString("pending_update_version", null)
+        if (!pending.isNullOrBlank() && pending == DeviceInfo.romVersion) {
+            prefs.edit().remove("pending_update_version").apply()
+            val text = getString(R.string.update_done_text)
+            val nm = getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
+            val channel = NotificationChannel("ota_updates", getString(R.string.notif_channel_name), NotificationManager.IMPORTANCE_LOW)
+            nm.createNotificationChannel(channel)
+            nm.notify(
+                3,
+                NotificationCompat.Builder(this, "ota_updates")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle(getString(R.string.update_done_title))
+                    .setContentText(text)
+                    .setAutoCancel(true)
+                    .build()
+            )
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+        }
     }
 
     /** Swap the main_content fragment and update the collapsing header subtitle. */

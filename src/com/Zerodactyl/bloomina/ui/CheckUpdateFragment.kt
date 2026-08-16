@@ -345,13 +345,16 @@ class CheckUpdateFragment : Fragment() {
             }
             val v = _b ?: return@launch
             when (result) {
-                is InstallResult.StagedRebootingToRecovery ->
+                is InstallResult.StagedRebootingToRecovery -> {
                     setHero(R.drawable.ic_status_available, getString(R.string.install_staged_title), getString(R.string.install_staged_sub))
+                    requireContext().getSharedPreferences("bloomina", 0).edit().putString("pending_update_version", manifest?.release?.version ?: "").apply()
+                }
                 is InstallResult.AppliedBackgroundRebootRequired -> {
                     setHero(R.drawable.ic_status_available, getString(R.string.install_applied_title), getString(R.string.install_applied_sub))
                     setRebootButton(v)
                     v.btnExport.visibility = View.VISIBLE
                     showRebootBottomSheet()
+                    requireContext().getSharedPreferences("bloomina", 0).edit().putString("pending_update_version", manifest?.release?.version ?: "").apply()
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, getString(R.string.install_failed_title), result.why)
