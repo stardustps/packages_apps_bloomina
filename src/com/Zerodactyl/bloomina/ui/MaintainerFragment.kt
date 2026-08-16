@@ -81,8 +81,8 @@ class MaintainerFragment : Fragment() {
         
         setupLink(v.btnTelegram, null, m.telegram)
         setupLink(v.btnDonate, null, m.donateUrl)
-        setupLink(v.root.findViewById(R.id.btnGithub), v.root.findViewById(R.id.divGithub), m.githubUrl)
-        setupLink(v.root.findViewById(R.id.btnXda), v.root.findViewById(R.id.divXda), m.xdaUrl)
+        setupLink(requireView().findViewById(R.id.btnGithub), requireView().findViewById(R.id.divGithub), m.githubUrl)
+        setupLink(requireView().findViewById(R.id.btnXda), requireView().findViewById(R.id.divXda), m.xdaUrl)
     }
 
     override fun onDestroyView() {
