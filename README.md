@@ -33,7 +33,7 @@ add the package to your device's makefile (e.g., `device/brand/codename/device.m
 ```makefile
 # include bloomina updater
 product_packages += \
-    bloominaupdater
+    bloomina
 ```
 
 ### 3. build your rom

@@ -3,7 +3,7 @@
 //
 
 android_app {
-    name: "BloominaUpdater",
+    name: "bloomina",
 
     srcs: [
         "app/src/main/java/**/*.java",
