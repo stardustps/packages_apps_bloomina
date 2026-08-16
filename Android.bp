@@ -42,7 +42,6 @@ android_app {
 
     optimize: {
         enabled: true,
-        proguard_flags_files: ["proguard-rules.pro"],
     },
 
     required: [
