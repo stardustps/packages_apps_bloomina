@@ -21,8 +21,8 @@ class BloominaRootService : LibsuRootService() {
         }.getOrDefault("")
 
         override fun moduleReady(): Boolean =
-            File("/data/adb/modules/bloomina_ota/bloomina_ready").exists() ||
-            File("/data/adb/modules/bloomina_ota/module.prop").exists()
+            File("/data/adb/modules/bloomina_helper/bloomina_ready").exists() ||
+            File("/data/adb/modules/bloomina_helper/module.prop").exists()
 
         override fun stageRecovery(pkgPath: String, filename: String): String {
             return try {

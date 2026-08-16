@@ -5,10 +5,10 @@ package com.Zerodactyl.bloomina.ota;
 import com.Zerodactyl.bloomina.ota.IFlashCallback;
 
 interface IRootIpc {
-    // Read any system property from the root context (e.g. ro.skynight.version).
+    // Read any system property from the root context (e.g. ro.bloomina.version).
     String getProp(String key);
 
-    // True if the skynight module dropped its readiness marker.
+    // True if the bloomina module dropped its readiness marker.
     boolean moduleReady();
 
     // Stage a recovery-flashable package and write /cache/recovery/command.

@@ -24,8 +24,8 @@ object RootManager {
     /** The module drops this marker in post-fs-data.sh so the app can confirm its rules are live. */
     fun bloominaModulePresent(): Boolean {
         val paths = listOf(
-            "/data/adb/modules/bloomina_ota/module.prop",
-            "/data/adb/modules/bloomina_ota/bloomina_ready"
+            "/data/adb/modules/bloomina_helper/module.prop",
+            "/data/adb/modules/bloomina_helper/bloomina_ready"
         )
         val res = Shell.cmd(paths.joinToString(" || ") { "[ -e $it ]" } + " && echo YES").exec()
         return res.isSuccess && res.out.any { it.trim() == "YES" }
