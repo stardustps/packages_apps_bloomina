@@ -4,11 +4,11 @@ import com.Zerodactyl.bloomina.data.Release
 
 /**
  * Decides whether a remote [Release] is newer than what's installed, using the ROM's own
- * stamp `ro.skynight.rom.ver` (and `ro.skynight.rom.ver.code` when available) as the source of truth.
+ * stamp `ro.bloomina.rom.ver` (and `ro.bloomina.rom.ver.code` when available) as the source of truth.
  *
  * Order of preference:
- *   1. Integer compare: manifest.version_code  vs  ro.skynight.rom.ver.code
- *   2. Semver compare:  manifest.version        vs  ro.skynight.rom.ver
+ *   1. Integer compare: manifest.version_code  vs  ro.bloomina.rom.ver.code
+ *   2. Semver compare:  manifest.version        vs  ro.bloomina.rom.ver
  *   3. Fallback:        build fingerprint differs (last resort, least reliable)
  */
 object VersionCheck {
@@ -16,8 +16,8 @@ object VersionCheck {
     data class Result(val updateAvailable: Boolean, val installed: String, val reason: String)
 
     fun evaluate(release: Release): Result {
-        val installedVersion = DeviceInfo.romVersion            // ro.skynight.rom.ver
-        val installedCode = DeviceInfo.romVersionCode           // ro.skynight.rom.ver.code
+        val installedVersion = DeviceInfo.romVersion            // ro.bloomina.rom.ver
+        val installedCode = DeviceInfo.romVersionCode           // ro.bloomina.rom.ver.code
 
         // 1) numeric version codes — cleanest
         if (release.versionCode != null && installedCode != null) {
@@ -28,19 +28,19 @@ object VersionCheck {
             )
         }
 
-        // 2) semver from ro.skynight.rom.ver
+        // 2) semver from ro.bloomina.rom.ver
         if (installedVersion.isNotBlank()) {
             val cmp = compareSemver(extractSemver(release.version), extractSemver(installedVersion))
             return Result(cmp > 0, installedVersion, "${DeviceInfo.PROP_ROM_VER} $installedVersion")
         }
 
-        // 3) fingerprint fallback (non-skynight base, prop unset)
+        // 3) fingerprint fallback (non-bloomina base, prop unset)
         val differs = release.fingerprint.isNotBlank() &&
                 release.fingerprint != DeviceInfo.fingerprint
         return Result(differs, "unknown (${DeviceInfo.PROP_ROM_VER} unset)", "fingerprint fallback")
     }
 
-    /** Pulls the first x[.y[.z]] token out of a label like "skynight 8.6.4 Beta". */
+    /** Pulls the first x[.y[.z]] token out of a label like "bloomina 8.6.4 Beta". */
     private fun extractSemver(s: String): List<Int> =
         Regex("(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?").find(s)
             ?.let { m -> m.groupValues.drop(1).map { it.toIntOrNull() ?: 0 } }

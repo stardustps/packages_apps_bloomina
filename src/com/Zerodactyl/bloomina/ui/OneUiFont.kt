@@ -14,7 +14,7 @@ import com.Zerodactyl.bloomina.R
 /**
  * Applies the bundled One UI Sans family to every [TextView] as it is inflated.
  *
- * Why this exists: setting `android:fontFamily` in [R.style.Theme_skynight] only reaches views
+ * Why this exists: setting `android:fontFamily` in [R.style.Theme_bloomina] only reaches views
  * whose style resolves the theme attribute. The oneui-design widgets (CardItemView, Separator,
  * ToolbarLayout's title/subtitle) build their TextViews in code with a hardcoded
  * `fontFamily="sec"`, so a theme-level font never touches them - the tabs and card rows would

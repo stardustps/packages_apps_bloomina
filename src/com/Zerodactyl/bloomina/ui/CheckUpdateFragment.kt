@@ -64,7 +64,7 @@ class CheckUpdateFragment : Fragment() {
      *  cleared the Settings field used to leave an empty string here, which OkHttp rejects. */
     private val jsonUrl: String
         get() = requireContext()
-            .getSharedPreferences("skynight", 0)
+            .getSharedPreferences("bloomina", 0)
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
@@ -343,7 +343,7 @@ class CheckUpdateFragment : Fragment() {
                 is InstallResult.StagedRebootingToRecovery ->
                     setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
                 is InstallResult.NeedsRoot -> {
-                    setHero(R.drawable.ic_status_error, "Root required", "Root + skynight module required (${result.why})")
+                    setHero(R.drawable.ic_status_error, "Root required", "Root + bloomina module required (${result.why})")
                     v.btnDownload.isEnabled = true
                         v.btnExport.visibility = View.VISIBLE
                 }
@@ -358,7 +358,7 @@ class CheckUpdateFragment : Fragment() {
 
     /** Scary, unambiguous confirmation before any direct-to-partition write on an A-only device. */
     private fun confirmRawFlash(pkg: File, dl: Download) {
-        val target = "system"   // for skynight full images; a boot/recovery image would pass its own name
+        val target = "system"   // for bloomina full images; a boot/recovery image would pass its own name
         AlertDialog.Builder(requireContext())
             .setTitle("Flash directly to /$target?")
             .setMessage(
@@ -391,7 +391,7 @@ class CheckUpdateFragment : Fragment() {
                 setHero(
                     R.drawable.ic_status_error,
                     getString(R.string.status_failed),
-                    "Root worker unavailable — is the skynight module installed?"
+                    "Root worker unavailable — is the bloomina module installed?"
                 )
                 return@launch
             }

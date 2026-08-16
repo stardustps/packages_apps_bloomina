@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.skynight" parent="Theme.Material3.DynamicColors.DayNight">
+    <style name="Theme.bloomina" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="android:fontFamily">@font/google_sans_flex</item>
         <item name="fontFamily">@font/google_sans_flex</item>
         <item name="android:windowBackground">?attr/colorSurface</item>

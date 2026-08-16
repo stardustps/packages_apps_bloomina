@@ -4,7 +4,7 @@ import com.topjohnwu.superuser.Shell
 
 /**
  * Thin wrapper over libsu. Detects a working root shell and, specifically, the
- * skynight Magisk/KernelSU module that grants us the SELinux + permission rules
+ * bloomina Magisk/KernelSU module that grants us the SELinux + permission rules
  * needed to stage a recovery update on this A-Only device.
  */
 object RootManager {
@@ -22,10 +22,10 @@ object RootManager {
     fun hasRoot(): Boolean = Shell.getShell().isRoot
 
     /** The module drops this marker in post-fs-data.sh so the app can confirm its rules are live. */
-    fun skynightModulePresent(): Boolean {
+    fun bloominaModulePresent(): Boolean {
         val paths = listOf(
-            "/data/adb/modules/skynight_ota/module.prop",
-            "/data/adb/modules/skynight_ota/skynight_ready"
+            "/data/adb/modules/bloomina_ota/module.prop",
+            "/data/adb/modules/bloomina_ota/bloomina_ready"
         )
         val res = Shell.cmd(paths.joinToString(" || ") { "[ -e $it ]" } + " && echo YES").exec()
         return res.isSuccess && res.out.any { it.trim() == "YES" }

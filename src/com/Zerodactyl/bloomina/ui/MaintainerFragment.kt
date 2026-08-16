@@ -30,7 +30,7 @@ class MaintainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val url = requireContext().getSharedPreferences("skynight", 0)
+        val url = requireContext().getSharedPreferences("bloomina", 0)
             .getString("json_url", null)
             ?.trim()
             ?.takeIf { it.isNotEmpty() }

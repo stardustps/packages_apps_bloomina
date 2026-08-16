@@ -21,14 +21,14 @@ class BloominaRootService : LibsuRootService() {
         }.getOrDefault("")
 
         override fun moduleReady(): Boolean =
-            File("/data/adb/modules/skynight_ota/skynight_ready").exists() ||
-            File("/data/adb/modules/skynight_ota/module.prop").exists()
+            File("/data/adb/modules/bloomina_ota/bloomina_ready").exists() ||
+            File("/data/adb/modules/bloomina_ota/module.prop").exists()
 
         override fun stageRecovery(pkgPath: String, filename: String): String {
             return try {
-                val staged = "/data/media/0/skynight/$filename"
+                val staged = "/data/media/0/bloomina/$filename"
                 sh(
-                    "mkdir -p /data/media/0/skynight",
+                    "mkdir -p /data/media/0/bloomina",
                     "cp '$pkgPath' '$staged'",
                     "chmod 0644 '$staged'",
                     "mkdir -p /cache/recovery",

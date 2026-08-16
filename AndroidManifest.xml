@@ -14,7 +14,7 @@
     <uses-sdk tools:overrideLibrary="dev.oneuiproject.oneui" />
 
     <application
-        android:name=".bloominaApp"
+        android:name=".BloominaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -62,6 +62,6 @@
             <meta-data android:name="com.samsung.settings.order" android:value="150" />
         </activity>
 
-        <service android:name=".ota.bloominaRootService" android:exported="false" />
+        <service android:name=".ota.BloominaRootService" android:exported="false" />
     </application>
 </manifest>

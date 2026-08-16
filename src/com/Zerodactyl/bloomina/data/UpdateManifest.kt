@@ -53,7 +53,7 @@ data class Maintainer(
 
 data class Release(
     val version: String,
-    val versionCode: Long?, // preferred: compare vs ro.skynight.rom.ver.code
+    val versionCode: Long?, // preferred: compare vs ro.bloomina.rom.ver.code
     val buildDate: String,          // Tab1: Build Date
     val androidVersion: String, // Tab1: Android Version
     val securityPatch: String,   // Tab1: Security Patch Level
