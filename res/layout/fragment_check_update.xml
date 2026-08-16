@@ -131,6 +131,7 @@
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/f_fingerprint" android:textStyle="bold" />
                 <TextView android:id="@+id/rowRemoteFingerprint" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Changelog -->
