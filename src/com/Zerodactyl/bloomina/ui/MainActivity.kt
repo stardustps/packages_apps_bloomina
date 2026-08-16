@@ -5,7 +5,6 @@ import com.google.android.material.color.DynamicColors
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.Zerodactyl.bloomina.R
-import com.Zerodactyl.bloomina.databinding.ActivityMainBinding
 
 /**
  * Standard Material Design shell:
@@ -14,7 +13,6 @@ import com.Zerodactyl.bloomina.databinding.ActivityMainBinding
  */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
 
     private val updateFragment by lazy { CheckUpdateFragment() }
     private val maintainerFragment by lazy { MaintainerFragment() }
@@ -23,11 +21,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        
+        setContentView(R.layout.activity_main)
 
-        binding.bottomTab.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomTab).setOnItemSelectedListener { item ->
+            when (item.getItemId()) {
                 R.id.tab_update -> show(updateFragment, R.string.tab_check_update)
                 R.id.tab_maintainer -> show(maintainerFragment, R.string.tab_maintainer)
                 R.id.tab_settings -> show(settingsFragment, R.string.tab_settings)
@@ -42,8 +40,8 @@ class MainActivity : AppCompatActivity() {
     private fun show(fragment: Fragment, subtitleRes: Int) {
         supportFragmentManager.beginTransaction()
             .setReorderingAllowed(true)
-            .replace(binding.fragmentContainer.id, fragment)
+            .replace(R.id.fragmentContainer, fragment)
             .commit()
-        binding.toolbar.subtitle = getString(subtitleRes)
+        findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar).subtitle = getString(subtitleRes)
     }
 }
