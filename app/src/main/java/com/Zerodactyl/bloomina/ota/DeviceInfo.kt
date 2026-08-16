@@ -33,6 +33,9 @@ object DeviceInfo {
     val maintainer: String get() = getProp(PROP_MAINTAINER).orEmpty()
 
     /** Device codename used to build the default OTA manifest URL (e.g. "a32"). */
+    val romName: String
+        get() = getProp("ro.bloomina.rom").orEmpty().ifBlank { "unknown" }
+
     val deviceCodename: String
         get() = getProp("ro.product.vendor.device").orEmpty().ifBlank { Build.DEVICE ?: "unknown" }
 
