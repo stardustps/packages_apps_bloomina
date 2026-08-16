@@ -73,3 +73,55 @@ PRODUCT_PROPERTY_OVERRIDES += \
 - `ro.bloomina.maintainer`: the name of the official maintainer for this device. this populates the "maintainer" tab in the app automatically.
 - `ro.bloomina.rom.ver`: the human-readable version of the rom currently installed on the device (e.g., `21.0-20260816-unofficial`).
 - `ro.bloomina.rom.ver.code`: a numeric integer used by the app to natively compare if the online update is newer than the installed update (usually a datecode).
+---
+
+## reverting to the default lineageos updater
+
+bloomina is a drop-in replacement for the stock lineageos updater (the `Updater` app, `org.lineageos.updater`, built from `packages/apps/Updater`). if you would rather ship your rom with the built-in updater instead, simply undo the integration steps above.
+
+### 1. remove bloomina from your device makefile
+in your `device.mk` / `lineage_codename.mk`, delete the bloomina entry:
+
+```makefile
+# remove this line
+PRODUCT_PACKAGES += \
+    bloomina
+```
+
+if you had removed the stock updater to make room for bloomina (common in some trees), add it back:
+
+```makefile
+# restore the stock lineageos updater
+PRODUCT_PACKAGES += \
+    Updater
+```
+
+### 2. drop the bloomina sepolicy
+in `BoardConfig.mk`, remove the bloomina sepolicy directory. the stock updater brings its own selinux rules from the tree, so this is no longer needed:
+
+```makefile
+# remove this line
+BOARD_SEPOLICY_DIRS += packages/apps/bloomina/sepolicy
+```
+
+### 3. (optional) clean up the bloomina properties
+the `ro.bloomina.*` overrides are only read by bloomina, so leaving them is harmless — but you can delete them from your `device.mk` for tidiness:
+
+```makefile
+# remove these
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bloomina.rom=lineage \
+    ro.bloomina.maintainer="your name here" \
+    ro.bloomina.rom.ver=$(lineage_version) \
+    ro.bloomina.rom.ver.code=$(date +%Y%m%d)
+```
+
+the `privapp-permissions-bloomina.xml` and `bloomina.te` shipped by this repo become unused once bloomina is gone. they target a package that no longer exists and are ignored, so you can leave the checkout in place or delete `packages/apps/bloomina` entirely.
+
+### 4. rebuild and reflash
+```bash
+source build/envsetup.sh
+breakfast codename
+mka bacon
+```
+after flashing, **settings → about phone → system update** (and any samsung settings injection) will open the stock lineageos `Updater` again. no extra permissions or intent-filter changes are required — the default updater already registers `android.settings.SYSTEM_UPDATE_SETTINGS`, which it reclaims once bloomina is removed.
