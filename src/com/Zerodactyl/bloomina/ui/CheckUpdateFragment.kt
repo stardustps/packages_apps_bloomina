@@ -92,11 +92,7 @@ class CheckUpdateFragment : Fragment() {
      * Device rows come from `getprop` and /proc/version - process forks and a file read.
      * They ran on the main thread before, which stuttered the first frame of the tab.
      */
-        cleanupOldOtas()
     private fun renderLocalDeviceRows() {
-        setupTapToCopy()
-        renderDiagnostics()
-        b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
         viewLifecycleOwner.lifecycleScope.launch {
             val info = withContext(Dispatchers.IO) {
                 LocalInfo(
@@ -291,18 +287,6 @@ class CheckUpdateFragment : Fragment() {
                     }
                 }
             }
-                    is DownloadState.Failed -> {
-                        v.downloadBar.visibility = View.GONE
-                        setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
-                        v.btnDownload.isEnabled = true
-                        v.btnExport.visibility = View.VISIBLE
-                    }
-                    is DownloadState.Done -> {
-                        v.downloadBar.visibility = View.GONE
-                        install(st.file)
-                    }
-                }
-            }
         }
     }
 
@@ -329,28 +313,17 @@ class CheckUpdateFragment : Fragment() {
                     setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
                     showRebootBottomSheet()
                     v.btnDownload.isEnabled = true
-                        v.btnExport.visibility = View.VISIBLE
-                    
+                    v.btnExport.visibility = View.VISIBLE
                 }
-                is InstallResult.Failed -> {
-                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
-                    v.btnDownload.isEnabled = true
-                        v.btnExport.visibility = View.VISIBLE
-                }
-            }
-            val v = _b ?: return@launch
-            when (result) {
-                is InstallResult.StagedRebootingToRecovery ->
-                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
                 is InstallResult.NeedsRoot -> {
                     setHero(R.drawable.ic_status_error, "Root required", "Root + bloomina module required (${result.why})")
                     v.btnDownload.isEnabled = true
-                        v.btnExport.visibility = View.VISIBLE
+                    v.btnExport.visibility = View.VISIBLE
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
                     v.btnDownload.isEnabled = true
-                        v.btnExport.visibility = View.VISIBLE
+                    v.btnExport.visibility = View.VISIBLE
                 }
             }
         }
@@ -446,7 +419,6 @@ class CheckUpdateFragment : Fragment() {
         private const val OTA_BASE = "https://over-the-air.tuong.qzz.io/bloomina"
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.romName}/${DeviceInfo.deviceCodename}.json"
     }
-}
 
     private fun exportUpdate(dl: Download) {
         val src = File(requireContext().getExternalFilesDir(null), dl.filename)
@@ -592,3 +564,4 @@ class CheckUpdateFragment : Fragment() {
         b.rowFingerprint.setOnClickListener { copyAction(b.rowFingerprint.text) }
         b.rowKernel.setOnClickListener { copyAction(b.rowKernel.text) }
     }
+}
