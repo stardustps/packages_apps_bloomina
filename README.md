@@ -1,48 +1,48 @@
-# Bloomina Updater
+# bloomina updater
 
-A native OTA Updater for unofficial LineageOS-based ROMs. 
+a native ota updater for unofficial lineageos-based roms. 
 
-Built with standard **Material 3 Expressive** design, it perfectly mimics the clean, stock Android settings aesthetic. Unlike standard root-based updaters, Bloomina is designed to be built directly inline with your ROM's source code as a Privileged System App.
+built with standard **material 3 expressive** design, it perfectly mimics the clean, stock android settings aesthetic. unlike standard root-based updaters, bloomina is designed to be built directly inline with your rom's source code as a privileged system app.
 
-## Features
+## features
 
-- **Material 3 Design:** Fully integrated M3 dynamic colors and Google Sans typography.
-- **Native A/B Support:** Uses `android.os.UpdateEngine` to seamlessly install `payload.bin` updates in the background on seamless A/B devices.
-- **Native A-Only Support:** Uses `android.os.RecoverySystem` to securely verify, stage, and flash traditional recovery zips.
-- **No Root Required:** Operates entirely using native AOSP system permissions. 
-- **Dependency-Free:** Networking and JSON parsing are handled strictly through native `HttpURLConnection` and `org.json`, eliminating the need for bulky prebuilt libraries (like OkHttp or Gson) in your ROM tree.
+- **material 3 design:** fully integrated m3 dynamic colors and google sans typography.
+- **native a/b support:** uses `android.os.updateengine` to seamlessly install `payload.bin` updates in the background on seamless a/b devices.
+- **native a-only support:** uses `android.os.recoverysystem` to securely verify, stage, and flash traditional recovery zips.
+- **no root required:** operates entirely using native aosp system permissions. 
+- **dependency-free:** networking and json parsing are handled strictly through native `httpurlconnection` and `org.json`, eliminating the need for bulky prebuilt libraries (like okhttp or gson) in your rom tree.
 
 ---
 
-## How to add to your ROM source tree
+## how to add to your rom source tree
 
-Because Bloomina is configured with an `Android.bp`, adding it to your AOSP/LineageOS tree is simple.
+because bloomina is configured with an `android.bp`, adding it to your aosp/lineageos tree is simple.
 
-### 1. Clone the repository
-Clone this repository into the standard `packages/apps` directory in your ROM source tree:
+### 1. clone the repository
+clone this repository into the standard `packages/apps` directory in your rom source tree:
 ```bash
 cd /path/to/your/rom/source
 git clone https://github.com/stardustps/packages_apps_bloomina.git packages/apps/bloomina
 ```
 
-*(Alternatively, add it to your local manifest `.repo/local_manifests/roomservice.xml` so `repo sync` pulls it automatically).*
+*(alternatively, add it to your local manifest `.repo/local_manifests/roomservice.xml` so `repo sync` pulls it automatically).*
 
-### 2. Include the package in your build
-Add the package to your device's makefile (e.g., `device/brand/codename/device.mk` or `lineage_codename.mk`):
+### 2. include the package in your build
+add the package to your device's makefile (e.g., `device/brand/codename/device.mk` or `lineage_codename.mk`):
 
 ```makefile
-# Include Bloomina Updater
-PRODUCT_PACKAGES += \
-    BloominaUpdater
+# include bloomina updater
+product_packages += \
+    bloominaupdater
 ```
 
-### 3. Build your ROM
-Once the package is declared, standard builds will pick it up automatically:
+### 3. build your rom
+once the package is declared, standard builds will pick it up automatically:
 ```bash
 source build/envsetup.sh
 breakfast codename
 mka bacon
 ```
 
-## Permissions
-The app is built as a Privileged System App. The required `privapp-permissions-bloomina.xml` is automatically included and deployed by the `Android.bp` build rules, granting the app the `REBOOT` and `RECOVERY` permissions necessary to trigger native OTA flashes.
+## permissions
+the app is built as a privileged system app. the required `privapp-permissions-bloomina.xml` is automatically included and deployed by the `android.bp` build rules, granting the app the `reboot` and `recovery` permissions necessary to trigger native ota flashes.
