@@ -137,7 +137,7 @@ class CheckUpdateFragment : Fragment() {
                     v.rowRemoteAndroid.text = r.androidVersion
                     v.rowRemoteSecurity.text = r.securityPatch
                     v.rowRemoteFingerprint.text = r.fingerprint
-                    v.changelog.text = Html.fromHtml(r.changelog.joinToString("<br>") { "v.changelog.text = r.changelog.joinToString("\n") { "•  $it" }#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+                    v.changelog.text = Html.fromHtml(r.changelog.joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
                     v.changelog.movementMethod = LinkMovementMethod.getInstance()
 
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
@@ -315,11 +315,6 @@ class CheckUpdateFragment : Fragment() {
                     v.btnDownload.isEnabled = true
                     v.btnExport.visibility = View.VISIBLE
                 }
-                is InstallResult.NeedsRoot -> {
-                    setHero(R.drawable.ic_status_error, "Root required", "Root + bloomina module required (${result.why})")
-                    v.btnDownload.isEnabled = true
-                    v.btnExport.visibility = View.VISIBLE
-                }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
                     v.btnDownload.isEnabled = true
@@ -490,6 +485,7 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun cleanupOldOtas() {
+        val isDownloading = _b?.downloadBar?.visibility == View.VISIBLE
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // Clean cache dir (Local Updates)
@@ -498,7 +494,7 @@ class CheckUpdateFragment : Fragment() {
                 val extDir = requireContext().getExternalFilesDir(null)
                 extDir?.listFiles { _, name -> name.endsWith(".zip") }?.forEach { file ->
                     // Only delete if it's not currently downloading
-                    if (file.exists() && b.downloadBar.visibility != View.VISIBLE) {
+                    if (file.exists() && !isDownloading) {
                         file.delete()
                     }
                 }
