@@ -3,7 +3,10 @@
     <style name="Theme.skynight" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="android:fontFamily">@font/google_sans_flex</item>
         <item name="fontFamily">@font/google_sans_flex</item>
-        <item name="android:windowBackground">?attr/colorSurface</item>
+        <!-- Pure AMOLED Black for OLED screens -->
+        <item name="android:windowBackground">#000000</item>
+        <item name="colorSurface">#000000</item>
+        <item name="colorSurfaceContainer">#111111</item>
         <item name="colorPrimary">@color/ic_launcher_background</item>
     </style>
 </resources>

@@ -5,6 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import android.widget.Button
+import android.widget.TextView
+import android.widget.LinearLayout
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.Zerodactyl.bloomina.R
@@ -64,6 +69,7 @@ class CheckUpdateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cleanupOldOtas()
         renderLocalDeviceRows()
         renderDiagnostics()
         b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
@@ -77,6 +83,7 @@ class CheckUpdateFragment : Fragment() {
      * Device rows come from `getprop` and /proc/version - process forks and a file read.
      * They ran on the main thread before, which stuttered the first frame of the tab.
      */
+        cleanupOldOtas()
     private fun renderLocalDeviceRows() {
         renderDiagnostics()
         b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
@@ -265,10 +272,10 @@ class CheckUpdateFragment : Fragment() {
                     setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
                 is InstallResult.AppliedBackgroundRebootRequired -> {
                     setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
-                    v.btnDownload.text = "Reboot"
+                    showRebootBottomSheet()
                     v.btnDownload.isEnabled = true
                         v.btnExport.visibility = View.VISIBLE
-                    v.btnDownload.setOnClickListener { RootManager.exec("reboot") } // Optional reboot shortcut
+                    
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
@@ -453,4 +460,65 @@ class CheckUpdateFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun cleanupOldOtas() {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Clean cache dir (Local Updates)
+                requireContext().cacheDir.listFiles { _, name -> name.endsWith(".zip") }?.forEach { it.delete() }
+                // Clean external files dir (Downloaded OTAs)
+                val extDir = requireContext().getExternalFilesDir(null)
+                extDir?.listFiles { _, name -> name.endsWith(".zip") }?.forEach { file ->
+                    // Only delete if it's not currently downloading
+                    if (file.exists() && b.downloadBar.visibility != View.VISIBLE) {
+                        file.delete()
+                    }
+                }
+            } catch (e: Exception) {
+                // Ignore cleanup errors
+            }
+        }
+    }
+
+    private fun showRebootBottomSheet() {
+        val sheet = BottomSheetDialog(requireContext())
+        
+        val layout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(64, 64, 64, 64)
+            gravity = Gravity.CENTER_HORIZONTAL
+        }
+        
+        val title = TextView(requireContext()).apply {
+            text = "System Update Complete"
+            textSize = 24f
+            setTypeface(null, android.graphics.Typeface.BOLD)
+            setPadding(0, 0, 0, 16)
+        }
+        
+        val desc = TextView(requireContext()).apply {
+            text = "The update has been successfully installed in the background. A restart is required to finish applying the changes."
+            textSize = 16f
+            setPadding(0, 0, 0, 64)
+            gravity = Gravity.CENTER_HORIZONTAL
+        }
+        
+        val btnReboot = Button(requireContext(), null, com.google.android.material.R.attr.materialButtonStyle).apply {
+            text = "Reboot Now"
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            setOnClickListener {
+                sheet.dismiss()
+                val pm = requireContext().getSystemService(android.content.Context.POWER_SERVICE) as android.os.PowerManager
+                pm.reboot(null)
+            }
+        }
+        
+        layout.addView(title)
+        layout.addView(desc)
+        layout.addView(btnReboot)
+        
+        sheet.setContentView(layout)
+        sheet.setCancelable(false)
+        sheet.show()
     }
