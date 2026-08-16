@@ -1,20 +1,15 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    
-    <!-- Crescent Moon -->
-    <path android:fillColor="#E2E8F0"
-        android:pathData="M70.5,58.5 A26,26 0 1 1 49.5,37.5 A32,32 0 0 0 70.5,58.5 Z"/>
-        
-    <!-- Download Arrow (for OTA updates) -->
-    <path android:fillColor="#0EA5E9"
-        android:pathData="M51,40 h6 v10 h5 l-8,9 -8,-9 h5 Z"/>
-        
-    <!-- Star 1 -->
-    <path android:fillColor="#FDE047"
-        android:pathData="M34,26 L35,30 L39,31 L35,32 L34,36 L33,32 L29,31 L33,30 Z"/>
-        
-    <!-- Star 2 -->
-    <path android:fillColor="#FDE047"
-        android:pathData="M78,74 L79,77 L82,78 L79,79 L78,82 L77,79 L74,78 L77,77 Z"/>
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,26c-15.46,0 -28,12.54 -28,28 0,15.46 12.54,28 28,28 15.46,0 28,-12.54 28,-28 0,-15.46 -12.54,-28 -28,-28zM54,74c-11.05,0 -20,-8.95 -20,-20 0,-11.05 8.95,-20 20,-20 11.05,0 20,8.95 20,20 0,11.05 -8.95,20 -20,20z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,38v10h10v-10z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,64l12,-12H42z" />
 </vector>
