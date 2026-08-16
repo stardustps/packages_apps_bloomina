@@ -33,7 +33,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s is the latest build for this device</string>
     <string name="status_update_available">Update available</string>
     <string name="status_update_available_sub">bloomina %1$s is ready to download</string>
-    <string name="status_failed">Couldn't check for updates</string>
+    <string name="status_failed">Couldn\'t check for updates</string>
     <string name="status_downloading">Downloading update</string>
     <string name="status_downloading_sub">%1$d%% · keep bloomina open</string>
     <string name="status_installing">Preparing to install</string>

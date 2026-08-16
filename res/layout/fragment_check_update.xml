@@ -189,6 +189,7 @@
                 <TextView android:id="@+id/lblActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Active Slot" android:textStyle="bold" />
                 <TextView android:id="@+id/rowActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- This device -->
