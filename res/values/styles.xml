@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="bloomina.Text.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="bloomina.Text.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:lineSpacingExtra">5dp</item>
+    </style>
+</resources>
