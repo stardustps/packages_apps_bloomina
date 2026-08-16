@@ -1,0 +1,14 @@
+# SELinux policy for Bloomina Updater (when built as priv_app)
+# This replaces the need for the Magisk helper module.
+
+# Allow Bloomina to write to the cache recovery partition to stage A-Only OTAs
+allow priv_app cache_recovery_file:dir { search write add_name };
+allow priv_app cache_recovery_file:file { create open write getattr setattr };
+
+# Allow Bloomina to read block devices to verify A/B payload properties
+allow priv_app block_device:dir { search read };
+allow priv_app block_device:lnk_file { read getattr };
+
+# Allow Bloomina to access the UpdateEngine for A/B background updates
+allow priv_app update_engine_service:service_manager find;
+binder_call(priv_app, update_engine)
