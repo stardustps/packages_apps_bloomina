@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ota
+package com.Zerodactyl.bloomina.ota
 
 import android.os.Build
 import java.io.File

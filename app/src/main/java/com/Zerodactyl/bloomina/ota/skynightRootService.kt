@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ota
+package com.Zerodactyl.bloomina.ota
 
 import android.content.Intent
 import android.os.IBinder

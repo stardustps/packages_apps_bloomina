@@ -1,10 +1,10 @@
-package com.Zerodactyl.skynight.ui
+package com.Zerodactyl.bloomina.ui
 
 import android.os.Bundle
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.Zerodactyl.skynight.R
+import com.Zerodactyl.bloomina.R
 
 /**
  * skynight internal settings, using the SESL preference fork so the rows match OneUI.

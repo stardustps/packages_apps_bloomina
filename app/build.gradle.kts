@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.Zerodactyl.skynight"
+    namespace = "com.Zerodactyl.bloomina"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.Zerodactyl.skynight"
+        applicationId = "com.Zerodactyl.bloomina"
         minSdk = 26
         targetSdk = 34
         versionCode = 80604

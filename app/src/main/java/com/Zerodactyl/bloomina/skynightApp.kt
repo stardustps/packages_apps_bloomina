@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight
+package com.Zerodactyl.bloomina
 
 import android.app.Application
 import com.topjohnwu.superuser.Shell

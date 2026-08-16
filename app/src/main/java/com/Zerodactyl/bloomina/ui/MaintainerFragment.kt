@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ui
+package com.Zerodactyl.bloomina.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.Zerodactyl.skynight.R
-import com.Zerodactyl.skynight.data.UpdateRepository
-import com.Zerodactyl.skynight.databinding.FragmentMaintainerBinding
-import com.Zerodactyl.skynight.ota.DeviceInfo
+import com.Zerodactyl.bloomina.R
+import com.Zerodactyl.bloomina.data.UpdateRepository
+import com.Zerodactyl.bloomina.databinding.FragmentMaintainerBinding
+import com.Zerodactyl.bloomina.ota.DeviceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

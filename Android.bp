@@ -43,12 +43,12 @@ android_app {
     },
 
     required: [
-        "privapp_whitelist_com.Zerodactyl.skynight",
+        "privapp_whitelist_com.Zerodactyl.bloomina",
     ],
 }
 
 prebuilt_etc {
-    name: "privapp_whitelist_com.Zerodactyl.skynight",
+    name: "privapp_whitelist_com.Zerodactyl.bloomina",
     sub_dir: "permissions",
     src: "privapp-permissions-bloomina.xml",
     filename_from_src: true,

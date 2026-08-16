@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ui
+package com.Zerodactyl.bloomina.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.LayoutInflaterCompat
-import com.Zerodactyl.skynight.R
+import com.Zerodactyl.bloomina.R
 
 /**
  * Applies the bundled One UI Sans family to every [TextView] as it is inflated.

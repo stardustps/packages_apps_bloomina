@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ota
+package com.Zerodactyl.bloomina.ota
 
 import com.topjohnwu.superuser.Shell
 

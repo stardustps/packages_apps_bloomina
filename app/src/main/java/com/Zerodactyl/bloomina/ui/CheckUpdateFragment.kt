@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.ui
+package com.Zerodactyl.bloomina.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.Zerodactyl.skynight.R
-import com.Zerodactyl.skynight.data.Download
-import com.Zerodactyl.skynight.data.DownloadState
-import com.Zerodactyl.skynight.data.UpdateManifest
-import com.Zerodactyl.skynight.data.UpdateRepository
-import com.Zerodactyl.skynight.databinding.FragmentCheckUpdateBinding
-import com.Zerodactyl.skynight.ota.DeviceInfo
-import com.Zerodactyl.skynight.ota.IFlashCallback
-import com.Zerodactyl.skynight.ota.InstallResult
-import com.Zerodactyl.skynight.ota.OtaInstaller
-import com.Zerodactyl.skynight.ota.RootIpc
-import com.Zerodactyl.skynight.ota.VersionCheck
+import com.Zerodactyl.bloomina.R
+import com.Zerodactyl.bloomina.data.Download
+import com.Zerodactyl.bloomina.data.DownloadState
+import com.Zerodactyl.bloomina.data.UpdateManifest
+import com.Zerodactyl.bloomina.data.UpdateRepository
+import com.Zerodactyl.bloomina.databinding.FragmentCheckUpdateBinding
+import com.Zerodactyl.bloomina.ota.DeviceInfo
+import com.Zerodactyl.bloomina.ota.IFlashCallback
+import com.Zerodactyl.bloomina.ota.InstallResult
+import com.Zerodactyl.bloomina.ota.OtaInstaller
+import com.Zerodactyl.bloomina.ota.RootIpc
+import com.Zerodactyl.bloomina.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

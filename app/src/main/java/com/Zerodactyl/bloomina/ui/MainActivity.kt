@@ -1,10 +1,10 @@
-package com.Zerodactyl.skynight.ui
+package com.Zerodactyl.bloomina.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.Zerodactyl.skynight.R
-import com.Zerodactyl.skynight.databinding.ActivityMainBinding
+import com.Zerodactyl.bloomina.R
+import com.Zerodactyl.bloomina.databinding.ActivityMainBinding
 
 /**
  * OneUI 8 shell:

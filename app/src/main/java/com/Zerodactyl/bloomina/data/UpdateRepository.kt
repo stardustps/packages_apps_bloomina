@@ -1,4 +1,4 @@
-package com.Zerodactyl.skynight.data
+package com.Zerodactyl.bloomina.data
 
 import org.json.JSONException
 import org.json.JSONObject
