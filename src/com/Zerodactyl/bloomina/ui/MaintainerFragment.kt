@@ -65,7 +65,8 @@ class MaintainerFragment : Fragment() {
     private fun bindLinks(m: com.Zerodactyl.bloomina.data.Maintainer) {
         val v = _b ?: return
         
-        fun setupLink(btn: View, div: View?, url: String?) {
+        fun setupLink(btn: View?, div: View?, url: String?) {
+            if (btn == null) return
             if (!url.isNullOrBlank()) {
                 btn.visibility = View.VISIBLE
                 div?.visibility = View.VISIBLE
@@ -80,8 +81,8 @@ class MaintainerFragment : Fragment() {
         
         setupLink(v.btnTelegram, null, m.telegram)
         setupLink(v.btnDonate, null, m.donateUrl)
-        setupLink(v.btnGithub, v.divGithub, m.githubUrl)
-        setupLink(v.btnXda, v.divXda, m.xdaUrl)
+        setupLink(v.root.findViewById(R.id.btnGithub), v.root.findViewById(R.id.divGithub), m.githubUrl)
+        setupLink(v.root.findViewById(R.id.btnXda), v.root.findViewById(R.id.divXda), m.xdaUrl)
     }
 
     override fun onDestroyView() {
