@@ -31,8 +31,12 @@ android_app {
         "kotlinx_coroutines_android",
         "com.google.android.material_material",
         "SettingsLib",
-        // Note: okhttp, gson, and libsu might require prebuilts or source drops
-        // depending on your LineageOS tree version. 
+        // libsu provides com.topjohnwu.superuser (Shell, RootService, ipc).
+        // Module name assumes a standard tree (external/libsu -> "libsu").
+        // Adjust to your tree's prebuilt name if it differs.
+        "libsu",
+        // Note: okhttp and gson might require prebuilts or source drops
+        // depending on your LineageOS tree version.
         // "okhttp",
         // "gson",
     ],
