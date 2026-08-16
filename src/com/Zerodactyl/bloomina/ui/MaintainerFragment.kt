@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.Zerodactyl.bloomina.R
 import com.Zerodactyl.bloomina.data.UpdateRepository
-import com.Zerodactyl.bloomina.databinding.FragmentMaintainerBinding
 import com.Zerodactyl.bloomina.ota.DeviceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,13 +17,10 @@ import kotlinx.coroutines.withContext
 
 class MaintainerFragment : Fragment() {
 
-    private var _b: FragmentMaintainerBinding? = null
-    private val b get() = _b!!
     private val repo = UpdateRepository()
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _b = FragmentMaintainerBinding.inflate(i, c, false)
-        return b.root
+        return i.inflate(R.layout.fragment_maintainer, c, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +36,7 @@ class MaintainerFragment : Fragment() {
             val local = withContext(Dispatchers.IO) {
                 Triple(DeviceInfo.maintainer, DeviceInfo.model, DeviceInfo.romVersion)
             }
-            _b?.let { v ->
+            view?.let { _ ->
                 requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
                 requireView().findViewById<android.widget.TextView>(R.id.device).text = local.second
                 requireView().findViewById<android.widget.TextView>(R.id.rom).text = local.third.ifBlank { "-" }
@@ -48,7 +44,7 @@ class MaintainerFragment : Fragment() {
 
             repo.fetchManifest(url)
                 .onSuccess { m ->
-                    val v = _b ?: return@onSuccess
+                    
                     val mt = m.maintainer
                     requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { mt.name }
                     requireView().findViewById<android.widget.TextView>(R.id.handle).text = mt.handle
@@ -63,7 +59,7 @@ class MaintainerFragment : Fragment() {
     }
 
     private fun bindLinks(m: com.Zerodactyl.bloomina.data.Maintainer) {
-        val v = _b ?: return
+        val v = view ?: return
         
         fun setupLink(btn: View?, div: View?, url: String?) {
             if (btn == null) return
@@ -87,6 +83,6 @@ class MaintainerFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _b = null
+        
     }
 }
