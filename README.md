@@ -46,3 +46,10 @@ mka bacon
 
 ## permissions
 the app is built as a privileged system app. the required `privapp-permissions-bloomina.xml` is automatically included and deployed by the `android.bp` build rules, granting the app the `reboot` and `recovery` permissions necessary to trigger native ota flashes.
+
+### 4. selinux policies
+to ensure the app has the proper selinux contexts to write to recovery and access the update engine natively (replacing the old magisk helper), add the included sepolicy directory to your device's `board_sepolicy_dirs` in your `boardconfig.mk`:
+
+```makefile
+board_sepolicy_dirs += packages/apps/bloomina/sepolicy
+```
