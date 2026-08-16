@@ -31,6 +31,12 @@ import java.io.File
 import java.util.Locale
 import android.os.Environment
 import android.widget.Toast
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import androidx.core.app.NotificationCompat
+import android.os.BatteryManager
+import android.content.Intent
+import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemProperties
@@ -38,6 +44,8 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
+import android.content.ClipboardManager
+import android.content.ClipData
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
@@ -71,6 +79,7 @@ class CheckUpdateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         cleanupOldOtas()
         renderLocalDeviceRows()
+        setupTapToCopy()
         renderDiagnostics()
         b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
         b.btnCheck.setOnClickListener { check() }
@@ -85,6 +94,7 @@ class CheckUpdateFragment : Fragment() {
      */
         cleanupOldOtas()
     private fun renderLocalDeviceRows() {
+        setupTapToCopy()
         renderDiagnostics()
         b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -222,6 +232,15 @@ class CheckUpdateFragment : Fragment() {
         val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
         b.btnDownload.isEnabled = false
         viewLifecycleOwner.lifecycleScope.launch {
+            val nm = requireContext().getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
+            val channel = NotificationChannel("ota_updates", "System Updates", NotificationManager.IMPORTANCE_LOW)
+            nm.createNotificationChannel(channel)
+            val builder = NotificationCompat.Builder(requireContext(), "ota_updates")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Downloading System Update")
+                .setOngoing(true)
+                .setOnlyAlertOnce(true)
+
             repo.download(dl, dest).collect { st ->
                 val v = _b ?: return@collect
                 when (st) {
@@ -230,12 +249,48 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.isIndeterminate = false
                         v.downloadBar.visibility = View.VISIBLE
                         v.downloadBar.progress = pct
-                        setHero(
-                            R.drawable.ic_status_available,
-                            getString(R.string.status_downloading),
-                            getString(R.string.status_downloading_sub, pct)
-                        )
+                        setHero(R.drawable.ic_status_available, getString(R.string.status_downloading), getString(R.string.status_downloading_sub, pct))
+                        
+                        builder.setProgress(100, pct, false)
+                        builder.setContentText("$pct%")
+                        nm.notify(1, builder.build())
                     }
+                    is DownloadState.Failed -> {
+                        v.downloadBar.visibility = View.GONE
+                        setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
+                        v.btnDownload.isEnabled = true
+                        
+                        builder.setContentTitle("Download Failed").setContentText(st.reason).setProgress(0, 0, false).setOngoing(false)
+                        nm.notify(1, builder.build())
+                    }
+                    is DownloadState.Done -> {
+                        v.downloadBar.visibility = View.GONE
+                        builder.setContentTitle("Download Complete").setContentText("Ready to install").setProgress(0, 0, false).setOngoing(false)
+                        nm.notify(1, builder.build())
+                        
+                        // Battery Safety Check
+                        val batteryStatus: Intent? = requireContext().registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+                        val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+                        val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+                        val batteryPct = level * 100 / scale.toFloat()
+                        val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
+                        val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
+                        
+                        if (batteryPct < 20 && !isCharging) {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle("Battery Too Low")
+                                .setMessage("Your battery is below 20%. Please plug in your device to safely install this system update.")
+                                .setPositiveButton("OK", null)
+                                .show()
+                            v.btnDownload.text = "Install Now"
+                            v.btnDownload.isEnabled = true
+                            v.btnDownload.setOnClickListener { install(st.file) }
+                        } else {
+                            install(st.file)
+                        }
+                    }
+                }
+            }
                     is DownloadState.Failed -> {
                         v.downloadBar.visibility = View.GONE
                         setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
@@ -521,4 +576,19 @@ class CheckUpdateFragment : Fragment() {
         sheet.setContentView(layout)
         sheet.setCancelable(false)
         sheet.show()
+    }
+
+    private fun setupTapToCopy() {
+        val copyAction = { text: CharSequence ->
+            val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setPrimaryClip(ClipData.newPlainText("Device Info", text))
+            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+        }
+        
+        b.rowInstalledVersion.setOnClickListener { copyAction(b.rowInstalledVersion.text) }
+        b.rowDeviceModel.setOnClickListener { copyAction(b.rowDeviceModel.text) }
+        b.rowAndroid.setOnClickListener { copyAction(b.rowAndroid.text) }
+        b.rowSecurity.setOnClickListener { copyAction(b.rowSecurity.text) }
+        b.rowFingerprint.setOnClickListener { copyAction(b.rowFingerprint.text) }
+        b.rowKernel.setOnClickListener { copyAction(b.rowKernel.text) }
     }

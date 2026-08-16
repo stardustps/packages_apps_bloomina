@@ -1,6 +1,7 @@
 package com.Zerodactyl.bloomina.ui
 
 import android.os.Bundle
+import com.google.android.material.color.DynamicColors
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.Zerodactyl.bloomina.R
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         // what pushes the bundled One UI Sans into the library's own CardItemView/Separator
         // TextViews, which ignore the theme-level fontFamily.
         OneUiFont.install(this)
+        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
