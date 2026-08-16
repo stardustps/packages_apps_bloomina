@@ -43,6 +43,7 @@ import android.net.NetworkCapabilities
 import android.os.SystemProperties
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.text.format.DateUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
 import android.content.ClipboardManager
@@ -79,6 +80,7 @@ class CheckUpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cleanupOldOtas()
+        showLastChecked()
         renderLocalDeviceRows()
         setupTapToCopy()
         renderDiagnostics()
@@ -180,6 +182,7 @@ class CheckUpdateFragment : Fragment() {
                     v.btnDownload.isEnabled = false
                         v.btnExport.visibility = View.GONE
                 }
+        persistLastChecked()
 
             v.downloadBar.visibility = View.GONE
             v.btnCheck.isEnabled = true
@@ -226,6 +229,8 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun startDownload(dl: Download) {
+        requireContext().getSharedPreferences("bloomina", 0)
+            .edit().putString("active_ota_file", dl.filename).apply()
         val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
         b.btnDownload.isEnabled = false
         viewLifecycleOwner.lifecycleScope.launch {
@@ -247,7 +252,7 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.visibility = View.VISIBLE
                         v.downloadBar.progress = pct
                         setHero(R.drawable.ic_status_available, getString(R.string.status_downloading), getString(R.string.status_downloading_sub, pct))
-                        
+
                         builder.setProgress(100, pct, false)
                         builder.setContentText("$pct%")
                         nm.notify(1, builder.build())
@@ -256,7 +261,7 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.visibility = View.GONE
                         setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
                         v.btnDownload.isEnabled = true
-                        
+
                         builder.setContentTitle("Download Failed").setContentText(st.reason).setProgress(0, 0, false).setOngoing(false)
                         nm.notify(1, builder.build())
                     }
@@ -264,24 +269,24 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.visibility = View.GONE
                         builder.setContentTitle("Download Complete").setContentText("Ready to install").setProgress(0, 0, false).setOngoing(false)
                         nm.notify(1, builder.build())
-                        
-                        // Battery Safety Check
+
+                        v.txtIntegrity.text = getString(R.string.integrity_verified, dl.sha256)
+                        v.txtIntegrity.visibility = View.VISIBLE
+
                         val batteryStatus: Intent? = requireContext().registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
                         val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
                         val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-                        val batteryPct = level * 100 / scale.toFloat()
+                        val batteryPct = if (scale > 0) level * 100 / scale.toFloat() else -1f
                         val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
                         val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
-                        
-                        if (batteryPct < 20 && !isCharging) {
+
+                        if (batteryPct in 0f..20f && !isCharging) {
                             AlertDialog.Builder(requireContext())
                                 .setTitle("Battery Too Low")
                                 .setMessage("Your battery is below 20%. Please plug in your device to safely install this system update.")
                                 .setPositiveButton("OK", null)
                                 .show()
-                            v.btnDownload.text = "Install Now"
-                            v.btnDownload.isEnabled = true
-                            v.btnDownload.setOnClickListener { install(st.file) }
+                            setInstallButton(v, st.file)
                         } else {
                             install(st.file)
                         }
@@ -289,6 +294,18 @@ class CheckUpdateFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setInstallButton(v: V, file: File) {
+        v.btnDownload.text = getString(R.string.btn_install)
+        v.btnDownload.isEnabled = true
+        v.btnDownload.setOnClickListener { v.btnDownload.isEnabled = false; install(file) }
+    }
+
+    private fun setRebootButton(v: V) {
+        v.btnDownload.text = getString(R.string.btn_reboot)
+        v.btnDownload.isEnabled = true
+        v.btnDownload.setOnClickListener { showRebootBottomSheet() }
     }
 
     private fun install(pkg: File) {
@@ -310,13 +327,15 @@ class CheckUpdateFragment : Fragment() {
                     setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
                 is InstallResult.AppliedBackgroundRebootRequired -> {
                     setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
-                    showRebootBottomSheet()
-                    v.btnDownload.isEnabled = true
+                    setRebootButton(v)
                     v.btnExport.visibility = View.VISIBLE
+                    showRebootBottomSheet()
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    v.btnDownload.text = getString(R.string.btn_download)
                     v.btnDownload.isEnabled = true
+                    v.btnDownload.setOnClickListener { manifest?.release?.download?.let { d -> downloadAndInstall(d) } }
                     v.btnExport.visibility = View.VISIBLE
                 }
             }
@@ -367,6 +386,8 @@ class CheckUpdateFragment : Fragment() {
         val rowFingerprint: TextView = root.findViewById(R.id.rowFingerprint)
         val rowKernel: TextView = root.findViewById(R.id.rowKernel)
         val fabLocalUpdate: FloatingActionButton = root.findViewById(R.id.fabLocalUpdate)
+        val txtIntegrity: TextView = root.findViewById(R.id.txtIntegrity)
+        val txtLastChecked: TextView = root.findViewById(R.id.txtLastChecked)
     }
 
     companion object {
@@ -449,14 +470,14 @@ class CheckUpdateFragment : Fragment() {
 
     private fun cleanupOldOtas() {
         val isDownloading = _b?.downloadBar?.visibility == View.VISIBLE
+        val activeOta = requireContext().getSharedPreferences("bloomina", 0).getString("active_ota_file", null)
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Clean cache dir (Local Updates)
-                requireContext().cacheDir.listFiles { _, name -> name.endsWith(".zip") }?.forEach { it.delete() }
-                // Clean external files dir (Downloaded OTAs)
+                // Clean cache dir (Local Updates staged zips) but keep the in-flight sideload.
+                requireContext().cacheDir.listFiles { _, name -> name.endsWith(".zip") && name != "local_update.zip" }?.forEach { it.delete() }
+                // Clean external files dir (Downloaded OTAs) but never the active download.
                 val extDir = requireContext().getExternalFilesDir(null)
-                extDir?.listFiles { _, name -> name.endsWith(".zip") }?.forEach { file ->
-                    // Only delete if it's not currently downloading
+                extDir?.listFiles { _, name -> name.endsWith(".zip") && name != activeOta }?.forEach { file ->
                     if (file.exists() && !isDownloading) {
                         file.delete()
                     }
@@ -522,5 +543,22 @@ class CheckUpdateFragment : Fragment() {
         b.rowSecurity.setOnClickListener { copyAction(b.rowSecurity.text) }
         b.rowFingerprint.setOnClickListener { copyAction(b.rowFingerprint.text) }
         b.rowKernel.setOnClickListener { copyAction(b.rowKernel.text) }
+    }
+    private fun persistLastChecked() {
+        requireContext().getSharedPreferences("bloomina", 0)
+            .edit().putLong("last_check_ms", System.currentTimeMillis()).apply()
+        showLastChecked()
+    }
+
+    private fun showLastChecked() {
+        val v = _b ?: return
+        val ms = requireContext().getSharedPreferences("bloomina", 0).getLong("last_check_ms", 0L)
+        if (ms <= 0L) {
+            v.txtLastChecked.visibility = View.GONE
+            return
+        }
+        v.txtLastChecked.visibility = View.VISIBLE
+        val rel = DateUtils.getRelativeTimeSpanString(ms, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS)
+        v.txtLastChecked.text = getString(R.string.last_checked, rel)
     }
 }

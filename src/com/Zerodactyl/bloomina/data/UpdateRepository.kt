@@ -86,14 +86,21 @@ class UpdateRepository {
                 emit(DownloadState.Failed("HTTP $responseCode"))
                 return@flow
             }
-            
+            // If we requested a range but the server ignored it (200 instead of 206),
+            // appending would corrupt the file. Discard the partial and start over.
+            if (append && responseCode == HttpURLConnection.HTTP_OK) {
+                dest.delete()
+                append = false
+            }
+
             val total = download.sizeBytes
-            
+            val startBytes = if (append) downloadedBytes else 0L
+
             connection.inputStream.use { input ->
                 FileOutputStream(dest, append).use { output ->
                     val buf = ByteArray(64 * 1024)
                     var read: Int
-                    var written = downloadedBytes
+                    var written = startBytes
                     var lastEmit = 0L
                     
                     while (input.read(buf).also { read = it } != -1) {

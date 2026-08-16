@@ -45,4 +45,11 @@
 
     <string name="unknown_maintainer">Unknown maintainer</string>
     <string name="flash_warning">Do not unplug or power off the device.</string>
+    <string name="btn_install">Install update</string>
+    <string name="btn_reboot">Reboot now</string>
+    <string name="integrity_verified">Verified · SHA-256 %1$s</string>
+    <string name="last_checked">Last checked: %1$s</string>
+    <string name="diag_title">System Diagnostics</string>
+    <string name="diag_layout">Partition Layout</string>
+    <string name="diag_slot">Active Slot</string>
 </resources>

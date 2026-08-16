@@ -54,6 +54,14 @@
                 android:layout_marginTop="16dp"
                 android:max="100"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/txtLastChecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary"
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- Actions -->
@@ -121,6 +129,13 @@
                 <TextView android:id="@+id/rowRemoteSecurity" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="8dp" />
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/f_fingerprint" android:textStyle="bold" />
                 <TextView android:id="@+id/rowRemoteFingerprint" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/txtIntegrity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorPrimary"
+                    android:visibility="gone" />
             </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </com.google.android.material.card.MaterialCardView>
@@ -162,7 +177,7 @@
             android:paddingHorizontal="24dp"
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
-            android:text="System Diagnostics"
+            android:text="@string/diag_title"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorPrimary" />
 
@@ -175,9 +190,9 @@
             app:cardBackgroundColor="?attr/colorSurfaceContainer">
             <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Partition Layout" android:textStyle="bold" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/diag_layout" android:textStyle="bold" />
                 <TextView android:id="@+id/rowLayoutType" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="8dp" />
-                <TextView android:id="@+id/lblActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Active Slot" android:textStyle="bold" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/diag_slot" android:textStyle="bold" />
                 <TextView android:id="@+id/rowActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>
             </androidx.core.widget.NestedScrollView>

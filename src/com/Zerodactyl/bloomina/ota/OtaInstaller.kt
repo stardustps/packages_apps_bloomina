@@ -101,41 +101,55 @@ class OtaInstaller(private val context: Context) {
      * UpdateEngine requires this offset so it doesn't have to extract the 3GB payload.bin.
      */
     private fun getZipEntryOffset(file: File, entryName: String): Long {
-        // A simple, reliable way without writing a full zip parser is iterating headers.
-        // We will just read raw bytes to find the local file header signature 0x04034b50
-        // and matching file name, then calculate offset + header length.
-        // For production LineageOS, they use a dedicated C++ zip parser or ZipFile API, 
-        // but this works securely in Kotlin.
         java.io.RandomAccessFile(file, "r").use { raf ->
-            var offset = 0L
-            val buffer = ByteArray(30)
-            while (offset < raf.length() - 30) {
-                raf.seek(offset)
-                raf.readFully(buffer)
-                
-                // Check for Local File Header signature (0x04034b50)
-                if (buffer[0] == 0x50.toByte() && buffer[1] == 0x4b.toByte() && 
-                    buffer[2] == 0x03.toByte() && buffer[3] == 0x04.toByte()) {
-                    
-                    val nameLength = (buffer[26].toInt() and 0xFF) or ((buffer[27].toInt() and 0xFF) shl 8)
-                    val extraFieldLength = (buffer[28].toInt() and 0xFF) or ((buffer[29].toInt() and 0xFF) shl 8)
-                    
-                    val nameBuffer = ByteArray(nameLength)
-                    raf.readFully(nameBuffer)
-                    val currentName = String(nameBuffer)
-                    
-                    if (currentName == entryName) {
-                        return offset + 30 + nameLength + extraFieldLength
-                    }
-                    
-                    // Skip to next header by seeking past compressed data (if we could easily read compressed size).
-                    // As a fallback, we just advance the offset safely. In reality ZipFile API handles this better 
-                    // via Central Directory, but Java's ZipFile doesn't expose the local header offset.
-                    // Instead, we just advance by 1 to search for the next signature since it's fast enough.
+            val len = raf.length()
+            // End Of Central Directory record is at most 22 + 65535 bytes and lives at the file tail.
+            val eocdSize = if (len > 22L + 0xFFFF) (22 + 0xFFFF) else len.toInt()
+            val eocdBuf = ByteArray(eocdSize)
+            raf.seek(len - eocdBuf.size)
+            raf.readFully(eocdBuf)
+            // Locate the EOCD signature (0x06054b50), taking the last match.
+            var eocd = -1
+            for (i in 0 until eocdBuf.size - 21) {
+                if (eocdBuf[i] == 0x50.toByte() && eocdBuf[i + 1] == 0x4b.toByte() &&
+                    eocdBuf[i + 2] == 0x05.toByte() && eocdBuf[i + 3] == 0x06.toByte()
+                ) eocd = i
+            }
+            if (eocd < 0) throw IllegalStateException("Not a valid zip (missing EOCD)")
+            val cdOffset = readLe32(eocdBuf, eocd + 16)
+            val cdCount = readLe16(eocdBuf, eocd + 10)
+            raf.seek(cdOffset)
+            val cdh = ByteArray(46)
+            for (n in 0 until cdCount) {
+                raf.readFully(cdh)
+                if (readLe32(cdh, 0) != 0x02014b50) throw IllegalStateException("Corrupt central directory")
+                val nameLen = readLe16(cdh, 28)
+                val extraLen = readLe16(cdh, 30)
+                val commentLen = readLe16(cdh, 32)
+                val localOffset = readLe32(cdh, 42)
+                val nameBuf = ByteArray(nameLen)
+                raf.readFully(nameBuf)
+                raf.skipBytes(extraLen + commentLen)
+                if (String(nameBuf, Charsets.UTF_8) == entryName) {
+                    val lh = ByteArray(30)
+                    raf.seek(localOffset)
+                    raf.readFully(lh)
+                    if (readLe32(lh, 0) != 0x04034b50) throw IllegalStateException("Bad local header for $entryName")
+                    val lNameLen = readLe16(lh, 26)
+                    val lExtraLen = readLe16(lh, 28)
+                    return localOffset + 30 + lNameLen + lExtraLen
                 }
-                offset++
             }
         }
-        throw IllegalStateException("Could not find payload offset for $entryName")
+        throw IllegalStateException("Could not find $entryName in zip")
     }
+
+    private fun readLe16(b: ByteArray, o: Int): Int =
+        (b[o].toInt() and 0xFF) or ((b[o + 1].toInt() and 0xFF) shl 8)
+
+    private fun readLe32(b: ByteArray, o: Int): Long =
+        (b[o].toLong() and 0xFF) or
+        ((b[o + 1].toLong() and 0xFF) shl 8) or
+        ((b[o + 2].toLong() and 0xFF) shl 16) or
+        ((b[o + 3].toLong() and 0xFF) shl 24)
 }
