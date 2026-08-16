@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -17,8 +19,9 @@ import com.Zerodactyl.bloomina.data.Download
 import com.Zerodactyl.bloomina.data.DownloadState
 import com.Zerodactyl.bloomina.data.UpdateManifest
 import com.Zerodactyl.bloomina.data.UpdateRepository
-import com.Zerodactyl.bloomina.databinding.FragmentCheckUpdateBinding
 import com.Zerodactyl.bloomina.ota.DeviceInfo
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.Zerodactyl.bloomina.ota.IFlashCallback
 import com.Zerodactyl.bloomina.ota.InstallResult
 import com.Zerodactyl.bloomina.ota.OtaInstaller
@@ -51,7 +54,7 @@ import java.io.FileOutputStream
 
 class CheckUpdateFragment : Fragment() {
 
-    private var _b: FragmentCheckUpdateBinding? = null
+    private var _b: V? = null
     private val b get() = _b!!
     private val repo = UpdateRepository()
     private val rootIpc by lazy { RootIpc(requireContext().applicationContext) }
@@ -71,8 +74,9 @@ class CheckUpdateFragment : Fragment() {
             ?: DEFAULT_JSON_URL
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _b = FragmentCheckUpdateBinding.inflate(i, c, false)
-        return b.root
+        val root = i.inflate(R.layout.fragment_check_update, c, false)
+        _b = V(root)
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -405,6 +409,38 @@ class CheckUpdateFragment : Fragment() {
         val fingerprint: String,
         val kernel: String
     )
+
+    /** Manual view holder - avoids the ViewBinding generator, which is not enabled in this AOSP build. */
+    private class V(root: View) {
+        val heroIcon: ImageView = root.findViewById(R.id.heroIcon)
+        val heroTitle: TextView = root.findViewById(R.id.heroTitle)
+        val heroSubtitle: TextView = root.findViewById(R.id.heroSubtitle)
+        val downloadBar: ProgressBar = root.findViewById(R.id.downloadBar)
+        val btnExport: Button = root.findViewById(R.id.btnExport)
+        val btnDownload: Button = root.findViewById(R.id.btnDownload)
+        val btnCheck: Button = root.findViewById(R.id.btnCheck)
+        val sepAvailable: TextView = root.findViewById(R.id.sepAvailable)
+        val cardAvailable: MaterialCardView = root.findViewById(R.id.cardAvailable)
+        val rowRemoteVersion: TextView = root.findViewById(R.id.rowRemoteVersion)
+        val rowBuildDate: TextView = root.findViewById(R.id.rowBuildDate)
+        val rowDownloadSize: TextView = root.findViewById(R.id.rowDownloadSize)
+        val rowRemoteAndroid: TextView = root.findViewById(R.id.rowRemoteAndroid)
+        val rowRemoteSecurity: TextView = root.findViewById(R.id.rowRemoteSecurity)
+        val rowRemoteFingerprint: TextView = root.findViewById(R.id.rowRemoteFingerprint)
+        val changelog: TextView = root.findViewById(R.id.changelog)
+        val sepChangelog: TextView = root.findViewById(R.id.sepChangelog)
+        val cardChangelog: MaterialCardView = root.findViewById(R.id.cardChangelog)
+        val rowLayoutType: TextView = root.findViewById(R.id.rowLayoutType)
+        val lblActiveSlot: TextView = root.findViewById(R.id.lblActiveSlot)
+        val rowActiveSlot: TextView = root.findViewById(R.id.rowActiveSlot)
+        val rowInstalledVersion: TextView = root.findViewById(R.id.rowInstalledVersion)
+        val rowDeviceModel: TextView = root.findViewById(R.id.rowDeviceModel)
+        val rowAndroid: TextView = root.findViewById(R.id.rowAndroid)
+        val rowSecurity: TextView = root.findViewById(R.id.rowSecurity)
+        val rowFingerprint: TextView = root.findViewById(R.id.rowFingerprint)
+        val rowKernel: TextView = root.findViewById(R.id.rowKernel)
+        val fabLocalUpdate: FloatingActionButton = root.findViewById(R.id.fabLocalUpdate)
+    }
 
     companion object {
         /**
