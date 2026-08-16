@@ -53,7 +53,8 @@ class MaintainerFragment : Fragment() {
                     bindLinks(mt)
                 }
                 .onFailure { t ->
-                    view?.findViewById<android.widget.TextView>(R.id.handle)?.text = UpdateRepository.describe(t)
+                    requireView().findViewById<android.widget.TextView>(R.id.name).text = getString(R.string.unknown_maintainer)
+                    requireView().findViewById<android.widget.TextView>(R.id.handle).text = UpdateRepository.describe(t)
                 }
         }
     }

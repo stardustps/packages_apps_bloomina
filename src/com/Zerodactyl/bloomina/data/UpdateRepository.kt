@@ -148,6 +148,12 @@ class UpdateRepository {
     }
 
     companion object {
-        fun describe(t: Throwable): String = t.message ?: "Network error"
+    fun describe(t: Throwable): String = when (t) {
+        is JSONException -> "Bad update manifest"
+        is UnknownHostException -> "Network error"
+        is SocketTimeoutException -> "Network timeout"
+        is IOException -> "Network error"
+        else -> t.message ?: "Unexpected error"
+    }
     }
 }

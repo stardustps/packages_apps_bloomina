@@ -81,6 +81,7 @@ class CheckUpdateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         cleanupOldOtas()
         showLastChecked()
+        renderCached()
         renderLocalDeviceRows()
         setupTapToCopy()
         renderDiagnostics()
@@ -88,6 +89,7 @@ class CheckUpdateFragment : Fragment() {
         b.btnCheck.setOnClickListener { check() }
         b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
         b.btnExport.setOnClickListener { manifest?.let { exportUpdate(it.release.download) } }
+        b.btnCopyChangelog.setOnClickListener { copyChangelog() }
         check()
     }
 
@@ -169,18 +171,25 @@ class CheckUpdateFragment : Fragment() {
                         v.btnDownload.isEnabled = false
                         v.btnExport.visibility = View.GONE
                     }
+                    persistManifest(m, verdict)
                 }
                 .onFailure { t ->
                     manifest = null
-                    setHero(
-                        R.drawable.ic_status_error,
-                        getString(R.string.status_failed),
-                        UpdateRepository.describe(t)
-                    )
-                    showReleaseSections(false)
-                    v.btnDownload.visibility = View.GONE
-                    v.btnDownload.isEnabled = false
+                    val hasCache = requireContext().getSharedPreferences("bloomina", 0)
+                        .getString("cached_version", "")?.isNotBlank() == true
+                    if (hasCache) {
+                        renderCached()
+                    } else {
+                        setHero(
+                            R.drawable.ic_status_error,
+                            getString(R.string.status_failed),
+                            UpdateRepository.describe(t)
+                        )
+                        showReleaseSections(false)
+                        v.btnDownload.visibility = View.GONE
+                        v.btnDownload.isEnabled = false
                         v.btnExport.visibility = View.GONE
+                    }
                 }
         persistLastChecked()
 
@@ -216,10 +225,14 @@ class CheckUpdateFragment : Fragment() {
         val cm = requireContext().getSystemService(android.content.Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetwork
         val caps = cm.getNetworkCapabilities(activeNetwork)
+        if (caps == null) {
+            setHero(R.drawable.ic_status_error, getString(R.string.status_failed), getString(R.string.error_no_network))
+            return
+        }
         if (caps != null && !caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
             AlertDialog.Builder(requireContext())
-                .setTitle("Cellular Data Warning")
-                .setMessage("You are on a metered network. This update may consume a large amount of data. Continue?")
+                .setTitle(getString(R.string.warn_metered_title))
+                .setMessage(getString(R.string.warn_metered_msg))
                 .setPositiveButton("Download") { _, _ -> startDownload(dl) }
                 .setNegativeButton("Cancel", null)
                 .show()
@@ -242,7 +255,8 @@ class CheckUpdateFragment : Fragment() {
                 .setContentTitle("Downloading System Update")
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
-
+            var lastMs = System.currentTimeMillis()
+            var lastBytes = 0L
             repo.download(dl, dest).collect { st ->
                 val v = _b ?: return@collect
                 when (st) {
@@ -251,7 +265,14 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.isIndeterminate = false
                         v.downloadBar.visibility = View.VISIBLE
                         v.downloadBar.progress = pct
-                        setHero(R.drawable.ic_status_available, getString(R.string.status_downloading), getString(R.string.status_downloading_sub, pct))
+                        val now = System.currentTimeMillis()
+                        val dt = (now - lastMs) / 1000.0
+                        val bytesNow = st.bytes
+                        val speed = if (dt > 0) (bytesNow - lastBytes) / dt else 0.0
+                        lastMs = now
+                        lastBytes = bytesNow
+                        val speedStr = if (speed > 0) formatBytes(speed.toLong()) + "/s" else "—"
+                        setHero(R.drawable.ic_status_available, getString(R.string.status_downloading), getString(R.string.download_speed, pct, speedStr))
 
                         builder.setProgress(100, pct, false)
                         builder.setContentText("$pct%")
@@ -261,6 +282,7 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.visibility = View.GONE
                         setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
                         v.btnDownload.isEnabled = true
+                        v.btnDownload.text = getString(R.string.btn_retry)
 
                         builder.setContentTitle("Download Failed").setContentText(st.reason).setProgress(0, 0, false).setOngoing(false)
                         nm.notify(1, builder.build())
@@ -282,8 +304,8 @@ class CheckUpdateFragment : Fragment() {
 
                         if (batteryPct in 0f..20f && !isCharging) {
                             AlertDialog.Builder(requireContext())
-                                .setTitle("Battery Too Low")
-                                .setMessage("Your battery is below 20%. Please plug in your device to safely install this system update.")
+                                .setTitle(getString(R.string.warn_battery_title))
+                                .setMessage(getString(R.string.warn_battery_msg))
                                 .setPositiveButton("OK", null)
                                 .show()
                             setInstallButton(v, st.file)
@@ -324,15 +346,15 @@ class CheckUpdateFragment : Fragment() {
             val v = _b ?: return@launch
             when (result) {
                 is InstallResult.StagedRebootingToRecovery ->
-                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
+                    setHero(R.drawable.ic_status_available, getString(R.string.install_staged_title), getString(R.string.install_staged_sub))
                 is InstallResult.AppliedBackgroundRebootRequired -> {
-                    setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
+                    setHero(R.drawable.ic_status_available, getString(R.string.install_applied_title), getString(R.string.install_applied_sub))
                     setRebootButton(v)
                     v.btnExport.visibility = View.VISIBLE
                     showRebootBottomSheet()
                 }
                 is InstallResult.Failed -> {
-                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    setHero(R.drawable.ic_status_error, getString(R.string.install_failed_title), result.why)
                     v.btnDownload.text = getString(R.string.btn_download)
                     v.btnDownload.isEnabled = true
                     v.btnDownload.setOnClickListener { manifest?.release?.download?.let { d -> downloadAndInstall(d) } }
@@ -388,6 +410,7 @@ class CheckUpdateFragment : Fragment() {
         val fabLocalUpdate: FloatingActionButton = root.findViewById(R.id.fabLocalUpdate)
         val txtIntegrity: TextView = root.findViewById(R.id.txtIntegrity)
         val txtLastChecked: TextView = root.findViewById(R.id.txtLastChecked)
+        val btnCopyChangelog: Button = root.findViewById(R.id.btnCopyChangelog)
     }
 
     companion object {
@@ -402,7 +425,7 @@ class CheckUpdateFragment : Fragment() {
     private fun exportUpdate(dl: Download) {
         val src = File(requireContext().getExternalFilesDir(null), dl.filename)
         if (!src.exists()) {
-            Toast.makeText(context, "Update file not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.export_not_found), Toast.LENGTH_SHORT).show()
             return
         }
         
@@ -418,11 +441,11 @@ class CheckUpdateFragment : Fragment() {
                 }
                 
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Exported to Downloads folder", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.export_success), Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.export_failed, e.message), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -443,7 +466,7 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun handleLocalUpdate(uri: Uri) {
-        setHero(R.drawable.ic_cloud_large, "Staging Local Update", "Copying zip file...")
+        setHero(R.drawable.ic_cloud_large, getString(R.string.local_staging), getString(R.string.local_copying))
         b.downloadBar.isIndeterminate = true
         b.downloadBar.visibility = View.VISIBLE
         
@@ -461,7 +484,7 @@ class CheckUpdateFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    setHero(R.drawable.ic_status_error, "Local Update Failed", e.message ?: "Could not read file")
+                    setHero(R.drawable.ic_status_error, getString(R.string.local_failed_title), e.message ?: getString(R.string.local_failed_msg))
                     b.downloadBar.visibility = View.GONE
                 }
             }
@@ -498,21 +521,21 @@ class CheckUpdateFragment : Fragment() {
         }
         
         val title = TextView(requireContext()).apply {
-            text = "System Update Complete"
+            text = getString(R.string.sheet_complete_title)
             textSize = 24f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, 0, 0, 16)
         }
         
         val desc = TextView(requireContext()).apply {
-            text = "The update has been successfully installed in the background. A restart is required to finish applying the changes."
+            text = getString(R.string.sheet_complete_desc)
             textSize = 16f
             setPadding(0, 0, 0, 64)
             gravity = Gravity.CENTER_HORIZONTAL
         }
         
         val btnReboot = Button(requireContext(), null, com.google.android.material.R.attr.materialButtonStyle).apply {
-            text = "Reboot Now"
+            text = getString(R.string.sheet_reboot_btn)
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             setOnClickListener {
                 sheet.dismiss()
@@ -534,7 +557,7 @@ class CheckUpdateFragment : Fragment() {
         val copyAction = { text: CharSequence ->
             val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE) as ClipboardManager
             clipboard.setPrimaryClip(ClipData.newPlainText("Device Info", text))
-            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.copied), Toast.LENGTH_SHORT).show()
         }
         
         b.rowInstalledVersion.setOnClickListener { copyAction(b.rowInstalledVersion.text) }
@@ -560,5 +583,55 @@ class CheckUpdateFragment : Fragment() {
         v.txtLastChecked.visibility = View.VISIBLE
         val rel = DateUtils.getRelativeTimeSpanString(ms, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS)
         v.txtLastChecked.text = getString(R.string.last_checked, rel)
+    }
+
+    private fun copyChangelog() {
+        val text = _b?.changelog?.text ?: return
+        val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("Changelog", text))
+        Toast.makeText(context, getString(R.string.copied), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun persistManifest(m: UpdateManifest, verdict: VersionCheck.Result) {
+        val prefs = requireContext().getSharedPreferences("bloomina", 0).edit()
+        val r = m.release
+        prefs.putString("cached_version", r.version)
+        prefs.putLong("cached_version_code", r.versionCode ?: -1L)
+        prefs.putString("cached_build_date", r.buildDate)
+        prefs.putString("cached_size", r.download.sizeBytes.toString())
+        prefs.putString("cached_android", r.androidVersion)
+        prefs.putString("cached_security", r.securityPatch)
+        prefs.putString("cached_fingerprint", r.fingerprint)
+        prefs.putString("cached_changelog", r.changelog.joinToString("\n"))
+        prefs.putString("cached_rom", m.romName)
+        prefs.putBoolean("cached_available", verdict.updateAvailable)
+        prefs.apply()
+    }
+
+    private fun renderCached() {
+        val v = _b ?: return
+        val prefs = requireContext().getSharedPreferences("bloomina", 0)
+        val version = prefs.getString("cached_version", "") ?: ""
+        if (version.isBlank()) {
+            showReleaseSections(false)
+            return
+        }
+        val size = prefs.getString("cached_size", "0")?.toLongOrNull() ?: 0L
+        v.rowRemoteVersion.text = version
+        v.rowBuildDate.text = prefs.getString("cached_build_date", "-") ?: "-"
+        v.rowDownloadSize.text = formatBytes(size)
+        v.rowRemoteAndroid.text = prefs.getString("cached_android", "-") ?: "-"
+        v.rowRemoteSecurity.text = prefs.getString("cached_security", "-") ?: "-"
+        v.rowRemoteFingerprint.text = prefs.getString("cached_fingerprint", "-") ?: "-"
+        val changelog = prefs.getString("cached_changelog", "") ?: ""
+        v.changelog.text = Html.fromHtml(changelog.split("\n").joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+        v.changelog.movementMethod = LinkMovementMethod.getInstance()
+        val available = prefs.getBoolean("cached_available", false)
+        showReleaseSections(available)
+        if (available) {
+            setHero(R.drawable.ic_status_available, getString(R.string.status_update_available), getString(R.string.status_update_available_sub, version))
+        } else {
+            setHero(R.drawable.ic_status_uptodate, getString(R.string.status_up_to_date), getString(R.string.cached_sub))
+        }
     }
 }

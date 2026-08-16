@@ -1,0 +1,38 @@
+{
+  "rom_name": "lineage",
+  "maintainer": {
+    "name": "aerocat",
+    "handle": "@aerocat",
+    "device": "Galaxy A32 4G",
+    "codename": "a32",
+    "avatar_url": null,
+    "telegram": "https://t.me/aerocat",
+    "donate_url": null,
+    "github_url": "https://github.com/aerocat",
+    "xda_url": "https://xdaforums.com/t/a32"
+  },
+  "release": {
+    "version": "8.6.4",
+    "version_code": 20260816,
+    "build_date": "2026-08-16",
+    "android_version": "15",
+    "security_patch": "2026-08-05",
+    "build_fingerprint": "lineage/a32/a32:15/QP1A.190711.020/20260816:userdebug/release-keys",
+    "device_model": "Samsung Galaxy A32",
+    "kernel_version": "5.4.0-lineage-g1234567890",
+    "partition_layout": "a-only",
+    "changelog": [
+      "Merged August security patch",
+      "Improved touchpanel firmware for A32",
+      "Fixed intermittent Wi-Fi disconnects",
+      "Updated prebuilt WebView to 138.0.7204.0"
+    ],
+    "download": {
+      "url": "https://over-the-air.tuong.qzz.io/bloomina/lineage/a32/lineage-a32-8.6.4-20260816.zip",
+      "filename": "lineage-a32-8.6.4-20260816.zip",
+      "size_bytes": 1288490188,
+      "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "install_type": "recovery_zip"
+    }
+  }
+}

@@ -167,6 +167,13 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+            <Button
+                android:id="@+id/btnCopyChangelog"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_copy_changelog" />
         </com.google.android.material.card.MaterialCardView>
 
         <!-- A/B Slot Status -->
