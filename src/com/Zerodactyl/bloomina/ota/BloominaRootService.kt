@@ -9,7 +9,7 @@ import java.io.File
  * libsu RootService — hosts a persistent worker in a separate ROOT process.
  * Everything in [Ipc] runs as uid 0, so the app never has to spawn `su -c` per action.
  */
-class skynightRootService : LibsuRootService() {
+class BloominaRootService : LibsuRootService() {
 
     override fun onBind(intent: Intent): IBinder = Ipc()
 
