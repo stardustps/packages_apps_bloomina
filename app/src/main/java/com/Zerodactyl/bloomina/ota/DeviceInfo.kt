@@ -20,7 +20,7 @@ object DeviceInfo {
     }
 
     /**
-     * The ROM's own version stamp: `ro.skynight.rom.ver` (e.g. "8.6.4").
+     * The ROM's own version stamp: `ro.bloomina.rom.ver` (e.g. "8.6.4").
      * Most reliable signal for what's installed - better than fingerprint diffing.
      * Empty when unset (e.g. skynight running on a non-skynight build).
      */
@@ -29,7 +29,7 @@ object DeviceInfo {
     /** Optional numeric companion for clean integer comparison. */
     val romVersionCode: Long? get() = getProp(PROP_ROM_VER_CODE)?.toLongOrNull()
 
-    /** Maintainer name baked into the ROM: `ro.skynight.maintainer`. */
+    /** Maintainer name baked into the ROM: `ro.bloomina.maintainer`. */
     val maintainer: String get() = getProp(PROP_MAINTAINER).orEmpty()
 
     /** Device codename used to build the default OTA manifest URL (e.g. "a32"). */
@@ -42,9 +42,9 @@ object DeviceInfo {
     /** A-Only vs A/B, detected from the ROM slot suffix property. */
     val isAOnly: Boolean get() = getProp("ro.boot.slot_suffix").isNullOrEmpty()
 
-    const val PROP_ROM_VER = "ro.skynight.rom.ver"
-    const val PROP_ROM_VER_CODE = "ro.skynight.rom.ver.code"
-    const val PROP_MAINTAINER = "ro.skynight.maintainer"
+    const val PROP_ROM_VER = "ro.bloomina.rom.ver"
+    const val PROP_ROM_VER_CODE = "ro.bloomina.rom.ver.code"
+    const val PROP_MAINTAINER = "ro.bloomina.maintainer"
 
     // Every getProp() forks a `getprop` process (~10-30ms). Tab 1 alone reads six of them on
     // each render, on the main thread, which is a visible stutter on an A32. These are all

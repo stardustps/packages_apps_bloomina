@@ -53,3 +53,23 @@ to ensure the app has the proper selinux contexts to write to recovery and acces
 ```makefile
 board_sepolicy_dirs += packages/apps/bloomina/sepolicy
 ```
+
+## system properties configuration
+to make bloomina work seamlessly with your rom, you must configure a few build properties in your device tree.
+
+add the following lines to your `device.mk` (or `lineage_codename.mk`):
+
+```makefile
+# bloomina updater properties
+product_property_overrides += \
+    ro.bloomina.rom=lineage \
+    ro.bloomina.maintainer="your name here" \
+    ro.bloomina.rom.ver=$(lineage_version) \
+    ro.bloomina.rom.ver.code=$(date +%Y%m%d)
+```
+
+### what these properties do:
+- `ro.bloomina.rom`: this dictates the rom name injected into the ota url (e.g. `lineage`, `lunaris`, `bliss`). if set to `lineage`, the app will query `https://over-the-air.tuong.qzz.io/bloomina/lineage/device.json`.
+- `ro.bloomina.maintainer`: the name of the official maintainer for this device. this populates the "maintainer" tab in the app automatically.
+- `ro.bloomina.rom.ver`: the human-readable version of the rom currently installed on the device (e.g., `21.0-20260816-unofficial`).
+- `ro.bloomina.rom.ver.code`: a numeric integer used by the app to natively compare if the online update is newer than the installed update (usually a datecode).
