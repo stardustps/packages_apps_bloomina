@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight کی اپ ڈیٹ چیک کریں۔</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina کی اپ ڈیٹ چیک کریں۔</string>
     <string name="tab_check_update">اپ ڈیٹ کریں۔</string>
     <string name="tab_maintainer">دیکھ بھال کرنے والا</string>
     <string name="tab_settings">ترتیبات</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">ڈیوائس</string>
     <string name="status_checking">اپ ڈیٹس کی جانچ ہو رہی ہے…</string>
-    <string name="status_checking_sub">skynight اپ ڈیٹ سرور سے رابطہ کرنا</string>
+    <string name="status_checking_sub">bloomina اپ ڈیٹ سرور سے رابطہ کرنا</string>
     <string name="status_up_to_date">آپ کا سافٹ ویئر اپ ٹو ڈیٹ ہے۔</string>
-    <string name="status_up_to_date_sub">skynight %1$s اس ڈیوائس کے لیے تازہ ترین تعمیر ہے۔</string>
+    <string name="status_up_to_date_sub">bloomina %1$s اس ڈیوائس کے لیے تازہ ترین تعمیر ہے۔</string>
     <string name="status_update_available">اپ ڈیٹ دستیاب ہے۔</string>
-    <string name="status_update_available_sub">skynight %1$s ڈاؤن لوڈ کے لیے تیار ہے۔</string>
+    <string name="status_update_available_sub">bloomina %1$s ڈاؤن لوڈ کے لیے تیار ہے۔</string>
     <string name="status_failed">اپ ڈیٹس کے لیے\\'کی جانچ نہیں کی جا سکی</string>
     <string name="status_downloading">اپ ڈیٹ ڈاؤن لوڈ ہو رہا ہے۔</string>
     <string name="status_downloading_sub">%1$d%% · اسکائی نائٹ کو کھلا رکھیں</string>

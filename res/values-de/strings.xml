@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Nach skynight-Updates suchen</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Nach bloomina-Updates suchen</string>
     <string name="tab_check_update">Update</string>
     <string name="tab_maintainer">Maintainer</string>
     <string name="tab_settings">Einstellungen</string>
@@ -23,14 +23,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Gerät</string>
     <string name="status_checking">Suche nach Updates…</string>
-    <string name="status_checking_sub">Verbindung zum skynight-Update-Server wird hergestellt</string>
+    <string name="status_checking_sub">Verbindung zum bloomina-Update-Server wird hergestellt</string>
     <string name="status_up_to_date">Ihre Software ist auf dem neuesten Stand</string>
-    <string name="status_up_to_date_sub">skynight %1$s ist der neueste Build für dieses Gerät</string>
+    <string name="status_up_to_date_sub">bloomina %1$s ist der neueste Build für dieses Gerät</string>
     <string name="status_update_available">Update verfügbar</string>
-    <string name="status_update_available_sub">skynight %1$s ist zum Download bereit</string>
+    <string name="status_update_available_sub">bloomina %1$s ist zum Download bereit</string>
     <string name="status_failed">Suche nach Updates fehlgeschlagen</string>
     <string name="status_downloading">Update wird heruntergeladen</string>
-    <string name="status_downloading_sub">%1$d%% · skynight geöffnet lassen</string>
+    <string name="status_downloading_sub">%1$d%% · bloomina geöffnet lassen</string>
     <string name="status_installing">Installation wird vorbereitet</string>
     <string name="btn_check">Nach Updates suchen</string>
     <string name="btn_download">Herunterladen und installieren</string>

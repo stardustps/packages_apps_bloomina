@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Tjek opdatering af skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Tjek opdatering af bloomina</string>
     <string name="tab_check_update">Opdatering</string>
     <string name="tab_maintainer">Vedligeholder</string>
     <string name="tab_settings">Indstillinger</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Enhed</string>
     <string name="status_checking">Søger efter opdateringer...</string>
-    <string name="status_checking_sub">Kontakter skynight-opdateringsserveren</string>
+    <string name="status_checking_sub">Kontakter bloomina-opdateringsserveren</string>
     <string name="status_up_to_date">Din software er opdateret</string>
-    <string name="status_up_to_date_sub">skynight %1$s er den seneste build til denne enhed</string>
+    <string name="status_up_to_date_sub">bloomina %1$s er den seneste build til denne enhed</string>
     <string name="status_update_available">Opdatering tilgængelig</string>
-    <string name="status_update_available_sub">skynight %1$s er klar til at downloade</string>
+    <string name="status_update_available_sub">bloomina %1$s er klar til at downloade</string>
     <string name="status_failed">Kunne ikke\\' tjekke for opdateringer</string>
     <string name="status_downloading">Downloader opdatering</string>
-    <string name="status_downloading_sub">%1$d%% · hold skynight åben</string>
+    <string name="status_downloading_sub">%1$d%% · hold bloomina åben</string>
     <string name="status_installing">Forbereder til installation</string>
     <string name="btn_check">Se efter opdateringer</string>
     <string name="btn_download">Download og installer</string>

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Patikrinkite skynight atnaujinimą</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Patikrinkite bloomina atnaujinimą</string>
     <string name="tab_check_update">Atnaujinti</string>
     <string name="tab_maintainer">Prižiūrėtojas</string>
     <string name="tab_settings">Nustatymai</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Įrenginys</string>
     <string name="status_checking">Tikrinama, ar yra naujinių…</string>
-    <string name="status_checking_sub">Susisiekimas su skynight naujinimo serveriu</string>
+    <string name="status_checking_sub">Susisiekimas su bloomina naujinimo serveriu</string>
     <string name="status_up_to_date">Jūsų programinė įranga yra atnaujinta</string>
-    <string name="status_up_to_date_sub">skynight %1$s yra naujausia šio įrenginio versija</string>
+    <string name="status_up_to_date_sub">bloomina %1$s yra naujausia šio įrenginio versija</string>
     <string name="status_update_available">Galimas atnaujinimas</string>
-    <string name="status_update_available_sub">skynight %1$s paruoštas atsisiųsti</string>
+    <string name="status_update_available_sub">bloomina %1$s paruoštas atsisiųsti</string>
     <string name="status_failed">Nepavyko\\' patikrinti, ar nėra naujinimų</string>
     <string name="status_downloading">Atsisiunčiamas naujinimas</string>
     <string name="status_downloading_sub">%1$d%% · Laikykite dangų atvirą</string>

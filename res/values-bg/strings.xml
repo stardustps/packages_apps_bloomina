@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Проверете актуализацията на skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Проверете актуализацията на bloomina</string>
     <string name="tab_check_update">Актуализация</string>
     <string name="tab_maintainer">Поддържащ</string>
     <string name="tab_settings">Settings</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">устройство</string>
     <string name="status_checking">Проверка за актуализации...</string>
-    <string name="status_checking_sub">Свързване със сървъра за актуализиране на skynight</string>
+    <string name="status_checking_sub">Свързване със сървъра за актуализиране на bloomina</string>
     <string name="status_up_to_date">Вашият софтуер е актуален</string>
-    <string name="status_up_to_date_sub">skynight %1$s е най-новата версия за това устройство</string>
+    <string name="status_up_to_date_sub">bloomina %1$s е най-новата версия за това устройство</string>
     <string name="status_update_available">Налична актуализация</string>
-    <string name="status_update_available_sub">skynight %1$s е готов за изтегляне</string>
+    <string name="status_update_available_sub">bloomina %1$s е готов за изтегляне</string>
     <string name="status_failed">Не можа\\'да провери за актуализации</string>
     <string name="status_downloading">Изтегля се актуализация</string>
-    <string name="status_downloading_sub">%1$d%% · дръж skynight отворен</string>
+    <string name="status_downloading_sub">%1$d%% · дръж bloomina отворен</string>
     <string name="status_installing">Подготовка за инсталиране</string>
     <string name="btn_check">Проверете за актуализации</string>
     <string name="btn_download">Изтеглете и инсталирайте</string>

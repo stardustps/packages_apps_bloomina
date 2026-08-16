@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight இன் புதுப்பிப்பைச் சரிபார்க்கவும்</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina இன் புதுப்பிப்பைச் சரிபார்க்கவும்</string>
     <string name="tab_check_update">புதுப்பிக்கவும்</string>
     <string name="tab_maintainer">பராமரிப்பாளர்</string>
     <string name="tab_settings">அமைப்புகள்</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ரோம்</string>
     <string name="f_device">சாதனம்</string>
     <string name="status_checking">புதுப்பிப்புகளைச் சரிபார்க்கிறது…</string>
-    <string name="status_checking_sub">skynight புதுப்பிப்பு சேவையகத்தைத் தொடர்பு கொள்கிறது</string>
+    <string name="status_checking_sub">bloomina புதுப்பிப்பு சேவையகத்தைத் தொடர்பு கொள்கிறது</string>
     <string name="status_up_to_date">உங்கள் மென்பொருள் புதுப்பித்த நிலையில் உள்ளது</string>
-    <string name="status_up_to_date_sub">skynight %1$s என்பது இந்தச் சாதனத்திற்கான சமீபத்திய உருவாக்கமாகும்</string>
+    <string name="status_up_to_date_sub">bloomina %1$s என்பது இந்தச் சாதனத்திற்கான சமீபத்திய உருவாக்கமாகும்</string>
     <string name="status_update_available">புதுப்பிப்பு கிடைக்கிறது</string>
-    <string name="status_update_available_sub">skynight %1$s பதிவிறக்க தயாராக உள்ளது</string>
+    <string name="status_update_available_sub">bloomina %1$s பதிவிறக்க தயாராக உள்ளது</string>
     <string name="status_failed">\\' புதுப்பிப்புகளைச் சரிபார்க்க முடியவில்லை</string>
     <string name="status_downloading">புதுப்பிப்பைப் பதிவிறக்குகிறது</string>
     <string name="status_downloading_sub">%1$d%% · ஸ்கைநைட்டை திறந்து வைக்கவும்</string>

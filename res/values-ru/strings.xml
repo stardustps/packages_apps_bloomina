@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Проверка обновлений skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Проверка обновлений bloomina</string>
     <string name="tab_check_update">Обновление</string>
     <string name="tab_maintainer">Сопровождающий</string>
     <string name="tab_settings">Настройки</string>
@@ -23,14 +23,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Устройство</string>
     <string name="status_checking">Проверка обновлений…</string>
-    <string name="status_checking_sub">Подключение к серверу обновлений skynight</string>
+    <string name="status_checking_sub">Подключение к серверу обновлений bloomina</string>
     <string name="status_up_to_date">ПО не требует обновления</string>
-    <string name="status_up_to_date_sub">skynight %1$s — это последняя сборка для данного устройства</string>
+    <string name="status_up_to_date_sub">bloomina %1$s — это последняя сборка для данного устройства</string>
     <string name="status_update_available">Доступно обновление</string>
-    <string name="status_update_available_sub">skynight %1$s готова к загрузке</string>
+    <string name="status_update_available_sub">bloomina %1$s готова к загрузке</string>
     <string name="status_failed">Не удалось проверить обновления</string>
     <string name="status_downloading">Загрузка обновления</string>
-    <string name="status_downloading_sub">%1$d%% · не закрывайте skynight</string>
+    <string name="status_downloading_sub">%1$d%% · не закрывайте bloomina</string>
     <string name="status_installing">Подготовка к установке</string>
     <string name="btn_check">Проверить обновления</string>
     <string name="btn_download">Скачать и установить</string>

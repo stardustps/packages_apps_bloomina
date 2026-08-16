@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Periksa pembaruan skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Periksa pembaruan bloomina</string>
     <string name="tab_check_update">Pembaruan</string>
     <string name="tab_maintainer">Pengelola</string>
     <string name="tab_settings">Pengaturan</string>
@@ -23,14 +23,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Perangkat</string>
     <string name="status_checking">Memeriksa pembaruan…</string>
-    <string name="status_checking_sub">Menghubungi server pembaruan skynight</string>
+    <string name="status_checking_sub">Menghubungi server pembaruan bloomina</string>
     <string name="status_up_to_date">Perangkat lunak Anda sudah terbaru</string>
-    <string name="status_up_to_date_sub">skynight %1$s adalah build terbaru untuk perangkat ini</string>
+    <string name="status_up_to_date_sub">bloomina %1$s adalah build terbaru untuk perangkat ini</string>
     <string name="status_update_available">Pembaruan tersedia</string>
-    <string name="status_update_available_sub">skynight %1$s siap diunduh</string>
+    <string name="status_update_available_sub">bloomina %1$s siap diunduh</string>
     <string name="status_failed">Tidak dapat memeriksa pembaruan</string>
     <string name="status_downloading">Mengunduh pembaruan</string>
-    <string name="status_downloading_sub">%1$d%% · biarkan skynight tetap terbuka</string>
+    <string name="status_downloading_sub">%1$d%% · biarkan bloomina tetap terbuka</string>
     <string name="status_installing">Bersiap untuk menginstal</string>
     <string name="btn_check">Periksa pembaruan</string>
     <string name="btn_download">Unduh dan instal</string>

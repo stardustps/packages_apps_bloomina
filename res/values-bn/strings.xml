@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight-এর আপডেট চেক করুন</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina-এর আপডেট চেক করুন</string>
     <string name="tab_check_update">আপডেট</string>
     <string name="tab_maintainer">রক্ষণাবেক্ষণকারী</string>
     <string name="tab_settings">সেটিংস</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">রম</string>
     <string name="f_device">ডিভাইস</string>
     <string name="status_checking">আপডেটের জন্য পরীক্ষা করা হচ্ছে...</string>
-    <string name="status_checking_sub">skynight আপডেট সার্ভারের সাথে যোগাযোগ করা হচ্ছে</string>
+    <string name="status_checking_sub">bloomina আপডেট সার্ভারের সাথে যোগাযোগ করা হচ্ছে</string>
     <string name="status_up_to_date">আপনার সফ্টওয়্যার আপ টু ডেট</string>
-    <string name="status_up_to_date_sub">skynight %1$s এই ডিভাইসের জন্য সর্বশেষ বিল্ড</string>
+    <string name="status_up_to_date_sub">bloomina %1$s এই ডিভাইসের জন্য সর্বশেষ বিল্ড</string>
     <string name="status_update_available">আপডেট উপলব্ধ</string>
-    <string name="status_update_available_sub">skynight %1$s ডাউনলোডের জন্য প্রস্তুত</string>
+    <string name="status_update_available_sub">bloomina %1$s ডাউনলোডের জন্য প্রস্তুত</string>
     <string name="status_failed">আপডেটের জন্য\\' চেক করা যায়নি</string>
     <string name="status_downloading">আপডেট ডাউনলোড হচ্ছে</string>
     <string name="status_downloading_sub">%1$d%% · আকাশের রাত খোলা রাখুন</string>

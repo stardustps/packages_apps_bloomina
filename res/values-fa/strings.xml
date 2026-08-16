@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">آپدیت skynight را بررسی کنید</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">آپدیت bloomina را بررسی کنید</string>
     <string name="tab_check_update">به روز رسانی</string>
     <string name="tab_maintainer">نگهدارنده</string>
     <string name="tab_settings">تنظیمات</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">رام</string>
     <string name="f_device">دستگاه</string>
     <string name="status_checking">در حال بررسی به‌روزرسانی‌ها…</string>
-    <string name="status_checking_sub">تماس با سرور به روز رسانی skynight</string>
+    <string name="status_checking_sub">تماس با سرور به روز رسانی bloomina</string>
     <string name="status_up_to_date">نرم افزار شما به روز است</string>
-    <string name="status_up_to_date_sub">skynight %1$s آخرین ساخت این دستگاه است</string>
+    <string name="status_up_to_date_sub">bloomina %1$s آخرین ساخت این دستگاه است</string>
     <string name="status_update_available">به روز رسانی موجود است</string>
-    <string name="status_update_available_sub">skynight %1$s آماده دانلود است</string>
+    <string name="status_update_available_sub">bloomina %1$s آماده دانلود است</string>
     <string name="status_failed">نمی‌توان\\'به‌روزرسانی‌ها را بررسی کرد</string>
     <string name="status_downloading">در حال دانلود به روز رسانی</string>
-    <string name="status_downloading_sub">%1$d%% · skynight را باز نگه دارید</string>
+    <string name="status_downloading_sub">%1$d%% · bloomina را باز نگه دارید</string>
     <string name="status_installing">در حال آماده شدن برای نصب</string>
     <string name="btn_check">به روز رسانی را بررسی کنید</string>
     <string name="btn_download">دانلود و نصب کنید</string>

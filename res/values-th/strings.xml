@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">ตรวจสอบการอัปเดต skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">ตรวจสอบการอัปเดต bloomina</string>
     <string name="tab_check_update">อัปเดต</string>
     <string name="tab_maintainer">ผู้ดูแล</string>
     <string name="tab_settings">การตั้งค่า</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">รอม</string>
     <string name="f_device">อุปกรณ์</string>
     <string name="status_checking">กำลังตรวจสอบการอัปเดต...</string>
-    <string name="status_checking_sub">การติดต่อเซิร์ฟเวอร์อัพเดต skynight</string>
+    <string name="status_checking_sub">การติดต่อเซิร์ฟเวอร์อัพเดต bloomina</string>
     <string name="status_up_to_date">ซอฟต์แวร์ของคุณเป็นเวอร์ชันล่าสุด</string>
-    <string name="status_up_to_date_sub">skynight %1$s เป็นรุ่นล่าสุดสำหรับอุปกรณ์นี้</string>
+    <string name="status_up_to_date_sub">bloomina %1$s เป็นรุ่นล่าสุดสำหรับอุปกรณ์นี้</string>
     <string name="status_update_available">อัปเดตพร้อมใช้งาน</string>
-    <string name="status_update_available_sub">skynight %1$s พร้อมดาวน์โหลดแล้ว</string>
+    <string name="status_update_available_sub">bloomina %1$s พร้อมดาวน์โหลดแล้ว</string>
     <string name="status_failed">ไม่สามารถ\\'ตรวจสอบการอัปเดตได้</string>
     <string name="status_downloading">กำลังดาวน์โหลดอัปเดต</string>
     <string name="status_downloading_sub">%1$d%% · เปิดสกายไนท์ไว้</string>

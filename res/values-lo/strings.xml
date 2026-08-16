@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">ກວດເບິ່ງການປັບປຸງຂອງ skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">ກວດເບິ່ງການປັບປຸງຂອງ bloomina</string>
     <string name="tab_check_update">ອັບເດດ</string>
     <string name="tab_maintainer">ຜູ້ຮັກສາ</string>
     <string name="tab_settings">ການຕັ້ງຄ່າ</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">ອຸປະກອນ</string>
     <string name="status_checking">ກຳລັງກວດສອບການອັບເດດ...</string>
-    <string name="status_checking_sub">ຕິດຕໍ່ເຊີບເວີການອັບເດດ skynight</string>
+    <string name="status_checking_sub">ຕິດຕໍ່ເຊີບເວີການອັບເດດ bloomina</string>
     <string name="status_up_to_date">ຊອບແວຂອງທ່ານອັບເດດແລ້ວ</string>
-    <string name="status_up_to_date_sub">skynight %1$s ເປັນຕົວສ້າງຫຼ້າສຸດສຳລັບອຸປະກອນນີ້</string>
+    <string name="status_up_to_date_sub">bloomina %1$s ເປັນຕົວສ້າງຫຼ້າສຸດສຳລັບອຸປະກອນນີ້</string>
     <string name="status_update_available">ມີອັບເດດແລ້ວ</string>
-    <string name="status_update_available_sub">skynight %1$s ພ້ອມໃຫ້ດາວໂຫຼດແລ້ວ</string>
+    <string name="status_update_available_sub">bloomina %1$s ພ້ອມໃຫ້ດາວໂຫຼດແລ້ວ</string>
     <string name="status_failed">ບໍ່ສາມາດ \\' ກວດເບິ່ງການອັບເດດໄດ້</string>
     <string name="status_downloading">ກຳລັງດາວໂຫລດອັບເດດ</string>
     <string name="status_downloading_sub">%1$d%% · ເຮັດໃຫ້ກາງຄືນເປີດຢູ່ສະເໝີ</string>

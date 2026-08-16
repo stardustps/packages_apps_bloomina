@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Suriin ang update ng skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Suriin ang update ng bloomina</string>
     <string name="tab_check_update">Update</string>
     <string name="tab_maintainer">Tagapangasiwa</string>
     <string name="tab_settings">Mga setting</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Device</string>
     <string name="status_checking">Tinitingnan ang mga update…</string>
-    <string name="status_checking_sub">Pakikipag-ugnayan sa server ng pag-update ng skynight</string>
+    <string name="status_checking_sub">Pakikipag-ugnayan sa server ng pag-update ng bloomina</string>
     <string name="status_up_to_date">Ang iyong software ay napapanahon</string>
-    <string name="status_up_to_date_sub">Ang skynight %1$s ay ang pinakabagong build para sa device na ito</string>
+    <string name="status_up_to_date_sub">Ang bloomina %1$s ay ang pinakabagong build para sa device na ito</string>
     <string name="status_update_available">Available ang update</string>
-    <string name="status_update_available_sub">Handa nang i-download ang skynight %1$s</string>
+    <string name="status_update_available_sub">Handa nang i-download ang bloomina %1$s</string>
     <string name="status_failed">Hindi\\'t suriin para sa mga update</string>
     <string name="status_downloading">Nagda-download ng update</string>
     <string name="status_downloading_sub">%1$d%% · panatilihing bukas ang kalangitan</string>

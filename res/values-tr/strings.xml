@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight güncellemelerini kontrol et</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina güncellemelerini kontrol et</string>
     <string name="tab_check_update">Güncelleme</string>
     <string name="tab_maintainer">Geliştirici</string>
     <string name="tab_settings">Ayarlar</string>
@@ -23,14 +23,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Cihaz</string>
     <string name="status_checking">Güncellemeler kontrol ediliyor…</string>
-    <string name="status_checking_sub">skynight güncelleme sunucusuna bağlanılıyor</string>
+    <string name="status_checking_sub">bloomina güncelleme sunucusuna bağlanılıyor</string>
     <string name="status_up_to_date">Yazılımınız güncel</string>
-    <string name="status_up_to_date_sub">skynight %1$s, bu cihaz için en son yapıdır</string>
+    <string name="status_up_to_date_sub">bloomina %1$s, bu cihaz için en son yapıdır</string>
     <string name="status_update_available">Güncelleme mevcut</string>
-    <string name="status_update_available_sub">skynight %1$s indirilmeye hazır</string>
+    <string name="status_update_available_sub">bloomina %1$s indirilmeye hazır</string>
     <string name="status_failed">Güncellemeler kontrol edilemedi</string>
     <string name="status_downloading">Güncelleme indiriliyor</string>
-    <string name="status_downloading_sub">%%1$d%% · skynight\'ı açık tutun</string>
+    <string name="status_downloading_sub">%%1$d%% · bloomina\'ı açık tutun</string>
     <string name="status_installing">Kuruluma hazırlanıyor</string>
     <string name="btn_check">Güncellemeleri kontrol et</string>
     <string name="btn_download">İndir ve kur</string>

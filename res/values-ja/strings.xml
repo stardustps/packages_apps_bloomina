@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynightのアップデートを確認する</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloominaのアップデートを確認する</string>
     <string name="tab_check_update">アップデート</string>
     <string name="tab_maintainer">メンテナー</string>
     <string name="tab_settings">設定</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">デバイス</string>
     <string name="status_checking">アップデートをチェック中…</string>
-    <string name="status_checking_sub">skynight アップデートサーバーへの接続</string>
+    <string name="status_checking_sub">bloomina アップデートサーバーへの接続</string>
     <string name="status_up_to_date">ソフトウェアは最新です</string>
-    <string name="status_up_to_date_sub">skynight %1$s はこのデバイスの最新ビルドです</string>
+    <string name="status_up_to_date_sub">bloomina %1$s はこのデバイスの最新ビルドです</string>
     <string name="status_update_available">利用可能なアップデート</string>
-    <string name="status_update_available_sub">skynight %1$s をダウンロードする準備ができました</string>
+    <string name="status_update_available_sub">bloomina %1$s をダウンロードする準備ができました</string>
     <string name="status_failed">\\' アップデートをチェックできませんでした</string>
     <string name="status_downloading">アップデートをダウンロードしています</string>
     <string name="status_downloading_sub">%1$d%% · スカイナイトを開いたままにしてください</string>

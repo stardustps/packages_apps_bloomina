@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Проверете го ажурирањето на skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Проверете го ажурирањето на bloomina</string>
     <string name="tab_check_update">Ажурирање</string>
     <string name="tab_maintainer">Одржувач</string>
     <string name="tab_settings">Поставки</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Уред</string>
     <string name="status_checking">Се проверува за ажурирања…</string>
-    <string name="status_checking_sub">Контактирање со серверот за ажурирање на skynight</string>
+    <string name="status_checking_sub">Контактирање со серверот за ажурирање на bloomina</string>
     <string name="status_up_to_date">Вашиот софтвер е ажуриран</string>
-    <string name="status_up_to_date_sub">skynight %1$s е најновата верзија за овој уред</string>
+    <string name="status_up_to_date_sub">bloomina %1$s е најновата верзија за овој уред</string>
     <string name="status_update_available">Достапно е ажурирање</string>
-    <string name="status_update_available_sub">skynight %1$s е подготвен за преземање</string>
+    <string name="status_update_available_sub">bloomina %1$s е подготвен за преземање</string>
     <string name="status_failed">Не можеше\\' да провери дали има ажурирања</string>
     <string name="status_downloading">Се презема ажурирање</string>
-    <string name="status_downloading_sub">%1$d%% · држете го skynight отворен</string>
+    <string name="status_downloading_sub">%1$d%% · држете го bloomina отворен</string>
     <string name="status_installing">Се подготвува за инсталирање</string>
     <string name="btn_check">Проверете дали има ажурирања</string>
     <string name="btn_download">Преземете и инсталирајте</string>

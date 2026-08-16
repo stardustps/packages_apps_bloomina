@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Kontrollige skynight-i värskendust</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Kontrollige bloomina-i värskendust</string>
     <string name="tab_check_update">Värskenda</string>
     <string name="tab_maintainer">Hooldaja</string>
     <string name="tab_settings">Seaded</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Seade</string>
     <string name="status_checking">Värskenduste otsimine…</string>
-    <string name="status_checking_sub">skynight-i värskendusserveriga ühenduse võtmine</string>
+    <string name="status_checking_sub">bloomina-i värskendusserveriga ühenduse võtmine</string>
     <string name="status_up_to_date">Teie tarkvara on ajakohane</string>
-    <string name="status_up_to_date_sub">skynight %1$s on selle seadme uusim versioon</string>
+    <string name="status_up_to_date_sub">bloomina %1$s on selle seadme uusim versioon</string>
     <string name="status_update_available">Värskendus saadaval</string>
-    <string name="status_update_available_sub">skynight %1$s on allalaadimiseks valmis</string>
+    <string name="status_update_available_sub">bloomina %1$s on allalaadimiseks valmis</string>
     <string name="status_failed">Ei saanud\\'värskendusi kontrollida</string>
     <string name="status_downloading">Värskenduse allalaadimine</string>
     <string name="status_downloading_sub">%1$d%% · hoidke taevaõhtu avatud</string>

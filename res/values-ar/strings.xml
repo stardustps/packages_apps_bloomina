@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">التحقق من تحديث skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">التحقق من تحديث bloomina</string>
     <string name="tab_check_update">التحديث</string>
     <string name="tab_maintainer">المطور</string>
     <string name="tab_settings">الإعدادات</string>
@@ -23,14 +23,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">الجهاز</string>
     <string name="status_checking">جاري التحقق من التحديثات…</string>
-    <string name="status_checking_sub">الاتصال بخادم تحديث skynight</string>
+    <string name="status_checking_sub">الاتصال بخادم تحديث bloomina</string>
     <string name="status_up_to_date">برنامجك محدث</string>
-    <string name="status_up_to_date_sub">skynight %1$s هو أحدث إصدار لهذا الجهاز</string>
+    <string name="status_up_to_date_sub">bloomina %1$s هو أحدث إصدار لهذا الجهاز</string>
     <string name="status_update_available">تحديث متوفر</string>
-    <string name="status_update_available_sub">skynight %1$s جاهز للتنزيل</string>
+    <string name="status_update_available_sub">bloomina %1$s جاهز للتنزيل</string>
     <string name="status_failed">تعذر التحقق من التحديثات</string>
     <string name="status_downloading">جاري تنزيل التحديث</string>
-    <string name="status_downloading_sub">%1$d%% · ابق skynight مفتوحًا</string>
+    <string name="status_downloading_sub">%1$d%% · ابق bloomina مفتوحًا</string>
     <string name="status_installing">الاستعداد للتثبيت</string>
     <string name="btn_check">التحقق من التحديثات</string>
     <string name="btn_download">تنزيل وتثبيت</string>

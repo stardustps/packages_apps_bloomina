@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Athugaðu uppfærslu á skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Athugaðu uppfærslu á bloomina</string>
     <string name="tab_check_update">Uppfærsla</string>
     <string name="tab_maintainer">Umsjónarmaður</string>
     <string name="tab_settings">Stillingar</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Tæki</string>
     <string name="status_checking">Leitar að uppfærslum...</string>
-    <string name="status_checking_sub">Haft samband við skynight uppfærsluþjóninn</string>
+    <string name="status_checking_sub">Haft samband við bloomina uppfærsluþjóninn</string>
     <string name="status_up_to_date">Hugbúnaðurinn þinn er uppfærður</string>
-    <string name="status_up_to_date_sub">skynight %1$s er nýjasta smíði þessa tækis</string>
+    <string name="status_up_to_date_sub">bloomina %1$s er nýjasta smíði þessa tækis</string>
     <string name="status_update_available">Uppfærsla í boði</string>
-    <string name="status_update_available_sub">skynight %1$s er tilbúið til niðurhals</string>
+    <string name="status_update_available_sub">bloomina %1$s er tilbúið til niðurhals</string>
     <string name="status_failed">Gat\\' ekki leitað að uppfærslum</string>
     <string name="status_downloading">Er að sækja uppfærslu</string>
     <string name="status_downloading_sub">%1$d%% · hafðu opið kvöld</string>

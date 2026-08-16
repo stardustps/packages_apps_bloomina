@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">檢查 skynight 更新</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">檢查 bloomina 更新</string>
     <string name="tab_check_update">更新</string>
     <string name="tab_maintainer">維護者</string>
     <string name="tab_settings">設定</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">唯讀記憶體</string>
     <string name="f_device">裝置</string>
     <string name="status_checking">正在檢查更新...</string>
-    <string name="status_checking_sub">聯絡 skynight 更新伺服器</string>
+    <string name="status_checking_sub">聯絡 bloomina 更新伺服器</string>
     <string name="status_up_to_date">您的軟體是最新的</string>
-    <string name="status_up_to_date_sub">skynight %1$s 是該裝置的最新版本</string>
+    <string name="status_up_to_date_sub">bloomina %1$s 是該裝置的最新版本</string>
     <string name="status_update_available">可用更新</string>
-    <string name="status_update_available_sub">skynight %1$s 已準備好下載</string>
+    <string name="status_update_available_sub">bloomina %1$s 已準備好下載</string>
     <string name="status_failed">無法\\'檢查更新</string>
     <string name="status_downloading">正在下載更新</string>
     <string name="status_downloading_sub">%1$d%% · 保持天夜暢通</string>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
     <string name="settings_entry_summary">Проверите ажурирање ЛумиРОМ-а</string>
     <string name="tab_check_update">Ажурирај</string>
     <string name="tab_maintainer">Маинтаинер</string>

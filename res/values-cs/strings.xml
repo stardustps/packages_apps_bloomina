@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Zkontrolujte aktualizaci skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Zkontrolujte aktualizaci bloomina</string>
     <string name="tab_check_update">Aktualizovat</string>
     <string name="tab_maintainer">Udržovatel</string>
     <string name="tab_settings">Nastavení</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Zařízení</string>
     <string name="status_checking">Kontrola aktualizací…</string>
-    <string name="status_checking_sub">Kontaktování aktualizačního serveru skynight</string>
+    <string name="status_checking_sub">Kontaktování aktualizačního serveru bloomina</string>
     <string name="status_up_to_date">Váš software je aktuální</string>
-    <string name="status_up_to_date_sub">skynight %1$s je nejnovější sestavení pro toto zařízení</string>
+    <string name="status_up_to_date_sub">bloomina %1$s je nejnovější sestavení pro toto zařízení</string>
     <string name="status_update_available">Aktualizace k dispozici</string>
-    <string name="status_update_available_sub">skynight %1$s je připraven ke stažení</string>
+    <string name="status_update_available_sub">bloomina %1$s je připraven ke stažení</string>
     <string name="status_failed">Nelze\\'t vyhledat aktualizace</string>
     <string name="status_downloading">Stahování aktualizace</string>
-    <string name="status_downloading_sub">%1$d%% · udržovat skynight otevřenou</string>
+    <string name="status_downloading_sub">%1$d%% · udržovat bloomina otevřenou</string>
     <string name="status_installing">Příprava k instalaci</string>
     <string name="btn_check">Zkontrolujte aktualizace</string>
     <string name="btn_download">Stáhněte a nainstalujte</string>

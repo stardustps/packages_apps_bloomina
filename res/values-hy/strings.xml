@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Ստուգեք skynight-ի թարմացումը</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Ստուգեք bloomina-ի թարմացումը</string>
     <string name="tab_check_update">Թարմացնել</string>
     <string name="tab_maintainer">Պահպանող</string>
     <string name="tab_settings">Կարգավորումներ</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Սարք</string>
     <string name="status_checking">Թարմացումների ստուգում…</string>
-    <string name="status_checking_sub">Կապվելով skynight թարմացման սերվերի հետ</string>
+    <string name="status_checking_sub">Կապվելով bloomina թարմացման սերվերի հետ</string>
     <string name="status_up_to_date">Ձեր ծրագրաշարը թարմացված է</string>
-    <string name="status_up_to_date_sub">skynight %1$s-ն այս սարքի վերջին կառուցումն է</string>
+    <string name="status_up_to_date_sub">bloomina %1$s-ն այս սարքի վերջին կառուցումն է</string>
     <string name="status_update_available">Թարմացումը հասանելի է</string>
-    <string name="status_update_available_sub">skynight %1$s-ը պատրաստ է ներբեռնման</string>
+    <string name="status_update_available_sub">bloomina %1$s-ը պատրաստ է ներբեռնման</string>
     <string name="status_failed">Չհաջողվեց\\' ստուգել թարմացումների համար</string>
     <string name="status_downloading">Թարմացումը ներբեռնվում է</string>
     <string name="status_downloading_sub">%1$d%% · Բաց պահեք երկնքի գիշերը</string>

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Verifique a atualização do skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Verifique a atualização do bloomina</string>
     <string name="tab_check_update">Atualizar</string>
     <string name="tab_maintainer">Mantenedor</string>
     <string name="tab_settings">Configurações</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Dispositivo</string>
     <string name="status_checking">Verificando atualizações…</string>
-    <string name="status_checking_sub">Entrando em contato com o servidor de atualização skynight</string>
+    <string name="status_checking_sub">Entrando em contato com o servidor de atualização bloomina</string>
     <string name="status_up_to_date">Seu software está atualizado</string>
-    <string name="status_up_to_date_sub">skynight %1$s é a versão mais recente para este dispositivo</string>
+    <string name="status_up_to_date_sub">bloomina %1$s é a versão mais recente para este dispositivo</string>
     <string name="status_update_available">Atualização disponível</string>
-    <string name="status_update_available_sub">skynight %1$s está pronto para download</string>
+    <string name="status_update_available_sub">bloomina %1$s está pronto para download</string>
     <string name="status_failed">Não foi possível\\'t verificar atualizações</string>
     <string name="status_downloading">Baixando atualização</string>
     <string name="status_downloading_sub">%1$d%% · mantenha a noite aberta</string>

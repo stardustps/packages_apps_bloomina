@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight ನ ನವೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಿ</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina ನ ನವೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಿ</string>
     <string name="tab_check_update">ನವೀಕರಿಸಿ</string>
     <string name="tab_maintainer">ನಿರ್ವಾಹಕ</string>
     <string name="tab_settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ರಾಮ್</string>
     <string name="f_device">ಸಾಧನ</string>
     <string name="status_checking">ನವೀಕರಣಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...</string>
-    <string name="status_checking_sub">skynight ನವೀಕರಣ ಸರ್ವರ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="status_checking_sub">bloomina ನವೀಕರಣ ಸರ್ವರ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ</string>
     <string name="status_up_to_date">ನಿಮ್ಮ ಸಾಫ್ಟ್‌ವೇರ್ ನವೀಕೃತವಾಗಿದೆ</string>
-    <string name="status_up_to_date_sub">skynight %1$s ಈ ಸಾಧನಕ್ಕಾಗಿ ಇತ್ತೀಚಿನ ನಿರ್ಮಾಣವಾಗಿದೆ</string>
+    <string name="status_up_to_date_sub">bloomina %1$s ಈ ಸಾಧನಕ್ಕಾಗಿ ಇತ್ತೀಚಿನ ನಿರ್ಮಾಣವಾಗಿದೆ</string>
     <string name="status_update_available">ನವೀಕರಣ ಲಭ್ಯವಿದೆ</string>
-    <string name="status_update_available_sub">skynight %1$s ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸಿದ್ಧವಾಗಿದೆ</string>
+    <string name="status_update_available_sub">bloomina %1$s ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸಿದ್ಧವಾಗಿದೆ</string>
     <string name="status_failed">ನವೀಕರಣಗಳಿಗಾಗಿ\\' ಪರಿಶೀಲಿಸಲಾಗಲಿಲ್ಲ</string>
     <string name="status_downloading">ನವೀಕರಣವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
     <string name="status_downloading_sub">%1$d%% · ಸ್ಕೈನೈಟ್ ಅನ್ನು ತೆರೆದಿಡಿ</string>

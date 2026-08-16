@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">בדוק את העדכון של skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">בדוק את העדכון של bloomina</string>
     <string name="tab_check_update">עדכון</string>
     <string name="tab_maintainer">משמר</string>
     <string name="tab_settings">הגדרות</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">מכשיר</string>
     <string name="status_checking">מחפש עדכונים...</string>
-    <string name="status_checking_sub">יצירת קשר עם שרת העדכונים של skynight</string>
+    <string name="status_checking_sub">יצירת קשר עם שרת העדכונים של bloomina</string>
     <string name="status_up_to_date">התוכנה שלך מעודכנת</string>
-    <string name="status_up_to_date_sub">skynight %1$s הוא ה-build העדכני ביותר עבור מכשיר זה</string>
+    <string name="status_up_to_date_sub">bloomina %1$s הוא ה-build העדכני ביותר עבור מכשיר זה</string>
     <string name="status_update_available">עדכון זמין</string>
-    <string name="status_update_available_sub">skynight %1$s מוכן להורדה</string>
+    <string name="status_update_available_sub">bloomina %1$s מוכן להורדה</string>
     <string name="status_failed">לא יכולתי\\' לחפש עדכונים</string>
     <string name="status_downloading">מוריד עדכון</string>
     <string name="status_downloading_sub">%1$d%% · שמור על לילה פתוח</string>

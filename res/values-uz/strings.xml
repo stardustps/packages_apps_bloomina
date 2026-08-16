@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight yangilanishini tekshiring</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina yangilanishini tekshiring</string>
     <string name="tab_check_update">Yangilash</string>
     <string name="tab_maintainer">Ta\'minotchi</string>
     <string name="tab_settings">Sozlamalar</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Qurilma</string>
     <string name="status_checking">Yangilanishlar tekshirilmoqda…</string>
-    <string name="status_checking_sub">skynight yangilash serveri bilan bog\'lanish</string>
+    <string name="status_checking_sub">bloomina yangilash serveri bilan bog\'lanish</string>
     <string name="status_up_to_date">Sizning dasturiy ta\'minotingiz yangilangan</string>
-    <string name="status_up_to_date_sub">skynight %1$s - bu qurilma uchun eng so\'nggi qurilma</string>
+    <string name="status_up_to_date_sub">bloomina %1$s - bu qurilma uchun eng so\'nggi qurilma</string>
     <string name="status_update_available">Yangilanish mavjud</string>
-    <string name="status_update_available_sub">skynight %1$s yuklab olishga tayyor</string>
+    <string name="status_update_available_sub">bloomina %1$s yuklab olishga tayyor</string>
     <string name="status_failed">Yangilanishlarni APOS___ tekshirib bo\'lmadi</string>
     <string name="status_downloading">Yangilanish yuklab olinmoqda</string>
     <string name="status_downloading_sub">%1$d%% · osmon tunini ochiq tuting</string>

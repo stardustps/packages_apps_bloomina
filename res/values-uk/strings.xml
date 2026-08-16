@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Перевірте оновлення skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Перевірте оновлення bloomina</string>
     <string name="tab_check_update">оновлення</string>
     <string name="tab_maintainer">Супроводжувач</string>
     <string name="tab_settings">Налаштування</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">пристрій</string>
     <string name="status_checking">Перевірка оновлень…</string>
-    <string name="status_checking_sub">Зв’язок із сервером оновлення skynight</string>
+    <string name="status_checking_sub">Зв’язок із сервером оновлення bloomina</string>
     <string name="status_up_to_date">Ваше програмне забезпечення оновлено</string>
-    <string name="status_up_to_date_sub">skynight %1$s є останньою збіркою для цього пристрою</string>
+    <string name="status_up_to_date_sub">bloomina %1$s є останньою збіркою для цього пристрою</string>
     <string name="status_update_available">Доступне оновлення</string>
-    <string name="status_update_available_sub">skynight %1$s готовий до завантаження</string>
+    <string name="status_update_available_sub">bloomina %1$s готовий до завантаження</string>
     <string name="status_failed">Не вдалося\\'не перевірити наявність оновлень</string>
     <string name="status_downloading">Завантаження оновлення</string>
-    <string name="status_downloading_sub">%1$d%% · тримати Skynight відкритим</string>
+    <string name="status_downloading_sub">%1$d%% · тримати bloomina відкритим</string>
     <string name="status_installing">Підготовка до встановлення</string>
     <string name="btn_check">Перевірте наявність оновлень</string>
     <string name="btn_download">Завантажте та встановіть</string>

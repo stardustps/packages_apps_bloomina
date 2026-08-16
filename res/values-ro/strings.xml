@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">Verificați actualizarea skynight</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">Verificați actualizarea bloomina</string>
     <string name="tab_check_update">Actualizare</string>
     <string name="tab_maintainer">întreținător</string>
     <string name="tab_settings">Setări</string>
@@ -24,14 +24,14 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">Dispozitiv</string>
     <string name="status_checking">Se verifică actualizările...</string>
-    <string name="status_checking_sub">Contactarea serverului de actualizare skynight</string>
+    <string name="status_checking_sub">Contactarea serverului de actualizare bloomina</string>
     <string name="status_up_to_date">Software-ul dvs. este actualizat</string>
-    <string name="status_up_to_date_sub">skynight %1$s este cea mai recentă versiune pentru acest dispozitiv</string>
+    <string name="status_up_to_date_sub">bloomina %1$s este cea mai recentă versiune pentru acest dispozitiv</string>
     <string name="status_update_available">Actualizare disponibilă</string>
-    <string name="status_update_available_sub">skynight %1$s este gata de descărcat</string>
+    <string name="status_update_available_sub">bloomina %1$s este gata de descărcat</string>
     <string name="status_failed">Nu s-au putut\\'verifica actualizările</string>
     <string name="status_downloading">Se descarcă actualizarea</string>
-    <string name="status_downloading_sub">%1$d%% · păstrați skynight deschis</string>
+    <string name="status_downloading_sub">%1$d%% · păstrați bloomina deschis</string>
     <string name="status_installing">Se pregătește pentru instalare</string>
     <string name="btn_check">Verificați actualizările</string>
     <string name="btn_download">Descărcați și instalați</string>

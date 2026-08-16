@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">skynight</string>
-    <string name="settings_entry_title">skynight</string>
-    <string name="settings_entry_summary">skynight को अद्यावधिक जाँच गर्नुहोस्</string>
+    <string name="app_name">bloomina</string>
+    <string name="settings_entry_title">bloomina</string>
+    <string name="settings_entry_summary">bloomina को अद्यावधिक जाँच गर्नुहोस्</string>
     <string name="tab_check_update">अपडेट गर्नुहोस्</string>
     <string name="tab_maintainer">संरक्षक</string>
     <string name="tab_settings">सेटिङहरू</string>
@@ -24,11 +24,11 @@
     <string name="f_rom">ROM</string>
     <string name="f_device">यन्त्र</string>
     <string name="status_checking">अद्यावधिकहरूको लागि जाँच गर्दै...</string>
-    <string name="status_checking_sub">skynight अद्यावधिक सर्भरलाई सम्पर्क गर्दै</string>
+    <string name="status_checking_sub">bloomina अद्यावधिक सर्भरलाई सम्पर्क गर्दै</string>
     <string name="status_up_to_date">तपाईंको सफ्टवेयर अप टु डेट छ</string>
-    <string name="status_up_to_date_sub">skynight %1$s यस यन्त्रको लागि पछिल्लो निर्माण हो</string>
+    <string name="status_up_to_date_sub">bloomina %1$s यस यन्त्रको लागि पछिल्लो निर्माण हो</string>
     <string name="status_update_available">अपडेट उपलब्ध छ</string>
-    <string name="status_update_available_sub">skynight %1$s डाउनलोड गर्न तयार छ</string>
+    <string name="status_update_available_sub">bloomina %1$s डाउनलोड गर्न तयार छ</string>
     <string name="status_failed">अद्यावधिकहरूको लागि\\' जाँच गर्न सकिएन</string>
     <string name="status_downloading">अपडेट डाउनलोड गर्दै</string>
     <string name="status_downloading_sub">%1$d%% · स्काईनाइट खुला राख्नुहोस्</string>
