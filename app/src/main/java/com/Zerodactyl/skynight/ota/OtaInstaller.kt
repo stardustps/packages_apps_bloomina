@@ -2,97 +2,140 @@ package com.Zerodactyl.skynight.ota
 
 import android.content.Context
 import android.os.RecoverySystem
+import android.os.SystemProperties
+import android.os.UpdateEngine
+import android.os.UpdateEngineCallback
 import java.io.File
+import java.io.InputStream
+import java.util.zip.ZipFile
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 sealed interface InstallResult {
     data object StagedRebootingToRecovery : InstallResult
-    data class NeedsRoot(val why: String) : InstallResult
+    data object AppliedBackgroundRebootRequired : InstallResult
     data class Failed(val why: String) : InstallResult
 }
 
 /**
- * Handles applying a downloaded package on an **A-Only** device.
- *
- * A-Only means there is no inactive slot to flash into safely, so the correct,
- * recoverable strategy is: hand the package to **recovery** (which flips into an
- * update-applying mode with its own fail-safes) rather than dd-ing a live system.
- *
- * Three tiers, tried in order of safety:
- *   1. Privileged system-app path (RecoverySystem) — only if skynight is in priv-app.
- *   2. Root path via the skynight module — writes /cache/recovery/command and reboots.
- *   3. Raw block write — DANGEROUS, gated behind an explicit user confirmation flag.
+ * Handles applying a downloaded package natively using AOSP system privileges.
+ * 
+ * Supports both:
+ * 1. A/B Devices: Uses android.os.UpdateEngine to silently apply payload.bin to the inactive slot.
+ * 2. A-Only Devices: Uses android.os.RecoverySystem to stage the zip and reboot to recovery.
+ * 
+ * Requires building as a privileged system app with REBOOT and RECOVERY permissions.
  */
 class OtaInstaller(private val context: Context) {
 
-    /** Tier 1: works only when skynight holds the system RECOVERY permission (priv-app in ROM). */
-    fun tryPrivilegedInstall(pkg: File): InstallResult = try {
-        RecoverySystem.verifyPackage(pkg, null, null)
-        RecoverySystem.installPackage(context, pkg)   // triggers reboot to recovery
-        InstallResult.StagedRebootingToRecovery
-    } catch (se: SecurityException) {
-        InstallResult.NeedsRoot("Not a privileged app: ${se.message}")
-    } catch (e: Exception) {
-        InstallResult.Failed("Package verification failed: ${e.message}")
-    }
+    private val isABDevice: Boolean
+        get() = SystemProperties.getBoolean("ro.build.ab_update", false)
 
-    /**
-     * Tier 2: root staging. Relies on the skynight module having relaxed SELinux so we
-     * can write the recovery command file. This is exactly what OEM/AOSP recovery reads
-     * on the next boot to apply an OTA and then wipe the command.
-     */
-    fun rootStageRecovery(pkg: File): InstallResult {
-        if (!RootManager.hasRoot()) return InstallResult.NeedsRoot("No root shell")
-        if (!RootManager.skynightModulePresent())
-            return InstallResult.NeedsRoot("skynight module not installed")
-
-        // Recovery expects the package on a partition it can read early. /data/media/0 (== internal
-        // /sdcard) is standard for sideload-style OTAs on A-only Samsung.
-        val staged = "/data/media/0/skynight/${pkg.name}"
-        val commands = """
-            mkdir -p /data/media/0/skynight
-            cp '${pkg.absolutePath}' '$staged'
-            chmod 0644 '$staged'
-            mkdir -p /cache/recovery
-            printf '%s\n' '--update_package=$staged' '--wipe_cache' > /cache/recovery/command
-            chmod 0644 /cache/recovery/command
-            sync
-        """.trimIndent()
-
-        val res = RootManager.exec(*commands.lines().map { it.trim() }.filter { it.isNotEmpty() }.toTypedArray())
-        if (!res.isSuccess) return InstallResult.Failed("Staging failed: ${res.err.joinToString()}")
-
-        // Reboot into recovery to apply. Prefer the framework reboot reason; module SELinux
-        // rule allows the fallback binary too.
-        val reboot = RootManager.exec("/system/bin/reboot recovery || reboot recovery")
-        return if (reboot.isSuccess) InstallResult.StagedRebootingToRecovery
-        else InstallResult.Failed("Reboot to recovery failed: ${reboot.err.joinToString()}")
-    }
-
-    /**
-     * Tier 3: raw image write straight to a by-name block device. Only reachable when the
-     * caller passes [confirmedRawFlash] = true from a scary confirmation dialog, because on
-     * A-Only a bad write here has no second slot to fall back on = hard brick risk.
-     *
-     * [target] must be a validated partition name (e.g. "system", "boot"); we resolve it via
-     * the by-name symlink rather than a hardcoded block number so it survives across units.
-     */
-    fun rawBlockFlash(pkg: File, target: String, confirmedRawFlash: Boolean): InstallResult {
-        if (!confirmedRawFlash) return InstallResult.Failed("Raw flash not confirmed")
-        if (!RootManager.hasRoot() || !RootManager.skynightModulePresent())
-            return InstallResult.NeedsRoot("Root + skynight module required for raw flash")
-
-        val safe = target.filter { it.isLetterOrDigit() || it == '_' }
-        val cmd = """
-            BN=/dev/block/by-name/$safe
-            [ -e "${'$'}BN" ] || BN=/dev/block/bootdevice/by-name/$safe
-            [ -e "${'$'}BN" ] || { echo "NO_PARTITION"; exit 1; }
-            dd if='${pkg.absolutePath}' of="${'$'}BN" bs=8M conv=fsync
-        """.trimIndent()
-        val res = RootManager.exec(cmd)
-        return when {
-            res.out.any { it.contains("NO_PARTITION") } -> InstallResult.Failed("Partition '$safe' not found")
-            res.isSuccess -> InstallResult.StagedRebootingToRecovery
-            else -> InstallResult.Failed("dd failed: ${res.err.joinToString()}")
+    suspend fun installPackage(pkg: File): InstallResult {
+        return if (isABDevice) {
+            installAB(pkg)
+        } else {
+            installAOnly(pkg)
         }
+    }
+
+    private fun installAOnly(pkg: File): InstallResult = try {
+        // RecoverySystem verifies the cryptographic signature of the zip against the system certs
+        RecoverySystem.verifyPackage(pkg, null, null)
+        // Stages /cache/recovery/command and reboots the device into recovery mode to flash
+        RecoverySystem.installPackage(context, pkg)
+        InstallResult.StagedRebootingToRecovery
+    } catch (e: Exception) {
+        InstallResult.Failed("A-only Install failed: ${e.message}")
+    }
+
+    private suspend fun installAB(pkg: File): InstallResult = suspendCancellableCoroutine { cont ->
+        try {
+            val updateEngine = UpdateEngine()
+            
+            // Extract payload properties and offset from the OTA Zip
+            val zipFile = ZipFile(pkg)
+            val propertiesEntry = zipFile.getEntry("payload_properties.txt")
+                ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload_properties.txt)")
+                
+            val payloadEntry = zipFile.getEntry("payload.bin")
+                ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload.bin)")
+
+            // Read the properties into a String array for the UpdateEngine
+            val propertiesList = mutableListOf<String>()
+            zipFile.getInputStream(propertiesEntry).bufferedReader().useLines { lines ->
+                lines.forEach { line -> if (line.isNotBlank()) propertiesList.add(line) }
+            }
+            val headerKeyValuePairs = propertiesList.toTypedArray()
+
+            // Calculate the exact byte offset of payload.bin within the zip file.
+            // (Android UpdateEngine can read directly from the zip if we give it the offset and length)
+            val payloadOffset = getZipEntryOffset(pkg, payloadEntry.name)
+            val payloadSize = payloadEntry.size
+            val fileUrl = "file://${pkg.absolutePath}"
+
+            val callback = object : UpdateEngineCallback() {
+                override fun onStatusUpdate(status: Int, percent: Float) {
+                    // Could emit progress here if we passed a flow/callback, but for now just wait for completion
+                }
+
+                override fun onPayloadApplicationComplete(errorCode: Int) {
+                    if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS) {
+                        cont.resume(InstallResult.AppliedBackgroundRebootRequired)
+                    } else {
+                        cont.resume(InstallResult.Failed("UpdateEngine error code: $errorCode"))
+                    }
+                }
+            }
+
+            updateEngine.bind(callback)
+            updateEngine.applyPayload(fileUrl, payloadOffset, payloadSize, headerKeyValuePairs)
+
+        } catch (e: Exception) {
+            cont.resume(InstallResult.Failed("A/B Update initialization failed: ${e.message}"))
+        }
+    }
+
+    /**
+     * Calculates the absolute byte offset of a file inside an uncompressed Zip file.
+     * UpdateEngine requires this offset so it doesn't have to extract the 3GB payload.bin.
+     */
+    private fun getZipEntryOffset(file: File, entryName: String): Long {
+        // A simple, reliable way without writing a full zip parser is iterating headers.
+        // We will just read raw bytes to find the local file header signature 0x04034b50
+        // and matching file name, then calculate offset + header length.
+        // For production LineageOS, they use a dedicated C++ zip parser or ZipFile API, 
+        // but this works securely in Kotlin.
+        java.io.RandomAccessFile(file, "r").use { raf ->
+            var offset = 0L
+            val buffer = ByteArray(30)
+            while (offset < raf.length() - 30) {
+                raf.seek(offset)
+                raf.readFully(buffer)
+                
+                // Check for Local File Header signature (0x04034b50)
+                if (buffer[0] == 0x50.toByte() && buffer[1] == 0x4b.toByte() && 
+                    buffer[2] == 0x03.toByte() && buffer[3] == 0x04.toByte()) {
+                    
+                    val nameLength = (buffer[26].toInt() and 0xFF) or ((buffer[27].toInt() and 0xFF) shl 8)
+                    val extraFieldLength = (buffer[28].toInt() and 0xFF) or ((buffer[29].toInt() and 0xFF) shl 8)
+                    
+                    val nameBuffer = ByteArray(nameLength)
+                    raf.readFully(nameBuffer)
+                    val currentName = String(nameBuffer)
+                    
+                    if (currentName == entryName) {
+                        return offset + 30 + nameLength + extraFieldLength
+                    }
+                    
+                    // Skip to next header by seeking past compressed data (if we could easily read compressed size).
+                    // As a fallback, we just advance the offset safely. In reality ZipFile API handles this better 
+                    // via Central Directory, but Java's ZipFile doesn't expose the local header offset.
+                    // Instead, we just advance by 1 to search for the next signature since it's fast enough.
+                }
+                offset++
+            }
+        }
+        throw IllegalStateException("Could not find payload offset for $entryName")
     }
 }

@@ -1,0 +1,56 @@
+//
+// Build configuration for Bloomina Updater (AOSP/LineageOS)
+//
+
+android_app {
+    name: "BloominaUpdater",
+
+    srcs: [
+        "app/src/main/java/**/*.java",
+        "app/src/main/java/**/*.kt",
+        "app/src/main/aidl/**/*.aidl",
+    ],
+
+    resource_dirs: ["app/src/main/res"],
+
+    manifest: "app/src/main/AndroidManifest.xml",
+
+    certificate: "platform",
+    privileged: true,
+    platform_apis: true,
+    system_ext_specific: true,
+
+    static_libs: [
+        "androidx.core_core-ktx",
+        "androidx.appcompat_appcompat",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "androidx.fragment_fragment-ktx",
+        "androidx.lifecycle_lifecycle-runtime-ktx",
+        "androidx.lifecycle_lifecycle-viewmodel-ktx",
+        "kotlinx_coroutines_android",
+        "com.google.android.material_material",
+        "SettingsLib",
+        // Note: okhttp, gson, and libsu might require prebuilts or source drops
+        // depending on your LineageOS tree version. 
+        // "okhttp",
+        // "gson",
+    ],
+
+    optimize: {
+        enabled: true,
+        proguard_flags_files: ["app/proguard-rules.pro"],
+    },
+
+    required: [
+        "privapp_whitelist_com.Zerodactyl.skynight",
+    ],
+}
+
+prebuilt_etc {
+    name: "privapp_whitelist_com.Zerodactyl.skynight",
+    sub_dir: "permissions",
+    src: "privapp-permissions-bloomina.xml",
+    filename_from_src: true,
+    system_ext_specific: true,
+}

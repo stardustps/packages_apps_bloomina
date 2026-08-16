@@ -73,12 +73,12 @@ class CheckUpdateFragment : Fragment() {
                 )
             }
             val v = _b ?: return@launch
-            v.rowInstalledVersion.summary = info.installed
-            v.rowDeviceModel.summary = info.model
-            v.rowAndroid.summary = info.android
-            v.rowSecurity.summary = info.patch
-            v.rowFingerprint.summary = info.fingerprint
-            v.rowKernel.summary = info.kernel
+            v.rowInstalledVersion.text = info.installed
+            v.rowDeviceModel.text = info.model
+            v.rowAndroid.text = info.android
+            v.rowSecurity.text = info.patch
+            v.rowFingerprint.text = info.fingerprint
+            v.rowKernel.text = info.kernel
         }
     }
 
@@ -99,16 +99,16 @@ class CheckUpdateFragment : Fragment() {
                 .onSuccess { m ->
                     manifest = m
                     val r = m.release
-                    v.rowRemoteVersion.summary = r.version
-                    v.rowBuildDate.summary = r.buildDate
-                    v.rowDownloadSize.summary = formatBytes(r.download.sizeBytes)
-                    v.rowRemoteAndroid.summary = r.androidVersion
-                    v.rowRemoteSecurity.summary = r.securityPatch
-                    v.rowRemoteFingerprint.summary = r.fingerprint
+                    v.rowRemoteVersion.text = r.version
+                    v.rowBuildDate.text = r.buildDate
+                    v.rowDownloadSize.text = formatBytes(r.download.sizeBytes)
+                    v.rowRemoteAndroid.text = r.androidVersion
+                    v.rowRemoteSecurity.text = r.securityPatch
+                    v.rowRemoteFingerprint.text = r.fingerprint
                     v.changelog.text = r.changelog.joinToString("\n") { "•  $it" }
 
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
-                    v.rowInstalledVersion.summary = verdict.installed
+                    v.rowInstalledVersion.text = verdict.installed
 
                     if (verdict.updateAvailable) {
                         setHero(
@@ -217,9 +217,21 @@ class CheckUpdateFragment : Fragment() {
             // on a shell round-trip. On a multi-GB ROM that is an ANR if it runs on Main.
             val result = withContext(Dispatchers.IO) {
                 val installer = OtaInstaller(requireContext().applicationContext)
-                when (val privileged = installer.tryPrivilegedInstall(pkg)) {
-                    is InstallResult.NeedsRoot -> installer.rootStageRecovery(pkg)
-                    else -> privileged
+                installer.installPackage(pkg)
+            }
+            val v = _b ?: return@launch
+            when (result) {
+                is InstallResult.StagedRebootingToRecovery ->
+                    setHero(R.drawable.ic_status_available, "Staged", "Rebooting to recovery to apply…")
+                is InstallResult.AppliedBackgroundRebootRequired -> {
+                    setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
+                    v.btnDownload.text = "Reboot"
+                    v.btnDownload.isEnabled = true
+                    v.btnDownload.setOnClickListener { RootManager.exec("reboot") } // Optional reboot shortcut
+                }
+                is InstallResult.Failed -> {
+                    setHero(R.drawable.ic_status_error, "Install failed", result.why)
+                    v.btnDownload.isEnabled = true
                 }
             }
             val v = _b ?: return@launch
@@ -258,7 +270,6 @@ class CheckUpdateFragment : Fragment() {
         val progressView = layoutInflater.inflate(R.layout.dialog_flash_progress, null)
         // AlertDialog inflates against its own themed context, so the activity's font factory
         // does not reach this view tree - apply the family by hand.
-        OneUiFont.applyRecursively(progressView)
         val bar = progressView.findViewById<android.widget.ProgressBar>(R.id.flashBar)
         val label = progressView.findViewById<android.widget.TextView>(R.id.flashLabel)
         val dialog = AlertDialog.Builder(requireContext())

@@ -45,8 +45,8 @@ class MaintainerFragment : Fragment() {
             }
             _b?.let { v ->
                 v.name.text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
-                v.device.summary = local.second
-                v.rom.summary = local.third.ifBlank { "-" }
+                v.device.text = local.second
+                v.rom.text = local.third.ifBlank { "-" }
             }
 
             // This used to share the Check tab's bug: fetchManifest blocked on Main, threw
@@ -60,8 +60,8 @@ class MaintainerFragment : Fragment() {
                     // value is only a fallback for devices that don't set the prop.
                     v.name.text = local.first.ifBlank { mt.name }
                     v.handle.text = mt.handle
-                    v.device.summary = "${mt.device} (${mt.codename})"
-                    v.rom.summary = m.romName
+                    v.device.text = "${mt.device} (${mt.codename})"
+                    v.rom.text = m.romName
                     v.btnTelegram.setOnClickListener { open(mt.telegram) }
                     v.btnDonate.setOnClickListener { open(mt.donateUrl) }
                 }

@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    OneUI 8 shell with an 8.5-style FLOATING bottom navigation bar:
-      ToolbarLayout          - collapsing large title + subtitle
-      FragmentContainerView  - main_content (adaptive margins handled by the lib)
-      BottomFloatingLayout   - footer; floats the tab bar with margins + pill background
--->
-<dev.oneuiproject.oneui.layout.ToolbarLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbarLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:expandable="true"
-    app:expanded="true"
-    app:title="@string/app_name"
-    app:subtitle="@string/settings_entry_summary">
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name"
+            app:subtitle="@string/settings_entry_summary"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_location="main_content" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <dev.oneuiproject.oneui.widget.BottomFloatingLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        app:maxChildWidth="480dp"
-        app:layout_location="footer">
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_bottom_tabs" />
 
-        <dev.oneuiproject.oneui.widget.BottomTabLayout
-            android:id="@+id/bottomTab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_oui_float_nav"
-            android:elevation="0dp"
-            android:outlineProvider="none"
-            android:minHeight="48dp"
-            app:menu="@menu/menu_bottom_tabs" />
-    </dev.oneuiproject.oneui.widget.BottomFloatingLayout>
-
-</dev.oneuiproject.oneui.layout.ToolbarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
