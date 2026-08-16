@@ -26,6 +26,13 @@ import java.io.File
 import java.util.Locale
 import android.os.Environment
 import android.widget.Toast
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.SystemProperties
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import androidx.activity.result.contract.ActivityResultContracts
+import android.net.Uri
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
@@ -36,6 +43,9 @@ class CheckUpdateFragment : Fragment() {
     private val repo = UpdateRepository()
     private val rootIpc by lazy { RootIpc(requireContext().applicationContext) }
     private var manifest: UpdateManifest? = null
+    private val localUpdateLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) handleLocalUpdate(uri)
+    }
 
     /** Falls back to the default when the stored value is missing OR blank - a user who
      *  cleared the Settings field used to leave an empty string here, which OkHttp rejects. */
@@ -55,6 +65,8 @@ class CheckUpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         renderLocalDeviceRows()
+        renderDiagnostics()
+        b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
         b.btnCheck.setOnClickListener { check() }
         b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
         b.btnExport.setOnClickListener { manifest?.let { exportUpdate(it.release.download) } }
@@ -66,6 +78,8 @@ class CheckUpdateFragment : Fragment() {
      * They ran on the main thread before, which stuttered the first frame of the tab.
      */
     private fun renderLocalDeviceRows() {
+        renderDiagnostics()
+        b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
         viewLifecycleOwner.lifecycleScope.launch {
             val info = withContext(Dispatchers.IO) {
                 LocalInfo(
@@ -110,7 +124,8 @@ class CheckUpdateFragment : Fragment() {
                     v.rowRemoteAndroid.text = r.androidVersion
                     v.rowRemoteSecurity.text = r.securityPatch
                     v.rowRemoteFingerprint.text = r.fingerprint
-                    v.changelog.text = r.changelog.joinToString("\n") { "•  $it" }
+                    v.changelog.text = Html.fromHtml(r.changelog.joinToString("<br>") { "v.changelog.text = r.changelog.joinToString("\n") { "•  $it" }#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+                    v.changelog.movementMethod = LinkMovementMethod.getInstance()
 
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
                     v.rowInstalledVersion.text = verdict.installed
@@ -181,6 +196,22 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun downloadAndInstall(dl: Download) {
+        val cm = requireContext().getSystemService(android.content.Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetwork
+        val caps = cm.getNetworkCapabilities(activeNetwork)
+        if (caps != null && !caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Cellular Data Warning")
+                .setMessage("You are on a metered network. This update may consume a large amount of data. Continue?")
+                .setPositiveButton("Download") { _, _ -> startDownload(dl) }
+                .setNegativeButton("Cancel", null)
+                .show()
+            return
+        }
+        startDownload(dl)
+    }
+
+    private fun startDownload(dl: Download) {
         val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
         b.btnDownload.isEnabled = false
         viewLifecycleOwner.lifecycleScope.launch {
@@ -379,6 +410,46 @@ class CheckUpdateFragment : Fragment() {
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun renderDiagnostics() {
+        val isAB = SystemProperties.getBoolean("ro.build.ab_update", false)
+        val slot = SystemProperties.get("ro.boot.slot_suffix", "")
+        b.rowLayoutType.text = if (isAB) "A/B (Seamless)" else "A-Only (Recovery)"
+        if (isAB && slot.isNotEmpty()) {
+            b.rowActiveSlot.text = slot.replace("_", "").uppercase()
+            b.lblActiveSlot.visibility = View.VISIBLE
+            b.rowActiveSlot.visibility = View.VISIBLE
+        } else {
+            b.lblActiveSlot.visibility = View.GONE
+            b.rowActiveSlot.visibility = View.GONE
+        }
+    }
+
+    private fun handleLocalUpdate(uri: Uri) {
+        setHero(R.drawable.ic_cloud_large, "Staging Local Update", "Copying zip file...")
+        b.downloadBar.isIndeterminate = true
+        b.downloadBar.visibility = View.VISIBLE
+        
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val dest = File(requireContext().cacheDir, "local_update.zip")
+                requireContext().contentResolver.openInputStream(uri)?.use { input ->
+                    java.io.FileOutputStream(dest).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    b.downloadBar.visibility = View.GONE
+                    install(dest)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    setHero(R.drawable.ic_status_error, "Local Update Failed", e.message ?: "Could not read file")
+                    b.downloadBar.visibility = View.GONE
                 }
             }
         }
