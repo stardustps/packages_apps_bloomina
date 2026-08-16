@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.REBOOT" tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECOVERY" tools:ignore="ProtectedPermissions" />
 
-    <!-- oneui-icons / oneui-design raise minSdk; override so our minSdk 26 app builds. -->
-    <uses-sdk tools:overrideLibrary="dev.oneuiproject.oneui" />
 
     <application
         android:name=".BloominaApp"
@@ -24,10 +22,7 @@
         android:theme="@style/Theme.bloomina"
         tools:ignore="UnusedAttribute">
 
-        <!-- OneUI dynamic (wallpaper) color theming. Provided by oneui-design. -->
         <meta-data android:name="SamsungBasicInteraction" android:value="SEP10" />
-        <meta-data android:name="theming-meta" android:value="theming_meta_bloomina" />
-        <meta-data android:name="theming-meta-xml" android:value="@xml/theming_meta_bloomina" />
 
         <activity
             android:name=".ui.MainActivity"

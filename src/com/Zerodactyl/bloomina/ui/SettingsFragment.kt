@@ -7,8 +7,8 @@ import androidx.preference.PreferenceFragmentCompat
 import com.Zerodactyl.bloomina.R
 
 /**
- * bloomina internal settings, using the SESL preference fork so the rows match OneUI.
- *   • "Custom JSON URL"      → SeslEditTextPreference-style dialog (androidx.preference sesl)
+ * bloomina internal settings, using standard AndroidX preferences.
+ *   • "Custom JSON URL"      → standard EditTextPreference dialog
  *   • "Reset Configurations" → clears every SharedPreference flag
  */
 class SettingsFragment : PreferenceFragmentCompat() {
