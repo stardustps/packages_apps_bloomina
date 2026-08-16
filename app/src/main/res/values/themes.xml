@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.skynight" parent="Theme.Material3.DynamicColors.DayNight">
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/google_sans_flex</item>
+        <item name="fontFamily">@font/google_sans_flex</item>
         <!-- The user asked for Google Sans Flex. On a Pixel or LineageOS build, 
-             the default device sans-serif is already Google Sans/Roboto. -->
+             the default device @font/google_sans_flex is already Google Sans/Roboto. -->
         <item name="android:windowBackground">?attr/colorSurface</item>
         <item name="colorPrimary">@color/ic_launcher_background</item>
     </style>
