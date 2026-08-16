@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">Το bloomina %1$s είναι η πιο πρόσφατη έκδοση για αυτήν τη συσκευή</string>
     <string name="status_update_available">Διαθέσιμη ενημέρωση</string>
     <string name="status_update_available_sub">Το bloomina %1$s είναι έτοιμο για λήψη</string>
-    <string name="status_failed">Δεν ήταν δυνατός\\' έλεγχος για ενημερώσεις</string>
+    <string name="status_failed">Δεν ήταν δυνατός\' έλεγχος για ενημερώσεις</string>
     <string name="status_downloading">Λήψη ενημέρωσης</string>
     <string name="status_downloading_sub">%1$d%% · κρατήστε το bloomina ανοιχτό</string>
     <string name="status_installing">Προετοιμασία εγκατάστασης</string>

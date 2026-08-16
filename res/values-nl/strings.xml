@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s is de nieuwste build voor dit apparaat</string>
     <string name="status_update_available">Update beschikbaar</string>
     <string name="status_update_available_sub">bloomina %1$s is klaar om te downloaden</string>
-    <string name="status_failed">Kon\\'niet controleren op updates</string>
+    <string name="status_failed">Kon\'niet controleren op updates</string>
     <string name="status_downloading">Update downloaden</string>
     <string name="status_downloading_sub">%1$d%% · houd bloomina open</string>
     <string name="status_installing">Voorbereiden om te installeren</string>

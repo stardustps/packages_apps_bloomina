@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s je najnovšia zostava pre toto zariadenie</string>
     <string name="status_update_available">K dispozícii je aktualizácia</string>
     <string name="status_update_available_sub">bloomina %1$s je pripravený na stiahnutie</string>
-    <string name="status_failed">Nepodarilo sa\\'skontrolovať aktualizácie</string>
+    <string name="status_failed">Nepodarilo sa\'skontrolovať aktualizácie</string>
     <string name="status_downloading">Sťahuje sa aktualizácia</string>
     <string name="status_downloading_sub">%1$d%% · majte otvorený večer</string>
     <string name="status_installing">Príprava na inštaláciu</string>

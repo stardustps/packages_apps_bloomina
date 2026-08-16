@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s اس ڈیوائس کے لیے تازہ ترین تعمیر ہے۔</string>
     <string name="status_update_available">اپ ڈیٹ دستیاب ہے۔</string>
     <string name="status_update_available_sub">bloomina %1$s ڈاؤن لوڈ کے لیے تیار ہے۔</string>
-    <string name="status_failed">اپ ڈیٹس کے لیے\\'کی جانچ نہیں کی جا سکی</string>
+    <string name="status_failed">اپ ڈیٹس کے لیے\'کی جانچ نہیں کی جا سکی</string>
     <string name="status_downloading">اپ ڈیٹ ڈاؤن لوڈ ہو رہا ہے۔</string>
     <string name="status_downloading_sub">%1$d%% · اسکائی نائٹ کو کھلا رکھیں</string>
     <string name="status_installing">انسٹال کرنے کی تیاری</string>

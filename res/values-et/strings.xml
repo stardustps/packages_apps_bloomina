@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s on selle seadme uusim versioon</string>
     <string name="status_update_available">Värskendus saadaval</string>
     <string name="status_update_available_sub">bloomina %1$s on allalaadimiseks valmis</string>
-    <string name="status_failed">Ei saanud\\'värskendusi kontrollida</string>
+    <string name="status_failed">Ei saanud\'värskendusi kontrollida</string>
     <string name="status_downloading">Värskenduse allalaadimine</string>
     <string name="status_downloading_sub">%1$d%% · hoidke taevaõhtu avatud</string>
     <string name="status_installing">Paigaldamise ettevalmistamine</string>

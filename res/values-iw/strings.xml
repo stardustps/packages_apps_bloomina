@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s הוא ה-build העדכני ביותר עבור מכשיר זה</string>
     <string name="status_update_available">עדכון זמין</string>
     <string name="status_update_available_sub">bloomina %1$s מוכן להורדה</string>
-    <string name="status_failed">לא יכולתי\\' לחפש עדכונים</string>
+    <string name="status_failed">לא יכולתי\' לחפש עדכונים</string>
     <string name="status_downloading">מוריד עדכון</string>
     <string name="status_downloading_sub">%1$d%% · שמור על לילה פתוח</string>
     <string name="status_installing">מתכונן להתקנה</string>

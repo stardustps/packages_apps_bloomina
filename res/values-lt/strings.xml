@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s yra naujausia šio įrenginio versija</string>
     <string name="status_update_available">Galimas atnaujinimas</string>
     <string name="status_update_available_sub">bloomina %1$s paruoštas atsisiųsti</string>
-    <string name="status_failed">Nepavyko\\' patikrinti, ar nėra naujinimų</string>
+    <string name="status_failed">Nepavyko\' patikrinti, ar nėra naujinimų</string>
     <string name="status_downloading">Atsisiunčiamas naujinimas</string>
     <string name="status_downloading_sub">%1$d%% · Laikykite dangų atvirą</string>
     <string name="status_installing">Ruošiamasi montuoti</string>

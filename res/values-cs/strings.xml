@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s je nejnovější sestavení pro toto zařízení</string>
     <string name="status_update_available">Aktualizace k dispozici</string>
     <string name="status_update_available_sub">bloomina %1$s je připraven ke stažení</string>
-    <string name="status_failed">Nelze\\'t vyhledat aktualizace</string>
+    <string name="status_failed">Nelze\'t vyhledat aktualizace</string>
     <string name="status_downloading">Stahování aktualizace</string>
     <string name="status_downloading_sub">%1$d%% · udržovat bloomina otevřenou</string>
     <string name="status_installing">Příprava k instalaci</string>

@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s on tämän laitteen uusin versio</string>
     <string name="status_update_available">Päivitys saatavilla</string>
     <string name="status_update_available_sub">bloomina %1$s on valmis ladattavaksi</string>
-    <string name="status_failed">Ei voitu\\' tarkistaa päivityksiä</string>
+    <string name="status_failed">Ei voitu\' tarkistaa päivityksiä</string>
     <string name="status_downloading">Ladataan päivitystä</string>
     <string name="status_downloading_sub">%1$d%% · pidä taivasyö auki</string>
     <string name="status_installing">Valmistellaan asennusta</string>

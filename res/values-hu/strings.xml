@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">A bloomina %1$s a legújabb verzió ehhez az eszközhöz</string>
     <string name="status_update_available">Frissítés elérhető</string>
     <string name="status_update_available_sub">A bloomina %1$s készen áll a letöltésre</string>
-    <string name="status_failed">Nem lehetett\\'frissítéseket keresni</string>
+    <string name="status_failed">Nem lehetett\'frissítéseket keresni</string>
     <string name="status_downloading">Frissítés letöltése</string>
     <string name="status_downloading_sub">%1$d%% · tartsa nyitva az égboltot</string>
     <string name="status_installing">Felkészülés a telepítésre</string>

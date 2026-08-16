@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s 是該裝置的最新版本</string>
     <string name="status_update_available">可用更新</string>
     <string name="status_update_available_sub">bloomina %1$s 已準備好下載</string>
-    <string name="status_failed">無法\\'檢查更新</string>
+    <string name="status_failed">無法\'檢查更新</string>
     <string name="status_downloading">正在下載更新</string>
     <string name="status_downloading_sub">%1$d%% · 保持天夜暢通</string>
     <string name="status_installing">準備安裝</string>

@@ -25,13 +25,13 @@
     <string name="status_checking">Ricerca aggiornamenti…</string>
     <string name="status_checking_sub">Connessione al server di aggiornamento bloomina</string>
     <string name="status_up_to_date">Il tuo software è aggiornato</string>
-    <string name="status_up_to_date_sub">bloomina %1$s è l\'ultima build per questo dispositivo</string>
+    <string name="status_up_to_date_sub">bloomina %1$s è l'ultima build per questo dispositivo</string>
     <string name="status_update_available">Aggiornamento disponibile</string>
     <string name="status_update_available_sub">bloomina %1$s è pronto per il download</string>
     <string name="status_failed">Impossibile controllare gli aggiornamenti</string>
     <string name="status_downloading">Download aggiornamento</string>
     <string name="status_downloading_sub">%1$d%% · tieni aperto bloomina</string>
-    <string name="status_installing">Preparazione all\'installazione</string>
+    <string name="status_installing">Preparazione all'installazione</string>
     <string name="btn_check">Controlla aggiornamenti</string>
     <string name="btn_download">Scarica e installa</string>
     <string name="btn_telegram">Telegram</string>

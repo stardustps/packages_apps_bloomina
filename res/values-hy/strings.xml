@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s-ն այս սարքի վերջին կառուցումն է</string>
     <string name="status_update_available">Թարմացումը հասանելի է</string>
     <string name="status_update_available_sub">bloomina %1$s-ը պատրաստ է ներբեռնման</string>
-    <string name="status_failed">Չհաջողվեց\\' ստուգել թարմացումների համար</string>
+    <string name="status_failed">Չհաջողվեց\' ստուգել թարմացումների համար</string>
     <string name="status_downloading">Թարմացումը ներբեռնվում է</string>
     <string name="status_downloading_sub">%1$d%% · Բաց պահեք երկնքի գիշերը</string>
     <string name="status_installing">Պատրաստվում է տեղադրմանը</string>

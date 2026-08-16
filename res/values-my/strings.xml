@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s သည် ဤစက်ပစ္စည်းအတွက် နောက်ဆုံးပေါ်တည်ဆောက်မှုဖြစ်သည်။</string>
     <string name="status_update_available">အပ်ဒိတ်ရနိုင်သည်။</string>
     <string name="status_update_available_sub">bloomina %1$s ကို ဒေါင်းလုဒ်လုပ်ရန် အသင့်ဖြစ်ပါပြီ။</string>
-    <string name="status_failed">အပ်ဒိတ်များအတွက် \\' မစစ်ဆေးနိုင်ပါ။</string>
+    <string name="status_failed">အပ်ဒိတ်များအတွက် \' မစစ်ဆေးနိုင်ပါ။</string>
     <string name="status_downloading">အပ်ဒိတ်ကို ဒေါင်းလုဒ်လုပ်နေသည်။</string>
     <string name="status_downloading_sub">%1$d%% · ကောင်းကင်ယံကို ဖွင့်ထားပါ။</string>
     <string name="status_installing">တပ်ဆင်ရန် ပြင်ဆင်နေပါသည်။</string>

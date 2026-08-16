@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s এই ডিভাইসের জন্য সর্বশেষ বিল্ড</string>
     <string name="status_update_available">আপডেট উপলব্ধ</string>
     <string name="status_update_available_sub">bloomina %1$s ডাউনলোডের জন্য প্রস্তুত</string>
-    <string name="status_failed">আপডেটের জন্য\\' চেক করা যায়নি</string>
+    <string name="status_failed">আপডেটের জন্য\' চেক করা যায়নি</string>
     <string name="status_downloading">আপডেট ডাউনলোড হচ্ছে</string>
     <string name="status_downloading_sub">%1$d%% · আকাশের রাত খোলা রাখুন</string>
     <string name="status_installing">ইনস্টল করার প্রস্তুতি নিচ্ছেন</string>

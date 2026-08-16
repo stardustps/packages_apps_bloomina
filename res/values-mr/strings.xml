@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s हे या उपकरणासाठी नवीनतम बिल्ड आहे</string>
     <string name="status_update_available">अपडेट उपलब्ध</string>
     <string name="status_update_available_sub">bloomina %1$s डाउनलोड करण्यासाठी तयार आहे</string>
-    <string name="status_failed">अद्यतनांसाठी\\' तपासू शकलो नाही</string>
+    <string name="status_failed">अद्यतनांसाठी\' तपासू शकलो नाही</string>
     <string name="status_downloading">अपडेट डाउनलोड करत आहे</string>
     <string name="status_downloading_sub">%1$d%% · आकाशरात्र उघडी ठेवा</string>
     <string name="status_installing">स्थापित करण्याची तयारी करत आहे</string>

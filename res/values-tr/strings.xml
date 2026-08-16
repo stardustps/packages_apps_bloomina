@@ -30,7 +30,7 @@
     <string name="status_update_available_sub">bloomina %1$s indirilmeye hazır</string>
     <string name="status_failed">Güncellemeler kontrol edilemedi</string>
     <string name="status_downloading">Güncelleme indiriliyor</string>
-    <string name="status_downloading_sub">%%1$d%% · bloomina\'ı açık tutun</string>
+    <string name="status_downloading_sub">%%1$d%% · bloomina'ı açık tutun</string>
     <string name="status_installing">Kuruluma hazırlanıyor</string>
     <string name="btn_check">Güncellemeleri kontrol et</string>
     <string name="btn_download">İndir ve kur</string>

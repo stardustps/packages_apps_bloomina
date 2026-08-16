@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s ialah binaan terbaharu untuk peranti ini</string>
     <string name="status_update_available">Kemas kini tersedia</string>
     <string name="status_update_available_sub">bloomina %1$s sedia untuk dimuat turun</string>
-    <string name="status_failed">Tidak dapat\\'t menyemak kemas kini</string>
+    <string name="status_failed">Tidak dapat\'t menyemak kemas kini</string>
     <string name="status_downloading">Memuat turun kemas kini</string>
     <string name="status_downloading_sub">%1$d%% · pastikan langit malam terbuka</string>
     <string name="status_installing">Bersedia untuk memasang</string>

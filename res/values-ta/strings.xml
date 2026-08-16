@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s என்பது இந்தச் சாதனத்திற்கான சமீபத்திய உருவாக்கமாகும்</string>
     <string name="status_update_available">புதுப்பிப்பு கிடைக்கிறது</string>
     <string name="status_update_available_sub">bloomina %1$s பதிவிறக்க தயாராக உள்ளது</string>
-    <string name="status_failed">\\' புதுப்பிப்புகளைச் சரிபார்க்க முடியவில்லை</string>
+    <string name="status_failed">\' புதுப்பிப்புகளைச் சரிபார்க்க முடியவில்லை</string>
     <string name="status_downloading">புதுப்பிப்பைப் பதிவிறக்குகிறது</string>
     <string name="status_downloading_sub">%1$d%% · ஸ்கைநைட்டை திறந்து வைக்கவும்</string>
     <string name="status_installing">நிறுவ தயாராகிறது</string>

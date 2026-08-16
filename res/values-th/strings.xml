@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s เป็นรุ่นล่าสุดสำหรับอุปกรณ์นี้</string>
     <string name="status_update_available">อัปเดตพร้อมใช้งาน</string>
     <string name="status_update_available_sub">bloomina %1$s พร้อมดาวน์โหลดแล้ว</string>
-    <string name="status_failed">ไม่สามารถ\\'ตรวจสอบการอัปเดตได้</string>
+    <string name="status_failed">ไม่สามารถ\'ตรวจสอบการอัปเดตได้</string>
     <string name="status_downloading">กำลังดาวน์โหลดอัปเดต</string>
     <string name="status_downloading_sub">%1$d%% · เปิดสกายไนท์ไว้</string>
     <string name="status_installing">กำลังเตรียมการติดตั้ง</string>

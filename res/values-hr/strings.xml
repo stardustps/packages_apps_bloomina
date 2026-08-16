@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s najnovija je verzija za ovaj uređaj</string>
     <string name="status_update_available">Ažuriranje dostupno</string>
     <string name="status_update_available_sub">bloomina %1$s je spreman za preuzimanje</string>
-    <string name="status_failed">Nije moguće\\'provjeriti ažuriranja</string>
+    <string name="status_failed">Nije moguće\'provjeriti ažuriranja</string>
     <string name="status_downloading">Preuzimanje ažuriranja</string>
     <string name="status_downloading_sub">%1$d%% · Držite bloomina otvorenim</string>
     <string name="status_installing">Priprema za instalaciju</string>

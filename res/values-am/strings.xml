@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s_ የዚህ መሣሪያ የቅርብ ጊዜ ግንባታ ነው።</string>
     <string name="status_update_available">ማዘመን አለ።</string>
     <string name="status_update_available_sub">bloomina %1$s ለመውረድ ዝግጁ ነው።</string>
-    <string name="status_failed">\\'ዝማኔዎችን መፈለግ አልተቻለም</string>
+    <string name="status_failed">\'ዝማኔዎችን መፈለግ አልተቻለም</string>
     <string name="status_downloading">ዝመናን በማውረድ ላይ</string>
     <string name="status_downloading_sub">%1$d%%_ · የሰማይ ሌሊት ክፍት ይሁኑ</string>
     <string name="status_installing">ለመጫን በመዘጋጀት ላይ</string>

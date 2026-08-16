@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s е най-новата версия за това устройство</string>
     <string name="status_update_available">Налична актуализация</string>
     <string name="status_update_available_sub">bloomina %1$s е готов за изтегляне</string>
-    <string name="status_failed">Не можа\\'да провери за актуализации</string>
+    <string name="status_failed">Не можа\'да провери за актуализации</string>
     <string name="status_downloading">Изтегля се актуализация</string>
     <string name="status_downloading_sub">%1$d%% · дръж bloomina отворен</string>
     <string name="status_installing">Подготовка за инсталиране</string>

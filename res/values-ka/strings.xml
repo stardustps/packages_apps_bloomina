@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s არის ამ მოწყობილობის უახლესი ვერსია</string>
     <string name="status_update_available">განახლება ხელმისაწვდომია</string>
     <string name="status_update_available_sub">bloomina %1$s მზად არის ჩამოსატვირთად</string>
-    <string name="status_failed">განახლებების შემოწმება\\' ვერ მოხერხდა</string>
+    <string name="status_failed">განახლებების შემოწმება\' ვერ მოხერხდა</string>
     <string name="status_downloading">მიმდინარეობს განახლების ჩამოტვირთვა</string>
     <string name="status_downloading_sub">%1$d%% · შეინახეთ bloomina ღია</string>
     <string name="status_installing">ინსტალაციისთვის მზადება</string>

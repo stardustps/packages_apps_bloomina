@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s ndio muundo mpya zaidi wa kifaa hiki</string>
     <string name="status_update_available">Sasisho linapatikana</string>
     <string name="status_update_available_sub">bloomina %1$s iko tayari kupakuliwa</string>
-    <string name="status_failed">Haikuweza\\' kuangalia masasisho</string>
+    <string name="status_failed">Haikuweza\' kuangalia masasisho</string>
     <string name="status_downloading">Inapakua sasisho</string>
     <string name="status_downloading_sub">%1$d%% · weka anga wazi</string>
     <string name="status_installing">Inajiandaa kusakinisha</string>

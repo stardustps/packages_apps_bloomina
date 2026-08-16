@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s គឺជាការបង្កើតចុងក្រោយបំផុតសម្រាប់ឧបករណ៍នេះ។</string>
     <string name="status_update_available">ការអាប់ដេតមាន</string>
     <string name="status_update_available_sub">bloomina %1$s រួចរាល់ក្នុងការទាញយក</string>
-    <string name="status_failed">មិនអាច \\' ពិនិត្យរកមើលបច្ចុប្បន្នភាព</string>
+    <string name="status_failed">មិនអាច \' ពិនិត្យរកមើលបច្ចុប្បន្នភាព</string>
     <string name="status_downloading">កំពុងទាញយកបច្ចុប្បន្នភាព</string>
     <string name="status_downloading_sub">%1$d%% · រក្សាមេឃពេលយប់បើក</string>
     <string name="status_installing">កំពុងរៀបចំដំឡើង</string>

@@ -18,7 +18,7 @@
     <string name="f_patch">Correctif de sécurité</string>
     <string name="f_fingerprint">Empreinte de compilation</string>
     <string name="f_installed">Version installée</string>
-    <string name="f_model">Modèle de l\'appareil</string>
+    <string name="f_model">Modèle de l'appareil</string>
     <string name="f_kernel">Version du noyau</string>
     <string name="f_rom">ROM</string>
     <string name="f_device">Appareil</string>
@@ -31,11 +31,11 @@
     <string name="status_failed">Impossible de vérifier les mises à jour</string>
     <string name="status_downloading">Téléchargement de la mise à jour</string>
     <string name="status_downloading_sub">%1$d%% · gardez bloomina ouvert</string>
-    <string name="status_installing">Préparation de l\'installation</string>
+    <string name="status_installing">Préparation de l'installation</string>
     <string name="btn_check">Vérifier les mises à jour</string>
     <string name="btn_download">Télécharger et installer</string>
     <string name="btn_telegram">Telegram</string>
     <string name="btn_donate">Faire un don</string>
     <string name="unknown_maintainer">Mainteneur inconnu</string>
-    <string name="flash_warning">Ne débranchez pas et n\'éteignez pas l\'appareil.</string>
+    <string name="flash_warning">Ne débranchez pas et n'éteignez pas l'appareil.</string>
 </resources>

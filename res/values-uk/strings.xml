@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s є останньою збіркою для цього пристрою</string>
     <string name="status_update_available">Доступне оновлення</string>
     <string name="status_update_available_sub">bloomina %1$s готовий до завантаження</string>
-    <string name="status_failed">Не вдалося\\'не перевірити наявність оновлень</string>
+    <string name="status_failed">Не вдалося\'не перевірити наявність оновлень</string>
     <string name="status_downloading">Завантаження оновлення</string>
     <string name="status_downloading_sub">%1$d%% · тримати bloomina відкритим</string>
     <string name="status_installing">Підготовка до встановлення</string>

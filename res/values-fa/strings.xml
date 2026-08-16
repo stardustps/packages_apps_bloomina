@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s آخرین ساخت این دستگاه است</string>
     <string name="status_update_available">به روز رسانی موجود است</string>
     <string name="status_update_available_sub">bloomina %1$s آماده دانلود است</string>
-    <string name="status_failed">نمی‌توان\\'به‌روزرسانی‌ها را بررسی کرد</string>
+    <string name="status_failed">نمی‌توان\'به‌روزرسانی‌ها را بررسی کرد</string>
     <string name="status_downloading">در حال دانلود به روز رسانی</string>
     <string name="status_downloading_sub">%1$d%% · bloomina را باز نگه دارید</string>
     <string name="status_installing">در حال آماده شدن برای نصب</string>

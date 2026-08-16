@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s ir šīs ierīces jaunākā versija</string>
     <string name="status_update_available">Pieejams atjauninājums</string>
     <string name="status_update_available_sub">bloomina %1$s ir gatavs lejupielādei</string>
-    <string name="status_failed">Nevarēja\\'pārbaudīt atjauninājumus</string>
+    <string name="status_failed">Nevarēja\'pārbaudīt atjauninājumus</string>
     <string name="status_downloading">Notiek atjauninājuma lejupielāde</string>
     <string name="status_downloading_sub">%1$d%% · turiet debesu nakti atvērtu</string>
     <string name="status_installing">Sagatavošanās instalēšanai</string>

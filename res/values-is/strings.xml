@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s er nýjasta smíði þessa tækis</string>
     <string name="status_update_available">Uppfærsla í boði</string>
     <string name="status_update_available_sub">bloomina %1$s er tilbúið til niðurhals</string>
-    <string name="status_failed">Gat\\' ekki leitað að uppfærslum</string>
+    <string name="status_failed">Gat\' ekki leitað að uppfærslum</string>
     <string name="status_downloading">Er að sækja uppfærslu</string>
     <string name="status_downloading_sub">%1$d%% · hafðu opið kvöld</string>
     <string name="status_installing">Undirbúa uppsetningu</string>

@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">Ang bloomina %1$s ay ang pinakabagong build para sa device na ito</string>
     <string name="status_update_available">Available ang update</string>
     <string name="status_update_available_sub">Handa nang i-download ang bloomina %1$s</string>
-    <string name="status_failed">Hindi\\'t suriin para sa mga update</string>
+    <string name="status_failed">Hindi\'t suriin para sa mga update</string>
     <string name="status_downloading">Nagda-download ng update</string>
     <string name="status_downloading_sub">%1$d%% · panatilihing bukas ang kalangitan</string>
     <string name="status_installing">Naghahanda sa pag-install</string>

@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s यस यन्त्रको लागि पछिल्लो निर्माण हो</string>
     <string name="status_update_available">अपडेट उपलब्ध छ</string>
     <string name="status_update_available_sub">bloomina %1$s डाउनलोड गर्न तयार छ</string>
-    <string name="status_failed">अद्यावधिकहरूको लागि\\' जाँच गर्न सकिएन</string>
+    <string name="status_failed">अद्यावधिकहरूको लागि\' जाँच गर्न सकिएन</string>
     <string name="status_downloading">अपडेट डाउनलोड गर्दै</string>
     <string name="status_downloading_sub">%1$d%% · स्काईनाइट खुला राख्नुहोस्</string>
     <string name="status_installing">स्थापना गर्ने तयारी गर्दै</string>

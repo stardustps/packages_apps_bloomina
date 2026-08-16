@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s är den senaste versionen för den här enheten</string>
     <string name="status_update_available">Uppdatering tillgänglig</string>
     <string name="status_update_available_sub">bloomina %1$s är redo att laddas ner</string>
-    <string name="status_failed">Kunde inte\\' söka efter uppdateringar</string>
+    <string name="status_failed">Kunde inte\' söka efter uppdateringar</string>
     <string name="status_downloading">Laddar ner uppdatering</string>
     <string name="status_downloading_sub">%1$d%% · håll ljuskvällen öppen</string>
     <string name="status_installing">Förbereder för installation</string>

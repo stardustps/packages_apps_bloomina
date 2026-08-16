@@ -29,7 +29,7 @@
     <string name="status_up_to_date_sub">bloomina %1$s はこのデバイスの最新ビルドです</string>
     <string name="status_update_available">利用可能なアップデート</string>
     <string name="status_update_available_sub">bloomina %1$s をダウンロードする準備ができました</string>
-    <string name="status_failed">\\' アップデートをチェックできませんでした</string>
+    <string name="status_failed">\' アップデートをチェックできませんでした</string>
     <string name="status_downloading">アップデートをダウンロードしています</string>
     <string name="status_downloading_sub">%1$d%% · スカイナイトを開いたままにしてください</string>
     <string name="status_installing">インストールの準備中</string>
