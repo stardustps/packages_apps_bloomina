@@ -38,7 +38,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <!-- ===== Samsung Settings dashboard injection =====
@@ -46,6 +45,11 @@
                  a sideloaded user app is silently ignored by the indexer. -->
             <intent-filter>
                 <action android:name="com.samsung.settings.action.EXTRA_SETTINGS" />
+            </intent-filter>
+            <!-- Standard AOSP Settings Injection -->
+            <intent-filter>
+                <action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.samsung.settings.category"
                 android:value="com.samsung.settings.category.software_update" />

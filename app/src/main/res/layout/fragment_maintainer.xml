@@ -98,6 +98,30 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground" />
+                <TextView
+                    android:id="@+id/btnGithub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="GitHub"
+                    android:visibility="gone"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground" />
+                <View android:id="@+id/divGithub" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" android:visibility="gone" />
+                <TextView
+                    android:id="@+id/btnXda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="XDA Thread"
+                    android:visibility="gone"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground" />
+                <View android:id="@+id/divXda" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" android:visibility="gone" />
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
                 <TextView
                     android:id="@+id/btnDonate"

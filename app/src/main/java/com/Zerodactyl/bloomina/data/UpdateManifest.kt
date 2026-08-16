@@ -30,7 +30,9 @@ data class Maintainer(
     val codename: String,
     val avatarUrl: String?,
     val telegram: String?,
-    val donateUrl: String?
+    val donateUrl: String?,
+    val githubUrl: String?,
+    val xdaUrl: String?
 ) {
     companion object {
         fun fromJson(json: JSONObject): Maintainer {
@@ -41,7 +43,9 @@ data class Maintainer(
                 codename = json.optString("codename"),
                 avatarUrl = json.optString("avatar_url", null),
                 telegram = json.optString("telegram", null),
-                donateUrl = json.optString("donate_url", null)
+                donateUrl = json.optString("donate_url", null),
+                githubUrl = json.optString("github_url", null),
+                xdaUrl = json.optString("xda_url", null)
             )
         }
     }

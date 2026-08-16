@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/** Tab 2 — SESL card layout with maintainer profile, device and contact/credits actions. */
 class MaintainerFragment : Fragment() {
 
     private var _b: FragmentMaintainerBinding? = null
@@ -38,8 +37,6 @@ class MaintainerFragment : Fragment() {
             ?: CheckUpdateFragment.DEFAULT_JSON_URL
 
         viewLifecycleOwner.lifecycleScope.launch {
-            // Populate from device props first so the tab is never blank while the network
-            // call is in flight. Props fork `getprop`, so they go to IO like everything else.
             val local = withContext(Dispatchers.IO) {
                 Triple(DeviceInfo.maintainer, DeviceInfo.model, DeviceInfo.romVersion)
             }
@@ -49,21 +46,15 @@ class MaintainerFragment : Fragment() {
                 v.rom.text = local.third.ifBlank { "-" }
             }
 
-            // This used to share the Check tab's bug: fetchManifest blocked on Main, threw
-            // NetworkOnMainThreadException, and the result was dropped silently because there
-            // was no onFailure branch - the tab just sat on the prop values forever.
             repo.fetchManifest(url)
                 .onSuccess { m ->
                     val v = _b ?: return@onSuccess
                     val mt = m.maintainer
-                    // ro.skynight.maintainer (baked into the ROM) is authoritative; the JSON
-                    // value is only a fallback for devices that don't set the prop.
                     v.name.text = local.first.ifBlank { mt.name }
                     v.handle.text = mt.handle
                     v.device.text = "${mt.device} (${mt.codename})"
                     v.rom.text = m.romName
-                    v.btnTelegram.setOnClickListener { open(mt.telegram) }
-                    v.btnDonate.setOnClickListener { open(mt.donateUrl) }
+                    bindLinks(mt)
                 }
                 .onFailure { t ->
                     _b?.handle?.text = UpdateRepository.describe(t)
@@ -71,9 +62,26 @@ class MaintainerFragment : Fragment() {
         }
     }
 
-    private fun open(url: String?) {
-        if (url.isNullOrBlank()) return
-        runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+    private fun bindLinks(m: com.Zerodactyl.bloomina.data.Maintainer) {
+        val v = _b ?: return
+        
+        fun setupLink(btn: View, div: View?, url: String?) {
+            if (!url.isNullOrBlank()) {
+                btn.visibility = View.VISIBLE
+                div?.visibility = View.VISIBLE
+                btn.setOnClickListener {
+                    runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+                }
+            } else {
+                btn.visibility = View.GONE
+                div?.visibility = View.GONE
+            }
+        }
+        
+        setupLink(v.btnTelegram, null, m.telegram)
+        setupLink(v.btnDonate, null, m.donateUrl)
+        setupLink(v.btnGithub, v.divGithub, m.githubUrl)
+        setupLink(v.btnXda, v.divXda, m.xdaUrl)
     }
 
     override fun onDestroyView() {
