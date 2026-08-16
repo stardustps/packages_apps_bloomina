@@ -1,3 +1,5 @@
+#!/bin/bash
+cat << 'INNER_EOF' > app/src/main/java/com/Zerodactyl/bloomina/data/UpdateRepository.kt
 package com.Zerodactyl.bloomina.data
 
 import org.json.JSONException
@@ -144,3 +146,4 @@ class UpdateRepository {
         fun describe(t: Throwable): String = t.message ?: "Network error"
     }
 }
+INNER_EOF

@@ -62,11 +62,27 @@
             android:orientation="vertical"
             android:paddingHorizontal="24dp">
             <Button
+                android:id="@+id/btnExport"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Export to Downloads" />
+
+            <Button
                 android:id="@+id/btnDownload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:text="@string/btn_download" />
+            <Button
+                android:id="@+id/btnExport"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Export to Downloads" />
+
             <Button
                 android:id="@+id/btnCheck"
                 style="@style/Widget.Material3.Button.OutlinedButton"

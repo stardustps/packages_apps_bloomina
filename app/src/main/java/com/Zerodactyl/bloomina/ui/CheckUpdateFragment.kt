@@ -24,6 +24,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.Locale
+import android.os.Environment
+import android.widget.Toast
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 class CheckUpdateFragment : Fragment() {
 
@@ -53,6 +57,7 @@ class CheckUpdateFragment : Fragment() {
         renderLocalDeviceRows()
         b.btnCheck.setOnClickListener { check() }
         b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
+        b.btnExport.setOnClickListener { manifest?.let { exportUpdate(it.release.download) } }
         check()
     }
 
@@ -119,6 +124,7 @@ class CheckUpdateFragment : Fragment() {
                         showReleaseSections(true)
                         v.btnDownload.visibility = View.VISIBLE
                         v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                     } else {
                         setHero(
                             R.drawable.ic_status_uptodate,
@@ -130,6 +136,7 @@ class CheckUpdateFragment : Fragment() {
                         showReleaseSections(false)
                         v.btnDownload.visibility = View.GONE
                         v.btnDownload.isEnabled = false
+                        v.btnExport.visibility = View.GONE
                     }
                 }
                 .onFailure { t ->
@@ -142,6 +149,7 @@ class CheckUpdateFragment : Fragment() {
                     showReleaseSections(false)
                     v.btnDownload.visibility = View.GONE
                     v.btnDownload.isEnabled = false
+                        v.btnExport.visibility = View.GONE
                 }
 
             v.downloadBar.visibility = View.GONE
@@ -194,6 +202,7 @@ class CheckUpdateFragment : Fragment() {
                         v.downloadBar.visibility = View.GONE
                         setHero(R.drawable.ic_status_error, getString(R.string.status_failed), st.reason)
                         v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                     }
                     is DownloadState.Done -> {
                         v.downloadBar.visibility = View.GONE
@@ -227,11 +236,13 @@ class CheckUpdateFragment : Fragment() {
                     setHero(R.drawable.ic_status_available, "Installed", "Update applied successfully. Please reboot.")
                     v.btnDownload.text = "Reboot"
                     v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                     v.btnDownload.setOnClickListener { RootManager.exec("reboot") } // Optional reboot shortcut
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
                     v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                 }
             }
             val v = _b ?: return@launch
@@ -241,10 +252,12 @@ class CheckUpdateFragment : Fragment() {
                 is InstallResult.NeedsRoot -> {
                     setHero(R.drawable.ic_status_error, "Root required", "Root + skynight module required (${result.why})")
                     v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, "Install failed", result.why)
                     v.btnDownload.isEnabled = true
+                        v.btnExport.visibility = View.VISIBLE
                 }
             }
         }
@@ -341,3 +354,32 @@ class CheckUpdateFragment : Fragment() {
         val DEFAULT_JSON_URL: String get() = "$OTA_BASE/${DeviceInfo.deviceCodename}.json"
     }
 }
+
+    private fun exportUpdate(dl: Download) {
+        val src = File(requireContext().getExternalFilesDir(null), dl.filename)
+        if (!src.exists()) {
+            Toast.makeText(context, "Update file not found", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                val dest = File(downloadsDir, dl.filename)
+                
+                FileInputStream(src).use { input ->
+                    FileOutputStream(dest).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+                
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Exported to Downloads folder", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
