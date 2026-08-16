@@ -56,7 +56,5 @@
                 android:resource="@drawable/ic_bloomina_settings" />
             <meta-data android:name="com.samsung.settings.order" android:value="150" />
         </activity>
-
-        <service android:name=".ota.BloominaRootService" android:exported="false" />
     </application>
 </manifest>

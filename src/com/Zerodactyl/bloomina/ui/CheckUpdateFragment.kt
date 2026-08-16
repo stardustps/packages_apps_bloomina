@@ -22,10 +22,8 @@ import com.Zerodactyl.bloomina.data.UpdateRepository
 import com.Zerodactyl.bloomina.ota.DeviceInfo
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.Zerodactyl.bloomina.ota.IFlashCallback
 import com.Zerodactyl.bloomina.ota.InstallResult
 import com.Zerodactyl.bloomina.ota.OtaInstaller
-import com.Zerodactyl.bloomina.ota.RootIpc
 import com.Zerodactyl.bloomina.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +55,6 @@ class CheckUpdateFragment : Fragment() {
     private var _b: V? = null
     private val b get() = _b!!
     private val repo = UpdateRepository()
-    private val rootIpc by lazy { RootIpc(requireContext().applicationContext) }
     private var manifest: UpdateManifest? = null
     private val localUpdateLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) handleLocalUpdate(uri)
@@ -296,15 +293,13 @@ class CheckUpdateFragment : Fragment() {
 
     private fun install(pkg: File) {
         val dl = manifest?.release?.download ?: return
-        if (dl.installType.equals("raw_image", ignoreCase = true)) {
-            confirmRawFlash(pkg, dl)   // dangerous path -> explicit confirmation first
-            return
-        }
+        // A system/privileged updater applies packages via framework APIs (UpdateEngine for
+        // A/B, RecoverySystem for A-Only) — no root/dd required.
         setHero(R.drawable.ic_status_available, getString(R.string.status_installing), "")
 
         viewLifecycleOwner.lifecycleScope.launch {
-            // RecoverySystem.verifyPackage re-hashes the whole zip and RootManager.exec blocks
-            // on a shell round-trip. On a multi-GB ROM that is an ANR if it runs on Main.
+            // RecoverySystem.verifyPackage re-hashes the whole zip; run off the Main thread
+            // so a multi-GB ROM doesn't ANR the UI.
             val result = withContext(Dispatchers.IO) {
                 val installer = OtaInstaller(requireContext().applicationContext)
                 installer.installPackage(pkg)
@@ -328,75 +323,7 @@ class CheckUpdateFragment : Fragment() {
         }
     }
 
-    /** Scary, unambiguous confirmation before any direct-to-partition write on an A-only device. */
-    private fun confirmRawFlash(pkg: File, dl: Download) {
-        val target = "system"   // for bloomina full images; a boot/recovery image would pass its own name
-        AlertDialog.Builder(requireContext())
-            .setTitle("Flash directly to /$target?")
-            .setMessage(
-                "This writes the image straight to the $target partition.\n\n" +
-                "The Galaxy A32 is A-only — there is no backup slot. If the write is " +
-                "interrupted or the image is wrong, the device may not boot and will need " +
-                "recovery/Odin to restore.\n\nOnly continue if you understand the risk."
-            )
-            .setPositiveButton("I understand, flash") { _, _ -> startRawFlash(pkg, target, dl.sizeBytes) }
-            .setNegativeButton("Cancel", null)
-            .show()
-    }
-
-    private fun startRawFlash(pkg: File, partition: String, totalBytes: Long) {
-        val progressView = layoutInflater.inflate(R.layout.dialog_flash_progress, null)
-        // AlertDialog inflates against its own themed context, so the activity's font factory
-        // does not reach this view tree - apply the family by hand.
-        val bar = progressView.findViewById<android.widget.ProgressBar>(R.id.flashBar)
-        val label = progressView.findViewById<android.widget.TextView>(R.id.flashLabel)
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle("Flashing $partition")
-            .setView(progressView)
-            .setCancelable(false)
-            .create()
-        dialog.show()
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (!rootIpc.connect()) {
-                dialog.dismiss()
-                setHero(
-                    R.drawable.ic_status_error,
-                    getString(R.string.status_failed),
-                    "Root worker unavailable — is the bloomina module installed?"
-                )
-                return@launch
-            }
-            val cb = object : IFlashCallback.Stub() {
-                override fun onProgress(percent: Int, line: String?) {
-                    this@CheckUpdateFragment.view?.post {
-                        if (percent >= 0) { bar.isIndeterminate = false; bar.progress = percent }
-                        label.text = if (percent >= 0) "$percent%  ·  ${line.orEmpty()}" else line.orEmpty()
-                    }
-                }
-                override fun onDone(success: Boolean, message: String?) {
-                    // post-to-view instead of requireActivity().runOnUiThread: the callback can
-                    // land after the fragment is detached, and requireActivity() throws then.
-                    this@CheckUpdateFragment.view?.post {
-                        dialog.dismiss()
-                        if (success) {
-                            setHero(R.drawable.ic_status_available, "Flashed", "Rebooting to recovery to finalize…")
-                            rootIpc.worker?.rebootRecovery()
-                        } else {
-                            setHero(R.drawable.ic_status_error, "Flash failed", message.orEmpty())
-                        }
-                    }
-                }
-            }
-            // Runs entirely in the root worker process; progress streams back via cb.
-            withContext(Dispatchers.IO) {
-                rootIpc.worker?.rawFlash(pkg.absolutePath, partition, totalBytes, cb)
-            }
-        }
-    }
-
     override fun onDestroyView() {
-        rootIpc.disconnect()
         super.onDestroyView()
         _b = null
     }
