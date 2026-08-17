@@ -31,5 +31,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<EditTextPreference>("json_url")?.text = OtaConfig.defaultJsonUrl
             true
         }
+
+        findPreference<androidx.preference.SwitchPreferenceCompat>("auto_check")
+            ?.setOnPreferenceChangeListener { _, _ ->
+                if (UpdateScheduler.isEnabled(requireContext())) {
+                    UpdateScheduler.schedule(requireContext())
+                } else {
+                    UpdateScheduler.cancel(requireContext())
+                }
+                true
+            }
+
+        findPreference<androidx.preference.ListPreference>("check_interval")
+            ?.setOnPreferenceChangeListener { _, _ ->
+                // Re-arm the alarm with the new cadence (only matters while enabled).
+                UpdateScheduler.cancel(requireContext())
+                UpdateScheduler.schedule(requireContext())
+                true
+            }
     }
 }

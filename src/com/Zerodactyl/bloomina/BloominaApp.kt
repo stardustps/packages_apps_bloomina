@@ -5,6 +5,10 @@ import android.app.Application
 class BloominaApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        UpdateScheduler.schedule(this)
+        if (UpdateScheduler.isEnabled(this)) {
+            UpdateScheduler.schedule(this)
+        } else {
+            UpdateScheduler.cancel(this)
+        }
     }
 }

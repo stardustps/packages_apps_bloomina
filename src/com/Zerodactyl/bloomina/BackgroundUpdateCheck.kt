@@ -26,11 +26,22 @@ private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 /**
  * Schedules a periodic background update check and posts a notification when a newer
  * build is available. Uses only framework APIs (AlarmManager) — no extra library deps.
+ * Respects the user's "auto_check" + "check_interval" preferences.
  */
 object UpdateScheduler {
-    private const val INTERVAL_MS = 6L * 60 * 60 * 1000 // 6 hours
+
+    fun isEnabled(context: Context): Boolean =
+        context.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
+            .getBoolean("auto_check", true)
+
+    private fun intervalMs(context: Context): Long {
+        val hours = context.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
+            .getString("check_interval", "6")?.toIntOrNull() ?: 6
+        return hours.coerceAtLeast(1).toLong() * 60 * 60 * 1000
+    }
 
     fun schedule(context: Context) {
+        if (!isEnabled(context)) return
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         val pi = PendingIntent.getBroadcast(
@@ -40,9 +51,19 @@ object UpdateScheduler {
         am.setInexactRepeating(
             AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + 60_000,
-            INTERVAL_MS,
+            intervalMs(context),
             pi
         )
+    }
+
+    fun cancel(context: Context) {
+        val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pi = PendingIntent.getBroadcast(
+            context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        am.cancel(pi)
     }
 }
 

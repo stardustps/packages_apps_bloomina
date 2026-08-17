@@ -18,6 +18,21 @@
     <string name="label_full">Full</string>
     <string name="label_incremental">Incremental</string>
 
+    <string name="pref_auto_check">Automatic update checks</string>
+    <string name="pref_auto_check_summary">Periodically check for new builds in the background</string>
+    <string name="pref_check_interval">Check frequency</string>
+    <string name="pref_check_interval_summary">How often bloomina looks for updates</string>
+    <string-array name="check_interval_entries">
+        <item>Every 6 hours</item>
+        <item>Every 12 hours</item>
+        <item>Every 24 hours</item>
+    </string-array>
+    <string-array name="check_interval_values">
+        <item>6</item>
+        <item>12</item>
+        <item>24</item>
+    </string-array>
+
     <string name="f_version">Version</string>
     <string name="f_build_date">Build date</string>
     <string name="f_size">Download size</string>

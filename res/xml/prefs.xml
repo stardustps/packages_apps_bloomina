@@ -9,6 +9,22 @@
             android:summary="Remote manifest bloomina checks for new bloomina builds" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Automatic checks">
+        <SwitchPreferenceCompat
+            android:key="auto_check"
+            android:title="@string/pref_auto_check"
+            android:summary="@string/pref_auto_check_summary"
+            android:defaultValue="true" />
+        <ListPreference
+            android:key="check_interval"
+            android:title="@string/pref_check_interval"
+            android:summary="@string/pref_check_interval_summary"
+            android:entries="@array/check_interval_entries"
+            android:entryValues="@array/check_interval_values"
+            android:defaultValue="6"
+            android:dependency="auto_check" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Maintenance">
         <Preference
             android:key="reset"
