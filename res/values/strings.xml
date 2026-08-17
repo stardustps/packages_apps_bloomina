@@ -163,4 +163,6 @@
     <string name="tile_check">Check update</string>
     <string name="tile_update_available">Update available</string>
     <string name="tile_up_to_date">Your software is up to date</string>
+    <string name="widget_update_available">Update available</string>
+    <string name="widget_up_to_date">Up to date</string>
 </resources>

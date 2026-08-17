@@ -17,6 +17,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.Zerodactyl.bloomina.DownloadService
 import com.Zerodactyl.bloomina.R
+import com.Zerodactyl.bloomina.UpdateWidgetProvider
 import com.Zerodactyl.bloomina.data.Download
 import com.Zerodactyl.bloomina.data.DownloadBus
 import com.Zerodactyl.bloomina.data.OtaConfig
@@ -152,6 +153,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         loadCached()
         refreshLastChecked()
         applyPendingInstallState()
+        UpdateWidgetProvider.notifyUpdate(app)
     }
 
     fun check() {
@@ -261,6 +263,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
             refreshLastChecked()
             _state.update { it.copy(checking = false, downloadVisible = false) }
         }
+        UpdateWidgetProvider.notifyUpdate(app)
     }
 
     /** The download the user will actually fetch: incremental delta when selected, else full. */
