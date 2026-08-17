@@ -61,11 +61,18 @@
     <string name="status_update_available_sub">bloomina %1$s is ready to download</string>
     <string name="status_failed">Couldn\'t check for updates</string>
     <string name="status_downloading">Downloading update</string>
-    <string name="status_downloading_sub">%1$d%% · keep bloomina open</string>
+    <string name="status_downloading_sub">%1$d%% · downloads in the background</string>
+    <string name="status_preparing">Getting ready…</string>
+    <string name="status_download_done">Download complete</string>
+    <string name="status_download_done_sub">Ready to install</string>
+    <string name="status_paused">Download paused</string>
+    <string name="status_paused_sub">Tap resume to continue</string>
     <string name="status_installing">Preparing to install</string>
 
     <string name="btn_check">Check for updates</string>
     <string name="btn_download">Download and install</string>
+    <string name="btn_resume">Resume download</string>
+    <string name="btn_pause">Pause</string>
     <string name="btn_telegram">Telegram</string>
     <string name="btn_donate">Donate</string>
 
@@ -75,50 +82,27 @@
     <string name="btn_reboot">Reboot now</string>
     <string name="integrity_verified">Verified · SHA-256 %1$s</string>
     <string name="last_checked">Last checked: %1$s</string>
+    <string name="unknown_error">Something went wrong</string>
+
     <string name="diag_title">System Diagnostics</string>
     <string name="diag_layout">Partition Layout</string>
     <string name="diag_slot">Active Slot</string>
+
+    <!-- Notifications -->
     <string name="notif_channel_name">System Updates</string>
+    <string name="notif_channel_desc">Progress and completion of system update downloads</string>
+    <string name="notif_title">System update</string>
+    <string name="notif_preparing">Preparing download…</string>
     <string name="notif_update_title">Update available</string>
     <string name="notif_update_text">A new bloomina build is ready to download</string>
-    <string name="error_no_network">No internet connection</string>
-    <string name="sheet_complete_title">System Update Complete</string>
-    <string name="sheet_complete_desc">The update has been successfully installed in the background. A restart is required to finish applying the changes.</string>
-    <string name="sheet_reboot_btn">Reboot Now</string>
-    <string name="warn_metered_title">Cellular Data Warning</string>
-    <string name="warn_metered_msg">You are on a metered network. This update may consume a large amount of data. Continue?</string>
-    <string name="warn_battery_title">Battery Too Low</string>
-    <string name="warn_battery_msg">Your battery is below 20%. Please plug in your device to safely install this system update.</string>
-    <string name="local_staging">Staging Local Update</string>
-    <string name="local_copying">Copying zip file…</string>
-    <string name="local_failed_title">Local Update Failed</string>
-    <string name="local_failed_msg">Could not read file</string>
-    <string name="install_staged_title">Staged</string>
-    <string name="install_staged_sub">Rebooting to recovery to apply…</string>
-    <string name="install_applied_title">Installed</string>
-    <string name="install_applied_sub">Update applied successfully. Please reboot.</string>
-    <string name="install_failed_title">Install failed</string>
-    <string name="btn_retry">Retry download</string>
-    <string name="btn_copy_changelog">Copy changelog</string>
-    <string name="export_success">Exported to Downloads folder</string>
-    <string name="export_not_found">Update file not found</string>
-    <string name="export_failed">Export failed: %1$s</string>
-    <string name="copied">Copied to clipboard</string>
-    <string name="download_speed">%1$d%% · %2$s</string>
-    <string name="cached_sub">Last known state (offline)</string>
-    <string name="update_done_title">Update complete</string>
-    <string name="update_done_text">Your device has been updated. Enjoy!</string>
     <string name="notif_downloading_title">Downloading System Update</string>
     <string name="notif_download_failed">Download Failed</string>
     <string name="notif_download_complete">Download Complete</string>
     <string name="notif_ready_to_install">Ready to install</string>
-    <string name="export_button">Export to Downloads</string>
-    <string name="changelog_empty">No changelog available for this build</string>
-    <string name="local_update">Local Update</string>
-    <string name="status_downloading_sub">%1$d%% · keep bloomina open</string>
-    <string name="notif_channel_name">System Updates</string>
-    <string name="notif_update_title">Update available</string>
-    <string name="notif_update_text">A new bloomina build is ready to download</string>
+    <string name="notif_done_title">Update downloaded</string>
+    <string name="notif_done_text">Tap to install the update</string>
+    <string name="notif_failed_title">Download failed</string>
+
     <string name="error_no_network">No internet connection</string>
     <string name="sheet_complete_title">System Update Complete</string>
     <string name="sheet_complete_desc">The update has been successfully installed in the background. A restart is required to finish applying the changes.</string>
@@ -146,6 +130,10 @@
     <string name="cached_sub">Last known state (offline)</string>
     <string name="update_done_title">Update complete</string>
     <string name="update_done_text">Your device has been updated. Enjoy!</string>
+    <string name="export_button">Export to Downloads</string>
+    <string name="changelog_empty">No changelog available for this build</string>
+    <string name="local_update">Local Update</string>
+
     <!-- M3 Expressive additions -->
     <string name="hero_checking_title">Checking for updates…</string>
     <string name="hero_checking_subtitle">Contacting the bloomina update server</string>

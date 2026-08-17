@@ -129,6 +129,16 @@
                         android:textAllCaps="false"
                         android:elevation="2dp" />
 
+                    <!-- Pause Button (Filled, shown only while downloading) -->
+                    <Button
+                        android:id="@+id/btnPause"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:visibility="gone"
+                        android:text="@string/btn_pause"
+                        android:textAllCaps="false" />
+
                     <!-- Check Button (Outlined) -->
                     <Button
                         android:id="@+id/btnCheck"

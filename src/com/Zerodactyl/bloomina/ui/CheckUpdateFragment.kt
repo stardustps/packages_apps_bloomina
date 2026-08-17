@@ -67,6 +67,7 @@ class CheckUpdateFragment : Fragment() {
         b.btnExport.setOnClickListener { vm.exportCurrentRelease() }
         b.btnCopyChangelog.setOnClickListener { copyChangelog() }
         b.btnDownload.setOnClickListener { vm.onPrimaryButtonClicked() }
+        b.btnPause.setOnClickListener { vm.pauseDownload() }
         b.downloadTypeToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) vm.setUseIncremental(checkedId == R.id.chipIncremental)
         }
@@ -114,8 +115,13 @@ class CheckUpdateFragment : Fragment() {
             CheckUpdateViewModel.DownloadButtonState.RETRY -> getString(R.string.btn_retry)
             CheckUpdateViewModel.DownloadButtonState.INSTALL -> getString(R.string.btn_install)
             CheckUpdateViewModel.DownloadButtonState.REBOOT -> getString(R.string.btn_reboot)
+            CheckUpdateViewModel.DownloadButtonState.PAUSED -> getString(R.string.btn_resume)
             CheckUpdateViewModel.DownloadButtonState.HIDDEN -> ""
         }
+
+        // Pause is only offered while a download is actively progressing (button hidden).
+        v.btnPause.visibility = if (state.downloadVisible && state.button == CheckUpdateViewModel.DownloadButtonState.HIDDEN) View.VISIBLE else View.GONE
+
         v.btnExport.visibility = if (state.updateAvailable) View.VISIBLE else View.GONE
 
         v.downloadTypeToggle.visibility = if (state.hasIncremental) View.VISIBLE else View.GONE
@@ -255,7 +261,7 @@ class CheckUpdateFragment : Fragment() {
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.warn_battery_title))
                     .setMessage(getString(R.string.warn_battery_msg))
-                    .setPositiveButton(android.R.string.ok) { _, _ -> vm.install(event.file) }
+                    .setPositiveButton(android.R.string.ok) { _, _ -> vm.install(event.file, force = true) }
                     .show()
             is CheckUpdateViewModel.CheckEvent.ShowRebootSheet -> showRebootBottomSheet()
         }
@@ -345,6 +351,7 @@ class CheckUpdateFragment : Fragment() {
         val downloadBar: ProgressBar = root.findViewById(R.id.downloadBar)
         val btnExport: Button = root.findViewById(R.id.btnExport)
         val btnDownload: Button = root.findViewById(R.id.btnDownload)
+        val btnPause: Button = root.findViewById(R.id.btnPause)
         val btnCheck: Button = root.findViewById(R.id.btnCheck)
         val sepAvailable: TextView = root.findViewById(R.id.sepAvailable)
         val cardAvailable: MaterialCardView = root.findViewById(R.id.cardAvailable)

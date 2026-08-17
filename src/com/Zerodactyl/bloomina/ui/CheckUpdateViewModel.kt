@@ -1,8 +1,6 @@
 package com.Zerodactyl.bloomina.ui
 
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -14,11 +12,13 @@ import android.os.BatteryManager
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Html
-import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.Zerodactyl.bloomina.DownloadService
 import com.Zerodactyl.bloomina.R
 import com.Zerodactyl.bloomina.data.Download
+import com.Zerodactyl.bloomina.data.DownloadBus
 import com.Zerodactyl.bloomina.data.OtaConfig
 import com.Zerodactyl.bloomina.data.UpdateManifest
 import com.Zerodactyl.bloomina.data.UpdateRepository
@@ -27,7 +27,6 @@ import com.Zerodactyl.bloomina.ota.InstallResult
 import com.Zerodactyl.bloomina.ota.OtaInstaller
 import com.Zerodactyl.bloomina.ota.VersionCheck
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -72,7 +71,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val fingerprint: String
     )
 
-    enum class DownloadButtonState { HIDDEN, DOWNLOAD, RETRY, INSTALL, REBOOT }
+    enum class DownloadButtonState { HIDDEN, DOWNLOAD, RETRY, INSTALL, REBOOT, PAUSED }
 
     enum class ChangelogMode { DIFF, FULL }
 
@@ -132,6 +131,14 @@ class CheckUpdateViewModel : AndroidViewModel() {
     private var manifest: UpdateManifest? = null
     private var incrementalDownload: Download? = null
     private var pendingInstallFile: File? = null
+    private var downLastMs = 0L
+    private var downLastBytes = 0L
+
+    init {
+        viewModelScope.launch {
+            DownloadBus.snapshot.collect { snap -> onServiceSnapshot(snap) }
+        }
+    }
 
     private val app: Application get() = getApplication()
     private fun S(resId: Int, vararg fmt: Any): String = app.getString(resId, *fmt)
@@ -144,6 +151,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         loadLocalDeviceInfo()
         loadCached()
         refreshLastChecked()
+        applyPendingInstallState()
     }
 
     fun check() {
@@ -226,6 +234,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                         }
                     }
                     persistManifest(m, verdict)
+                    applyPendingInstallState()
                 }
                 .onFailure { t ->
                     manifest = null
@@ -261,19 +270,25 @@ class CheckUpdateViewModel : AndroidViewModel() {
         else release.download
     }
 
-    /** Primary action button (download / retry / install / reboot) dispatcher. */
+    /** Primary action button (download / retry / install / reboot / resume) dispatcher. */
     fun onPrimaryButtonClicked() {
         when (_state.value.button) {
             DownloadButtonState.DOWNLOAD, DownloadButtonState.RETRY ->
                 activeDownload()?.let { beginDownload(it) }
             DownloadButtonState.INSTALL -> pendingInstallFile?.let { install(it) }
             DownloadButtonState.REBOOT -> _events.trySend(CheckEvent.ShowRebootSheet)
+            DownloadButtonState.PAUSED -> activeDownload()?.let { beginDownload(it) }
             DownloadButtonState.HIDDEN -> Unit
         }
     }
 
     fun confirmMeteredDownload() {
-        activeDownload()?.let { performDownload(it) }
+        activeDownload()?.let { startDownloadService(it) }
+    }
+
+    fun pauseDownload() {
+        if (_state.value.downloadVisible.not()) return
+        app.startService(Intent(app, DownloadService::class.java).apply { action = DownloadService.ACTION_PAUSE })
     }
 
     /** Toggle between the full and incremental package; the displayed size follows. */
@@ -289,8 +304,11 @@ class CheckUpdateViewModel : AndroidViewModel() {
         }
     }
 
-    fun install(file: File) {
-        val dl = activeDownload() ?: return
+    fun install(file: File, force: Boolean = false) {
+        if (!force && !isBatteryOk()) {
+            _events.trySend(CheckEvent.ConfirmBatteryInstall(file))
+            return
+        }
         _state.update {
             it.copy(
                 heroIcon = R.drawable.ic_status_available,
@@ -314,6 +332,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                             heroSubtitle = S(R.string.install_staged_sub)
                         )
                     }
+                    OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
                     deleteLocalZipIfNeeded(file)
                 }
@@ -326,6 +345,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                             button = DownloadButtonState.REBOOT
                         )
                     }
+                    OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
                     deleteLocalZipIfNeeded(file)
                     _events.trySend(CheckEvent.ShowRebootSheet)
@@ -344,12 +364,23 @@ class CheckUpdateViewModel : AndroidViewModel() {
         }
     }
 
+    /** True when the battery is healthy enough to install (or the device is charging). */
+    private fun isBatteryOk(): Boolean {
+        val batteryStatus: Intent? = app.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+        val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+        val batteryPct = if (scale > 0) level * 100 / scale.toFloat() else -1f
+        val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
+        val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
+        return !(batteryPct in 0f..20f && !isCharging)
+    }
+
     fun exportCurrentRelease() {
         val dl = activeDownload() ?: return
         exportUpdate(dl)
     }
 
-    // ---- Download -----------------------------------------------------------
+    // ---- Download (delegated to DownloadService) ---------------------------
 
     private fun beginDownload(dl: Download) {
         val cm = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -369,10 +400,10 @@ class CheckUpdateViewModel : AndroidViewModel() {
             _events.trySend(CheckEvent.ConfirmMeteredDownload)
             return
         }
-        performDownload(dl)
+        startDownloadService(dl)
     }
 
-    private fun performDownload(dl: Download) {
+    private fun startDownloadService(dl: Download) {
         val extDir = app.getExternalFilesDir(null) ?: run {
             _state.update {
                 it.copy(
@@ -384,80 +415,111 @@ class CheckUpdateViewModel : AndroidViewModel() {
             }
             return
         }
-        app.getSharedPreferences(OtaConfig.PREFS_NAME, 0).edit().putString("active_ota_file", dl.filename).apply()
         val dest = File(extDir, dl.filename)
-
+        OtaConfig.setActiveDownload(app, dest, dl.sha256, dl.installType)
+        downLastMs = System.currentTimeMillis()
+        downLastBytes = 0L
         _state.update {
             it.copy(
                 downloadVisible = true,
                 downloadIndeterminate = true,
-                button = DownloadButtonState.HIDDEN
+                button = DownloadButtonState.HIDDEN,
+                heroIcon = R.drawable.ic_status_available,
+                heroTitle = S(R.string.status_downloading),
+                heroSubtitle = S(R.string.status_preparing)
             )
         }
+        val intent = Intent(app, DownloadService::class.java).apply {
+            action = DownloadService.ACTION_START
+            putExtra(DownloadService.EXTRA_DOWNLOAD, dl)
+            putExtra(DownloadService.EXTRA_DEST, dest.absolutePath)
+        }
+        ContextCompat.startForegroundService(app, intent)
+    }
 
-        viewModelScope.launch {
-            var lastMs = System.currentTimeMillis()
-            var lastBytes = 0L
-            repo.download(dl, dest).collect { st ->
-                when (st) {
-                    is com.Zerodactyl.bloomina.data.DownloadState.Progress -> {
-                        val pct = (st.fraction * 100).toInt()
-                        val now = System.currentTimeMillis()
-                        val dt = (now - lastMs) / 1000.0
-                        val speed = if (dt > 0) (st.bytes - lastBytes) / dt else 0.0
-                        lastMs = now
-                        lastBytes = st.bytes
-                        val speedStr = if (speed > 0) formatBytes(speed.toLong()) + "/s" else "—"
-                        _state.update {
-                            it.copy(
-                                downloadIndeterminate = false,
-                                downloadProgress = pct,
-                                heroIcon = R.drawable.ic_status_available,
-                                heroTitle = S(R.string.status_downloading),
-                                heroSubtitle = S(R.string.download_speed, pct, speedStr)
-                            )
-                        }
-                        postNotification(1, S(R.string.notif_downloading_title), "$pct%", true, pct)
-                    }
-                    is com.Zerodactyl.bloomina.data.DownloadState.Failed -> {
-                        _state.update {
-                            it.copy(
-                                downloadVisible = false,
-                                heroIcon = R.drawable.ic_status_error,
-                                heroTitle = S(R.string.status_failed),
-                                heroSubtitle = st.reason,
-                                button = DownloadButtonState.RETRY
-                            )
-                        }
-                        postNotification(1, S(R.string.notif_download_failed), st.reason, false, -1)
-                    }
-                    is com.Zerodactyl.bloomina.data.DownloadState.Done -> {
-                        _state.update {
-                            it.copy(
-                                downloadVisible = false,
-                                integrity = S(R.string.integrity_verified, dl.sha256),
-                                button = DownloadButtonState.INSTALL
-                            )
-                        }
-                        postNotification(1, S(R.string.notif_download_complete), S(R.string.notif_ready_to_install), false, -1)
-                        pendingInstallFile = st.file
-
-                        val batteryStatus: Intent? = app.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-                        val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
-                        val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-                        val batteryPct = if (scale > 0) level * 100 / scale.toFloat() else -1f
-                        val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
-                        val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
-
-                        if (batteryPct in 0f..20f && !isCharging) {
-                            _events.trySend(CheckEvent.ConfirmBatteryInstall(st.file))
-                        } else {
-                            install(st.file)
-                        }
-                    }
+    /** Reacts to progress/completion posted by [DownloadService] via [DownloadBus]. */
+    private fun onServiceSnapshot(snap: DownloadBus.Snapshot?) {
+        if (snap == null) return
+        when (snap.status) {
+            DownloadBus.Status.DOWNLOADING -> {
+                val pct = if (snap.total > 0) ((snap.bytes * 100) / snap.total).toInt() else 0
+                val now = System.currentTimeMillis()
+                val dt = (now - downLastMs) / 1000.0
+                val speed = if (dt > 0) (snap.bytes - downLastBytes) / dt else 0.0
+                downLastMs = now
+                downLastBytes = snap.bytes
+                val speedStr = if (speed > 0) formatBytes(speed.toLong()) + "/s" else "—"
+                _state.update {
+                    it.copy(
+                        downloadVisible = true,
+                        downloadIndeterminate = false,
+                        downloadProgress = pct,
+                        button = DownloadButtonState.HIDDEN,
+                        heroIcon = R.drawable.ic_status_available,
+                        heroTitle = S(R.string.status_downloading),
+                        heroSubtitle = S(R.string.download_speed, pct, speedStr)
+                    )
+                }
+            }
+            DownloadBus.Status.DONE -> {
+                val file = snap.file?.let { f -> File(f) } ?: return
+                pendingInstallFile = file
+                val sha = OtaConfig.getActiveDownload(app)?.sha256 ?: ""
+                _state.update {
+                    it.copy(
+                        downloadVisible = false,
+                        integrity = S(R.string.integrity_verified, sha),
+                        button = DownloadButtonState.INSTALL,
+                        heroIcon = R.drawable.ic_status_available,
+                        heroTitle = S(R.string.status_download_done),
+                        heroSubtitle = S(R.string.status_download_done_sub)
+                    )
+                }
+            }
+            DownloadBus.Status.FAILED -> {
+                _state.update {
+                    it.copy(
+                        downloadVisible = false,
+                        heroIcon = R.drawable.ic_status_error,
+                        heroTitle = S(R.string.status_failed),
+                        heroSubtitle = snap.error ?: S(R.string.unknown_error),
+                        button = DownloadButtonState.RETRY
+                    )
+                }
+            }
+            DownloadBus.Status.PAUSED -> {
+                _state.update {
+                    it.copy(
+                        downloadVisible = false,
+                        heroIcon = R.drawable.ic_status_available,
+                        heroTitle = S(R.string.status_paused),
+                        heroSubtitle = S(R.string.status_paused_sub),
+                        button = DownloadButtonState.PAUSED
+                    )
                 }
             }
         }
+    }
+
+    /** If a completed download is already on disk (e.g. finished while the app was closed),
+     *  surface it as ready-to-install instead of re-offering a download. Returns true if applied. */
+    private fun applyPendingInstallState(): Boolean {
+        val active = OtaConfig.getActiveDownload(app) ?: return false
+        if (!active.done || !active.file.exists()) return false
+        pendingInstallFile = active.file
+        _state.update {
+            it.copy(
+                downloadVisible = false,
+                integrity = S(R.string.integrity_verified, active.sha256),
+                button = DownloadButtonState.INSTALL,
+                heroIcon = R.drawable.ic_status_available,
+                heroTitle = S(R.string.status_download_done),
+                heroSubtitle = S(R.string.status_download_done_sub),
+                showReleaseSections = true,
+                updateAvailable = true
+            )
+        }
+        return true
     }
 
     // ---- Local update / export ---------------------------------------------
@@ -630,7 +692,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
     }
 
     private fun cleanupOldOtas() {
-        val activeOta = app.getSharedPreferences(OtaConfig.PREFS_NAME, 0).getString("active_ota_file", null)
+        val activeOta = OtaConfig.getActiveDownload(app)?.file?.name
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 app.cacheDir.listFiles { _, name -> name.endsWith(".zip") && name != "local_update.zip" }
@@ -686,19 +748,5 @@ class CheckUpdateViewModel : AndroidViewModel() {
         bytes >= 1L shl 30 -> String.format(Locale.US, "%.2f GB", bytes / (1L shl 30).toDouble())
         bytes >= 1L shl 20 -> String.format(Locale.US, "%.0f MB", bytes / (1L shl 20).toDouble())
         else -> String.format(Locale.US, "%.0f KB", bytes / 1024.0)
-    }
-
-    private fun postNotification(id: Int, title: String, text: String, ongoing: Boolean, progress: Int) {
-        val nm = app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val channel = NotificationChannel("ota_updates", S(R.string.notif_channel_name), NotificationManager.IMPORTANCE_LOW)
-        nm.createNotificationChannel(channel)
-        val builder = NotificationCompat.Builder(app, "ota_updates")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setOngoing(ongoing)
-            .setOnlyAlertOnce(true)
-        if (progress >= 0) builder.setProgress(100, progress, false)
-        builder.setContentText(text)
-        nm.notify(id, builder.build())
     }
 }

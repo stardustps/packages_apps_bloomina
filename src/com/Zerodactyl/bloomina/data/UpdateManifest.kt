@@ -1,5 +1,7 @@
 package com.Zerodactyl.bloomina.data
 
+import android.os.Parcel
+import android.os.Parcelable
 import org.json.JSONObject
 import java.util.ArrayList
 
@@ -99,22 +101,46 @@ data class Release(
     }
 }
 
-data class Download(
-    val url: String,
-    val filename: String,
-    val sizeBytes: Long,
-    val sha256: String,   // integrity check before flashing
-    val installType: String // "recovery_zip" | "raw_image"
-) {
-    companion object {
-        fun fromJson(json: JSONObject): Download {
-            return Download(
-                url = json.optString("url"),
-                filename = json.optString("filename"),
-                sizeBytes = json.optLong("size_bytes"),
-                sha256 = json.optString("sha256"),
-                installType = json.optString("install_type")
-            )
+    data class Download(
+        val url: String,
+        val filename: String,
+        val sizeBytes: Long,
+        val sha256: String,
+        val installType: String,
+    ) : Parcelable {
+
+        constructor(parcel: Parcel) : this(
+            url = parcel.readString() ?: "",
+            filename = parcel.readString() ?: "",
+            sizeBytes = parcel.readLong(),
+            sha256 = parcel.readString() ?: "",
+            installType = parcel.readString() ?: "",
+        )
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeString(url)
+            parcel.writeString(filename)
+            parcel.writeLong(sizeBytes)
+            parcel.writeString(sha256)
+            parcel.writeString(installType)
+        }
+
+        override fun describeContents(): Int = 0
+
+        companion object : Parcelable.Creator<Download> {
+            override fun createFromParcel(parcel: Parcel): Download = Download(parcel)
+
+            override fun newArray(size: Int): Array<Download?> = arrayOfNulls(size)
+
+            fun fromJson(json: JSONObject): Download {
+                return Download(
+                    url = json.optString("url"),
+                    filename = json.optString("filename"),
+                    sizeBytes = json.optLong("size_bytes"),
+                    sha256 = json.optString("sha256"),
+                    installType = json.optString("install_type")
+                )
+            }
         }
     }
 }
