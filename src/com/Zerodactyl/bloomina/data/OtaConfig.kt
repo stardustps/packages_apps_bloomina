@@ -31,6 +31,10 @@ object OtaConfig {
     val defaultJsonUrl: String
         get() = "$OTA_BASE/${DeviceInfo.romName}/${DeviceInfo.deviceCodename}.json"
 
+    /** User opt-in to install automatically once a completed download is on a charging device. */
+    fun isAutoInstallEnabled(ctx: Context): Boolean =
+        ctx.getSharedPreferences(PREFS_NAME, 0).getBoolean("auto_install", false)
+
     /** Returns the user-configured URL, or the auto-detected default when unset/blank. */
     fun resolveJsonUrl(prefs: SharedPreferences): String =
         prefs.getString("json_url", null)

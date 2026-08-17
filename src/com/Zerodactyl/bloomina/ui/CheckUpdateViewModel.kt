@@ -398,6 +398,13 @@ class CheckUpdateViewModel : AndroidViewModel() {
         return incoming != null && current != null && current > 0 && incoming < current
     }
 
+    /** True when the device is currently on a charger. */
+    private fun isCharging(): Boolean {
+        val status: Int = app.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            ?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
+        return status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
+    }
+
     fun exportCurrentRelease() {
         val dl = activeDownload() ?: return
         exportUpdate(dl)
@@ -502,6 +509,10 @@ class CheckUpdateViewModel : AndroidViewModel() {
                         heroSubtitle = S(R.string.status_download_done_sub)
                     )
                 }
+                // Set-and-forget: if the user opted in and we're charging, install now.
+                if (OtaConfig.isAutoInstallEnabled(app) && isCharging()) {
+                    install(file, forceBattery = true)
+                }
             }
             DownloadBus.Status.FAILED -> {
                 _state.update {
@@ -545,6 +556,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 showReleaseSections = true,
                 updateAvailable = true
             )
+        }
+        if (OtaConfig.isAutoInstallEnabled(app) && isCharging()) {
+            install(active.file, forceBattery = true)
         }
         return true
     }
