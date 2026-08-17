@@ -36,7 +36,7 @@
                 android:id="@+id/iconUpdate"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_tab_update"
+                android:src="@drawable/ic_download"
                 app:tint="?attr/colorPrimary" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:id="@+id/iconMaintainer"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_tab_maintainer"
+                android:src="@drawable/ic_person"
                 app:tint="?attr/colorOnSurfaceVariant" />
 
             <TextView

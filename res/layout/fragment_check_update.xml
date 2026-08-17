@@ -176,107 +176,185 @@
                         android:orientation="vertical" 
                         android:padding="@dimen/card_padding_h">
                         
-                        <!-- Version -->
+                    <!-- Version -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_tag"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_version" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
-                        <TextView 
-                            android:id="@+id/rowRemoteVersion" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:paddingBottom="@dimen/spacing_sm"
-                            android:textAppearance="?attr/textAppearanceBodyLarge"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowRemoteVersion" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:paddingBottom="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
                         
-                        <!-- Build Date -->
+                    <!-- Build Date -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_build_date" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowBuildDate" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:paddingBottom="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface" />
+                    
+                    <!-- Size -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_storage"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:id="@+id/rowBuildDate" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:paddingBottom="@dimen/spacing_sm"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurface" />
-                        
-                        <!-- Size -->
-                        <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_size" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
-                        <TextView 
-                            android:id="@+id/rowDownloadSize" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:paddingBottom="@dimen/spacing_sm"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowDownloadSize" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:paddingBottom="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface" />
                         
-                        <!-- Android Version -->
+                    <!-- Android Version -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_android"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_android" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowRemoteAndroid" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:paddingBottom="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface" />
+                    
+                    <!-- Security Patch -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_security"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:id="@+id/rowRemoteAndroid" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:paddingBottom="@dimen/spacing_sm"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurface" />
-                        
-                        <!-- Security Patch -->
-                        <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_patch" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
-                        <TextView 
-                            android:id="@+id/rowRemoteSecurity" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:paddingBottom="@dimen/spacing_sm"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowRemoteSecurity" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:paddingBottom="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface" />
                         
-                        <!-- Fingerprint -->
+                    <!-- Fingerprint -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/spacing_xs">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_verified"
+                            app:tint="?attr/colorOnSurfaceVariant" />
                         <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/spacing_sm"
                             android:text="@string/f_fingerprint" 
                             android:textStyle="bold" 
                             android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
-                        <TextView 
-                            android:id="@+id/rowRemoteFingerprint" 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+                    </LinearLayout>
+                    <TextView 
+                        android:id="@+id/rowRemoteFingerprint" 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface" />
                         
                         <!-- Integrity -->
                         <TextView
@@ -450,14 +528,27 @@
                         android:padding="@dimen/card_padding_h">
                         
                         <!-- Installed Version -->
-                        <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:text="@string/f_installed" 
-                            android:textStyle="bold" 
-                            android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingBottom="@dimen/spacing_xs">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_tag"
+                                app:tint="?attr/colorOnSurfaceVariant" />
+                            <TextView 
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/spacing_sm"
+                                android:text="@string/f_installed" 
+                                android:textStyle="bold" 
+                                android:textAppearance="?attr/textAppearanceLabelLarge"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
                         <TextView 
                             android:id="@+id/rowInstalledVersion" 
                             android:layout_width="match_parent" 
@@ -468,14 +559,27 @@
                             android:textColor="?attr/colorOnSurface" />
                         
                         <!-- Model -->
-                        <TextView 
-                            android:layout_width="match_parent" 
-                            android:layout_height="wrap_content" 
-                            android:text="@string/f_model" 
-                            android:textStyle="bold" 
-                            android:textAppearance="?attr/textAppearanceLabelLarge"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:paddingBottom="@dimen/spacing_xs" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingBottom="@dimen/spacing_xs">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_phone"
+                                app:tint="?attr/colorOnSurfaceVariant" />
+                            <TextView 
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/spacing_sm"
+                                android:text="@string/f_model" 
+                                android:textStyle="bold" 
+                                android:textAppearance="?attr/textAppearanceLabelLarge"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
                         <TextView 
                             android:id="@+id/rowDeviceModel" 
                             android:layout_width="match_parent" 
