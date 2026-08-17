@@ -545,7 +545,19 @@
                             android:text="@string/label_full"
                             android:checkable="true" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
-                    
+
+                    <EditText
+                        android:id="@+id/changelogSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_small"
+                        android:layout_marginHorizontal="@dimen/card_padding_h"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:hint="@string/changelog_search_hint"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:importantForAutofill="no"
+                        android:visibility="gone" />
+
                     <TextView
                         android:id="@+id/changelog"
                         android:layout_width="match_parent"

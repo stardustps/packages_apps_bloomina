@@ -20,6 +20,8 @@
     <string name="label_diff">Diff</string>
     <string name="changelog_summary">%1$d new · %2$d removed</string>
     <string name="changelog_summary_none">Up to date with this build</string>
+    <string name="changelog_search_hint">Search changelog…</string>
+    <string name="changelog_count">%1$d entries</string>
     <string name="badge_new">New</string>
     <string name="badge_security">Security</string>
     <string name="desc_hero_icon">Update status icon</string>

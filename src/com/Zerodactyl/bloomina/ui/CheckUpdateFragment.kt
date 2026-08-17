@@ -12,12 +12,16 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikeThruSpan
+import android.text.style.StyleSpan
+import android.graphics.Typeface
+import java.util.LinkedHashMap
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Gravity
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -46,6 +50,7 @@ class CheckUpdateFragment : Fragment() {
 
     private var _b: V? = null
     private val b get() = _b!!
+    private var changelogQuery: String = ""
 
     private val vm: CheckUpdateViewModel by viewModels()
 
@@ -78,6 +83,14 @@ class CheckUpdateFragment : Fragment() {
                 else CheckUpdateViewModel.ChangelogMode.FULL
             )
         }
+        b.changelogSearch.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, p: Int, b: Int, c: Int) {}
+            override fun onTextChanged(s: CharSequence?, p: Int, b: Int, c: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                changelogQuery = s?.toString() ?: ""
+                renderChangelog(vm.uiState.value)
+            }
+        })
 
         setupTapToCopy()
         renderDiagnostics()
@@ -180,7 +193,8 @@ class CheckUpdateFragment : Fragment() {
     private fun renderChangelog(state: CheckUpdateViewModel.CheckUiState) {
         val v = _b ?: return
 
-        val hasContent = state.changelogFull.isNotEmpty() || state.changelogDiff.isNotEmpty()
+        val hasContent = state.changelogLines.isNotEmpty() || state.changelogDiff.isNotEmpty()
+        v.changelogSearch.visibility = if (hasContent) View.VISIBLE else View.GONE
         if (!hasContent) {
             v.changelog.text = getString(R.string.changelog_empty)
             v.changelogSummary.visibility = View.GONE
@@ -188,16 +202,7 @@ class CheckUpdateFragment : Fragment() {
             return
         }
 
-        // Summary line
-        if (state.changelogNew > 0 || state.changelogRemoved > 0) {
-            v.changelogSummary.visibility = View.VISIBLE
-            v.changelogSummary.text = getString(R.string.changelog_summary, state.changelogNew, state.changelogRemoved)
-        } else {
-            v.changelogSummary.visibility = View.VISIBLE
-            v.changelogSummary.text = getString(R.string.changelog_summary_none)
-        }
-
-        // Diff / Full toggle (hidden when there's nothing to diff against)
+        val q = changelogQuery.trim()
         val canDiff = state.changelogDiff.any { it.kind != CheckUpdateViewModel.ChangelogKind.SAME }
         v.changelogToggle.visibility = if (canDiff) View.VISIBLE else View.GONE
         if (canDiff) {
@@ -207,22 +212,38 @@ class CheckUpdateFragment : Fragment() {
             )
         }
 
-        v.changelog.text = if (state.changelogView == CheckUpdateViewModel.ChangelogMode.DIFF && canDiff) {
-            buildDiffText(state)
+        if (state.changelogView == CheckUpdateViewModel.ChangelogMode.DIFF && canDiff) {
+            val entries = if (q.isEmpty()) state.changelogDiff
+            else state.changelogDiff.filter { it.text.contains(q, ignoreCase = true) }
+            v.changelog.text = buildDiffText(entries)
+            v.changelogSummary.visibility = View.VISIBLE
+            v.changelogSummary.text = if (state.changelogNew > 0 || state.changelogRemoved > 0)
+                getString(R.string.changelog_summary, state.changelogNew, state.changelogRemoved)
+            else getString(R.string.changelog_summary_none)
         } else {
-            state.changelogFull
+            val lines = if (q.isEmpty()) state.changelogLines
+            else state.changelogLines.filter { it.contains(q, ignoreCase = true) }
+            v.changelog.text = buildGroupedText(lines)
+            v.changelogSummary.visibility = View.VISIBLE
+            v.changelogSummary.text = if (q.isEmpty()) {
+                if (state.changelogNew > 0 || state.changelogRemoved > 0)
+                    getString(R.string.changelog_summary, state.changelogNew, state.changelogRemoved)
+                else getString(R.string.changelog_summary_none)
+            } else {
+                getString(R.string.changelog_count, lines.size)
+            }
         }
         v.changelog.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    private fun buildDiffText(state: CheckUpdateViewModel.CheckUiState): CharSequence {
+    private fun buildDiffText(entries: List<CheckUpdateViewModel.ChangelogEntry>): CharSequence {
         val ctx = requireContext()
         val newColor = MaterialColors.getColor(ctx, R.attr.colorPrimary, 0xFF00BFA5.toInt())
         val removedColor = MaterialColors.getColor(ctx, R.attr.colorError, 0xFFC62828.toInt())
         val sameColor = MaterialColors.getColor(ctx, R.attr.colorOnSurfaceVariant, 0xFF666666.toInt())
 
         val ssb = SpannableStringBuilder()
-        state.changelogDiff.forEachIndexed { index, entry ->
+        entries.forEachIndexed { index, entry ->
             val bullet = "• "
             val color = when (entry.kind) {
                 CheckUpdateViewModel.ChangelogKind.NEW -> newColor
@@ -231,7 +252,7 @@ class CheckUpdateFragment : Fragment() {
             }
             val start = ssb.length
             ssb.append(bullet).append(entry.text)
-            if (index != state.changelogDiff.lastIndex) ssb.append("\n")
+            if (index != entries.lastIndex) ssb.append("\n")
             val end = ssb.length
             ssb.setSpan(
                 ForegroundColorSpan(color),
@@ -247,6 +268,55 @@ class CheckUpdateFragment : Fragment() {
             }
         }
         return ssb
+    }
+
+    /** Groups changelog lines into Features / Fixes / Security / Other sections. */
+    private fun buildGroupedText(lines: List<String>): CharSequence {
+        val ctx = requireContext()
+        val headerColor = MaterialColors.getColor(ctx, R.attr.colorPrimary, 0xFF00BFA5.toInt())
+        val bodyColor = MaterialColors.getColor(ctx, R.attr.colorOnSurface, 0xFF111111.toInt())
+
+        val groups = LinkedHashMap<String, MutableList<String>>()
+        val other = mutableListOf<String>()
+        for (line in lines) {
+            val match = CHANGELOG_GROUPS.firstOrNull { (_, re) -> re.containsMatchIn(line) }
+            if (match != null) {
+                val (title, re) = match
+                val cleaned = line.replaceFirst(re, "").trim().ifBlank { line }
+                groups.getOrPut(title) { mutableListOf() }.add(cleaned)
+            } else {
+                other.add(line)
+            }
+        }
+        if (other.isNotEmpty()) groups.getOrPut("Other") { mutableListOf() }.addAll(other)
+
+        val ssb = SpannableStringBuilder()
+        var first = true
+        for ((title, items) in groups) {
+            if (!first) ssb.append("\n")
+            first = false
+            val hs = ssb.length
+            ssb.append(title.uppercase())
+            ssb.setSpan(StyleSpan(Typeface.BOLD), hs, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ssb.setSpan(ForegroundColorSpan(headerColor), hs, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ssb.append("\n")
+            items.forEachIndexed { i, it ->
+                val bs = ssb.length
+                ssb.append("• ").append(it)
+                ssb.setSpan(ForegroundColorSpan(bodyColor), bs, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (i != items.lastIndex) ssb.append("\n")
+            }
+            ssb.append("\n")
+        }
+        return ssb
+    }
+
+    companion object {
+        private val CHANGELOG_GROUPS = listOf(
+            "Features" to Regex("^(feat|feature|add|new|\\+)\\b[\\s:\\-]*", RegexOption.IGNORE_CASE),
+            "Fixes" to Regex("^(fix|bugfix|bug|\\-)\\b[\\s:\\-]*", RegexOption.IGNORE_CASE),
+            "Security" to Regex("^(sec|security|cve)\\b[\\s:\\-]*", RegexOption.IGNORE_CASE)
+        )
     }
 
     private fun handleEvent(event: CheckUpdateViewModel.CheckEvent) {
@@ -373,6 +443,7 @@ class CheckUpdateFragment : Fragment() {
         val rowRemoteSecurity: TextView = root.findViewById(R.id.rowRemoteSecurity)
         val rowRemoteFingerprint: TextView = root.findViewById(R.id.rowRemoteFingerprint)
         val changelog: TextView = root.findViewById(R.id.changelog)
+        val changelogSearch: EditText = root.findViewById(R.id.changelogSearch)
         val sepChangelog: TextView = root.findViewById(R.id.sepChangelog)
         val cardChangelog: MaterialCardView = root.findViewById(R.id.cardChangelog)
         val rowLayoutType: TextView = root.findViewById(R.id.rowLayoutType)
