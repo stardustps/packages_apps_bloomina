@@ -7,529 +7,556 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <androidx.core.widget.NestedScrollView 
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:paddingBottom="@dimen/spacing_xxl">
-
-        <!-- Hero Section -->
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingHorizontal="@dimen/spacing_lg"
-            android:paddingVertical="@dimen/hero_padding_vertical">
+            android:orientation="vertical">
 
-            <!-- Hero Icon with container -->
+            <!-- Hero Section with Glass Container -->
             <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="?attr/colorPrimaryContainer"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/heroIcon"
-                    android:layout_width="@dimen/hero_icon_size"
-                    android:layout_height="@dimen/hero_icon_size"
-                    android:src="@drawable/ic_cloud_large"
-                    app:tint="?attr/colorOnPrimaryContainer" />
-            </FrameLayout>
-
-            <!-- Title -->
-            <TextView
-                android:id="@+id/heroTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                android:textStyle="bold"
-                android:text="@string/status_checking"
-                android:letterSpacing="-0.02"
-                android:textAlignment="center" />
-
-            <!-- Subtitle -->
-            <TextView
-                android:id="@+id/heroSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:textAlignment="center"
-                tools:text="Checking..." />
-
-            <!-- Progress Bar -->
-            <ProgressBar
-                android:id="@+id/downloadBar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:max="100"
-                android:progressTint="?attr/colorPrimary"
-                android:visibility="gone" />
+                android:background="@color/glass_hero_background"
+                android:elevation="@dimen/card_elevation_high"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingVertical="@dimen/hero_padding_vertical">
 
-            <!-- Last Checked -->
-            <TextView
-                android:id="@+id/txtLastChecked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:visibility="gone" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
 
-        <!-- Action Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/spacing_lg">
-            
-            <!-- Export Button (Text) -->
-            <Button
-                android:id="@+id/btnExport"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height_small"
-                android:visibility="gone"
-                android:text="@string/export_button"
-                android:textAllCaps="false" />
+                    <!-- Hero Icon with Glass Container -->
+                    <FrameLayout
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:background="@drawable/glass_container"
+                        android:gravity="center">
 
-            <!-- Download Button (Filled) -->
-            <Button
-                android:id="@+id/btnDownload"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:visibility="gone"
-                android:text="@string/btn_download"
-                android:textAllCaps="false"
-                android:elevation="2dp" />
+                        <ImageView
+                            android:id="@+id/heroIcon"
+                            android:layout_width="@dimen/hero_icon_size"
+                            android:layout_height="@dimen/hero_icon_size"
+                            android:src="@drawable/ic_cloud_large"
+                            app:tint="?attr/colorOnPrimaryContainer" />
+                    </FrameLayout>
 
-            <!-- Check Button (Outlined) -->
-            <Button
-                android:id="@+id/btnCheck"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:text="@string/btn_check"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-        <!-- Available Build Section -->
-        <TextView
-            android:id="@+id/sepAvailable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_lg"
-            android:paddingTop="@dimen/spacing_xl"
-            android:paddingBottom="@dimen/spacing_sm"
-            android:text="@string/sep_available"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:letterSpacing="-0.01"
-            android:visibility="gone" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardAvailable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_md"
-            app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-            android:visibility="gone">
-            
-            <androidx.core.widget.NestedScrollView 
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent">
-                <LinearLayout 
-                    android:layout_width="match_parent" 
-                    android:layout_height="wrap_content" 
-                    android:orientation="vertical" 
-                    android:padding="@dimen/card_padding_h">
-                    
-                    <!-- Version -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_version" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowRemoteVersion" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textStyle="bold"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Build Date -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_build_date" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowBuildDate" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Size -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_size" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowDownloadSize" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Android Version -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_android" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowRemoteAndroid" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Security Patch -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_patch" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowRemoteSecurity" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Fingerprint -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_fingerprint" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowRemoteFingerprint" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Integrity -->
+                    <!-- Title -->
                     <TextView
-                        android:id="@+id/txtIntegrity"
+                        android:id="@+id/heroTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_md"
+                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                        android:textStyle="bold"
+                        android:text="@string/status_checking"
+                        android:letterSpacing="-0.02"
+                        android:textAlignment="center" />
+
+                    <!-- Subtitle -->
+                    <TextView
+                        android:id="@+id/heroSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textAlignment="center"
+                        tools:text="Checking..." />
+
+                    <!-- Progress Bar -->
+                    <ProgressBar
+                        android:id="@+id/downloadBar"
+                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_md"
-                        android:background="?attr/colorPrimaryContainer"
-                        android:padding="@dimen/spacing_md"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:max="100"
+                        android:progressTint="?attr/colorPrimary"
+                        android:visibility="gone" />
+
+                    <!-- Last Checked -->
+                    <TextView
+                        android:id="@+id/txtLastChecked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
                         android:visibility="gone" />
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
-        <!-- Changelog Section -->
-        <TextView
-            android:id="@+id/sepChangelog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_lg"
-            android:paddingTop="@dimen/spacing_xl"
-            android:paddingBottom="@dimen/spacing_sm"
-            android:text="@string/sep_changelog"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:letterSpacing="-0.01"
-            android:visibility="gone" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardChangelog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_md"
-            app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-            android:visibility="gone">
-            
-            <LinearLayout
+            <!-- Action Buttons with Glass Container -->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                
-                <TextView
-                    android:id="@+id/changelog"
+                android:background="@color/glass_card_background"
+                android:elevation="@dimen/card_elevation"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingVertical="@dimen/spacing_md">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/card_padding_h"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:lineSpacingExtra="4dp" />
+                    android:orientation="vertical">
+                    
+                    <!-- Export Button (Text) -->
+                    <Button
+                        android:id="@+id/btnExport"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_small"
+                        android:visibility="gone"
+                        android:text="@string/export_button"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btnCopyChangelog"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    <!-- Download Button (Filled) -->
+                    <Button
+                        android:id="@+id/btnDownload"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:visibility="gone"
+                        android:text="@string/btn_download"
+                        android:textAllCaps="false"
+                        android:elevation="2dp" />
+
+                    <!-- Check Button (Outlined) -->
+                    <Button
+                        android:id="@+id/btnCheck"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:text="@string/btn_check"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Available Build Section -->
+            <TextView
+                android:id="@+id/sepAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_xl"
+                android:paddingBottom="@dimen/spacing_sm"
+                android:text="@string/sep_available"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:letterSpacing="-0.01"
+                android:visibility="gone" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/corner_lg"
+                app:cardElevation="@dimen/card_elevation_high"
+                app:cardBackgroundColor="@color/glass_card_background"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/glass_card_border"
+                android:visibility="gone">
+                
+                <androidx.core.widget.NestedScrollView 
+                    android:layout_width="match_parent" 
+                    android:layout_height="match_parent">
+                    <LinearLayout 
+                        android:layout_width="match_parent" 
+                        android:layout_height="wrap_content" 
+                        android:orientation="vertical" 
+                        android:padding="@dimen/card_padding_h">
+                        
+                        <!-- Version -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_version" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowRemoteVersion" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Build Date -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_build_date" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowBuildDate" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Size -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_size" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowDownloadSize" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Android Version -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_android" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowRemoteAndroid" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Security Patch -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_patch" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowRemoteSecurity" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Fingerprint -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_fingerprint" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowRemoteFingerprint" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Integrity -->
+                        <TextView
+                            android:id="@+id/txtIntegrity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_md"
+                            android:background="@drawable/glass_container"
+                            android:padding="@dimen/spacing_md"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorOnPrimaryContainer"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Changelog Section -->
+            <TextView
+                android:id="@+id/sepChangelog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_xl"
+                android:paddingBottom="@dimen/spacing_sm"
+                android:text="@string/sep_changelog"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:letterSpacing="-0.01"
+                android:visibility="gone" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardChangelog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/corner_lg"
+                app:cardElevation="@dimen/card_elevation_high"
+                app:cardBackgroundColor="@color/glass_card_background"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/glass_card_border"
+                android:visibility="gone">
+                
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_height"
-                    android:text="@string/btn_copy_changelog"
-                    android:textAllCaps="false"
-                    android:gravity="center" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- System Diagnostics Section -->
-        <TextView
-            android:id="@+id/sepSlotStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_lg"
-            android:paddingTop="@dimen/spacing_xl"
-            android:paddingBottom="@dimen/spacing_sm"
-            android:text="@string/diag_title"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:letterSpacing="-0.01" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardSlotStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_md"
-            app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
-            
-            <androidx.core.widget.NestedScrollView 
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent">
-                <LinearLayout 
-                    android:layout_width="match_parent" 
-                    android:layout_height="wrap_content" 
-                    android:orientation="vertical" 
-                    android:padding="@dimen/card_padding_h">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                     
-                    <!-- Layout Type -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/diag_layout" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowLayoutType" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_md"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textStyle="bold"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Active Slot -->
-                    <TextView 
-                        android:id="@+id/lblActiveSlot" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/diag_slot" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowActiveSlot" 
-                        android:layout_width="match_parent" 
+                    <TextView
+                        android:id="@+id/changelog"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textStyle="bold"
-                        android:textColor="?attr/colorOnSurface" />
+                        android:padding="@dimen/card_padding_h"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:lineSpacingExtra="4dp" />
+
+                    <Button
+                        android:id="@+id/btnCopyChangelog"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:text="@string/btn_copy_changelog"
+                        android:textAllCaps="false"
+                        android:gravity="center" />
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-        <!-- This Device Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_lg"
-            android:paddingTop="@dimen/spacing_xl"
-            android:paddingBottom="@dimen/spacing_sm"
-            android:text="@string/sep_device"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:letterSpacing="-0.01" />
+            <!-- System Diagnostics Section -->
+            <TextView
+                android:id="@+id/sepSlotStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_xl"
+                android:paddingBottom="@dimen/spacing_sm"
+                android:text="@string/diag_title"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:letterSpacing="-0.01" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_md"
-            app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
-            
-            <androidx.core.widget.NestedScrollView 
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent">
-                <LinearLayout 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSlotStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/corner_lg"
+                app:cardElevation="@dimen/card_elevation_high"
+                app:cardBackgroundColor="@color/glass_card_background"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/glass_card_border">
+                
+                <androidx.core.widget.NestedScrollView 
                     android:layout_width="match_parent" 
-                    android:layout_height="wrap_content" 
-                    android:orientation="vertical" 
-                    android:padding="@dimen/card_padding_h">
-                    
-                    <!-- Installed Version -->
-                    <TextView 
+                    android:layout_height="match_parent">
+                    <LinearLayout 
                         android:layout_width="match_parent" 
                         android:layout_height="wrap_content" 
-                        android:text="@string/f_installed" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowInstalledVersion" 
+                        android:orientation="vertical" 
+                        android:padding="@dimen/card_padding_h">
+                        
+                        <!-- Layout Type -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/diag_layout" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowLayoutType" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_md"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Active Slot -->
+                        <TextView 
+                            android:id="@+id/lblActiveSlot" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/diag_slot" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowActiveSlot" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- This Device Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_xl"
+                android:paddingBottom="@dimen/spacing_sm"
+                android:text="@string/sep_device"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:letterSpacing="-0.01" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/corner_lg"
+                app:cardElevation="@dimen/card_elevation_high"
+                app:cardBackgroundColor="@color/glass_card_background"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/glass_card_border">
+                
+                <androidx.core.widget.NestedScrollView 
+                    android:layout_width="match_parent" 
+                    android:layout_height="match_parent">
+                    <LinearLayout 
                         android:layout_width="match_parent" 
                         android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textStyle="bold"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Model -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_model" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowDeviceModel" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Android Version -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_android" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowAndroid" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Security Patch -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_patch" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowSecurity" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Fingerprint -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_fingerprint" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowFingerprint" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:paddingBottom="@dimen/spacing_sm"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                    
-                    <!-- Kernel -->
-                    <TextView 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content" 
-                        android:text="@string/f_kernel" 
-                        android:textStyle="bold" 
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:paddingBottom="@dimen/spacing_xs" />
-                    <TextView 
-                        android:id="@+id/rowKernel" 
-                        android:layout_width="match_parent" 
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurface" />
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+                        android:orientation="vertical" 
+                        android:padding="@dimen/card_padding_h">
+                        
+                        <!-- Installed Version -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_installed" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowInstalledVersion" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Model -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_model" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowDeviceModel" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Android Version -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_android" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowAndroid" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Security Patch -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_patch" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowSecurity" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Fingerprint -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_fingerprint" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowFingerprint" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:paddingBottom="@dimen/spacing_sm"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                        
+                        <!-- Kernel -->
+                        <TextView 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content" 
+                            android:text="@string/f_kernel" 
+                            android:textStyle="bold" 
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:paddingBottom="@dimen/spacing_xs" />
+                        <TextView 
+                            android:id="@+id/rowKernel" 
+                            android:layout_width="match_parent" 
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurface" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB for Local Update -->
+    <!-- FAB for Local Update with Glass Effect -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLocalUpdate"
         android:layout_width="wrap_content"
@@ -539,7 +566,8 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         app:srcCompat="@drawable/ic_launcher_foreground"
         app:tint="?attr/colorOnPrimaryContainer"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        android:contentDescription="@string/local_update" />
+        android:backgroundTint="@color/glass_fab_background"
+        android:contentDescription="@string/local_update"
+        app:elevation="8dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,53 +13,60 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/spacing_xxl">
 
-        <!-- Maintainer Hero Section -->
-        <LinearLayout
+        <!-- Maintainer Hero Section with Glass Container -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
+            android:background="@color/glass_hero_background"
+            android:elevation="@dimen/card_elevation_high"
             android:paddingHorizontal="@dimen/spacing_lg"
             android:paddingVertical="@dimen/hero_padding_vertical">
 
-            <!-- Avatar Container -->
-            <FrameLayout
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:background="?attr/colorPrimaryContainer"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_cloud_large"
-                    android:contentDescription="@string/tab_maintainer" />
-            </FrameLayout>
-
-            <!-- Name -->
-            <TextView
-                android:id="@+id/name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:gravity="center"
-                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                android:textStyle="bold"
-                tools:text="aerocat"
-                android:letterSpacing="-0.02" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-            <!-- Handle -->
-            <TextView
-                android:id="@+id/handle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xs"
-                android:gravity="center"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                tools:text="\@aerocat" />
-        </LinearLayout>
+                <!-- Avatar Container with Glass Effect -->
+                <FrameLayout
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:background="@drawable/glass_container"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_cloud_large"
+                        android:contentDescription="@string/tab_maintainer" />
+                </FrameLayout>
+
+                <!-- Name -->
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textStyle="bold"
+                    tools:text="aerocat"
+                    android:letterSpacing="-0.02" />
+
+                <!-- Handle -->
+                <TextView
+                    android:id="@+id/handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="\@aerocat" />
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Details Section -->
         <TextView
@@ -79,8 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_md"
             app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+            app:cardElevation="@dimen/card_elevation_high"
+            app:cardBackgroundColor="@color/glass_card_background"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/glass_card_border">
             
             <LinearLayout 
                 android:layout_width="match_parent" 
@@ -142,8 +151,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_md"
             app:cardCornerRadius="@dimen/corner_lg"
-            app:cardElevation="@dimen/card_elevation"
-            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+            app:cardElevation="@dimen/card_elevation_high"
+            app:cardBackgroundColor="@color/glass_card_background"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/glass_card_border">
             
             <LinearLayout 
                 android:layout_width="match_parent" 
@@ -182,7 +193,7 @@
                     android:id="@+id/divGithub" 
                     android:layout_width="match_parent" 
                     android:layout_height="1dp" 
-                    android:background="?attr/colorOutlineVariant" 
+                    android:background="@color/glass_section_divider" 
                     android:visibility="gone" />
 
                 <!-- XDA -->
@@ -203,13 +214,13 @@
                     android:id="@+id/divXda" 
                     android:layout_width="match_parent" 
                     android:layout_height="1dp" 
-                    android:background="?attr/colorOutlineVariant" 
+                    android:background="@color/glass_section_divider" 
                     android:visibility="gone" />
 
                 <View 
                     android:layout_width="match_parent" 
                     android:layout_height="1dp" 
-                    android:background="?attr/colorOutlineVariant" />
+                    android:background="@color/glass_section_divider" />
 
                 <!-- Donate -->
                 <TextView

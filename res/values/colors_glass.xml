@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Glass morphism colors -->
+    <color name="glass_card_background">#E6FFFFFF</color>
+    <color name="glass_card_border">#40000000</color>
+    <color name="glass_fab_background">#CCFFFFFF</color>
+    <color name="glass_nav_background">#F5F5F5</color>
+    <color name="glass_toolbar_background">#E6F5F5F5</color>
+    <color name="glass_hero_background">#CCFFFFFF</color>
+    <color name="glass_section_divider">#20000000</color>
+    <color name="glass_elevation_shadow">#1A000000</color>
+    
+    <!-- Dark theme glass colors -->
+    <color name="glass_card_background_dark">#E61C1B1F</color>
+    <color name="glass_card_border_dark">#40FFFFFF</color>
+    <color name="glass_fab_background_dark">#CC1C1B1F</color>
+    <color name="glass_nav_background_dark">#1C1B1F</color>
+    <color name="glass_toolbar_background_dark">#E61C1B1F</color>
+    <color name="glass_section_divider_dark">#20FFFFFF</color>
+    <color name="glass_elevation_shadow_dark">#26000000</color>
+</resources>
