@@ -35,6 +35,21 @@ object OtaConfig {
     fun isAutoInstallEnabled(ctx: Context): Boolean =
         ctx.getSharedPreferences(PREFS_NAME, 0).getBoolean("auto_install", false)
 
+    // Snooze: hide the "update available" prompt until the next check cadence passes.
+    private const val SNOOZE_UNTIL = "snooze_until"
+
+    fun setSnoozed(ctx: Context) {
+        val hours = ctx.getSharedPreferences(PREFS_NAME, 0)
+            .getString("check_interval", "6")?.toIntOrNull() ?: 6
+        val until = System.currentTimeMillis() + hours.coerceAtLeast(1) * 3600_000L
+        prefs(ctx).edit().putLong(SNOOZE_UNTIL, until).apply()
+    }
+
+    fun isSnoozed(ctx: Context): Boolean =
+        prefs(ctx).getLong(SNOOZE_UNTIL, 0L) > System.currentTimeMillis()
+
+    fun clearSnooze(ctx: Context) = prefs(ctx).edit().putLong(SNOOZE_UNTIL, 0L).apply()
+
     /** Returns the user-configured URL, or the auto-detected default when unset/blank. */
     fun resolveJsonUrl(prefs: SharedPreferences): String =
         prefs.getString("json_url", null)

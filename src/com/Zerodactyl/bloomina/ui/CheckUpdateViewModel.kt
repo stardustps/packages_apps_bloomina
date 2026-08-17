@@ -101,6 +101,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val showReleaseSections: Boolean = false,
         val updateAvailable: Boolean = false,
         val securityUpdate: Boolean = false,
+        val snoozed: Boolean = false,
         val button: DownloadButtonState = DownloadButtonState.HIDDEN,
         val integrity: String? = null,
         val lastChecked: Long = 0L,
@@ -159,6 +160,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
     }
 
     fun check() {
+        OtaConfig.clearSnooze(app)
         _state.update {
             it.copy(
                 heroIcon = R.drawable.ic_cloud_large,
@@ -294,6 +296,22 @@ class CheckUpdateViewModel : AndroidViewModel() {
 
     fun confirmMeteredDownload() {
         activeDownload()?.let { startDownloadService(it) }
+    }
+
+    /** Hide the "update available" prompt until the next check cadence passes. */
+    fun snooze() {
+        OtaConfig.setSnoozed(app)
+        _state.update {
+            it.copy(
+                snoozed = true,
+                showReleaseSections = false,
+                downloadVisible = false,
+                button = DownloadButtonState.HIDDEN,
+                heroIcon = R.drawable.ic_status_available,
+                heroTitle = S(R.string.status_snoozed),
+                heroSubtitle = S(R.string.status_snoozed_sub)
+            )
+        }
     }
 
     fun pauseDownload() {
@@ -664,6 +682,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val securityUpdate = available && runCatching {
             cachedSec.ifBlank { "0" } > DeviceInfo.securityPatch.ifBlank { "0" }
         }.getOrDefault(false)
+        val snoozed = available && OtaConfig.isSnoozed(app)
         _state.update {
             it.copy(
                 remote = RemoteReleaseView(
@@ -674,12 +693,15 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     securityPatch = prefs.getString("cached_security", "-") ?: "-",
                     fingerprint = prefs.getString("cached_fingerprint", "-") ?: "-"
                 ),
-                showReleaseSections = available,
+                showReleaseSections = available && !snoozed,
                 heroIcon = if (available) R.drawable.ic_status_available else R.drawable.ic_status_uptodate,
-                heroTitle = if (available) S(R.string.status_update_available) else S(R.string.status_up_to_date),
-                heroSubtitle = if (available) S(R.string.status_update_available_sub, version) else S(R.string.cached_sub),
-                button = if (available) DownloadButtonState.DOWNLOAD else DownloadButtonState.HIDDEN,
+                heroTitle = if (snoozed) S(R.string.status_snoozed)
+                else if (available) S(R.string.status_update_available) else S(R.string.status_up_to_date),
+                heroSubtitle = if (snoozed) S(R.string.status_snoozed_sub)
+                else if (available) S(R.string.status_update_available_sub, version) else S(R.string.cached_sub),
+                button = if (snoozed || !available) DownloadButtonState.HIDDEN else DownloadButtonState.DOWNLOAD,
                 securityUpdate = securityUpdate,
+                snoozed = snoozed,
                 hasIncremental = useInc,
                 useIncremental = useInc,
                 changelogFull = changelogState.full,

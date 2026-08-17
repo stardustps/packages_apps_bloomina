@@ -139,6 +139,17 @@
                         android:text="@string/btn_pause"
                         android:textAllCaps="false" />
 
+                    <!-- Snooze Button (Text, shown when an update is available) -->
+                    <Button
+                        android:id="@+id/btnSnooze"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_small"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:visibility="gone"
+                        android:text="@string/btn_snooze"
+                        android:textAllCaps="false" />
+
                     <!-- Check Button (Outlined) -->
                     <Button
                         android:id="@+id/btnCheck"

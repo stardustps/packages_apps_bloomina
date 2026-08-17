@@ -68,6 +68,7 @@ class CheckUpdateFragment : Fragment() {
         b.btnCopyChangelog.setOnClickListener { copyChangelog() }
         b.btnDownload.setOnClickListener { vm.onPrimaryButtonClicked() }
         b.btnPause.setOnClickListener { vm.pauseDownload() }
+        b.btnSnooze.setOnClickListener { vm.snooze() }
         b.downloadTypeToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) vm.setUseIncremental(checkedId == R.id.chipIncremental)
         }
@@ -121,6 +122,7 @@ class CheckUpdateFragment : Fragment() {
 
         // Pause is only offered while a download is actively progressing (button hidden).
         v.btnPause.visibility = if (state.downloadVisible && state.button == CheckUpdateViewModel.DownloadButtonState.HIDDEN) View.VISIBLE else View.GONE
+        v.btnSnooze.visibility = if (state.updateAvailable && !state.snoozed && !state.downloadVisible) View.VISIBLE else View.GONE
 
         v.btnExport.visibility = if (state.updateAvailable) View.VISIBLE else View.GONE
 
@@ -360,6 +362,7 @@ class CheckUpdateFragment : Fragment() {
         val btnExport: Button = root.findViewById(R.id.btnExport)
         val btnDownload: Button = root.findViewById(R.id.btnDownload)
         val btnPause: Button = root.findViewById(R.id.btnPause)
+        val btnSnooze: Button = root.findViewById(R.id.btnSnooze)
         val btnCheck: Button = root.findViewById(R.id.btnCheck)
         val sepAvailable: TextView = root.findViewById(R.id.sepAvailable)
         val cardAvailable: MaterialCardView = root.findViewById(R.id.cardAvailable)

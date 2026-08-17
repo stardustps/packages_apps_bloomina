@@ -95,6 +95,9 @@
     <string name="btn_download">Download and install</string>
     <string name="btn_resume">Resume download</string>
     <string name="btn_pause">Pause</string>
+    <string name="btn_snooze">Snooze</string>
+    <string name="status_snoozed">Update snoozed</string>
+    <string name="status_snoozed_sub">We\'ll remind you on the next check</string>
     <string name="btn_telegram">Telegram</string>
     <string name="btn_donate">Donate</string>
 
