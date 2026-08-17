@@ -27,12 +27,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomTab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/glass_nav_background"
-        app:elevation="8dp" />
+    <include layout="@layout/floating_nav_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

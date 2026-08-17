@@ -10,18 +10,23 @@ import android.app.NotificationManager
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.Zerodactyl.bloomina.ota.DeviceInfo
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 
 /**
  * Standard Material Design shell:
  *   - MaterialToolbar gives the collapsing title.
- *   - BottomNavigationView is the standard bottom navigation bar.
+ *   - Floating navigation bar with pill shape and glass effect.
  */
 class MainActivity : AppCompatActivity() {
-
 
     private val updateFragment by lazy { CheckUpdateFragment() }
     private val maintainerFragment by lazy { MaintainerFragment() }
     private val settingsFragment by lazy { SettingsFragment() }
+
+    private var activeTab: Int = R.id.navUpdate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
@@ -30,16 +35,63 @@ class MainActivity : AppCompatActivity() {
         
         setContentView(R.layout.activity_main)
 
-        findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomTab).setOnItemSelectedListener { item ->
-            when (item.getItemId()) {
-                R.id.tab_update -> show(updateFragment, R.string.tab_check_update)
-                R.id.tab_maintainer -> show(maintainerFragment, R.string.tab_maintainer)
-                R.id.tab_settings -> show(settingsFragment, R.string.tab_settings)
-            }
-            true
-        }
+        val navUpdate = findViewById<LinearLayout>(R.id.navUpdate)
+        val navMaintainer = findViewById<LinearLayout>(R.id.navMaintainer)
+        val navSettings = findViewById<LinearLayout>(R.id.navSettings)
 
-        if (savedInstanceState == null) show(updateFragment, R.string.tab_check_update)
+        navUpdate.setOnClickListener { selectTab(R.id.navUpdate) }
+        navMaintainer.setOnClickListener { selectTab(R.id.navMaintainer) }
+        navSettings.setOnClickListener { selectTab(R.id.navSettings) }
+
+        if (savedInstanceState == null) selectTab(R.id.navUpdate)
+    }
+
+    private fun selectTab(tabId: Int) {
+        if (activeTab == tabId) return
+        activeTab = tabId
+
+        val iconUpdate = findViewById<ImageView>(R.id.iconUpdate)
+        val labelUpdate = findViewById<TextView>(R.id.labelUpdate)
+        val iconMaintainer = findViewById<ImageView>(R.id.iconMaintainer)
+        val labelMaintainer = findViewById<TextView>(R.id.labelMaintainer)
+        val iconSettings = findViewById<ImageView>(R.id.iconSettings)
+        val labelSettings = findViewById<TextView>(R.id.labelSettings)
+
+        // Reset all to inactive
+        iconUpdate.setColorFilter(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelUpdate.setTextColor(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelUpdate.textFontWeight = 400
+
+        iconMaintainer.setColorFilter(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelMaintainer.setTextColor(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelMaintainer.textFontWeight = 400
+
+        iconSettings.setColorFilter(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelSettings.setTextColor(ContextCompat.getColor(this, R.color.material_on_surface_stroke))
+        labelSettings.textFontWeight = 400
+
+        // Set active tab
+        val primaryColor = ContextCompat.getColor(this, R.color.ic_launcher_background)
+        when (tabId) {
+            R.id.navUpdate -> {
+                iconUpdate.setColorFilter(primaryColor)
+                labelUpdate.setTextColor(primaryColor)
+                labelUpdate.textFontWeight = 600
+                show(updateFragment, R.string.tab_check_update)
+            }
+            R.id.navMaintainer -> {
+                iconMaintainer.setColorFilter(primaryColor)
+                labelMaintainer.setTextColor(primaryColor)
+                labelMaintainer.textFontWeight = 600
+                show(maintainerFragment, R.string.tab_maintainer)
+            }
+            R.id.navSettings -> {
+                iconSettings.setColorFilter(primaryColor)
+                labelSettings.setTextColor(primaryColor)
+                labelSettings.textFontWeight = 600
+                show(settingsFragment, R.string.tab_settings)
+            }
+        }
     }
 
     private fun checkUpdateCompleted() {
