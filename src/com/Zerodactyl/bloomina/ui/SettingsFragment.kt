@@ -32,6 +32,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        findPreference<Preference>("update_history")?.setOnPreferenceClickListener {
+            showUpdateHistory()
+            true
+        }
+
         findPreference<androidx.preference.SwitchPreferenceCompat>("auto_check")
             ?.setOnPreferenceChangeListener { _, _ ->
                 if (UpdateScheduler.isEnabled(requireContext())) {
@@ -49,5 +54,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 UpdateScheduler.schedule(requireContext())
                 true
             }
+    }
+
+    private fun showUpdateHistory() {
+        val history = OtaConfig.getUpdateHistory(requireContext())
+        val dialog = android.app.AlertDialog.Builder(requireContext())
+            .setTitle(R.string.pref_update_history)
+        if (history.isEmpty()) {
+            dialog.setMessage(R.string.update_history_empty)
+        } else {
+            val items = history.map { entry ->
+                val date = if (entry.timestamp > 0) {
+                    java.text.DateFormat.getDateInstance().format(java.util.Date(entry.timestamp))
+                } else {
+                    ""
+                }
+                "${entry.version}  ·  $date"
+            }.toTypedArray()
+            dialog.setItems(items) { _, _ -> }
+        }
+        dialog.setPositiveButton(android.R.string.ok, null).show()
     }
 }

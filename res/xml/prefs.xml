@@ -27,6 +27,10 @@
 
     <PreferenceCategory android:title="Maintenance">
         <Preference
+            android:key="update_history"
+            android:title="@string/pref_update_history"
+            android:summary="@string/pref_update_history_summary" />
+        <Preference
             android:key="reset"
             android:title="Reset configurations"
             android:summary="Clear all saved bloomina flags and restore defaults" />

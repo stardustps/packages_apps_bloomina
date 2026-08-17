@@ -3,6 +3,8 @@ package com.Zerodactyl.bloomina.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.Zerodactyl.bloomina.ota.DeviceInfo
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 
 /**
@@ -80,5 +82,37 @@ object OtaConfig {
             installType = p.getString(ACTIVE_OTA_TYPE, "") ?: "",
             done = p.getBoolean(ACTIVE_OTA_DONE, false),
         )
+    }
+
+    // Update history (builds this device has applied).
+    private const val UPDATE_HISTORY = "update_history"
+    private const val MAX_HISTORY = 50
+
+    data class AppliedUpdate(val version: String, val timestamp: Long)
+
+    fun recordAppliedUpdate(ctx: Context, version: String) {
+        if (version.isBlank()) return
+        val p = prefs(ctx)
+        val arr = runCatching { JSONArray(p.getString(UPDATE_HISTORY, "[]")) }
+            .getOrDefault(JSONArray())
+        val obj = JSONObject().apply {
+            put("version", version)
+            put("ts", System.currentTimeMillis())
+        }
+        arr.put(obj)
+        while (arr.length() > MAX_HISTORY) arr.remove(0)
+        p.edit().putString(UPDATE_HISTORY, arr.toString()).apply()
+    }
+
+    fun getUpdateHistory(ctx: Context): List<AppliedUpdate> {
+        val p = prefs(ctx)
+        val arr = runCatching { JSONArray(p.getString(UPDATE_HISTORY, "[]")) }
+            .getOrDefault(JSONArray())
+        val list = ArrayList<AppliedUpdate>()
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            list += AppliedUpdate(o.optString("version", "?"), o.optLong("ts", 0L))
+        }
+        return list.asReversed()
     }
 }

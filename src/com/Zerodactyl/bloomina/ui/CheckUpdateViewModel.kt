@@ -334,6 +334,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     }
                     OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
+                    OtaConfig.recordAppliedUpdate(app, manifest?.release?.version ?: "")
                     deleteLocalZipIfNeeded(file)
                 }
                 is InstallResult.AppliedBackgroundRebootRequired -> {
@@ -347,6 +348,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     }
                     OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
+                    OtaConfig.recordAppliedUpdate(app, manifest?.release?.version ?: "")
                     deleteLocalZipIfNeeded(file)
                     _events.trySend(CheckEvent.ShowRebootSheet)
                 }
