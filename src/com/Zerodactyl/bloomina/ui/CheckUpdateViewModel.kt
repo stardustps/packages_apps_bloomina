@@ -398,7 +398,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
             }
             return
         }
-        if (!caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
+        val unmeteredOnly = app.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
+            .getBoolean("download_unmetered_only", true)
+        if (!caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) && unmeteredOnly) {
             _events.trySend(CheckEvent.ConfirmMeteredDownload)
             return
         }

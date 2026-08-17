@@ -29,6 +29,8 @@
     <string name="pref_auto_check_summary">Periodically check for new builds in the background</string>
     <string name="pref_check_interval">Check frequency</string>
     <string name="pref_check_interval_summary">How often bloomina looks for updates</string>
+    <string name="pref_download_policy">Unmetered network only</string>
+    <string name="pref_download_policy_summary">Warn before downloading over cellular data</string>
     <string name="pref_update_history">Update history</string>
     <string name="pref_update_history_summary">Builds installed on this device</string>
     <string name="update_history_empty">No updates recorded yet</string>

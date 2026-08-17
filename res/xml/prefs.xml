@@ -25,6 +25,14 @@
             android:dependency="auto_check" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Downloads">
+        <SwitchPreferenceCompat
+            android:key="download_unmetered_only"
+            android:title="@string/pref_download_policy"
+            android:summary="@string/pref_download_policy_summary"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Maintenance">
         <Preference
             android:key="update_history"
