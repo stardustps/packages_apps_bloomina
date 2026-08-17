@@ -12,3 +12,15 @@ allow priv_app block_device:lnk_file { read getattr };
 # Allow Bloomina to access the UpdateEngine for A/B background updates
 allow priv_app update_engine_service:service_manager find;
 binder_call(priv_app, update_engine)
+
+# --- Bloomina ROM identity properties (ro.bloomina.*) -----------------------
+# Without this labeling the props fall under default_prop and init/vendor_init
+# is denied { set }, so the stamps are never published (see boot avc denials).
+type bloomina_prop, property_type;
+
+# Allow init / vendor_init to publish the ro.bloomina.* build stamps
+set_prop(init, bloomina_prop)
+set_prop(vendor_init, bloomina_prop)
+
+# Allow Bloomina (priv_app) to read its own ROM identity properties
+get_prop(priv_app, bloomina_prop)

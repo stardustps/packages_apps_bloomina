@@ -1,0 +1,7 @@
+# Bloomina Updater ROM identity properties
+# Prefix match covers:
+#   ro.bloomina.rom
+#   ro.bloomina.maintainer
+#   ro.bloomina.rom.ver
+#   ro.bloomina.rom.ver.code
+ro.bloomina.    u:object_r:bloomina_prop:s0
