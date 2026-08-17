@@ -144,4 +144,10 @@
     <string name="hero_downloading_title">Downloading update</string>
     <string name="hero_installing_title">Preparing to install</string>
     <string name="hero_error_title">Couldn\'t check for updates</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">System Update</string>
+    <string name="tile_check">Check update</string>
+    <string name="tile_update_available">Update available</string>
+    <string name="tile_up_to_date">Your software is up to date</string>
 </resources>
