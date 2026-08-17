@@ -20,6 +20,10 @@
     <string name="label_diff">Diff</string>
     <string name="changelog_summary">%1$d new · %2$d removed</string>
     <string name="changelog_summary_none">Up to date with this build</string>
+    <string name="badge_new">New</string>
+    <string name="desc_hero_icon">Update status icon</string>
+    <string name="desc_download_type">Choose full or incremental download</string>
+    <string name="desc_changelog_view">Choose diff or full changelog</string>
 
     <string name="pref_auto_check">Automatic update checks</string>
     <string name="pref_auto_check_summary">Periodically check for new builds in the background</string>

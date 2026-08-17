@@ -45,6 +45,7 @@
                             android:layout_width="@dimen/hero_icon_size"
                             android:layout_height="@dimen/hero_icon_size"
                             android:src="@drawable/ic_cloud_large"
+                            android:contentDescription="@string/desc_hero_icon"
                             app:tint="?attr/colorOnPrimaryContainer" />
                     </FrameLayout>
 
@@ -141,19 +142,40 @@
             </FrameLayout>
 
             <!-- Available Build Section -->
-            <TextView
-                android:id="@+id/sepAvailable"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:paddingHorizontal="@dimen/spacing_lg"
                 android:paddingTop="@dimen/spacing_xl"
-                android:paddingBottom="@dimen/spacing_sm"
-                android:text="@string/sep_available"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
-                android:textStyle="bold"
-                android:textColor="?attr/colorPrimary"
-                android:letterSpacing="-0.01"
-                android:visibility="gone" />
+                android:paddingBottom="@dimen/spacing_sm">
+
+                <TextView
+                    android:id="@+id/sepAvailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sep_available"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorPrimary"
+                    android:letterSpacing="-0.01" />
+
+                <TextView
+                    android:id="@+id/badgeNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:paddingHorizontal="@dimen/spacing_sm"
+                    android:paddingVertical="2dp"
+                    android:text="@string/badge_new"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/badge_new_bg"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAvailable"
@@ -196,6 +218,7 @@
                             android:id="@+id/downloadTypeToggle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/desc_download_type"
                             app:singleSelection="true"
                             app:selectionRequired="true">
 
@@ -463,6 +486,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/card_padding_h"
                         android:layout_marginTop="@dimen/spacing_sm"
+                        android:contentDescription="@string/desc_changelog_view"
                         app:singleSelection="true"
                         app:selectionRequired="true"
                         android:visibility="gone">
