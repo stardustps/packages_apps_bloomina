@@ -139,7 +139,9 @@
     <string name="export_not_found">Update file not found</string>
     <string name="export_failed">Export failed: %1$s</string>
     <string name="copied">Copied to clipboard</string>
-    <string name="download_speed">%1$d%% · %2$s</string>
+    <string name="download_speed">%1$d%% · %2$s · %3$s left</string>
+    <string name="status_retrying">Connection lost — retrying…</string>
+    <string name="notif_retrying">Retrying download…</string>
     <string name="cached_sub">Last known state (offline)</string>
     <string name="update_done_title">Update complete</string>
     <string name="update_done_text">Your device has been updated. Enjoy!</string>

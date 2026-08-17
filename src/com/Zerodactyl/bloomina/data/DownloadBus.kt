@@ -21,6 +21,7 @@ object DownloadBus {
         val total: Long = 0L,
         val file: String? = null,
         val error: String? = null,
+        val retrying: Boolean = false,
     )
 
     private val _snapshot = MutableStateFlow<Snapshot?>(null)

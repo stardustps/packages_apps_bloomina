@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -65,58 +66,76 @@ class DownloadService : Service() {
         createChannel()
         startForeground(NOTIF_ID, buildNotification(0, getString(R.string.notif_preparing), indeterminate = true))
         job = scope.launch {
-            try {
-                repo.download(dl, dest).collect { st ->
-                    when (st) {
-                        is DownloadState.Progress -> {
-                            val pct = if (st.total > 0) ((st.bytes * 100) / st.total).toInt() else 0
-                            DownloadBus.post(
-                                DownloadBus.Snapshot(
-                                    status = DownloadBus.Status.DOWNLOADING,
-                                    bytes = st.bytes,
-                                    total = st.total,
-                                ),
-                            )
-                            updateNotification(pct, formatSize(st.bytes) + " / " + formatSize(st.total))
-                        }
-                        is DownloadState.Done -> {
-                            DownloadBus.post(
-                                DownloadBus.Snapshot(
-                                    status = DownloadBus.Status.DONE,
-                                    total = dest.length(),
-                                    file = dest.absolutePath,
-                                ),
-                            )
-                            DownloadBus.pendingInstallPath = dest.absolutePath
-                            OtaConfig.markActiveDownloadDone(this@DownloadService)
-                            showResultNotification(
-                                title = getString(R.string.notif_done_title),
-                                text = getString(R.string.notif_done_text),
-                            )
-                            stopForeground(STOP_FOREGROUND_DETACH)
-                            stopSelf()
-                        }
-                        is DownloadState.Failed -> {
-                            DownloadBus.post(
-                                DownloadBus.Snapshot(
-                                    status = DownloadBus.Status.FAILED,
-                                    error = st.reason,
-                                ),
-                            )
-                            showResultNotification(
-                                title = getString(R.string.notif_failed_title),
-                                text = st.reason,
-                            )
-                            stopSelf()
+            var attempt = 0
+            while (true) {
+                try {
+                    repo.download(dl, dest).collect { st ->
+                        when (st) {
+                            is DownloadState.Progress -> {
+                                val pct = if (st.total > 0) ((st.bytes * 100) / st.total).toInt() else 0
+                                DownloadBus.post(
+                                    DownloadBus.Snapshot(
+                                        status = DownloadBus.Status.DOWNLOADING,
+                                        bytes = st.bytes,
+                                        total = st.total,
+                                    ),
+                                )
+                                updateNotification(pct, formatSize(st.bytes) + " / " + formatSize(st.total))
+                            }
+                            is DownloadState.Done -> {
+                                DownloadBus.post(
+                                    DownloadBus.Snapshot(
+                                        status = DownloadBus.Status.DONE,
+                                        total = dest.length(),
+                                        file = dest.absolutePath,
+                                    ),
+                                )
+                                DownloadBus.pendingInstallPath = dest.absolutePath
+                                OtaConfig.markActiveDownloadDone(this@DownloadService)
+                                showResultNotification(
+                                    title = getString(R.string.notif_done_title),
+                                    text = getString(R.string.notif_done_text),
+                                )
+                                stopForeground(STOP_FOREGROUND_DETACH)
+                                stopSelf()
+                            }
+                            is DownloadState.Failed -> {
+                                DownloadBus.post(
+                                    DownloadBus.Snapshot(
+                                        status = DownloadBus.Status.FAILED,
+                                        error = st.reason,
+                                    ),
+                                )
+                                showResultNotification(
+                                    title = getString(R.string.notif_failed_title),
+                                    text = st.reason,
+                                )
+                                stopSelf()
+                            }
                         }
                     }
+                    break
+                } catch (_: CancellationException) {
+                    throw _ // Paused — handled by pause().
+                } catch (e: Exception) {
+                    if (++attempt > MAX_ATTEMPTS) {
+                        DownloadBus.post(DownloadBus.Snapshot(DownloadBus.Status.FAILED, error = e.message))
+                        showResultNotification(getString(R.string.notif_failed_title), e.message ?: "")
+                        stopSelf()
+                        break
+                    }
+                    // Transient (e.g. network drop): brief backoff, then range-resume from the
+                    // partial file. The foreground notification stays up the whole time.
+                    DownloadBus.post(
+                        DownloadBus.Snapshot(
+                            status = DownloadBus.Status.DOWNLOADING,
+                            bytes = dest.length(),
+                            retrying = true,
+                        ),
+                    )
+                    updateNotification(0, getString(R.string.notif_retrying))
+                    delay(RETRY_DELAY_MS)
                 }
-            } catch (_: CancellationException) {
-                // Paused — handled by pause().
-            } catch (e: Exception) {
-                DownloadBus.post(DownloadBus.Snapshot(DownloadBus.Status.FAILED, error = e.message))
-                showResultNotification(getString(R.string.notif_failed_title), e.message ?: "")
-                stopSelf()
             }
         }
     }
@@ -201,5 +220,7 @@ class DownloadService : Service() {
         const val EXTRA_DEST = "extra_dest"
         const val NOTIF_ID = 1001
         const val CHANNEL_ID = "ota_download"
+        const val MAX_ATTEMPTS = 3
+        const val RETRY_DELAY_MS = 15_000L
     }
 }

@@ -456,6 +456,8 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 downLastMs = now
                 downLastBytes = snap.bytes
                 val speedStr = if (speed > 0) formatBytes(speed.toLong()) + "/s" else "—"
+                val etaStr = if (speed > 0 && snap.total > 0) formatEta(((snap.total - snap.bytes) / speed).toLong()) else "—"
+                val sub = if (snap.retrying) S(R.string.status_retrying) else S(R.string.download_speed, pct, speedStr, etaStr)
                 _state.update {
                     it.copy(
                         downloadVisible = true,
@@ -464,7 +466,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                         button = DownloadButtonState.HIDDEN,
                         heroIcon = R.drawable.ic_status_available,
                         heroTitle = S(R.string.status_downloading),
-                        heroSubtitle = S(R.string.download_speed, pct, speedStr)
+                        heroSubtitle = sub
                     )
                 }
             }
@@ -755,5 +757,12 @@ class CheckUpdateViewModel : AndroidViewModel() {
         bytes >= 1L shl 30 -> String.format(Locale.US, "%.2f GB", bytes / (1L shl 30).toDouble())
         bytes >= 1L shl 20 -> String.format(Locale.US, "%.0f MB", bytes / (1L shl 20).toDouble())
         else -> String.format(Locale.US, "%.0f KB", bytes / 1024.0)
+    }
+
+    private fun formatEta(seconds: Long): String {
+        if (seconds <= 0) return "—"
+        val m = seconds / 60
+        val s = seconds % 60
+        return if (m > 0) "${m}m ${s}s" else "${s}s"
     }
 }
