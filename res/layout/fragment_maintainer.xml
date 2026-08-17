@@ -11,125 +11,216 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="96dp">
+        android:paddingBottom="@dimen/spacing_xxl">
 
+        <!-- Maintainer Hero Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="32dp">
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingVertical="@dimen/hero_padding_vertical">
 
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_cloud_large"
-                android:contentDescription="@string/tab_maintainer" />
+            <!-- Avatar Container -->
+            <FrameLayout
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="?attr/colorPrimaryContainer"
+                android:gravity="center">
 
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_cloud_large"
+                    android:contentDescription="@string/tab_maintainer" />
+            </FrameLayout>
+
+            <!-- Name -->
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_md"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                tools:text="aerocat" />
+                android:textStyle="bold"
+                tools:text="aerocat"
+                android:letterSpacing="-0.02" />
 
+            <!-- Handle -->
             <TextView
                 android:id="@+id/handle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 tools:text="\@aerocat" />
         </LinearLayout>
 
+        <!-- Details Section -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingTop="@dimen/spacing_xl"
+            android:paddingBottom="@dimen/spacing_sm"
             android:text="@string/sep_details"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="?attr/colorPrimary" />
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:letterSpacing="-0.01" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="?attr/colorSurfaceContainer">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/f_rom" android:textStyle="bold" />
-                <TextView android:id="@+id/rom" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="8dp" />
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/f_device" android:textStyle="bold" />
-                <TextView android:id="@+id/device" android:layout_width="match_parent" android:layout_height="wrap_content" />
+            android:layout_marginHorizontal="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+            
+            <LinearLayout 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:orientation="vertical" 
+                android:padding="@dimen/card_padding_h">
+                
+                <!-- ROM -->
+                <TextView 
+                    android:layout_width="match_parent" 
+                    android:layout_height="wrap_content" 
+                    android:text="@string/f_rom" 
+                    android:textStyle="bold" 
+                    android:textAppearance="?attr/textAppearanceLabelLarge"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:paddingBottom="@dimen/spacing_xs" />
+                <TextView 
+                    android:id="@+id/rom" 
+                    android:layout_width="match_parent" 
+                    android:layout_height="wrap_content" 
+                    android:paddingBottom="@dimen/spacing_md"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface" />
+                
+                <!-- Device -->
+                <TextView 
+                    android:layout_width="match_parent" 
+                    android:layout_height="wrap_content" 
+                    android:text="@string/f_device" 
+                    android:textStyle="bold" 
+                    android:textAppearance="?attr/textAppearanceLabelLarge"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:paddingBottom="@dimen/spacing_xs" />
+                <TextView 
+                    android:id="@+id/device" 
+                    android:layout_width="match_parent" 
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Contact Section -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="8dp"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingTop="@dimen/spacing_xl"
+            android:paddingBottom="@dimen/spacing_sm"
             android:text="@string/sep_contact"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="?attr/colorPrimary" />
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:letterSpacing="-0.01" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="?attr/colorSurfaceContainer">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            android:layout_marginHorizontal="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/corner_lg"
+            app:cardElevation="@dimen/card_elevation"
+            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+            
+            <LinearLayout 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:orientation="vertical">
+                
+                <!-- Telegram -->
                 <TextView
                     android:id="@+id/btnTelegram"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_height="@dimen/list_item_height"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    android:gravity="center_vertical"
                     android:text="@string/btn_telegram"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorPrimary"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground" />
+
+                <!-- GitHub -->
                 <TextView
                     android:id="@+id/btnGithub"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_height="@dimen/list_item_height"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    android:gravity="center_vertical"
                     android:text="GitHub"
                     android:visibility="gone"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorPrimary"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground" />
-                <View android:id="@+id/divGithub" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" android:visibility="gone" />
+                <View 
+                    android:id="@+id/divGithub" 
+                    android:layout_width="match_parent" 
+                    android:layout_height="1dp" 
+                    android:background="?attr/colorOutlineVariant" 
+                    android:visibility="gone" />
+
+                <!-- XDA -->
                 <TextView
                     android:id="@+id/btnXda"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_height="@dimen/list_item_height"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    android:gravity="center_vertical"
                     android:text="XDA Thread"
                     android:visibility="gone"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorPrimary"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground" />
-                <View android:id="@+id/divXda" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" android:visibility="gone" />
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
+                <View 
+                    android:id="@+id/divXda" 
+                    android:layout_width="match_parent" 
+                    android:layout_height="1dp" 
+                    android:background="?attr/colorOutlineVariant" 
+                    android:visibility="gone" />
+
+                <View 
+                    android:layout_width="match_parent" 
+                    android:layout_height="1dp" 
+                    android:background="?attr/colorOutlineVariant" />
+
+                <!-- Donate -->
                 <TextView
                     android:id="@+id/btnDonate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_height="@dimen/list_item_height"
+                    android:paddingHorizontal="@dimen/list_item_padding"
+                    android:gravity="center_vertical"
                     android:text="@string/btn_donate"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorPrimary"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground" />

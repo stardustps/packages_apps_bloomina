@@ -1,3 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Card padding -->
     <dimen name="card_padding_h">24dp</dimen>
+    
+    <!-- Spacing scale (M3 Expressive) -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+    
+    <!-- Button heights -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height_small">40dp</dimen>
+    
+    <!-- Card elevation -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation_high">6dp</dimen>
+    
+    <!-- Corner radius -->
+    <dimen name="corner_sm">8dp</dimen>
+    <dimen name="corner_md">12dp</dimen>
+    <dimen name="corner_lg">16dp</dimen>
+    <dimen name="corner_xl">24dp</dimen>
+    
+    <!-- Hero section -->
+    <dimen name="hero_icon_size">72dp</dimen>
+    <dimen name="hero_padding_vertical">40dp</dimen>
+    
+    <!-- FAB -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin_bottom">120dp</dimen>
+    
+    <!-- Navigation bar -->
+    <dimen name="nav_bar_height">56dp</dimen>
+    
+    <!-- List item height -->
+    <dimen name="list_item_height">56dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
 </resources>

@@ -7,7 +7,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:elevation="0dp">
         
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -15,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
             app:subtitle="@string/settings_entry_summary"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="scroll|enterAlways" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -29,6 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/menu_bottom_tabs" />
+        app:elevation="8dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

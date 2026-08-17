@@ -4,6 +4,72 @@
         <item name="android:fontFamily">@font/google_sans_flex</item>
         <item name="fontFamily">@font/google_sans_flex</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
+        
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/ic_launcher_background</item>
+        <item name="onColor">?attr/colorOnPrimary</item>
+        
+        <!-- Surface colors for containers -->
+        <item name="colorSurface">?attr/colorSurface</item>
+        <item name="colorSurfaceContainerHighest">?attr/colorSurfaceContainerHighest</item>
+        <item name="colorOutline">?attr/colorOutline</item>
+        
+        <!-- Button styles -->
+        <item name="materialButtonStyle">@style/Widget.bloomina.Button</item>
+        <item name="materialCardViewStyle">@style/CardView.bloomina</item>
+        <item name="floatingActionButtonStyle">@style/Widget.bloomina.FloatingActionButton</item>
+        
+        <!-- Navigation bar styling -->
+        <item name="bottomNavigationStyle">@style/Widget.bloomina.BottomNavigation</item>
+        
+        <!-- Toolbar styling -->
+        <item name="toolbarStyle">@style/Widget.bloomina.Toolbar</item>
+    </style>
+
+    <!-- Button styles -->
+    <style name="Widget.bloomina.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="iconPadding">8dp</item>
+    </style>
+
+    <style name="Widget.bloomina.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="Widget.bloomina.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <!-- Card styles -->
+    <style name="CardView.bloomina" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainer</item>
+    </style>
+
+    <!-- FAB styles -->
+    <style name="Widget.bloomina.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="fabSize">normal</item>
+        <item name="maxImageSize">24dp</item>
+        <item name="tint">?attr/colorOnPrimaryContainer</item>
+    </style>
+
+    <!-- Bottom navigation -->
+    <style name="Widget.bloomina.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/TextAppearance.bloomina.Label.Active</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.bloomina.Label.Inactive</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="Widget.bloomina.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.bloomina.Title</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.bloomina.Subtitle</item>
     </style>
 </resources>
