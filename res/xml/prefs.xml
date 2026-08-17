@@ -44,6 +44,10 @@
             android:title="@string/pref_update_history"
             android:summary="@string/pref_update_history_summary" />
         <Preference
+            android:key="install_log"
+            android:title="@string/pref_install_log"
+            android:summary="@string/pref_install_log_summary" />
+        <Preference
             android:key="export_settings"
             android:title="@string/pref_export_settings"
             android:summary="@string/pref_export_settings_summary" />

@@ -119,4 +119,26 @@ object OtaConfig {
         }
         return list.asReversed()
     }
+
+    // Last install result (for the in-app log viewer).
+    private const val INSTALL_LOG = "install_log"
+
+    data class InstallRecord(val timestamp: Long, val success: Boolean, val detail: String)
+
+    fun recordInstallLog(ctx: Context, success: Boolean, detail: String) {
+        val obj = JSONObject().apply {
+            put("ts", System.currentTimeMillis())
+            put("success", success)
+            put("detail", detail)
+        }
+        prefs(ctx).edit().putString(INSTALL_LOG, obj.toString()).apply()
+    }
+
+    fun getInstallLog(ctx: Context): InstallRecord? {
+        val s = prefs(ctx).getString(INSTALL_LOG, null) ?: return null
+        return runCatching {
+            val o = JSONObject(s)
+            InstallRecord(o.optLong("ts", 0L), o.optBoolean("success"), o.optString("detail", ""))
+        }.getOrNull()
+    }
 }

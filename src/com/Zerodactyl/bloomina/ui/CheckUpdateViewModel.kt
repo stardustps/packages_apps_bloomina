@@ -349,6 +349,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
                     OtaConfig.recordAppliedUpdate(app, manifest?.release?.version ?: "")
+                    OtaConfig.recordInstallLog(app, true, manifest?.release?.version ?: "update")
                     deleteLocalZipIfNeeded(file)
                 }
                 is InstallResult.AppliedBackgroundRebootRequired -> {
@@ -363,10 +364,12 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     OtaConfig.clearActiveDownload(app)
                     persistPendingVersion()
                     OtaConfig.recordAppliedUpdate(app, manifest?.release?.version ?: "")
+                    OtaConfig.recordInstallLog(app, true, manifest?.release?.version ?: "update")
                     deleteLocalZipIfNeeded(file)
                     _events.trySend(CheckEvent.ShowRebootSheet)
                 }
                 is InstallResult.Failed -> {
+                    OtaConfig.recordInstallLog(app, false, result.why)
                     _state.update {
                         it.copy(
                             heroIcon = R.drawable.ic_status_error,

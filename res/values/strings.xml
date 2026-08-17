@@ -45,6 +45,12 @@
     <string name="pref_update_history">Update history</string>
     <string name="pref_update_history_summary">Builds installed on this device</string>
     <string name="update_history_empty">No updates recorded yet</string>
+    <string name="pref_install_log">Last install result</string>
+    <string name="pref_install_log_summary">Details of the most recent update attempt</string>
+    <string name="install_log_empty">No install attempts recorded yet</string>
+    <string name="install_log_success">Succeeded</string>
+    <string name="install_log_failed">Failed</string>
+    <string name="install_log_line">%1$s\n%2$s\n\n%3$s</string>
     <string-array name="check_interval_entries">
         <item>Every 6 hours</item>
         <item>Every 12 hours</item>

@@ -49,6 +49,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        findPreference<Preference>("install_log")?.setOnPreferenceClickListener {
+            showInstallLog()
+            true
+        }
+
         findPreference<Preference>("export_settings")?.setOnPreferenceClickListener {
             exportSettings()
             true
@@ -96,6 +101,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
             dialog.setItems(items) { _, _ -> }
         }
         dialog.setPositiveButton(android.R.string.ok, null).show()
+    }
+
+    private fun showInstallLog() {
+        val rec = OtaConfig.getInstallLog(requireContext())
+        val msg = if (rec == null) {
+            getString(R.string.install_log_empty)
+        } else {
+            val whenStr = if (rec.timestamp > 0) {
+                java.text.DateFormat.getDateTimeInstance().format(java.util.Date(rec.timestamp))
+            } else {
+                ""
+            }
+            val outcome = if (rec.success) getString(R.string.install_log_success) else getString(R.string.install_log_failed)
+            getString(R.string.install_log_line, whenStr, outcome, rec.detail)
+        }
+        android.app.AlertDialog.Builder(requireContext())
+            .setTitle(R.string.pref_install_log)
+            .setMessage(msg)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     private fun exportSettings() {
