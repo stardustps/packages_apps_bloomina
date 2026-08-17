@@ -9,14 +9,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
+import com.Zerodactyl.bloomina.data.OtaConfig
 import com.Zerodactyl.bloomina.data.UpdateManifest
 import com.Zerodactyl.bloomina.data.UpdateRepository
 import com.Zerodactyl.bloomina.ota.VersionCheck
-import com.Zerodactyl.bloomina.ui.CheckUpdateFragment
 import com.Zerodactyl.bloomina.ui.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.SupervisorJob
+
+/** Process-lifetime scope for background alarm-driven checks. */
+private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
 /**
  * Schedules a periodic background update check and posts a notification when a newer
@@ -44,11 +49,13 @@ object UpdateScheduler {
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val pending = goAsync()
-        CoroutineScope(Dispatchers.IO).launch {
+        // Structured scope with a SupervisorJob so a failure in one check never cancels the
+        // receiver's ability to schedule the next. pending.finish() ends the broadcast's
+        // extended lifetime once the work completes.
+        scope.launch {
             try {
-                val prefs = context.getSharedPreferences("bloomina", 0)
-                val url = prefs.getString("json_url", null)?.trim()?.takeIf { it.isNotEmpty() }
-                    ?: CheckUpdateFragment.DEFAULT_JSON_URL
+                val prefs = context.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
+                val url = OtaConfig.resolveJsonUrl(prefs)
                 UpdateRepository().fetchManifest(url, connectTimeout = 5000, readTimeout = 5000)
                     .onSuccess { m ->
                         if (VersionCheck.evaluate(m.release).updateAvailable) notifyUpdate(context, m)
