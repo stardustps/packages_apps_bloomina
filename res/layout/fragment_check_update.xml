@@ -445,6 +445,46 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/changelogSummary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/card_padding_h"
+                        android:paddingTop="@dimen/card_padding_h"
+                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorPrimary"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/changelogToggle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/card_padding_h"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        app:singleSelection="true"
+                        app:selectionRequired="true"
+                        android:visibility="gone">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/chipChangelogDiff"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_diff"
+                            android:checkable="true" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/chipChangelogFull"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_full"
+                            android:checkable="true" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
                     
                     <TextView
                         android:id="@+id/changelog"

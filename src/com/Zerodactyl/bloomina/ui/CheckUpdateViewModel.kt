@@ -69,11 +69,24 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val size: String,
         val androidVersion: String,
         val securityPatch: String,
-        val fingerprint: String,
-        val changelog: CharSequence
+        val fingerprint: String
     )
 
     enum class DownloadButtonState { HIDDEN, DOWNLOAD, RETRY, INSTALL, REBOOT }
+
+    enum class ChangelogMode { DIFF, FULL }
+
+    enum class ChangelogKind { NEW, REMOVED, SAME }
+
+    data class ChangelogEntry(val kind: ChangelogKind, val text: String)
+
+    private data class ChangelogState(
+        val full: CharSequence,
+        val diff: List<ChangelogEntry>,
+        val newCount: Int,
+        val removedCount: Int,
+        val mode: ChangelogMode
+    )
 
     data class CheckUiState(
         val heroIcon: Int = R.drawable.ic_cloud_large,
@@ -92,7 +105,12 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val lastChecked: Long = 0L,
         val error: Boolean = false,
         val hasIncremental: Boolean = false,
-        val useIncremental: Boolean = false
+        val useIncremental: Boolean = false,
+        val changelogFull: CharSequence = "",
+        val changelogDiff: List<ChangelogEntry> = emptyList(),
+        val changelogNew: Int = 0,
+        val changelogRemoved: Int = 0,
+        val changelogView: ChangelogMode = ChangelogMode.FULL
     )
 
     sealed interface CheckEvent {
@@ -153,7 +171,11 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     incrementalDownload = r.incrementalDownload
                     val chosen = r.incrementalDownload ?: r.download
                     val useInc = r.incrementalDownload != null
-                    val changelog = buildChangelog(r.changelog)
+                    val baseline = app.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
+                        .getString("cached_changelog", "")
+                        ?.lineSequence()?.map { it.trim() }?.filter { it.isNotBlank() }
+                        ?.toList() ?: emptyList()
+                    val changelogState = buildChangelog(r.changelog, baseline)
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
                     _state.update {
                         it.copy(
@@ -163,12 +185,16 @@ class CheckUpdateViewModel : AndroidViewModel() {
                                 size = formatBytes(chosen.sizeBytes),
                                 androidVersion = r.androidVersion,
                                 securityPatch = r.securityPatch,
-                                fingerprint = r.fingerprint,
-                                changelog = changelog
+                                fingerprint = r.fingerprint
                             ),
                             installed = it.installed.copy(installed = verdict.installed),
                             hasIncremental = useInc,
-                            useIncremental = useInc
+                            useIncremental = useInc,
+                            changelogFull = changelogState.full,
+                            changelogDiff = changelogState.diff,
+                            changelogNew = changelogState.newCount,
+                            changelogRemoved = changelogState.removedCount,
+                            changelogView = changelogState.mode
                         )
                     }
 
@@ -520,12 +546,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
             return
         }
         val size = prefs.getString("cached_size", "0")?.toLongOrNull() ?: 0L
-        val changelog = prefs.getString("cached_changelog", "") ?: ""
-        val changelogText = if (changelog.isBlank()) {
-            S(R.string.changelog_empty)
-        } else {
-            Html.fromHtml(changelog.split("\n").joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
-        }
+        val cachedLines = prefs.getString("cached_changelog", "")?.lineSequence()
+            ?.map { it.trim() }?.filter { it.isNotBlank() }?.toList() ?: emptyList()
+        val changelogState = buildChangelog(cachedLines, cachedLines)
         val inc = restoreDownload(prefs, "cached_inc_")
         incrementalDownload = inc
         val useInc = inc != null
@@ -539,8 +562,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                     size = formatBytes(chosenSize),
                     androidVersion = prefs.getString("cached_android", "-") ?: "-",
                     securityPatch = prefs.getString("cached_security", "-") ?: "-",
-                    fingerprint = prefs.getString("cached_fingerprint", "-") ?: "-",
-                    changelog = changelogText
+                    fingerprint = prefs.getString("cached_fingerprint", "-") ?: "-"
                 ),
                 showReleaseSections = available,
                 heroIcon = if (available) R.drawable.ic_status_available else R.drawable.ic_status_uptodate,
@@ -548,7 +570,12 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 heroSubtitle = if (available) S(R.string.status_update_available_sub, version) else S(R.string.cached_sub),
                 button = if (available) DownloadButtonState.DOWNLOAD else DownloadButtonState.HIDDEN,
                 hasIncremental = useInc,
-                useIncremental = useInc
+                useIncremental = useInc,
+                changelogFull = changelogState.full,
+                changelogDiff = changelogState.diff,
+                changelogNew = changelogState.newCount,
+                changelogRemoved = changelogState.removedCount,
+                changelogView = changelogState.mode
             )
         }
     }
@@ -617,12 +644,42 @@ class CheckUpdateViewModel : AndroidViewModel() {
 
     // ---- Helpers ------------------------------------------------------------
 
-    private fun buildChangelog(lines: List<String>): CharSequence =
-        if (lines.isEmpty()) {
+    /**
+     * Builds the changelog presentation. [incoming] is the new build's notes; [baseline] is the
+     * last-known (installed/previous) build's notes. When they differ we default to a color-coded
+     * Diff view (NEW / REMOVED / SAME); otherwise a plain Full view.
+     */
+    private fun buildChangelog(incoming: List<String>, baseline: List<String>): ChangelogState {
+        val full = if (incoming.isEmpty()) {
             S(R.string.changelog_empty)
         } else {
-            Html.fromHtml(lines.joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+            Html.fromHtml(incoming.joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
         }
+        if (incoming.isEmpty()) {
+            return ChangelogState(full, emptyList(), 0, 0, ChangelogMode.FULL)
+        }
+        val baseSet = baseline.toSet()
+        val incSet = incoming.toSet()
+        val diff = ArrayList<ChangelogEntry>()
+        incoming.forEach { line ->
+            diff += ChangelogEntry(
+                if (line in baseSet) ChangelogKind.SAME else ChangelogKind.NEW,
+                line
+            )
+        }
+        baseline.forEach { line ->
+            if (line !in incSet) diff += ChangelogEntry(ChangelogKind.REMOVED, line)
+        }
+        val newCount = diff.count { it.kind == ChangelogKind.NEW }
+        val removedCount = diff.count { it.kind == ChangelogKind.REMOVED }
+        val mode = if (newCount + removedCount > 0) ChangelogMode.DIFF else ChangelogMode.FULL
+        return ChangelogState(full, diff, newCount, removedCount, mode)
+    }
+
+    fun setChangelogView(mode: ChangelogMode) {
+        if (_state.value.changelogView == mode) return
+        _state.update { it.copy(changelogView = mode) }
+    }
 
     private fun formatBytes(bytes: Long): String = when {
         bytes <= 0L -> "-"

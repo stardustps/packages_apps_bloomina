@@ -17,6 +17,9 @@
     <string name="label_download_type">Download type</string>
     <string name="label_full">Full</string>
     <string name="label_incremental">Incremental</string>
+    <string name="label_diff">Diff</string>
+    <string name="changelog_summary">%1$d new · %2$d removed</string>
+    <string name="changelog_summary_none">Up to date with this build</string>
 
     <string name="pref_auto_check">Automatic update checks</string>
     <string name="pref_auto_check_summary">Periodically check for new builds in the background</string>
