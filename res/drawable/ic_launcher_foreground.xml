@@ -3,13 +3,56 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Outer bloom ring -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,26c-15.46,0 -28,12.54 -28,28 0,15.46 12.54,28 28,28 15.46,0 28,-12.54 28,-28 0,-15.46 -12.54,-28 -28,-28zM54,74c-11.05,0 -20,-8.95 -20,-20 0,-11.05 8.95,-20 20,-20 11.05,0 20,8.95 20,20 0,11.05 -8.95,20 -20,20z" />
+        android:pathData="M54,18C34.67,18 19,33.67 19,53.5S34.67,89 54,89s35,-15.67 35,-35.5S73.33,18 54,18z" />
+
+    <!-- Inner bloom circle (creates ring effect) -->
+    <path
+        android:fillColor="#00000000"
+        android:fillType="evenOdd"
+        android:pathData="M54,28C40.75,28 30,38.75 30,52.5S40.75,77 54,77s24,-10.75 24,-24.5S67.25,28 54,28z" />
+
+    <!-- Petal 1 - top -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,38v10h10v-10z" />
+        android:pathData="M54,30c-4,0 -7,3 -7,7c0,4 3,7 7,7s7,-3 7,-7C61,33 58,30 54,30z" />
+
+    <!-- Petal 2 - right -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,64l12,-12H42z" />
+        android:pathData="M72,48c0,-4 -3,-7 -7,-7c-4,0 -7,3 -7,7s3,7 7,7C69,55 72,52 72,48z" />
+
+    <!-- Petal 3 - bottom-right -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M68,64c-2,-2 -5,-2 -7,0c-2,2 -2,5 0,7s5,2 7,0S70,66 68,64z" />
+
+    <!-- Petal 4 - bottom-left -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,64c2,-2 5,-2 7,0c2,2 2,5 0,7s-5,2 -7,0S38,66 40,64z" />
+
+    <!-- Petal 5 - left -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,48c0,-4 3,-7 7,-7c4,0 7,3 7,7s-3,7 -7,7C39,55 36,52 36,48z" />
+
+    <!-- Center dot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,48c-3.31,0 -6,2.69 -6,6s2.69,6 6,6s6,-2.69 6,-6S57.31,48 54,48z" />
+
+    <!-- Update arrow - curved top -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,58c-5.52,0 -10,4.48 -10,10h3c0,-3.87 3.13,-7 7,-7s7,3.13 7,7h3C64,62.48 59.52,58 54,58z" />
+
+    <!-- Update arrow - downward triangle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,72l-4,-4v8l4,-4l4,4v-8L54,72z" />
+
 </vector>
