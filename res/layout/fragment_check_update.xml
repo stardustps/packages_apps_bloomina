@@ -185,6 +185,21 @@
                     android:textColor="@android:color/white"
                     android:background="@drawable/badge_new_bg"
                     android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/badgeSecurity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:paddingHorizontal="@dimen/spacing_sm"
+                    android:paddingVertical="2dp"
+                    android:text="@string/badge_security"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/badge_security_bg"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView

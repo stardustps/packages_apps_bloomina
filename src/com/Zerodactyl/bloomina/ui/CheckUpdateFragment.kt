@@ -144,6 +144,7 @@ class CheckUpdateFragment : Fragment() {
         val vis = if (state.showReleaseSections) View.VISIBLE else View.GONE
         v.sepAvailable.visibility = vis
         v.badgeNew.visibility = if (vis == View.VISIBLE && state.updateAvailable) View.VISIBLE else View.GONE
+        v.badgeSecurity.visibility = if (vis == View.VISIBLE && state.securityUpdate) View.VISIBLE else View.GONE
         v.cardAvailable.visibility = vis
         v.sepChangelog.visibility = vis
         v.cardChangelog.visibility = vis
@@ -385,5 +386,6 @@ class CheckUpdateFragment : Fragment() {
         val chipChangelogDiff: MaterialButton = root.findViewById(R.id.chipChangelogDiff)
         val chipChangelogFull: MaterialButton = root.findViewById(R.id.chipChangelogFull)
         val badgeNew: TextView = root.findViewById(R.id.badgeNew)
+        val badgeSecurity: TextView = root.findViewById(R.id.badgeSecurity)
     }
 }

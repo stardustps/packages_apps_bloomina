@@ -100,6 +100,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val installed: LocalDeviceInfo = LocalDeviceInfo("", "", "", "", "", ""),
         val showReleaseSections: Boolean = false,
         val updateAvailable: Boolean = false,
+        val securityUpdate: Boolean = false,
         val button: DownloadButtonState = DownloadButtonState.HIDDEN,
         val integrity: String? = null,
         val lastChecked: Long = 0L,
@@ -187,6 +188,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
                         ?.toList() ?: emptyList()
                     val changelogState = buildChangelog(r.changelog, baseline)
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
+                    val securityUpdate = runCatching {
+                        (r.securityPatch.ifBlank { "0" }) > (DeviceInfo.securityPatch.ifBlank { "0" })
+                    }.getOrDefault(false)
                     _state.update {
                         it.copy(
                             remote = RemoteReleaseView(
@@ -200,6 +204,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                             installed = it.installed.copy(installed = verdict.installed),
                             hasIncremental = useInc,
                             useIncremental = useInc,
+                            securityUpdate = securityUpdate,
                             changelogFull = changelogState.full,
                             changelogDiff = changelogState.diff,
                             changelogNew = changelogState.newCount,
@@ -216,6 +221,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                                 heroSubtitle = S(R.string.status_update_available_sub, r.version),
                                 showReleaseSections = true,
                                 updateAvailable = true,
+                                securityUpdate = securityUpdate,
                                 button = DownloadButtonState.DOWNLOAD,
                                 checking = false,
                                 downloadVisible = false
@@ -625,6 +631,10 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val useInc = inc != null
         val chosenSize = if (useInc) inc!!.sizeBytes else size
         val available = prefs.getBoolean("cached_available", false)
+        val cachedSec = prefs.getString("cached_security", "") ?: ""
+        val securityUpdate = available && runCatching {
+            cachedSec.ifBlank { "0" } > DeviceInfo.securityPatch.ifBlank { "0" }
+        }.getOrDefault(false)
         _state.update {
             it.copy(
                 remote = RemoteReleaseView(
@@ -640,6 +650,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 heroTitle = if (available) S(R.string.status_update_available) else S(R.string.status_up_to_date),
                 heroSubtitle = if (available) S(R.string.status_update_available_sub, version) else S(R.string.cached_sub),
                 button = if (available) DownloadButtonState.DOWNLOAD else DownloadButtonState.HIDDEN,
+                securityUpdate = securityUpdate,
                 hasIncremental = useInc,
                 useIncremental = useInc,
                 changelogFull = changelogState.full,
