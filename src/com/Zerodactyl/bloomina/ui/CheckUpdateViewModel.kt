@@ -428,6 +428,17 @@ class CheckUpdateViewModel : AndroidViewModel() {
         return status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
     }
 
+    private enum class DownloadPolicy { ASK, WIFI_ONLY, WIFI_CHARGING }
+
+    private fun currentDownloadPolicy(): DownloadPolicy {
+        val p = app.getSharedPreferences(OtaConfig.PREFS_NAME, 0).getString("download_policy", "ask") ?: "ask"
+        return when (p) {
+            "wifi" -> DownloadPolicy.WIFI_ONLY
+            "wifi_charge" -> DownloadPolicy.WIFI_CHARGING
+            else -> DownloadPolicy.ASK
+        }
+    }
+
     fun exportCurrentRelease() {
         val dl = activeDownload() ?: return
         exportUpdate(dl)
@@ -449,11 +460,20 @@ class CheckUpdateViewModel : AndroidViewModel() {
             }
             return
         }
-        val unmeteredOnly = app.getSharedPreferences(OtaConfig.PREFS_NAME, 0)
-            .getBoolean("download_unmetered_only", true)
-        if (!caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED) && unmeteredOnly) {
-            _events.trySend(CheckEvent.ConfirmMeteredDownload)
-            return
+        val unmetered = caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
+        when (currentDownloadPolicy()) {
+            DownloadPolicy.ASK -> if (!unmetered) {
+                _events.trySend(CheckEvent.ConfirmMeteredDownload)
+                return
+            }
+            DownloadPolicy.WIFI_ONLY -> if (!unmetered) {
+                _events.trySend(CheckEvent.Toast(S(R.string.policy_blocked_wifi)))
+                return
+            }
+            DownloadPolicy.WIFI_CHARGING -> if (!unmetered || !isCharging()) {
+                _events.trySend(CheckEvent.Toast(S(R.string.policy_blocked_wifi_charging)))
+                return
+            }
         }
         startDownloadService(dl)
     }

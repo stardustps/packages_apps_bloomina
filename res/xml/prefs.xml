@@ -26,11 +26,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Downloads">
-        <SwitchPreferenceCompat
-            android:key="download_unmetered_only"
+        <ListPreference
+            android:key="download_policy"
             android:title="@string/pref_download_policy"
             android:summary="@string/pref_download_policy_summary"
-            android:defaultValue="true" />
+            android:entries="@array/download_policy_entries"
+            android:entryValues="@array/download_policy_values"
+            android:defaultValue="ask" />
         <SwitchPreferenceCompat
             android:key="auto_install"
             android:title="@string/pref_auto_install"

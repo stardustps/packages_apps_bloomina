@@ -32,8 +32,24 @@
     <string name="pref_auto_check_summary">Periodically check for new builds in the background</string>
     <string name="pref_check_interval">Check frequency</string>
     <string name="pref_check_interval_summary">How often bloomina looks for updates</string>
-    <string name="pref_download_policy">Unmetered network only</string>
-    <string name="pref_download_policy_summary">Warn before downloading over cellular data</string>
+    <string name="pref_download_policy">Download policy</string>
+    <string name="pref_download_policy_summary">Choose when automatic downloads are allowed</string>
+    <string name="policy_ask">Ask before downloading over cellular data</string>
+    <string name="policy_wifi_only">Only download on Wi-Fi (unmetered) networks</string>
+    <string name="policy_wifi_charging">Only download on Wi-Fi while the device is charging</string>
+    <string name="policy_blocked_wifi">Waiting for an unmetered (Wi-Fi) connection to download</string>
+    <string name="policy_blocked_wifi_charging">Connect to Wi-Fi and a charger to download</string>
+
+    <string-array name="download_policy_entries">
+        <item>Ask on cellular</item>
+        <item>Wi-Fi only</item>
+        <item>Wi-Fi + charging</item>
+    </string-array>
+    <string-array name="download_policy_values">
+        <item>ask</item>
+        <item>wifi</item>
+        <item>wifi_charge</item>
+    </string-array>
     <string name="pref_auto_install">Auto-install on charge</string>
     <string name="pref_auto_install_summary">Install a downloaded update automatically while charging</string>
     <string name="pref_export_settings">Export settings</string>
