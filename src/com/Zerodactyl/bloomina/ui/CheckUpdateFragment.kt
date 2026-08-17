@@ -57,6 +57,7 @@ class CheckUpdateFragment : Fragment() {
     private val b get() = _b!!
     private val repo = UpdateRepository()
     private var manifest: UpdateManifest? = null
+    private var pendingInstallFile: File? = null
     private val localUpdateLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) handleLocalUpdate(uri)
     }
@@ -85,11 +86,20 @@ class CheckUpdateFragment : Fragment() {
         renderLocalDeviceRows()
         setupTapToCopy()
         renderDiagnostics()
-        b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("application/zip") }
+        b.fabLocalUpdate.setOnClickListener { localUpdateLauncher.launch("*/*") }
         b.btnCheck.setOnClickListener { check() }
-        b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
         b.btnExport.setOnClickListener { manifest?.let { exportUpdate(it.release.download) } }
         b.btnCopyChangelog.setOnClickListener { copyChangelog() }
+        pendingInstallFile?.let { file ->
+            if (file.exists()) {
+                setInstallButton(b, file)
+            } else {
+                pendingInstallFile = null
+                b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
+            }
+        } ?: run {
+            b.btnDownload.setOnClickListener { manifest?.let { downloadAndInstall(it.release.download) } }
+        }
         check()
     }
 
@@ -142,7 +152,12 @@ class CheckUpdateFragment : Fragment() {
                     v.rowRemoteAndroid.text = r.androidVersion
                     v.rowRemoteSecurity.text = r.securityPatch
                     v.rowRemoteFingerprint.text = r.fingerprint
-                    v.changelog.text = Html.fromHtml(r.changelog.joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+                    val changelogText = r.changelog.joinToString("<br>") { "&#8226; $it" }
+                    v.changelog.text = if (r.changelog.isEmpty()) {
+                        getString(R.string.changelog_empty)
+                    } else {
+                        Html.fromHtml(changelogText, Html.FROM_HTML_MODE_COMPACT)
+                    }
                     v.changelog.movementMethod = LinkMovementMethod.getInstance()
 
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
@@ -229,12 +244,12 @@ class CheckUpdateFragment : Fragment() {
             setHero(R.drawable.ic_status_error, getString(R.string.status_failed), getString(R.string.error_no_network))
             return
         }
-        if (caps != null && !caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
+        if (!caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)) {
             AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.warn_metered_title))
                 .setMessage(getString(R.string.warn_metered_msg))
-                .setPositiveButton("Download") { _, _ -> startDownload(dl) }
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton(getString(R.string.btn_download)) { _, _ -> startDownload(dl) }
+                .setNegativeButton(android.R.string.cancel, null)
                 .show()
             return
         }
@@ -242,17 +257,21 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun startDownload(dl: Download) {
+        val extDir = requireContext().getExternalFilesDir(null) ?: run {
+            setHero(R.drawable.ic_status_error, getString(R.string.status_failed), "External storage unavailable")
+            return
+        }
         requireContext().getSharedPreferences("bloomina", 0)
             .edit().putString("active_ota_file", dl.filename).apply()
-        val dest = File(requireContext().getExternalFilesDir(null), dl.filename)
+        val dest = File(extDir, dl.filename)
         b.btnDownload.isEnabled = false
         viewLifecycleOwner.lifecycleScope.launch {
             val nm = requireContext().getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
-            val channel = NotificationChannel("ota_updates", "System Updates", NotificationManager.IMPORTANCE_LOW)
+            val channel = NotificationChannel("ota_updates", getString(R.string.notif_channel_name), NotificationManager.IMPORTANCE_LOW)
             nm.createNotificationChannel(channel)
             val builder = NotificationCompat.Builder(requireContext(), "ota_updates")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Downloading System Update")
+                .setContentTitle(getString(R.string.notif_downloading_title))
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
             var lastMs = System.currentTimeMillis()
@@ -284,12 +303,12 @@ class CheckUpdateFragment : Fragment() {
                         v.btnDownload.isEnabled = true
                         v.btnDownload.text = getString(R.string.btn_retry)
 
-                        builder.setContentTitle("Download Failed").setContentText(st.reason).setProgress(0, 0, false).setOngoing(false)
+                        builder.setContentTitle(getString(R.string.notif_download_failed)).setContentText(st.reason).setProgress(0, 0, false).setOngoing(false)
                         nm.notify(1, builder.build())
                     }
                     is DownloadState.Done -> {
                         v.downloadBar.visibility = View.GONE
-                        builder.setContentTitle("Download Complete").setContentText("Ready to install").setProgress(0, 0, false).setOngoing(false)
+                        builder.setContentTitle(getString(R.string.notif_download_complete)).setContentText(getString(R.string.notif_ready_to_install)).setProgress(0, 0, false).setOngoing(false)
                         nm.notify(1, builder.build())
 
                         v.txtIntegrity.text = getString(R.string.integrity_verified, dl.sha256)
@@ -319,6 +338,7 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun setInstallButton(v: V, file: File) {
+        pendingInstallFile = file
         v.btnDownload.text = getString(R.string.btn_install)
         v.btnDownload.isEnabled = true
         v.btnDownload.setOnClickListener { v.btnDownload.isEnabled = false; install(file) }
@@ -348,6 +368,10 @@ class CheckUpdateFragment : Fragment() {
                 is InstallResult.StagedRebootingToRecovery -> {
                     setHero(R.drawable.ic_status_available, getString(R.string.install_staged_title), getString(R.string.install_staged_sub))
                     requireContext().getSharedPreferences("bloomina", 0).edit().putString("pending_update_version", manifest?.release?.version ?: "").apply()
+                    // Clean up local update zip after successful staging
+                    if (pkg.name == "local_update.zip") {
+                        runCatching { pkg.delete() }
+                    }
                 }
                 is InstallResult.AppliedBackgroundRebootRequired -> {
                     setHero(R.drawable.ic_status_available, getString(R.string.install_applied_title), getString(R.string.install_applied_sub))
@@ -355,6 +379,10 @@ class CheckUpdateFragment : Fragment() {
                     v.btnExport.visibility = View.VISIBLE
                     showRebootBottomSheet()
                     requireContext().getSharedPreferences("bloomina", 0).edit().putString("pending_update_version", manifest?.release?.version ?: "").apply()
+                    // Clean up local update zip after successful apply
+                    if (pkg.name == "local_update.zip") {
+                        runCatching { pkg.delete() }
+                    }
                 }
                 is InstallResult.Failed -> {
                     setHero(R.drawable.ic_status_error, getString(R.string.install_failed_title), result.why)
@@ -426,7 +454,7 @@ class CheckUpdateFragment : Fragment() {
     }
 
     private fun exportUpdate(dl: Download) {
-        val src = File(requireContext().getExternalFilesDir(null), dl.filename)
+        val src = File(requireContext().getExternalFilesDir(null) ?: return, dl.filename)
         if (!src.exists()) {
             Toast.makeText(context, getString(R.string.export_not_found), Toast.LENGTH_SHORT).show()
             return
@@ -434,14 +462,19 @@ class CheckUpdateFragment : Fragment() {
         
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                val dest = File(downloadsDir, dl.filename)
-                
-                FileInputStream(src).use { input ->
-                    FileOutputStream(dest).use { output ->
+                val resolver = requireContext().contentResolver
+                val values = android.content.ContentValues().apply {
+                    put(android.provider.MediaStore.Downloads.DISPLAY_NAME, dl.filename)
+                    put(android.provider.MediaStore.Downloads.MIME_TYPE, "application/zip")
+                    put(android.provider.MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                }
+                val uri = resolver.insert(android.provider.MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+                    ?: throw IOException("Failed to create MediaStore entry")
+                resolver.openOutputStream(uri)?.use { output ->
+                    FileInputStream(src).use { input ->
                         input.copyTo(output)
                     }
-                }
+                } ?: throw IOException("Failed to open output stream")
                 
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, getString(R.string.export_success), Toast.LENGTH_LONG).show()
@@ -627,7 +660,11 @@ class CheckUpdateFragment : Fragment() {
         v.rowRemoteSecurity.text = prefs.getString("cached_security", "-") ?: "-"
         v.rowRemoteFingerprint.text = prefs.getString("cached_fingerprint", "-") ?: "-"
         val changelog = prefs.getString("cached_changelog", "") ?: ""
-        v.changelog.text = Html.fromHtml(changelog.split("\n").joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+        v.changelog.text = if (changelog.isBlank()) {
+            getString(R.string.changelog_empty)
+        } else {
+            Html.fromHtml(changelog.split("\n").joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
+        }
         v.changelog.movementMethod = LinkMovementMethod.getInstance()
         val available = prefs.getBoolean("cached_available", false)
         showReleaseSections(available)

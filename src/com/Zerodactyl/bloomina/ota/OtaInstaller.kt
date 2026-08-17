@@ -50,46 +50,63 @@ class OtaInstaller(private val context: Context) {
     }
 
     private suspend fun installAB(pkg: File): InstallResult = suspendCancellableCoroutine { cont ->
+        var updateEngine: UpdateEngine? = null
         try {
-            val updateEngine = UpdateEngine()
+            // Copy zip to /cache/ which is readable by update_engine service
+            val cacheDir = File("/cache/")
+            val cachePkg = File(cacheDir, pkg.name)
+            if (pkg.absolutePath != cachePkg.absolutePath) {
+                pkg.copyTo(cachePkg, overwrite = true)
+                cachePkg.setReadable(true, false)
+            }
+
+            updateEngine = UpdateEngine()
             
             // Extract payload properties and offset from the OTA Zip
-            val zipFile = ZipFile(pkg)
-            val propertiesEntry = zipFile.getEntry("payload_properties.txt")
-                ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload_properties.txt)")
-                
-            val payloadEntry = zipFile.getEntry("payload.bin")
-                ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload.bin)")
+            val zipFile = ZipFile(cachePkg)
+            try {
+                val propertiesEntry = zipFile.getEntry("payload_properties.txt")
+                    ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload_properties.txt)")
+                    
+                val payloadEntry = zipFile.getEntry("payload.bin")
+                    ?: throw IllegalStateException("Not a valid A/B OTA zip (missing payload.bin)")
 
-            // Read the properties into a String array for the UpdateEngine
-            val propertiesList = mutableListOf<String>()
-            zipFile.getInputStream(propertiesEntry).bufferedReader().useLines { lines ->
-                lines.forEach { line -> if (line.isNotBlank()) propertiesList.add(line) }
-            }
-            val headerKeyValuePairs = propertiesList.toTypedArray()
-
-            // Calculate the exact byte offset of payload.bin within the zip file.
-            // (Android UpdateEngine can read directly from the zip if we give it the offset and length)
-            val payloadOffset = getZipEntryOffset(pkg, payloadEntry.name)
-            val payloadSize = payloadEntry.size
-            val fileUrl = "file://${pkg.absolutePath}"
-
-            val callback = object : UpdateEngineCallback() {
-                override fun onStatusUpdate(status: Int, percent: Float) {
-                    // Could emit progress here if we passed a flow/callback, but for now just wait for completion
+                // Read the properties into a String array for the UpdateEngine
+                val propertiesList = mutableListOf<String>()
+                zipFile.getInputStream(propertiesEntry).bufferedReader().useLines { lines ->
+                    lines.forEach { line -> if (line.isNotBlank()) propertiesList.add(line) }
                 }
+                val headerKeyValuePairs = propertiesList.toTypedArray()
 
-                override fun onPayloadApplicationComplete(errorCode: Int) {
-                    if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS) {
-                        cont.resume(InstallResult.AppliedBackgroundRebootRequired)
-                    } else {
-                        cont.resume(InstallResult.Failed("UpdateEngine error code: $errorCode"))
+                // Calculate the exact byte offset of payload.bin within the zip file.
+                // (Android UpdateEngine can read directly from the zip if we give it the offset and length)
+                val payloadOffset = getZipEntryOffset(cachePkg, payloadEntry.name)
+                val payloadSize = payloadEntry.size
+                val fileUrl = "file://${cachePkg.absolutePath}"
+
+                val callback = object : UpdateEngineCallback() {
+                    override fun onStatusUpdate(status: Int, percent: Float) {
+                        // Could emit progress here if we passed a flow/callback, but for now just wait for completion
+                    }
+
+                    override fun onPayloadApplicationComplete(errorCode: Int) {
+                        if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS) {
+                            cont.resume(InstallResult.AppliedBackgroundRebootRequired)
+                        } else {
+                            cont.resume(InstallResult.Failed("UpdateEngine error code: $errorCode"))
+                        }
                     }
                 }
-            }
 
-            updateEngine.bind(callback)
-            updateEngine.applyPayload(fileUrl, payloadOffset, payloadSize, headerKeyValuePairs)
+                cont.invokeOnCancellation {
+                    runCatching { updateEngine.unbind() }
+                }
+
+                updateEngine.bind(callback)
+                updateEngine.applyPayload(fileUrl, payloadOffset, payloadSize, headerKeyValuePairs)
+            } finally {
+                zipFile.close()
+            }
 
         } catch (e: Exception) {
             cont.resume(InstallResult.Failed("A/B Update initialization failed: ${e.message}"))

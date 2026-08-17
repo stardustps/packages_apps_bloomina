@@ -28,13 +28,13 @@ sealed interface DownloadState {
 
 class UpdateRepository {
 
-    suspend fun fetchManifest(urlString: String): Result<UpdateManifest> = withContext(Dispatchers.IO) {
+    suspend fun fetchManifest(urlString: String, connectTimeout: Int = 20000, readTimeout: Int = 30000): Result<UpdateManifest> = withContext(Dispatchers.IO) {
         runCatching {
             require(urlString.isNotBlank()) { "No manifest URL configured" }
             val url = URL(urlString)
             val connection = url.openConnection() as HttpURLConnection
-            connection.connectTimeout = 20000
-            connection.readTimeout = 30000
+            connection.connectTimeout = connectTimeout
+            connection.readTimeout = readTimeout
             
             try {
                 if (connection.responseCode != HttpURLConnection.HTTP_OK) {

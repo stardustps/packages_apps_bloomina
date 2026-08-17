@@ -36,25 +36,25 @@ class MaintainerFragment : Fragment() {
             val local = withContext(Dispatchers.IO) {
                 Triple(DeviceInfo.maintainer, DeviceInfo.model, DeviceInfo.romVersion)
             }
-            view?.let { _ ->
-                requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
-                requireView().findViewById<android.widget.TextView>(R.id.device).text = local.second
-                requireView().findViewById<android.widget.TextView>(R.id.rom).text = local.third.ifBlank { "-" }
-            }
+            val v = view ?: return@launch
+            v.findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { getString(R.string.unknown_maintainer) }
+            v.findViewById<android.widget.TextView>(R.id.device).text = local.second
+            v.findViewById<android.widget.TextView>(R.id.rom).text = local.third.ifBlank { "-" }
 
             repo.fetchManifest(url)
                 .onSuccess { m ->
-                    
+                    val view = view ?: return@onSuccess
                     val mt = m.maintainer
-                    requireView().findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { mt.name }
-                    requireView().findViewById<android.widget.TextView>(R.id.handle).text = mt.handle
-                    requireView().findViewById<android.widget.TextView>(R.id.device).text = "${mt.device} (${mt.codename})"
-                    requireView().findViewById<android.widget.TextView>(R.id.rom).text = m.romName
+                    view.findViewById<android.widget.TextView>(R.id.name).text = local.first.ifBlank { mt.name }
+                    view.findViewById<android.widget.TextView>(R.id.handle).text = mt.handle
+                    view.findViewById<android.widget.TextView>(R.id.device).text = "${mt.device} (${mt.codename})"
+                    view.findViewById<android.widget.TextView>(R.id.rom).text = m.romName
                     bindLinks(mt)
                 }
                 .onFailure { t ->
-                    requireView().findViewById<android.widget.TextView>(R.id.name).text = getString(R.string.unknown_maintainer)
-                    requireView().findViewById<android.widget.TextView>(R.id.handle).text = UpdateRepository.describe(t)
+                    val view = view ?: return@onFailure
+                    view.findViewById<android.widget.TextView>(R.id.name).text = getString(R.string.unknown_maintainer)
+                    view.findViewById<android.widget.TextView>(R.id.handle).text = UpdateRepository.describe(t)
                 }
         }
     }
@@ -76,10 +76,10 @@ class MaintainerFragment : Fragment() {
             }
         }
         
-        setupLink(requireView().findViewById<android.view.View>(R.id.btnTelegram), null, m.telegram)
-        setupLink(requireView().findViewById<android.view.View>(R.id.btnDonate), null, m.donateUrl)
-        setupLink(requireView().findViewById(R.id.btnGithub), requireView().findViewById(R.id.divGithub), m.githubUrl)
-        setupLink(requireView().findViewById(R.id.btnXda), requireView().findViewById(R.id.divXda), m.xdaUrl)
+        setupLink(v.findViewById<android.view.View>(R.id.btnTelegram), null, m.telegram)
+        setupLink(v.findViewById<android.view.View>(R.id.btnDonate), null, m.donateUrl)
+        setupLink(v.findViewById(R.id.btnGithub), v.findViewById(R.id.divGithub), m.githubUrl)
+        setupLink(v.findViewById(R.id.btnXda), v.findViewById(R.id.divXda), m.xdaUrl)
     }
 
     override fun onDestroyView() {

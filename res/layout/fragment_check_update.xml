@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="Export to Downloads" />
+                android:text="@string/export_button" />
 
             <Button
                 android:id="@+id/btnDownload"
@@ -252,6 +252,6 @@
         app:srcCompat="@drawable/ic_launcher_foreground"
         app:tint="?attr/colorOnPrimaryContainer"
         android:backgroundTint="?attr/colorPrimaryContainer"
-        android:contentDescription="Local Update" />
+        android:contentDescription="@string/local_update" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

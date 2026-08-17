@@ -39,9 +39,6 @@ object DeviceInfo {
     val deviceCodename: String
         get() = getProp("ro.product.vendor.device").orEmpty().ifBlank { Build.DEVICE ?: "unknown" }
 
-    /** A-Only vs A/B, detected from the ROM slot suffix property. */
-    val isAOnly: Boolean get() = getProp("ro.boot.slot_suffix").isNullOrEmpty()
-
     const val PROP_ROM_VER = "ro.bloomina.rom.ver"
     const val PROP_ROM_VER_CODE = "ro.bloomina.rom.ver.code"
     const val PROP_MAINTAINER = "ro.bloomina.maintainer"

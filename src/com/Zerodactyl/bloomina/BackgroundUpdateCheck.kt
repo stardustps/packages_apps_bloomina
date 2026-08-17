@@ -49,7 +49,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 val prefs = context.getSharedPreferences("bloomina", 0)
                 val url = prefs.getString("json_url", null)?.trim()?.takeIf { it.isNotEmpty() }
                     ?: CheckUpdateFragment.DEFAULT_JSON_URL
-                UpdateRepository().fetchManifest(url)
+                UpdateRepository().fetchManifest(url, connectTimeout = 5000, readTimeout = 5000)
                     .onSuccess { m ->
                         if (VersionCheck.evaluate(m.release).updateAvailable) notifyUpdate(context, m)
                     }
