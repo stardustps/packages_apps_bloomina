@@ -262,7 +262,14 @@ class CheckUpdateFragment : Fragment() {
                 AlertDialog.Builder(requireContext())
                     .setTitle(getString(R.string.warn_battery_title))
                     .setMessage(getString(R.string.warn_battery_msg))
-                    .setPositiveButton(android.R.string.ok) { _, _ -> vm.install(event.file, force = true) }
+                    .setPositiveButton(android.R.string.ok) { _, _ -> vm.install(event.file, forceBattery = true) }
+                    .show()
+            is CheckUpdateViewModel.CheckEvent.ConfirmDowngradeInstall ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.warn_downgrade_title))
+                    .setMessage(getString(R.string.warn_downgrade_msg))
+                    .setPositiveButton(android.R.string.ok) { _, _ -> vm.install(event.file, forceDowngrade = true) }
+                    .setNegativeButton(android.R.string.cancel, null)
                     .show()
             is CheckUpdateViewModel.CheckEvent.ShowRebootSheet -> showRebootBottomSheet()
         }

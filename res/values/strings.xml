@@ -125,6 +125,8 @@
     <string name="warn_metered_msg">You are on a metered network. This update may consume a large amount of data. Continue?</string>
     <string name="warn_battery_title">Battery Too Low</string>
     <string name="warn_battery_msg">Your battery is below 20%. Please plug in your device to safely install this system update.</string>
+    <string name="warn_downgrade_title">Older build</string>
+    <string name="warn_downgrade_msg">This build is older than the one currently installed. Installing it may roll back features and security patches. Continue?</string>
     <string name="local_staging">Staging Local Update</string>
     <string name="local_copying">Copying zip file…</string>
     <string name="local_failed_title">Local Update Failed</string>

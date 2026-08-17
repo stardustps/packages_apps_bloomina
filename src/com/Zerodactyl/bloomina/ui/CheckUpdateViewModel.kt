@@ -118,6 +118,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
         data class Toast(val message: String) : CheckEvent
         data object ConfirmMeteredDownload : CheckEvent
         data class ConfirmBatteryInstall(val file: File) : CheckEvent
+        data class ConfirmDowngradeInstall(val file: File) : CheckEvent
         data object ShowRebootSheet : CheckEvent
     }
 
@@ -313,9 +314,13 @@ class CheckUpdateViewModel : AndroidViewModel() {
         }
     }
 
-    fun install(file: File, force: Boolean = false) {
-        if (!force && !isBatteryOk()) {
+    fun install(file: File, forceBattery: Boolean = false, forceDowngrade: Boolean = false) {
+        if (!forceBattery && !isBatteryOk()) {
             _events.trySend(CheckEvent.ConfirmBatteryInstall(file))
+            return
+        }
+        if (!forceDowngrade && isDowngrade()) {
+            _events.trySend(CheckEvent.ConfirmDowngradeInstall(file))
             return
         }
         _state.update {
@@ -384,6 +389,13 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
         val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
         return !(batteryPct in 0f..20f && !isCharging)
+    }
+
+    /** True when the incoming build is an older version than what's installed. */
+    private fun isDowngrade(): Boolean {
+        val incoming = manifest?.release?.versionCode
+        val current = DeviceInfo.romVersionCode
+        return incoming != null && current != null && current > 0 && incoming < current
     }
 
     fun exportCurrentRelease() {
