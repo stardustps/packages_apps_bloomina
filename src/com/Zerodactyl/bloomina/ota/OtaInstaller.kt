@@ -122,7 +122,7 @@ class OtaInstaller(private val context: Context) {
             val cdh = ByteArray(46)
             for (n in 0 until cdCount) {
                 raf.readFully(cdh)
-                if (readLe32(cdh, 0) != 0x02014b50) throw IllegalStateException("Corrupt central directory")
+                if (readLe32(cdh, 0) != 0x02014b50L) throw IllegalStateException("Corrupt central directory")
                 val nameLen = readLe16(cdh, 28)
                 val extraLen = readLe16(cdh, 30)
                 val commentLen = readLe16(cdh, 32)
@@ -134,7 +134,7 @@ class OtaInstaller(private val context: Context) {
                     val lh = ByteArray(30)
                     raf.seek(localOffset)
                     raf.readFully(lh)
-                    if (readLe32(lh, 0) != 0x04034b50) throw IllegalStateException("Bad local header for $entryName")
+                    if (readLe32(lh, 0) != 0x04034b50L) throw IllegalStateException("Bad local header for $entryName")
                     val lNameLen = readLe16(lh, 26)
                     val lExtraLen = readLe16(lh, 28)
                     return localOffset + 30 + lNameLen + lExtraLen

@@ -199,7 +199,7 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/diag_layout" android:textStyle="bold" />
                 <TextView android:id="@+id/rowLayoutType" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="8dp" />
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/diag_slot" android:textStyle="bold" />
+                <TextView android:id="@+id/lblActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/diag_slot" android:textStyle="bold" />
                 <TextView android:id="@+id/rowActiveSlot" android:layout_width="match_parent" android:layout_height="wrap_content" />
             </LinearLayout>
             </androidx.core.widget.NestedScrollView>
