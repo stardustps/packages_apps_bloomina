@@ -62,7 +62,8 @@ data class Release(
     val kernelVersion: String,   // Tab1: Kernel Version
     val partitionLayout: String, // "a-only" expected
     val changelog: List<String>,      // Tab1: Changelogs
-    val download: Download
+    val download: Download,           // Full OTA package
+    val incrementalDownload: Download? = null // Delta/incremental package, if the server publishes one
 ) {
     companion object {
         fun fromJson(json: JSONObject): Release {
@@ -73,7 +74,13 @@ data class Release(
                     changelog.add(changelogArray.getString(i))
                 }
             }
-            
+
+            val incremental = if (json.has("incremental") && !json.isNull("incremental")) {
+                Download.fromJson(json.getJSONObject("incremental"))
+            } else {
+                null
+            }
+
             return Release(
                 version = json.optString("version"),
                 versionCode = if (json.has("version_code")) json.optLong("version_code") else null,
@@ -85,7 +92,8 @@ data class Release(
                 kernelVersion = json.optString("kernel_version"),
                 partitionLayout = json.optString("partition_layout"),
                 changelog = changelog,
-                download = Download.fromJson(json.getJSONObject("download"))
+                download = Download.fromJson(json.getJSONObject("download")),
+                incrementalDownload = incremental
             )
         }
     }

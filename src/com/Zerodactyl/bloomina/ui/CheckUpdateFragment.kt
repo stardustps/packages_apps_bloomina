@@ -26,6 +26,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.Zerodactyl.bloomina.R
@@ -60,6 +62,9 @@ class CheckUpdateFragment : Fragment() {
         b.btnExport.setOnClickListener { vm.exportCurrentRelease() }
         b.btnCopyChangelog.setOnClickListener { copyChangelog() }
         b.btnDownload.setOnClickListener { vm.onPrimaryButtonClicked() }
+        b.downloadTypeToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) vm.setUseIncremental(checkedId == R.id.chipIncremental)
+        }
 
         setupTapToCopy()
         renderDiagnostics()
@@ -101,6 +106,11 @@ class CheckUpdateFragment : Fragment() {
             CheckUpdateViewModel.DownloadButtonState.HIDDEN -> ""
         }
         v.btnExport.visibility = if (state.updateAvailable) View.VISIBLE else View.GONE
+
+        v.downloadTypeToggle.visibility = if (state.hasIncremental) View.VISIBLE else View.GONE
+        if (state.hasIncremental) {
+            v.downloadTypeToggle.check(if (state.useIncremental) R.id.chipIncremental else R.id.chipFull)
+        }
 
         val remote = state.remote
         if (remote != null) {
@@ -276,5 +286,8 @@ class CheckUpdateFragment : Fragment() {
         val txtIntegrity: TextView = root.findViewById(R.id.txtIntegrity)
         val txtLastChecked: TextView = root.findViewById(R.id.txtLastChecked)
         val btnCopyChangelog: Button = root.findViewById(R.id.btnCopyChangelog)
+        val downloadTypeToggle: MaterialButtonToggleGroup = root.findViewById(R.id.downloadTypeToggle)
+        val chipFull: MaterialButton = root.findViewById(R.id.chipFull)
+        val chipIncremental: MaterialButton = root.findViewById(R.id.chipIncremental)
     }
 }

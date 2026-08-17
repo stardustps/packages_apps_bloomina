@@ -33,6 +33,13 @@
       "size_bytes": 1288490188,
       "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
       "install_type": "recovery_zip"
+    },
+    "incremental": {
+      "url": "https://over-the-air.tuong.qzz.io/bloomina/lineage/a32/lineage-a32-8.6.4-20260816-incremental-from-8.6.3.zip",
+      "filename": "lineage-a32-8.6.4-20260816-incremental-from-8.6.3.zip",
+      "size_bytes": 134217728,
+      "sha256": "fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+      "install_type": "recovery_zip"
     }
   }
 }

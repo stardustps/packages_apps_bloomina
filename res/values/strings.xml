@@ -14,6 +14,10 @@
     <string name="sep_details">Details</string>
     <string name="sep_contact">Contact</string>
 
+    <string name="label_download_type">Download type</string>
+    <string name="label_full">Full</string>
+    <string name="label_incremental">Incremental</string>
+
     <string name="f_version">Version</string>
     <string name="f_build_date">Build date</string>
     <string name="f_size">Download size</string>

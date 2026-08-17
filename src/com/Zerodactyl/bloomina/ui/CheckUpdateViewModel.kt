@@ -90,7 +90,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
         val button: DownloadButtonState = DownloadButtonState.HIDDEN,
         val integrity: String? = null,
         val lastChecked: Long = 0L,
-        val error: Boolean = false
+        val error: Boolean = false,
+        val hasIncremental: Boolean = false,
+        val useIncremental: Boolean = false
     )
 
     sealed interface CheckEvent {
@@ -110,6 +112,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
 
     private val repo = UpdateRepository()
     private var manifest: UpdateManifest? = null
+    private var incrementalDownload: Download? = null
     private var pendingInstallFile: File? = null
 
     private val app: Application get() = getApplication()
@@ -147,6 +150,9 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 .onSuccess { m ->
                     manifest = m
                     val r = m.release
+                    incrementalDownload = r.incrementalDownload
+                    val chosen = r.incrementalDownload ?: r.download
+                    val useInc = r.incrementalDownload != null
                     val changelog = buildChangelog(r.changelog)
                     val verdict = withContext(Dispatchers.IO) { VersionCheck.evaluate(r) }
                     _state.update {
@@ -154,13 +160,15 @@ class CheckUpdateViewModel : AndroidViewModel() {
                             remote = RemoteReleaseView(
                                 version = r.version,
                                 buildDate = r.buildDate,
-                                size = formatBytes(r.download.sizeBytes),
+                                size = formatBytes(chosen.sizeBytes),
                                 androidVersion = r.androidVersion,
                                 securityPatch = r.securityPatch,
                                 fingerprint = r.fingerprint,
                                 changelog = changelog
                             ),
-                            installed = it.installed.copy(installed = verdict.installed)
+                            installed = it.installed.copy(installed = verdict.installed),
+                            hasIncremental = useInc,
+                            useIncremental = useInc
                         )
                     }
 
@@ -220,11 +228,18 @@ class CheckUpdateViewModel : AndroidViewModel() {
         }
     }
 
+    /** The download the user will actually fetch: incremental delta when selected, else full. */
+    private fun activeDownload(): Download? {
+        val release = manifest?.release ?: return null
+        return if (_state.value.useIncremental) release.incrementalDownload ?: release.download
+        else release.download
+    }
+
     /** Primary action button (download / retry / install / reboot) dispatcher. */
     fun onPrimaryButtonClicked() {
         when (_state.value.button) {
             DownloadButtonState.DOWNLOAD, DownloadButtonState.RETRY ->
-                manifest?.release?.download?.let { beginDownload(it) }
+                activeDownload()?.let { beginDownload(it) }
             DownloadButtonState.INSTALL -> pendingInstallFile?.let { install(it) }
             DownloadButtonState.REBOOT -> _events.trySend(CheckEvent.ShowRebootSheet)
             DownloadButtonState.HIDDEN -> Unit
@@ -232,11 +247,24 @@ class CheckUpdateViewModel : AndroidViewModel() {
     }
 
     fun confirmMeteredDownload() {
-        manifest?.release?.download?.let { performDownload(it) }
+        activeDownload()?.let { performDownload(it) }
+    }
+
+    /** Toggle between the full and incremental package; the displayed size follows. */
+    fun setUseIncremental(use: Boolean) {
+        if (_state.value.useIncremental == use) return
+        val release = manifest?.release ?: return
+        val dl = if (use) release.incrementalDownload ?: release.download else release.download
+        _state.update {
+            it.copy(
+                useIncremental = use,
+                remote = it.remote?.copy(size = formatBytes(dl.sizeBytes))
+            )
+        }
     }
 
     fun install(file: File) {
-        val dl = manifest?.release?.download ?: return
+        val dl = activeDownload() ?: return
         _state.update {
             it.copy(
                 heroIcon = R.drawable.ic_status_available,
@@ -291,7 +319,7 @@ class CheckUpdateViewModel : AndroidViewModel() {
     }
 
     fun exportCurrentRelease() {
-        val dl = manifest?.release?.download ?: return
+        val dl = activeDownload() ?: return
         exportUpdate(dl)
     }
 
@@ -498,13 +526,17 @@ class CheckUpdateViewModel : AndroidViewModel() {
         } else {
             Html.fromHtml(changelog.split("\n").joinToString("<br>") { "&#8226; $it" }, Html.FROM_HTML_MODE_COMPACT)
         }
+        val inc = restoreDownload(prefs, "cached_inc_")
+        incrementalDownload = inc
+        val useInc = inc != null
+        val chosenSize = if (useInc) inc!!.sizeBytes else size
         val available = prefs.getBoolean("cached_available", false)
         _state.update {
             it.copy(
                 remote = RemoteReleaseView(
                     version = version,
                     buildDate = prefs.getString("cached_build_date", "-") ?: "-",
-                    size = formatBytes(size),
+                    size = formatBytes(chosenSize),
                     androidVersion = prefs.getString("cached_android", "-") ?: "-",
                     securityPatch = prefs.getString("cached_security", "-") ?: "-",
                     fingerprint = prefs.getString("cached_fingerprint", "-") ?: "-",
@@ -514,9 +546,24 @@ class CheckUpdateViewModel : AndroidViewModel() {
                 heroIcon = if (available) R.drawable.ic_status_available else R.drawable.ic_status_uptodate,
                 heroTitle = if (available) S(R.string.status_update_available) else S(R.string.status_up_to_date),
                 heroSubtitle = if (available) S(R.string.status_update_available_sub, version) else S(R.string.cached_sub),
-                button = if (available) DownloadButtonState.DOWNLOAD else DownloadButtonState.HIDDEN
+                button = if (available) DownloadButtonState.DOWNLOAD else DownloadButtonState.HIDDEN,
+                hasIncremental = useInc,
+                useIncremental = useInc
             )
         }
+    }
+
+    /** Rebuilds a [Download] from prefixed SharedPreferences keys, or null if no URL was stored. */
+    private fun restoreDownload(prefs: android.content.SharedPreferences, p: String): Download? {
+        val url = prefs.getString(p + "url", "") ?: ""
+        if (url.isBlank()) return null
+        return Download(
+            url = url,
+            filename = prefs.getString(p + "filename", "") ?: "",
+            sizeBytes = prefs.getLong(p + "size", -1L),
+            sha256 = prefs.getString(p + "sha", "") ?: "",
+            installType = prefs.getString(p + "install_type", "") ?: ""
+        )
     }
 
     private fun persistManifest(m: UpdateManifest, verdict: VersionCheck.Result) {
@@ -532,6 +579,12 @@ class CheckUpdateViewModel : AndroidViewModel() {
         prefs.putString("cached_changelog", r.changelog.joinToString("\n"))
         prefs.putString("cached_rom", m.romName)
         prefs.putBoolean("cached_available", verdict.updateAvailable)
+        val inc = r.incrementalDownload
+        prefs.putString("cached_inc_url", inc?.url ?: "")
+        prefs.putString("cached_inc_filename", inc?.filename ?: "")
+        prefs.putLong("cached_inc_size", inc?.sizeBytes ?: -1L)
+        prefs.putString("cached_inc_sha", inc?.sha256 ?: "")
+        prefs.putString("cached_inc_install_type", inc?.installType ?: "")
         prefs.apply()
     }
 
