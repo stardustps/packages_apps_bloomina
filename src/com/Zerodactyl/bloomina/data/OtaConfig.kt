@@ -9,8 +9,8 @@ import java.io.File
 
 /**
  * Shared OTA configuration constants and helpers, previously scattered as a `companion object`
- * inside [com.Zerodactyl.bloomina.ui.CheckUpdateFragment] and re-referenced from
- * [com.Zerodactyl.bloomina.ui.MaintainerFragment] and
+ * inside [com.Zerodactyl.bloomina.ui.CheckUpdateScreen] and re-referenced from
+ * [com.Zerodactyl.bloomina.ui.MaintainerScreen] and
  * [com.Zerodactyl.bloomina.BackgroundUpdateCheck]. Centralizing them removes the cross-class
  * coupling and the magic default-URL string living in a UI class.
  */

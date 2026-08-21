@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Solid widget surface. RemoteViews can't consume dynamic color / tonal tokens, so the
+         home-screen widget uses explicit (non-glass) colors instead of the old translucent fill. -->
+    <color name="widget_background">#1C1B1F</color>
+    <color name="widget_accent">#00BFA5</color>
+</resources>

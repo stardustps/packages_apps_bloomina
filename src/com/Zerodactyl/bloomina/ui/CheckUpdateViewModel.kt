@@ -44,7 +44,7 @@ import java.util.Locale
 
 /**
  * Owns the entire update lifecycle (check → download → install) for Tab 1, so
- * [CheckUpdateFragment] is a thin view that renders [CheckUiState] and reacts to [CheckEvent]s.
+ * [CheckUpdateScreen] is a thin view that renders [CheckUiState] and reacts to [CheckEvent]s.
  *
  * Everything that touches the network, disk, or system properties runs on [Dispatchers.IO]
  * through [viewModelScope], which survives configuration changes — fixing the old NPE where a

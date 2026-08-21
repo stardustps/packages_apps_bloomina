@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.bloomina" parent="Theme.Material3.DynamicColors.DayNight">
+    <!-- Night variant inherits the dynamic dark scheme from Theme.Material3.DynamicColors.
+         Depth uses tonal surfaces; no hardcoded AMOLED black / glass fills. -->
+    <style name="Theme.bloomina" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/google_sans_flex</item>
         <item name="fontFamily">@font/google_sans_flex</item>
-        <!-- Pure AMOLED Black for OLED screens -->
-        <item name="android:windowBackground">#000000</item>
-        <item name="colorSurface">#000000</item>
-        <item name="colorSurfaceContainer">#111111</item>
-        <item name="colorPrimary">@color/ic_launcher_background</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 </resources>

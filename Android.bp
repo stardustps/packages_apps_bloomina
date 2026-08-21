@@ -1,6 +1,11 @@
 //
 // Build configuration for Bloomina Updater (AOSP/LineageOS)
 //
+// UI rewritten in Jetpack Compose (Material 3, M3 Expressive). The Compose Kotlin
+// compiler plugin (androidx.compose.compiler_compiler) is applied automatically by Soong
+// once the Compose runtime below is on the classpath — ensure your tree provides the
+// Compose prebuilts.
+//
 
 android_app {
     name: "bloomina",
@@ -22,19 +27,23 @@ android_app {
 
     static_libs: [
         "androidx.core_core-ktx",
-        "androidx.appcompat_appcompat",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.fragment_fragment-ktx",
         "androidx.lifecycle_lifecycle-runtime-ktx",
-        "androidx.lifecycle_lifecycle-viewmodel-ktx",
+        "androidx.lifecycle_lifecycle-runtime-compose",
+        "androidx.lifecycle_lifecycle-viewmodel-compose",
+        "androidx.activity_activity-compose",
+        "androidx.compose.ui_ui",
+        "androidx.compose.ui_ui-graphics",
+        "androidx.compose.ui_ui-text",
+        "androidx.compose.ui_ui-tooling-preview",
+        "androidx.compose.foundation_foundation",
+        "androidx.compose.foundation_foundation-layout",
+        "androidx.compose.material3_material3",
+        "androidx.compose.material3_material3-window-size-class",
+        "androidx.compose.material_icons-extended",
+        "androidx.navigation_navigation-compose",
         "kotlinx_coroutines_android",
         "com.google.android.material_material",
         "SettingsLib",
-        // Note: okhttp and gson might require prebuilts or source drops
-        // depending on your LineageOS tree version.
-        // "okhttp",
-        // "gson",
     ],
 
     optimize: {
